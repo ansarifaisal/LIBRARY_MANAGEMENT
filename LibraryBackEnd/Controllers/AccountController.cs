@@ -1,6 +1,7 @@
 ﻿using LibraryBackEnd.Models;
 using LibraryBackEnd.Providers;
 using LibraryBackEnd.Results;
+using LibraryBackEnd.Services;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -9,6 +10,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -25,8 +27,11 @@ namespace LibraryBackEnd.Controllers
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
 
+        ApplicationDbContext _context;
+
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -327,9 +332,23 @@ namespace LibraryBackEnd.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Role = model.Role, Status = model.Status };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+
+
+            if (result.Succeeded)
+            {
+                var userId = user.Id;
+
+                var appUserManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+                string code = await appUserManager.GenerateEmailConfirmationTokenAsync(userId);
+
+                var callBackUrl = new Uri(Url.Link("ConfirmEmailRoute", new { userId = userId, code = code }));
+
+                await appUserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callBackUrl + "\">here</a>");
+            }
 
             if (!result.Succeeded)
             {
@@ -338,6 +357,32 @@ namespace LibraryBackEnd.Controllers
 
             return Ok();
         }
+
+        [AllowAnonymous]
+        [Route("SendEmail")]
+        [HttpGet]
+        public async Task<IHttpActionResult> SendEmail(string userName)
+        {
+            var user = _context.Users.Where(u => u.UserName == userName).SingleOrDefault();
+
+            var appUserManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            SendEmailService sendEmailService = new SendEmailService();
+
+
+            string code = await appUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+
+            var callBackUrl = new Uri(Url.Link("ConfirmEmailRoute", new { userId = user.Id, code = code }));
+
+            var url = HttpUtility.UrlDecode(callBackUrl.ToString());
+
+            sendEmailService.SendEmail(user.Email, "Confirm your account", "Please confirm your account by clicking <a href=\"" + url + "\">here</a>");
+
+            //await appUserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callBackUrl + "\">here</a>");
+
+            return Ok("Done!");
+        }
+
 
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]

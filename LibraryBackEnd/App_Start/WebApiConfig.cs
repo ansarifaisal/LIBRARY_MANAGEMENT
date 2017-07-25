@@ -31,6 +31,14 @@ namespace LibraryBackEnd
                  defaults: new { userName = RouteParameter.Optional }
              );
 
+            config.Routes.MapHttpRoute(
+                 name: "ConfirmEmailRoute",
+                 routeTemplate: "#!/confirm"
+             );
+
+
+
+
         }
     }
 }

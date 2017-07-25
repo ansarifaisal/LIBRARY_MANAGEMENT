@@ -90,6 +90,7 @@ AuthenticationModule.factory("AuthenticationFactory", [
 
         //function to register the user into the database
         function register(userInfo) {
+            console.log(userInfo);
             var deferred = $q.defer();
             //calling the function in the backend
             $http.post("/api/Account/Register", userInfo)
