@@ -1,0 +1,15 @@
+﻿<form ng-submit="authCtrl.login()">
+
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" name="username" class="form-control" placeholder="Email" ng-model="authCtrl.credentials.username"/>
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="Password" ng-model="authCtrl.credentials.password" />
+    </div>
+
+    <input type="submit" name="login" value="Login" class="btn btn-success" />
+
+</form>

@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Library</title>
+
+    <script type="text/javascript" src="assets/js/jquery-3.1.1.js"></script>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+
+    <script type="text/javascript" src="assets/js/angular.js"></script>
+    <script type="text/javascript" src="assets/js/angular-route.js"></script>
+    <script type="text/javascript" src="assets/js/angular-cookies.js"></script>
+    <script type="text/javascript" src="app/app.module.js"></script>
+    <script type="text/javascript" src="app/app.routes.js"></script>
+
+
+    <script type="text/javascript" src="app/components/Authentication/authenticationFactory.js"></script>
+    <script type="text/javascript" src="app/components/Authentication/authenticationController.js"></script>
+
+</head>
+<body ng-cloak>
+
+    <div class="row container-fluid">
+
+        <div ng-view></div>
+
+    </div>
+
+</body>
+</html>
