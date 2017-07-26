@@ -1,5 +1,5 @@
-﻿using LibraryBackEnd.Models.ViewModel;
-using LibraryBackEnd.Services;
+﻿using LibraryBackEnd.Core.Services.Class;
+using LibraryBackEnd.Core.ViewModels;
 using System;
 using System.Web.Http;
 
@@ -10,7 +10,7 @@ namespace LibraryBackEnd.Controllers
     {
         [HttpPost]
         [Route("SendEmail")]
-        public IHttpActionResult SendEmailNotification(Email email)
+        public IHttpActionResult SendEmailNotification(EmailViewModel email)
         {
 
             try

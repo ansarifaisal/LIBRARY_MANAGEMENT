@@ -1,6 +1,6 @@
-﻿namespace LibraryBackEnd.Models.ViewModel
+﻿namespace LibraryBackEnd.Core.ViewModels
 {
-    public class Email
+    public class EmailViewModel
     {
         public string recipient { get; set; }
 

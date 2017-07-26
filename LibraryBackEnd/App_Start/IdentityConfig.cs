@@ -1,4 +1,5 @@
-﻿using LibraryBackEnd.Models;
+﻿using LibraryBackEnd.Configuration;
+using LibraryBackEnd.Core.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;

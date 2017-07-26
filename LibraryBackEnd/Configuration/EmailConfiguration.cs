@@ -11,6 +11,8 @@
 
         public static readonly int SmtpPort = 587;
 
+        public static readonly bool DefaultCredentials = false;
 
+        public static readonly bool Ssl = true;
     }
 }

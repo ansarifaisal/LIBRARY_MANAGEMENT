@@ -1,8 +1,10 @@
-﻿using LibraryBackEnd.Models;
+﻿using LibraryBackEnd.Configuration;
+using LibraryBackEnd.Core.BindingModels;
+using LibraryBackEnd.Core.Models;
+using LibraryBackEnd.Core.Services.Class;
+using LibraryBackEnd.Core.ViewModels;
 using LibraryBackEnd.Providers;
 using LibraryBackEnd.Results;
-using LibraryBackEnd.Services;
-using LibraryBackEnd.ViewModel;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -328,38 +330,30 @@ namespace LibraryBackEnd.Controllers
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(ModelState);
-            }
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Role = model.Role, Status = model.Status };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
-
-            if (result.Succeeded)
-            {
-                var appUserManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-
-                SendEmailService sendEmailService = new SendEmailService();
-
-                string code = await appUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-
-                var callBackUrl = new Uri(Url.Link("ConfirmEmailRoute", new { userId = user.Id, code = code, userName = user.UserName }));
-
-                var url = HttpUtility.UrlDecode(callBackUrl.ToString());
-
-                sendEmailService.SendEmail(user.Email, "Confirm your account", "Please confirm your account by clicking <a href=\"" + url + "\">here</a>");
-            }
-
             if (!result.Succeeded)
-            {
                 return GetErrorResult(result);
-            }
+
+            var appUserManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            SendEmailService sendEmailService = new SendEmailService();
+
+            string code = await appUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+
+            var url = new Uri(Url.Link("ConfirmEmailRoute",
+                                        new { userId = user.Id, code = code, userName = user.UserName }));
+
+            sendEmailService.SendActivationMail(url, user.Email);
 
             return Ok();
         }
 
+        // Post /api/Account/ConfirmEmail
         [AllowAnonymous]
         [Route("ConfirmEmail")]
         [HttpPost]

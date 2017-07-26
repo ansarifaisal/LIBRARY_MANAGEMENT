@@ -1,4 +1,4 @@
-﻿namespace LibraryBackEnd.ViewModel
+﻿namespace LibraryBackEnd.Core.ViewModels
 {
     public class ConfirmPasswordViewModel
     {
