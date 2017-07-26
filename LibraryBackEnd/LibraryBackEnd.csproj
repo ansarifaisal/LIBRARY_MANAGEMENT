@@ -253,6 +253,7 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Services\SendEmailService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\ConfirmPasswordViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.module.js" />
@@ -263,6 +264,7 @@
     <Content Include="app\components\Authentication\confirmation.html" />
     <Content Include="app\components\Authentication\error.html" />
     <Content Include="app\components\Authentication\login.html" />
+    <Content Include="app\components\Authentication\passwordConfirm.html" />
     <Content Include="app\components\Authentication\register.html" />
     <Content Include="app\components\User\home.html" />
     <Content Include="assets\css\bootstrap.css" />

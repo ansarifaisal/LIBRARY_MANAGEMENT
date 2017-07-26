@@ -28,7 +28,8 @@ AuthenticationModule.factory("AuthenticationFactory", [
             loadTokenFromSession: loadTokenFromSession,
             studentRole: studentRole,
             status: status,
-            getUserByUserName: getUserByUserName
+            getUserByUserName: getUserByUserName,
+            activateAccount: activateAccount
         }
 
         //returning the authenticationFactory object
@@ -181,6 +182,25 @@ AuthenticationModule.factory("AuthenticationFactory", [
                 },
             function (errorResponse) {
                 console.log("Failed to get the user")
+                deferred.reject(errorResponse);
+            });
+
+            return deferred.promise;
+
+        }
+
+        function activateAccount(confirmAccount) {
+
+            var deferred = $q.defer();
+
+            console.log(confirmAccount);
+
+            $http.post("/api/Account/ConfirmEmail", confirmAccount)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                },
+            function (errorResponse) {
+                console.log("Failed To Activate User")
                 deferred.reject(errorResponse);
             });
 

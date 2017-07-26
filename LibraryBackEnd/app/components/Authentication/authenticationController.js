@@ -5,7 +5,8 @@ AuthenticationModule.controller("AuthenticationController", [
     "$location",
     "$timeout",
     "$rootScope",
-    function (AuthenticationFactory, $scope, $location, $timeout, $rootScope) {
+    "$routeParams",
+    function (AuthenticationFactory, $scope, $location, $timeout, $rootScope, $routeParams) {
 
         //here `me` is use to reffer the current value
         var me = this;
@@ -22,6 +23,8 @@ AuthenticationModule.controller("AuthenticationController", [
         me.user = {};
 
         me.data = {};
+
+        me.confirmAccount = {}
 
         me.login = function () {
 
@@ -65,6 +68,22 @@ AuthenticationModule.controller("AuthenticationController", [
                 $rootScope.authenticated = AuthenticationFactory.getUserIsAuthenticated();
                 $location.path('/register');
 
+            });
+        }
+
+
+        me.activateAccount = function () {
+
+            me.confirmAccount.userId = $routeParams.userId;
+            me.confirmAccount.code = $routeParams.code;
+            me.confirmAccount.userName = $routeParams.userName;
+
+            AuthenticationFactory.activateAccount(me.confirmAccount)
+                .then(function (response) {
+                    console.log(response);
+                },
+            function (errorResponse) {
+                console.log("errorMessage");
             });
         }
 

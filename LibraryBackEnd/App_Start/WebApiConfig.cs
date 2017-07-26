@@ -33,11 +33,8 @@ namespace LibraryBackEnd
 
             config.Routes.MapHttpRoute(
                  name: "ConfirmEmailRoute",
-                 routeTemplate: "#!/confirm"
+                 routeTemplate: "#!/confirmPassword"
              );
-
-
-
 
         }
     }

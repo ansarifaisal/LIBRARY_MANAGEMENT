@@ -53,6 +53,16 @@ window.routes = {
 
     },
 
+    '/confirmPassword': {
+
+        templateUrl: 'app/components/authentication/passwordConfirm.html',
+        controller: 'AuthenticationController',
+        controllerAs: 'authCtrl',
+        requireLogin: false,
+        roles: ['GUEST']
+
+    },
+
     '/home': {
 
         templateUrl: 'app/components/user/home.html',

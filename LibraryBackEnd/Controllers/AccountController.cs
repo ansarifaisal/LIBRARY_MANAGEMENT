@@ -2,6 +2,7 @@
 using LibraryBackEnd.Providers;
 using LibraryBackEnd.Results;
 using LibraryBackEnd.Services;
+using LibraryBackEnd.ViewModel;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -10,7 +11,6 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -339,15 +339,17 @@ namespace LibraryBackEnd.Controllers
 
             if (result.Succeeded)
             {
-                var userId = user.Id;
-
                 var appUserManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
-                string code = await appUserManager.GenerateEmailConfirmationTokenAsync(userId);
+                SendEmailService sendEmailService = new SendEmailService();
 
-                var callBackUrl = new Uri(Url.Link("ConfirmEmailRoute", new { userId = userId, code = code }));
+                string code = await appUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
 
-                await appUserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callBackUrl + "\">here</a>");
+                var callBackUrl = new Uri(Url.Link("ConfirmEmailRoute", new { userId = user.Id, code = code, userName = user.UserName }));
+
+                var url = HttpUtility.UrlDecode(callBackUrl.ToString());
+
+                sendEmailService.SendEmail(user.Email, "Confirm your account", "Please confirm your account by clicking <a href=\"" + url + "\">here</a>");
             }
 
             if (!result.Succeeded)
@@ -359,28 +361,38 @@ namespace LibraryBackEnd.Controllers
         }
 
         [AllowAnonymous]
-        [Route("SendEmail")]
-        [HttpGet]
-        public async Task<IHttpActionResult> SendEmail(string userName)
+        [Route("ConfirmEmail")]
+        [HttpPost]
+        public async Task<IHttpActionResult> ConfirmEmail(ConfirmPasswordViewModel model)
         {
-            var user = _context.Users.Where(u => u.UserName == userName).SingleOrDefault();
+            IdentityResult result = null;
 
+            if (string.IsNullOrWhiteSpace(model.UserId) || string.IsNullOrWhiteSpace(model.Code))
+            {
+                ModelState.AddModelError("", "User Id and Code are required");
+                return BadRequest(ModelState);
+            }
             var appUserManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
-            SendEmailService sendEmailService = new SendEmailService();
+            var user = await appUserManager.FindAsync(model.UserName, model.Password);
+
+            if (user != null)
+            {
+                var decode = model.Code.Replace(" ", "+");
+                result = await appUserManager.ConfirmEmailAsync(model.UserId, decode);
+
+            }
 
 
-            string code = await appUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            if (result.Succeeded)
+            {
+                return Ok();
+            }
+            else
+            {
+                return GetErrorResult(result);
+            }
 
-            var callBackUrl = new Uri(Url.Link("ConfirmEmailRoute", new { userId = user.Id, code = code }));
-
-            var url = HttpUtility.UrlDecode(callBackUrl.ToString());
-
-            sendEmailService.SendEmail(user.Email, "Confirm your account", "Please confirm your account by clicking <a href=\"" + url + "\">here</a>");
-
-            //await appUserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callBackUrl + "\">here</a>");
-
-            return Ok("Done!");
         }
 
 
