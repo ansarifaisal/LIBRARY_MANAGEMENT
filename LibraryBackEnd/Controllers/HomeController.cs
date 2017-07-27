@@ -42,5 +42,18 @@ namespace LibraryBackEnd.Controllers
             return Ok(user);
         }
 
+        [Route("checkExistingUser")]
+        [HttpGet]
+        public bool checkExistingUser(string userName = "")
+        {
+            var flag = false;
+            var user = _studentService.GetByUserName(userName);
+
+            if (user != null)
+                return flag = true;
+
+            return flag;
+        }
+
     }
 }

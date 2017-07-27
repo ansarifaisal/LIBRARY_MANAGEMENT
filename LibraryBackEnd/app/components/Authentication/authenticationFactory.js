@@ -29,7 +29,8 @@ AuthenticationModule.factory("AuthenticationFactory", [
             studentRole: studentRole,
             status: status,
             getUserByUserName: getUserByUserName,
-            activateAccount: activateAccount
+            activateAccount: activateAccount,
+            checkExistingAccount: checkExistingAccount
         }
 
         //returning the authenticationFactory object
@@ -91,7 +92,6 @@ AuthenticationModule.factory("AuthenticationFactory", [
 
         //function to register the user into the database
         function register(userInfo) {
-            console.log(userInfo);
             var deferred = $q.defer();
             //calling the function in the backend
             $http.post("/api/Account/Register", userInfo)
@@ -123,8 +123,7 @@ AuthenticationModule.factory("AuthenticationFactory", [
                    deferred.resolve(response.data);
                }, function (errorResponse) {
                    //error response
-                   console.log("Registeration fail");
-                   deferred.reject(errorResponse);
+                   deferred.resolve(errorResponse.data);
                });
 
             //returning promise object
@@ -193,8 +192,6 @@ AuthenticationModule.factory("AuthenticationFactory", [
 
             var deferred = $q.defer();
 
-            console.log(confirmAccount);
-
             $http.post("/api/Account/ConfirmEmail", confirmAccount)
                 .then(function (response) {
                     deferred.resolve(response.data);
@@ -206,6 +203,22 @@ AuthenticationModule.factory("AuthenticationFactory", [
 
             return deferred.promise;
 
+        }
+
+        function checkExistingAccount(userName) {
+
+            var deferred = $q.defer();
+
+            $http.get("/api/home/checkExistingUser?userName=" + userName)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                },
+            function (errorResponse) {
+                console.log("Error Checking User");
+                deferred.reject(errorResponse);
+            });
+
+            return deferred.promise;
         }
 
     }

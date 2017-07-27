@@ -1,6 +1,7 @@
 ﻿using LibraryBackEnd.Configuration;
 using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
+using System.Linq;
 
 namespace LibraryBackEnd.Persistence.Repositories
 {
@@ -13,6 +14,11 @@ namespace LibraryBackEnd.Persistence.Repositories
         public StudentRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
+        }
+
+        public ApplicationUser GetByUserName(string userName)
+        {
+            return _context.Users.Where(u => u.UserName == userName).SingleOrDefault();
         }
 
         public ApplicationUser GetUserById(string Id)

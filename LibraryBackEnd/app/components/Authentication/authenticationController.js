@@ -6,16 +6,25 @@ AuthenticationModule.controller("AuthenticationController", [
     "$timeout",
     "$rootScope",
     "$routeParams",
-    function (AuthenticationFactory, $scope, $location, $timeout, $rootScope, $routeParams) {
+    "$route",
+    function (AuthenticationFactory, $scope, $location, $timeout, $rootScope, $routeParams, $route) {
 
         //here `me` is use to reffer the current value
         var me = this;
 
         //object to store credentials
-        me.credentials = {};
+        me.credentials = {
+            username: '',
+            password: ''
+        };
 
-        //error flag
-        me.error = false;
+        $rootScope.count = 5;
+
+        $scope.isEmailAlert = false;
+
+        $scope.errorMessage = "";
+
+        $scope.successMessage = "";
 
         //creating new user object
         me.newUser = {};
@@ -26,20 +35,44 @@ AuthenticationModule.controller("AuthenticationController", [
 
         me.confirmAccount = {}
 
+        $timeout(function () {
+            settings();
+        }, 1000);
+
         me.login = function () {
+
+            if (!me.credentials.username || !me.credentials.password)
+                return;
 
             AuthenticationFactory.login(me.credentials)
                 .then(function (data) {
                     me.data = data;
-                    //save token in the session
-                    AuthenticationFactory.saveToken(me.data);
+                    //if the credentials is wrong
+                    if (me.data.error === 'invalid_grant') {
+                        showAlert();
+                        return $scope.errorMessage = me.data.error_description;
+                    }
                     //getting the user
-                    AuthenticationFactory.getUserByUserName(data.userName).then(function (user) {
+                    AuthenticationFactory.getUserByUserName(me.data.userName).then(function (user) {
+                        console.log(user);
                         if (user) {
-                            AuthenticationFactory.saveUser(user);
-                            AuthenticationFactory.setUserIsAuthenticated(true);
-                            AuthenticationFactory.setRole(user.role);
-                            $location.path("/home");
+                            if (user.status === 'PENDING') {
+                                showAlert();
+                                return $scope.errorMessage = "Your account is pending"
+                            } else if (user.status === 'PENDING') {
+                                showAlert();
+                                return $scope.errorMessage = "Your account is '<string>'pending'<strong>'"
+                            } else if (user.emailConfirmed === false) {
+                                showAlert();
+                                return $scope.emailError = true;
+                            } else if (user.emailConfirmed === true && user.status === 'APPROVED') {
+                                //save token in the session
+                                AuthenticationFactory.saveToken(me.data);
+                                AuthenticationFactory.saveUser(user);
+                                AuthenticationFactory.setUserIsAuthenticated(true);
+                                AuthenticationFactory.setRole(user.role);
+                                $location.path("/home");
+                            }
                         } else {
                             AuthenticationFactory.setUserIsAuthenticated(false);
                             AuthenticationFactory.setRole("GUEST");
@@ -73,7 +106,7 @@ AuthenticationModule.controller("AuthenticationController", [
 
 
         me.activateAccount = function () {
-
+            console.log("called");
             me.confirmAccount.userId = $routeParams.userId;
             me.confirmAccount.code = $routeParams.code;
             me.confirmAccount.userName = $routeParams.userName;
@@ -86,6 +119,43 @@ AuthenticationModule.controller("AuthenticationController", [
                 console.log("errorMessage");
             });
         }
+
+        me.checkExistingAccount = function () {
+
+            var userName = me.newUser.Email;
+            AuthenticationFactory.checkExistingAccount(userName).then(function (exists) {
+                me.exists = false;
+                if (exists === true)
+                    me.exists = true;
+
+            },
+            function (errorResponse) {
+
+            });
+        }
+
+
+        me.sendActivationLink = function () {
+            var sendTo = me.credentials.username;
+            console.log(sendTo);
+        }
+
+        me.loginRedirect = function () {
+            me.countDown();
+            $timeout(function () {
+                $location.path("/login");
+            }, 5000);
+        }
+
+        me.countDown = function () {
+            $timeout(function () {
+                $rootScope.count--;
+                if ($rootScope.count === -1)
+                    return;
+                me.countDown();
+            }, 1000);
+        }
+
 
     }
 ]);

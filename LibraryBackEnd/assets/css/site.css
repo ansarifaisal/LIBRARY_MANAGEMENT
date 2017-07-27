@@ -1,0 +1,27 @@
+﻿.panel-margin-top {
+    margin-top: 75px;
+}
+
+.form-control:focus {
+    border: #66afe9 2px solid;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.has-error .form-control:focus {
+    border-color: #c9302c;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.has-success .form-control:focus {
+    border-color: #318837;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#logo {
+    content: url(../images/icon_graduate.png);
+    width: 50%;
+    position:center;
+}

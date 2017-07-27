@@ -20,5 +20,10 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _repository.GetUserById(Id);
         }
+
+        public ApplicationUser GetByUserName(string userName)
+        {
+            return _repository.GetByUserName(userName);
+        }
     }
 }

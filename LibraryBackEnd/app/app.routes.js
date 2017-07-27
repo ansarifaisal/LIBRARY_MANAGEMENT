@@ -29,6 +29,7 @@ window.routes = {
         controller: 'AuthenticationController',
         controllerAs: 'authCtrl',
         requireLogin: false,
+        data:{pageTitle: 'Error'},
         roles: ['GUEST', 'STUDENT']
 
     },
@@ -38,6 +39,7 @@ window.routes = {
         templateUrl: 'app/components/authentication/confirmation.html',
         controller: 'AuthenticationController',
         controllerAs: 'authCtrl',
+        data: { pageTitle: 'Confirmation' },
         requireLogin: false,
         roles: ['GUEST']
 
@@ -102,16 +104,12 @@ myApp.config(['$routeProvider',
 //when the app run check whether is authenticated to view this page
 //run method is basically use to initialization
 
-myApp.run(function ($rootScope, $location, AuthenticationFactory)
-{
-    debugger;
+myApp.run(function ($rootScope, $location, AuthenticationFactory) {
     //on method is use to listen on event of a given type
 
-    $rootScope.$on('$locationChangeStart', function (event, next, current)
-    {
-
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
         //check if the page refereshed has the same url thene execute the below block
-        if (next == current) {
+        if (next === current) {
             //if user trying to access page which requires login and is not logged in
 
             //load the user from the cookies
@@ -128,16 +126,15 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory)
 
         //Iterate through all the routes
         for (var route in window.routes) {
-            
             //check if the path is present
-            if (next.indexOf(route) != -1) {
+            if (next.indexOf(route) !== -1) {
                 $rootScope.user = AuthenticationFactory.loadUserFromCookie();
                 $rootScope.token = AuthenticationFactory.loadTokenFromSession();
                 $rootScope.authenticated = AuthenticationFactory.getUserIsAuthenticated();
                 if (window.routes[route].requireLogin && !AuthenticationFactory.getUserIsAuthenticated()) {
                     $location.path('/login');
                 } else if ((AuthenticationFactory.getUserIsAuthenticated())
-                    && (window.routes[route].roles.indexOf(AuthenticationFactory.getRole()) == -1)) {
+                    && (window.routes[route].roles.indexOf(AuthenticationFactory.getRole()) === -1)) {
                     $location.path('/error');
                 }
             }

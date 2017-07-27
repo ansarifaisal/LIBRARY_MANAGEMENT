@@ -1,28 +1,107 @@
 ﻿
+<div class="page-header">
+    <h2 class="text-center">Register Yourself</h2>
+</div>
 
-<form ng-submit="authCtrl.register()">
+<div class="col-md-offset-3 col-md-6">
 
-    <div class="form-group">
+    <!-- Panel Starts Here -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Register</h3>
+        </div>
 
-        <label for="userName">Username:</label>
-        <input type="email" class="form-control" placeholder="Email" name="userName" ng-model="authCtrl.newUser.Email" />
+        <!-- Panel Body Starts Here -->
+        <div class="panel-body">
+
+            <!-- Registration Form Starts Here -->
+
+            <form name="registerForm" ng-submit="authCtrl.register()" novalidate>
+
+                <!-- Email Field Starts Here -->
+
+                <div class="form-group" ng-class="{'has-error has-feedback': registerForm.username.$invalid && registerForm.username.$touched || registerForm.username.$invalid && registerForm.$submitted || authCtrl.exists == true,
+                         'has-success has-feedback': registerForm.username.$valid || registerForm.username.$valid && registerForm.$submitted}">
+
+                    <label for="username">Email</label>
+                    <input type="email" class="form-control" placeholder="Enter Email" name="username" ng-model="authCtrl.newUser.Email" ng-blur="authCtrl.checkExistingAccount()" required />
+
+                    <span class="glyphicon form-control-feedback"
+                          ng-class="{'glyphicon-ok': registerForm.username.$valid || registerForm.username.$valid && registerForm.$submitted,
+                          'glyphicon-remove': registerForm.username.$invalid && registerForm.username.$touched || registerForm.username.$invalid && registerForm.$submitted || authCtrl.exists == true}">
+                    </span>
+
+                    <div ng-show="registerForm.username.$invalid && registerForm.username.$touched || registerForm.$submitted">
+                        <span ng-show="registerForm.username.$error.required" class="text-danger small">Please, provide email.</span>
+                        <span ng-show="registerForm.username.$error.email" class="text-danger small ">Email id is invalid.</span>
+                        <span ng-show="authCtrl.exists" class="text-danger small ">Email is already in use.</span>
+                    </div>
+                </div>
+
+                <!-- Email Field Ends Here -->
+                <!-- Password Field Starts Here -->
+
+                <div class="form-group" ng-class="{'has-error has-feedback': registerForm.Password.$invalid && registerForm.Password.$touched || registerForm.Password.$invalid && registerForm.$submitted,
+                         'has-success has-feedback': registerForm.Password.$valid || registerForm.Password.$valid && registerForm.$submitted}">
+
+                    <label for="Password">Password</label>
+                    <input type="password" class="form-control" placeholder="Enter Password" name="Password" ng-model="authCtrl.newUser.Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" required />
+
+                    <span class="glyphicon form-control-feedback"
+                          ng-class="{'glyphicon-ok': registerForm.Password.$valid || registerForm.Password.$valid && registerForm.$submitted,
+                          'glyphicon-remove': registerForm.Password.$invalid && registerForm.Password.$touched || registerForm.Password.$invalid && registerForm.$submitted}">
+                    </span>
+
+                    <div ng-show="registerForm.Password.$invalid && registerForm.Password.$touched || registerForm.$submitted">
+                        <span ng-show="registerForm.Password.$error.required" class="text-danger small">Please, provide password.</span>
+                        <span ng-show="registerForm.Password.$error.pattern" class="text-danger small">Password must contain numbers, uppercase letter and special charachter.</span>
+                    </div>
+
+                </div>
+
+                <!-- Password Field Ends Here -->
+                <!-- Confirm Password Field Starts Here -->
+
+                <div class="form-group" ng-class="{'has-error has-feedback': registerForm.ConfirmPassword.$invalid && registerForm.ConfirmPassword.$touched || registerForm.ConfirmPassword.$invalid && registerForm.$submitted,
+                         'has-success has-feedback': registerForm.ConfirmPassword.$valid || registerForm.ConfirmPassword.$valid && registerForm.$submitted}">
+
+                    <label for="ConfirmPassword">Confirm Password</label>
+                    <input type="password" class="form-control" placeholder="Enter Confirm Password" name="ConfirmPassword" ng-model="authCtrl.newUser.ConfirmPassword" required />
+
+                    <span class="glyphicon form-control-feedback"
+                          ng-class="{'glyphicon-ok': registerForm.ConfirmPassword.$valid || registerForm.ConfirmPassword.$valid && registerForm.$submitted,
+                          'glyphicon-remove': registerForm.ConfirmPassword.$invalid && registerForm.ConfirmPassword.$touched || registerForm.ConfirmPassword.$invalid && registerForm.$submitted}">
+                    </span>
+
+                    <div ng-show="registerForm.ConfirmPassword.$invalid && registerForm.ConfirmPassword.$touched || registerForm.$submitted">
+                        <span ng-show="registerForm.ConfirmPassword.$error.required" class="text-danger small">Please, provide same as above.</span>
+                        <span ng-show="authCtrl.newUser.Password !== authCtrl.newUser.ConfirmPassword" class="text-danger small">Password doesn't match.</span>
+                    </div>
+                </div>
+
+                <!-- Confirm Password Ends Here -->
+                <div class="form-group">
+                    <div ng-show="registerForm.$valid" class="small text-danger"><strong>Note: Verify the email id, once submitted you cannot change it.</strong></div>
+                </div>
+                <!-- Submit Button Starts Here -->
+                <div class="form-group">
+                    <input type="submit" value="Register" class="btn btn-success form-control" />
+                </div><!-- Submit Button Ends Here -->
+
+            </form>
+
+            <!-- Registration Form Ends Here -->
+            <div class="pull-left">
+                <a href="#!/login">Login Now</a>
+            </div>
+            <div class="pull-right">
+                <a href="">Forget Password?</a>
+            </div>
+        </div>
+
+        <!-- Panel Body Ends Here -->
 
     </div>
+    <!-- Panel Ends Here -->
 
-    <div class="form-group">
-
-        <label for="Password">Password:</label>
-        <input type="password" class="form-control" placeholder="Password" name="Password" ng-model="authCtrl.newUser.Password" />
-
-    </div>
-
-    <div class="form-group">
-
-        <label for="ConfirmPassword">Password:</label>
-        <input type="password" class="form-control" placeholder="Confirm Password" name="ConfirmPassword" ng-model="authCtrl.newUser.ConfirmPassword" />
-
-    </div>
-
-    <input type="submit" value="Register" class="btn btn-success" />
-
-</form>
+</div>
