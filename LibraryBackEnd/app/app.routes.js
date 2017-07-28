@@ -29,7 +29,7 @@ window.routes = {
         controller: 'AuthenticationController',
         controllerAs: 'authCtrl',
         requireLogin: false,
-        data:{pageTitle: 'Error'},
+        data: { pageTitle: 'Error' },
         roles: ['GUEST', 'STUDENT']
 
     },
@@ -82,12 +82,14 @@ window.routes = {
 
 myApp.config(['$routeProvider',
         '$locationProvider',
-    function ($routeProvider, $locationProvider) {
+        '$httpProvider',
+    function ($routeProvider, $locationProvider, $httpProvider) {
 
         //loading route
         for (var route in window.routes) {
             $routeProvider.when(route, window.routes[route]);
         }
+
 
         //load this no path is matched
         $routeProvider.otherwise({
@@ -97,18 +99,25 @@ myApp.config(['$routeProvider',
         //config ! mark as prefix of #
         $locationProvider.hashPrefix('!');
 
+        $httpProvider.interceptors.push('httpRequestInterceptor');
+
     }
 ]);
+
+
 
 
 //when the app run check whether is authenticated to view this page
 //run method is basically use to initialization
 
-myApp.run(function ($rootScope, $location, AuthenticationFactory) {
+myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cookies) {
     //on method is use to listen on event of a given type
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
         //check if the page refereshed has the same url thene execute the below block
+
+
+
         if (next === current) {
             //if user trying to access page which requires login and is not logged in
 
@@ -120,6 +129,7 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory) {
 
             //check whether the user is authenticated
             $rootScope.authenticated = AuthenticationFactory.getUserIsAuthenticated();
+
 
             return;
         }
@@ -139,7 +149,21 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory) {
                 }
             }
         }
+    });
+
+    $cookies.getObject('user');
+    $cookies.getObject('authenticationData');
+
+    $(window).on('beforeunload', function () {
+
+        $cookies.remove('user');
+        $cookies.remove('authenticationData');
+        AuthenticationFactory.setUserIsAuthenticated(false);
 
     });
 
+    $rootScope.logOut = function () {
+        AppService.unLoad();
+        $location.path('/login');
+    }
 });

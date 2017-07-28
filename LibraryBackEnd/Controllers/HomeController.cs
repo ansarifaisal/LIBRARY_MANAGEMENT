@@ -22,6 +22,7 @@ namespace LibraryBackEnd.Controllers
         // GET /api/Home/UserByUserName
         [Route("UserByUserName")]
         [HttpGet]
+        [Authorize]
         public IHttpActionResult GetUserByUserName(string userName)
         {
             var user = _context.Users.Where(u => u.UserName == userName).SingleOrDefault();

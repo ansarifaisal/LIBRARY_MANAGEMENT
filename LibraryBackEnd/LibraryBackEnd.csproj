@@ -308,6 +308,7 @@
   <ItemGroup>
     <Content Include="app\app.module.js" />
     <Content Include="app\app.routes.js" />
+    <Content Include="app\appService.js" />
     <Content Include="app\components\Authentication\authenticationController.js" />
     <Content Include="app\components\Authentication\authenticationFactory.js" />
     <Content Include="app\components\Authentication\confirm.html" />
@@ -326,15 +327,21 @@
     <Content Include="assets\images\icon_graduate.png" />
     <Content Include="assets\js\angular-cookies.js" />
     <Content Include="assets\js\angular-cookies.min.js" />
+    <Content Include="assets\js\angular-jwt.js" />
+    <Content Include="assets\js\angular-jwt.min.js" />
     <Content Include="assets\js\angular-route.js" />
     <Content Include="assets\js\angular-route.min.js" />
     <Content Include="assets\js\angular.js" />
     <Content Include="assets\js\angular.min.js" />
     <Content Include="assets\js\app.js" />
+    <Content Include="assets\js\auth0-angular.js" />
+    <Content Include="assets\js\auth0-angular.min.js" />
     <Content Include="assets\js\bootstrap.js" />
     <Content Include="assets\js\bootstrap.min.js" />
     <None Include="assets\js\jquery-3.1.1.intellisense.js" />
     <Content Include="assets\js\jquery-3.1.1.js" />
+    <Content Include="assets\js\lock.js" />
+    <Content Include="assets\js\lock.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">

@@ -47,6 +47,8 @@ AuthenticationModule.controller("AuthenticationController", [
             AuthenticationFactory.login(me.credentials)
                 .then(function (data) {
                     me.data = data;
+                    AuthenticationFactory.saveToken(me.data);
+                    $rootScope.token = AuthenticationFactory.loadTokenFromSession();
                     //if the credentials is wrong
                     if (me.data.error === 'invalid_grant') {
                         showAlert();
@@ -54,7 +56,6 @@ AuthenticationModule.controller("AuthenticationController", [
                     }
                     //getting the user
                     AuthenticationFactory.getUserByUserName(me.data.userName).then(function (user) {
-                        console.log(user);
                         if (user) {
                             if (user.status === 'PENDING') {
                                 showAlert();
@@ -62,12 +63,11 @@ AuthenticationModule.controller("AuthenticationController", [
                             } else if (user.status === 'PENDING') {
                                 showAlert();
                                 return $scope.errorMessage = "Your account is '<string>'pending'<strong>'"
-                            } else if (user.emailConfirmed === false) {
-                                showAlert();
-                                return $scope.emailError = true;
-                            } else if (user.emailConfirmed === true && user.status === 'APPROVED') {
+                                //} else if (user.emailConfirmed === false) {
+                                //    showAlert();
+                                //    return $scope.emailError = true;
+                            } else if (user.status === 'APPROVED') {
                                 //save token in the session
-                                AuthenticationFactory.saveToken(me.data);
                                 AuthenticationFactory.saveUser(user);
                                 AuthenticationFactory.setUserIsAuthenticated(true);
                                 AuthenticationFactory.setRole(user.role);
@@ -106,14 +106,16 @@ AuthenticationModule.controller("AuthenticationController", [
 
 
         me.activateAccount = function () {
-            console.log("called");
             me.confirmAccount.userId = $routeParams.userId;
             me.confirmAccount.code = $routeParams.code;
             me.confirmAccount.userName = $routeParams.userName;
 
             AuthenticationFactory.activateAccount(me.confirmAccount)
                 .then(function (response) {
-                    console.log(response);
+                    me.countDown();
+                    $timeout(function () {
+                        $location.path("/login");
+                    }, 5000);
                 },
             function (errorResponse) {
                 console.log("errorMessage");

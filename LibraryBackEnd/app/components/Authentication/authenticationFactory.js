@@ -4,7 +4,8 @@ AuthenticationModule.factory("AuthenticationFactory", [
     "$http",
     "$q",
     "$cookies",
-    function ($http, $q, $cookies) {
+    "$rootScope",
+    function ($http, $q, $cookies, $rootScope) {
 
         //variable to check whether the user is authenticated
         var userIsAuthenticated = false;
@@ -175,7 +176,7 @@ AuthenticationModule.factory("AuthenticationFactory", [
 
             var deferred = $q.defer();
 
-            $http.get("/api/Home/UserByUserName?userName=" + userName)
+            $http.get("/api/Home/UserByUserName?userName=" + userName, { headers: { 'Authorization': 'Bearer ' + $rootScope.token.access_token } })
                 .then(function (response) {
                     deferred.resolve(response.data);
                 },
