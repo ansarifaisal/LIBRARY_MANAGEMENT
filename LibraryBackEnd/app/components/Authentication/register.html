@@ -20,7 +20,7 @@
 
                 <!-- Email Field Starts Here -->
 
-                <div class="form-group" ng-class="{'has-error has-feedback': registerForm.username.$invalid && registerForm.username.$touched || registerForm.username.$invalid && registerForm.$submitted || authCtrl.exists == true,
+                <div class="form-group" ng-class="{'has-error has-feedback': registerForm.username.$invalid && registerForm.username.$touched || registerForm.username.$invalid && registerForm.$submitted || authCtrl.exists,
                          'has-success has-feedback': registerForm.username.$valid || registerForm.username.$valid && registerForm.$submitted}">
 
                     <label for="username">Email</label>
@@ -28,10 +28,10 @@
 
                     <span class="glyphicon form-control-feedback"
                           ng-class="{'glyphicon-ok': registerForm.username.$valid || registerForm.username.$valid && registerForm.$submitted,
-                          'glyphicon-remove': registerForm.username.$invalid && registerForm.username.$touched || registerForm.username.$invalid && registerForm.$submitted || authCtrl.exists == true}">
+                          'glyphicon-remove': registerForm.username.$invalid && registerForm.username.$touched || registerForm.username.$invalid && registerForm.$submitted || authCtrl.exists}">
                     </span>
 
-                    <div ng-show="registerForm.username.$invalid && registerForm.username.$touched || registerForm.$submitted">
+                    <div ng-show="registerForm.username.$invalid && registerForm.username.$touched || registerForm.$submitted || authCtrl.exists">
                         <span ng-show="registerForm.username.$error.required" class="text-danger small">Please, provide email.</span>
                         <span ng-show="registerForm.username.$error.email" class="text-danger small ">Email id is invalid.</span>
                         <span ng-show="authCtrl.exists" class="text-danger small ">Email is already in use.</span>

@@ -1,7 +1,6 @@
-﻿using LibraryBackEnd.Configuration;
-using LibraryBackEnd.Core.BindingModels;
+﻿using LibraryBackEnd.Core.BindingModels;
 using LibraryBackEnd.Core.Models;
-using LibraryBackEnd.Core.Services.Class;
+using LibraryBackEnd.Core.Services.Interface;
 using LibraryBackEnd.Core.ViewModels;
 using LibraryBackEnd.Providers;
 using LibraryBackEnd.Results;
@@ -28,12 +27,13 @@ namespace LibraryBackEnd.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
+        private IStudentService _studentService;
+        private ISendEmailService _sendEmailService;
 
-        ApplicationDbContext _context;
-
-        public AccountController()
+        public AccountController(IStudentService studentService, ISendEmailService sendEmailService)
         {
-            _context = new ApplicationDbContext();
+            _studentService = studentService;
+            _sendEmailService = sendEmailService;
         }
 
         public AccountController(ApplicationUserManager userManager,
@@ -339,18 +339,30 @@ namespace LibraryBackEnd.Controllers
             if (!result.Succeeded)
                 return GetErrorResult(result);
 
+            await SendActivationMail(user.UserName);
+
+            return Ok();
+        }
+
+        //GET /api/Home/sendActivationMail
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("sendActivationEmail")]
+        public async Task<IHttpActionResult> SendActivationMail(string userName = "")
+        {
+            var user = _studentService.GetByUserName(userName);
+
+            if (user == null)
+                return NotFound();
+
             var appUserManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-
-            SendEmailService sendEmailService = new SendEmailService();
-
             string code = await appUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
 
             var url = new Uri(Url.Link("ConfirmEmailRoute",
                                         new { userId = user.Id, code = code, userName = user.UserName }));
+            _sendEmailService.SendActivationMail(url, user.Email);
 
-            sendEmailService.SendActivationMail(url, user.Email);
-
-            return Ok();
+            return Ok("An activation Email has been sent to your provided Email ID");
         }
 
         // Post /api/Account/ConfirmEmail
@@ -376,8 +388,6 @@ namespace LibraryBackEnd.Controllers
                 result = await appUserManager.ConfirmEmailAsync(model.UserId, decode);
 
             }
-
-
             if (result.Succeeded)
             {
                 return Ok();

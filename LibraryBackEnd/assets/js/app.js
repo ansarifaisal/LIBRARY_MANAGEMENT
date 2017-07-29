@@ -11,21 +11,15 @@ settings();
 var showAlert = function () {
 
     $(function () {
-        if ($(".alert-msg").hasClass("alert-info")) {
-            $(".alert-link").click(function () {
-                hideAlert();
-            });
-        } else {
-            hideAlert();
-        }
+        hideAlert();
+    }, 2000);
 
-        function hideAlert() {
-            $(".alert-msg").fadeTo(3000, 500).slideUp('500', function () {
-                $(".alert-msg").slideUp(500);
-            });
-        }
+}
+
+var hideAlert = function () {
+    $(".alert-msg").fadeTo(3000, 500).slideUp('500', function () {
+        $(".alert-msg").slideUp(500);
     });
-
 }
 
 showAlert();

@@ -1,7 +1,5 @@
-﻿using LibraryBackEnd.Configuration;
-using LibraryBackEnd.Core.Models;
+﻿using LibraryBackEnd.Core.Models;
 using LibraryBackEnd.Core.Services.Interface;
-using System.Linq;
 using System.Web.Http;
 
 namespace LibraryBackEnd.Controllers
@@ -11,12 +9,12 @@ namespace LibraryBackEnd.Controllers
     public class HomeController : ApiController
     {
         private readonly IStudentService _studentService;
+        private ISendEmailService _emailService;
 
-        private ApplicationDbContext _context = new ApplicationDbContext();
-
-        public HomeController(IStudentService studentService)
+        public HomeController(IStudentService studentService, ISendEmailService sendEmailService)
         {
             _studentService = studentService;
+            _emailService = sendEmailService;
         }
 
         // GET /api/Home/UserByUserName
@@ -25,7 +23,10 @@ namespace LibraryBackEnd.Controllers
         [Authorize]
         public IHttpActionResult GetUserByUserName(string userName)
         {
-            var user = _context.Users.Where(u => u.UserName == userName).SingleOrDefault();
+            var user = _studentService.GetByUserName(userName);
+
+            if (user == null)
+                return NotFound();
 
             return Ok(user);
         }
@@ -43,9 +44,11 @@ namespace LibraryBackEnd.Controllers
             return Ok(user);
         }
 
+        //Get /api/Home/checkExistingUser 
+        //to check whether the user exists
         [Route("checkExistingUser")]
         [HttpGet]
-        public bool checkExistingUser(string userName = "")
+        public bool CheckExistingUser(string userName = "")
         {
             var flag = false;
             var user = _studentService.GetByUserName(userName);

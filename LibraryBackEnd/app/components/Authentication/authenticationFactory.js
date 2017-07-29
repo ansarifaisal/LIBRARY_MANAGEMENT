@@ -31,7 +31,8 @@ AuthenticationModule.factory("AuthenticationFactory", [
             status: status,
             getUserByUserName: getUserByUserName,
             activateAccount: activateAccount,
-            checkExistingAccount: checkExistingAccount
+            checkExistingAccount: checkExistingAccount,
+            sendActivationMail: sendActivationMail
         }
 
         //returning the authenticationFactory object
@@ -220,6 +221,23 @@ AuthenticationModule.factory("AuthenticationFactory", [
             });
 
             return deferred.promise;
+        }
+
+        function sendActivationMail(userName){
+
+            var deferred = $q.defer();
+
+            $http.get("/api/account/sendActivationEmail?userName=" + userName)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                },
+            function (errorResponse) {
+                console.log("Error Checking User");
+                deferred.reject(errorResponse);
+            });
+
+            return deferred.promise;
+
         }
 
     }

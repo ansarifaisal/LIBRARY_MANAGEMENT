@@ -33,7 +33,7 @@
     border-top: 16px solid #3498db;
     width: 120px;
     height: 120px;
-    position:fixed;
+    position:absolute;
     z-index: 3;
     background-color:white;
     -webkit-animation: spin 2s linear infinite;

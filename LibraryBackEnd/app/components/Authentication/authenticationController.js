@@ -18,7 +18,7 @@ AuthenticationModule.controller("AuthenticationController", [
             password: ''
         };
 
-        $rootScope.count = 5;
+        $scope.count = 5;
 
         $scope.isEmailAlert = false;
 
@@ -33,6 +33,8 @@ AuthenticationModule.controller("AuthenticationController", [
 
         me.data = {};
 
+        $scope.isBusy = false;
+
         me.confirmAccount = {}
 
         $timeout(function () {
@@ -44,6 +46,7 @@ AuthenticationModule.controller("AuthenticationController", [
             if (!me.credentials.username || !me.credentials.password)
                 return;
 
+            $scope.isBusy = true;
             AuthenticationFactory.login(me.credentials)
                 .then(function (data) {
                     me.data = data;
@@ -60,13 +63,13 @@ AuthenticationModule.controller("AuthenticationController", [
                             if (user.status === 'PENDING') {
                                 showAlert();
                                 return $scope.errorMessage = "Your account is pending"
-                            } else if (user.status === 'PENDING') {
+                            } else if (user.status === 'REJECTED') {
                                 showAlert();
-                                return $scope.errorMessage = "Your account is '<string>'pending'<strong>'"
-                                //} else if (user.emailConfirmed === false) {
-                                //    showAlert();
-                                //    return $scope.emailError = true;
-                            } else if (user.status === 'APPROVED') {
+                                return $scope.errorMessage = "Your account request is rejected";
+                            } else if (user.emailConfirmed === false) {
+                                showAlert();
+                                return $scope.emailError = true;
+                            } else if (user.emailConfirmed === true && user.status === 'APPROVED') {
                                 //save token in the session
                                 AuthenticationFactory.saveUser(user);
                                 AuthenticationFactory.setUserIsAuthenticated(true);
@@ -83,13 +86,17 @@ AuthenticationModule.controller("AuthenticationController", [
 
                 },
                 function (errorResponse) {
+                    showAlert();
+                    return $scope.errorMessage = "Error While Login!";
+                }).finally(function () {
+                    $scope.isBusy = false;
                 });
         }
 
         me.register = function () {
             me.newUser.Role = AuthenticationFactory.studentRole();
             me.newUser.Status = AuthenticationFactory.status();
-
+            $scope.isBusy = true;
             AuthenticationFactory.register(me.newUser)
                 .then(function () {
                     AuthenticationFactory.setUserIsAuthenticated(false);
@@ -100,7 +107,10 @@ AuthenticationModule.controller("AuthenticationController", [
                 AuthenticationFactory.setUserIsAuthenticated(false);
                 $rootScope.authenticated = AuthenticationFactory.getUserIsAuthenticated();
                 $location.path('/register');
-
+                showAlert();
+                $scope.errorMessage = "Error while registration";
+            }).finally(function () {
+                $scope.isBusy = false;
             });
         }
 
@@ -109,37 +119,48 @@ AuthenticationModule.controller("AuthenticationController", [
             me.confirmAccount.userId = $routeParams.userId;
             me.confirmAccount.code = $routeParams.code;
             me.confirmAccount.userName = $routeParams.userName;
-
+            $scope.isBusy = true;
             AuthenticationFactory.activateAccount(me.confirmAccount)
                 .then(function (response) {
-                    me.countDown();
-                    $timeout(function () {
-                        $location.path("/login");
-                    }, 5000);
+                    //Needs to write check to check password
+                    $location.path("/confirm");
                 },
             function (errorResponse) {
-                console.log("errorMessage");
+                showAlert();
+                $scope.errorMessage = "Error activating account";
+            }).finally(function () {
+                $scope.isBusy = false;
             });
         }
 
         me.checkExistingAccount = function () {
-
             var userName = me.newUser.Email;
+            $scope.isBusy = true;
             AuthenticationFactory.checkExistingAccount(userName).then(function (exists) {
                 me.exists = false;
                 if (exists === true)
                     me.exists = true;
-
             },
             function (errorResponse) {
-
+                showAlert();
+                $scope.errorMessage = "Error while checking username";
             });
         }
 
 
         me.sendActivationLink = function () {
-            var sendTo = me.credentials.username;
-            console.log(sendTo);
+            var userName = me.credentials.username;
+            $scope.isBusy = true;
+            AuthenticationFactory.sendActivationMail(userName).then(function () {
+                $scope.isSuccess = true;
+                showAlert();
+                $scope.successMessage = "Email has been sent to your provided mail id.";
+            }, function (errorResponse) {
+                showAlert();
+                $scope.errorMessage = "Error sending activation link.";
+            }).finally(function () {
+                $scope.isBusy = false;
+            });
         }
 
         me.loginRedirect = function () {
@@ -151,8 +172,8 @@ AuthenticationModule.controller("AuthenticationController", [
 
         me.countDown = function () {
             $timeout(function () {
-                $rootScope.count--;
-                if ($rootScope.count === -1)
+                $scope.count--;
+                if ($scope.count === -1)
                     return;
                 me.countDown();
             }, 1000);
