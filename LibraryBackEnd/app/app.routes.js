@@ -65,6 +65,31 @@ window.routes = {
 
     },
 
+    '/forget': {
+        templateUrl: 'app/components/authentication/forget.html',
+        controller: 'AuthenticationController',
+        controllerAs: 'authCtrl',
+        requireLogin: false,
+        roles: ['GUEST']
+    },
+
+    '/setPassword': {
+        templateUrl: 'app/components/authentication/setPassword.html',
+        controller: 'AuthenticationController',
+        controllerAs: 'authCtrl',
+        requireLogin: false,
+        roles: ['GUEST']
+    },
+
+    '/passwordChanged': {
+        templateUrl: 'app/components/authentication/passwordChanged.html',
+        controller: 'AuthenticationController',
+        controllerAs: 'authCtrl',
+        requireLogin: false,
+        roles: ['GUEST']
+    },
+
+
     '/home': {
 
         templateUrl: 'app/components/user/home.html',
@@ -83,7 +108,9 @@ window.routes = {
 myApp.config(['$routeProvider',
         '$locationProvider',
         '$httpProvider',
-    function ($routeProvider, $locationProvider, $httpProvider) {
+        'toastrConfig',
+        'cfpLoadingBarProvider',
+    function ($routeProvider, $locationProvider, $httpProvider, toastrConfig, cfpLoadingBarProvider) {
 
         //loading route
         for (var route in window.routes) {
@@ -99,8 +126,27 @@ myApp.config(['$routeProvider',
         //config ! mark as prefix of #
         $locationProvider.hashPrefix('!');
 
+        //config to change the header to authorize the user
         $httpProvider.interceptors.push('httpRequestInterceptor');
-
+        
+        //toaster configuration
+        angular.extend(toastrConfig, {
+            autoDismiss: false,
+            containerId: 'toast-container',
+            maxOpened: 3,
+            newestOnTop: true,
+            positionClass: 'toast-top-right',
+            preventDuplicates: true,
+            preventOpenDuplicates: true,
+            target: 'body',
+            allowHtml: true,
+            closeButton: true,
+            timeOut: 5000,
+            progressBar: true,
+        });
+        
+        //loading bar configuration
+        cfpLoadingBarProvider.includeSpinner = false;
     }
 ]);
 

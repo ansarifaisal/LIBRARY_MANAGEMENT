@@ -7,7 +7,8 @@ AuthenticationModule.controller("AuthenticationController", [
     "$rootScope",
     "$routeParams",
     "$route",
-    function (AuthenticationFactory, $scope, $location, $timeout, $rootScope, $routeParams, $route) {
+    "toastr",
+    function (AuthenticationFactory, $scope, $location, $timeout, $rootScope, $routeParams, $route, toastr) {
 
         //here `me` is use to reffer the current value
         var me = this;
@@ -20,11 +21,11 @@ AuthenticationModule.controller("AuthenticationController", [
 
         $scope.count = 5;
 
-        $scope.isEmailAlert = false;
-
         $scope.errorMessage = "";
 
         $scope.successMessage = "";
+
+        $scope.infoMessage = "";
 
         //creating new user object
         me.newUser = {};
@@ -33,7 +34,18 @@ AuthenticationModule.controller("AuthenticationController", [
 
         me.data = {};
 
-        $scope.isBusy = false;
+        me.setNewPassword = {
+            password: '',
+            confirmPassword: '',
+            code: '',
+            userName: ''
+        }
+
+        me.forget = {
+            userName: ''
+        }
+
+        $rootScope.isBusy = false;
 
         me.confirmAccount = {}
 
@@ -41,42 +53,43 @@ AuthenticationModule.controller("AuthenticationController", [
             settings();
         }, 1000);
 
+        //Method to login.
         me.login = function () {
 
+            //check whether object is filled or not
             if (!me.credentials.username || !me.credentials.password)
                 return;
-
-            $scope.isBusy = true;
+            //variable to show loading icon
+            $rootScope.isBusy = true;
             AuthenticationFactory.login(me.credentials)
                 .then(function (data) {
                     me.data = data;
+                    //saving token into the cookies
                     AuthenticationFactory.saveToken(me.data);
+                    //storing token into global scope
                     $rootScope.token = AuthenticationFactory.loadTokenFromSession();
                     //if the credentials is wrong
-                    if (me.data.error === 'invalid_grant') {
-                        showAlert();
+                    if (me.data.error === 'invalid_grant')
                         return $scope.errorMessage = me.data.error_description;
-                    }
+
                     //getting the user
                     AuthenticationFactory.getUserByUserName(me.data.userName).then(function (user) {
                         if (user) {
                             if (user.status === 'PENDING') {
-                                showAlert();
                                 return $scope.errorMessage = "Your account is pending"
                             } else if (user.status === 'REJECTED') {
-                                showAlert();
                                 return $scope.errorMessage = "Your account request is rejected";
                             } else if (user.emailConfirmed === false) {
-                                showAlert();
                                 return $scope.emailError = true;
                             } else if (user.emailConfirmed === true && user.status === 'APPROVED') {
-                                //save token in the session
+                                //save the user into cookies
                                 AuthenticationFactory.saveUser(user);
                                 AuthenticationFactory.setUserIsAuthenticated(true);
                                 AuthenticationFactory.setRole(user.role);
                                 $location.path("/home");
                             }
                         } else {
+                            //if no user found
                             AuthenticationFactory.setUserIsAuthenticated(false);
                             AuthenticationFactory.setRole("GUEST");
                             $rootScope.authenticated = AuthenticationFactory.getUserIsAuthenticated();
@@ -86,17 +99,28 @@ AuthenticationModule.controller("AuthenticationController", [
 
                 },
                 function (errorResponse) {
-                    showAlert();
                     return $scope.errorMessage = "Error While Login!";
                 }).finally(function () {
-                    $scope.isBusy = false;
+                    if ($scope.errorMessage !== "")
+                        toastr.error($scope.errorMessage);
+
+                    if ($scope.successMessage !== "")
+                        toastr.success($scope.successMessage);
+
+                    $scope.emailError = false;
+                    $scope.errorMessage = "";
+                    $scope.successMessage = "";
+                    $rootScope.isBusy = false;
                 });
         }
 
+        //Method to register
         me.register = function () {
             me.newUser.Role = AuthenticationFactory.studentRole();
             me.newUser.Status = AuthenticationFactory.status();
-            $scope.isBusy = true;
+            if (!me.newUser)
+                return;
+            $rootScope.isBusy = true;
             AuthenticationFactory.register(me.newUser)
                 .then(function () {
                     AuthenticationFactory.setUserIsAuthenticated(false);
@@ -107,62 +131,138 @@ AuthenticationModule.controller("AuthenticationController", [
                 AuthenticationFactory.setUserIsAuthenticated(false);
                 $rootScope.authenticated = AuthenticationFactory.getUserIsAuthenticated();
                 $location.path('/register');
-                showAlert();
                 $scope.errorMessage = "Error while registration";
             }).finally(function () {
-                $scope.isBusy = false;
+                if ($scope.errorMessage !== "")
+                    toastr.error($scope.errorMessage);
+                $scope.errorMessage = "";
+                $rootScope.isBusy = false;
             });
         }
 
-
+        //method to activate account
         me.activateAccount = function () {
             me.confirmAccount.userId = $routeParams.userId;
             me.confirmAccount.code = $routeParams.code;
             me.confirmAccount.userName = $routeParams.userName;
-            $scope.isBusy = true;
+            if (!me.confirmAccount) {
+                if (!me.confirmAccount.code && !me.confirmAccount.userName && !me.confirmAccount.userId) {
+                    toastr.error("Sorry! there is nothing you can do, You will be redirect in " + $scope.count + " seconds");
+                    me.loginRedirect();
+                }
+                return;
+            }
+            $rootScope.isBusy = true;
             AuthenticationFactory.activateAccount(me.confirmAccount)
                 .then(function (response) {
                     //Needs to write check to check password
                     $location.path("/confirm");
                 },
             function (errorResponse) {
-                showAlert();
                 $scope.errorMessage = "Error activating account";
             }).finally(function () {
-                $scope.isBusy = false;
+                if ($scope.errorMessage !== "")
+                    toastr.error($scope.errorMessage);
+                $scope.errorMessage = "";
+                $rootScope.isBusy = false;
             });
         }
 
+
+        //check whether the user exists
         me.checkExistingAccount = function () {
             var userName = me.newUser.Email;
-            $scope.isBusy = true;
             AuthenticationFactory.checkExistingAccount(userName).then(function (exists) {
                 me.exists = false;
                 if (exists === true)
                     me.exists = true;
             },
             function (errorResponse) {
-                showAlert();
                 $scope.errorMessage = "Error while checking username";
+            }).finally(function () {
+                if ($scope.errorMessage !== "")
+                    toastr.error($scope.errorMessage);
+
+                $scope.errorMessage = "";
             });
         }
 
-
+        //send activation link
         me.sendActivationLink = function () {
             var userName = me.credentials.username;
-            $scope.isBusy = true;
+            $rootScope.isBusy = true;
             AuthenticationFactory.sendActivationMail(userName).then(function () {
-                $scope.isSuccess = true;
-                showAlert();
+                $route.reload();
                 $scope.successMessage = "Email has been sent to your provided mail id.";
             }, function (errorResponse) {
-                showAlert();
                 $scope.errorMessage = "Error sending activation link.";
             }).finally(function () {
-                $scope.isBusy = false;
+                if ($scope.successMessage !== "")
+                    toastr.success($scope.successMessage);
+
+                if ($scope.errorMessage !== "")
+                    toastr.error($scope.errorMessage);
+
+                $scope.successMessage = "";
+                $scope.errorMessage = "";
+                $rootScope.isBusy = false;
             });
         }
 
+        me.forgetPassword = function () {
+
+            if (!me.forget)
+                return;
+
+            $rootScope.isBusy = true;
+            AuthenticationFactory.forgetPassword(me.forget)
+                .then(function () {
+                    $route.reload();
+                    $scope.successMessage = "Reset Mail has been sent to your email.";
+                }, function (errorResponse) {
+                    $scope.errorMessage = "Error while sending email.";
+                }).finally(function () {
+                    if ($scope.successMessage !== "")
+                        toastr.success($scope.successMessage);
+
+                    if ($scope.errorMessage !== "")
+                        toastr.error($scope.errorMessage);
+
+                    $scope.successMessage = "";
+                    $scope.errorMessage = "";
+                    $rootScope.isBusy = false;
+                });
+        }
+
+        me.setPassword = function () {
+
+            me.setNewPassword.code = $routeParams.code;
+            me.setNewPassword.userName = $routeParams.userName;
+            if (!me.setNewPassword)
+                return;
+            $rootScope.isBusy = true;
+            AuthenticationFactory.setPassword(me.setNewPassword)
+                .then(function () {
+                    $route.reload();
+                    $scope.successMessage = "Password changed successfully, You will be redirected in " + $rootScope.count+ " seconds.";
+                    me.loginRedirect();
+                }, function (errorResponse) {
+                    $scope.errorMessage = "Error while changing password."
+                }).finally(function () {
+                    if ($scope.successMessage !== "")
+                        toastr.success($scope.successMessage);
+
+                    if ($scope.errorMessage !== "")
+                        toastr.error($scope.errorMessage);
+
+                    $scope.successMessage = "";
+                    $scope.errorMessage = "";
+
+                    $rootScope.isBusy = false;
+                });
+        }
+
+        //Method to redirect on login page
         me.loginRedirect = function () {
             me.countDown();
             $timeout(function () {
@@ -170,6 +270,7 @@ AuthenticationModule.controller("AuthenticationController", [
             }, 5000);
         }
 
+        //Method to show count down
         me.countDown = function () {
             $timeout(function () {
                 $scope.count--;

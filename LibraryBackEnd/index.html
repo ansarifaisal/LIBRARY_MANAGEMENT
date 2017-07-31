@@ -8,10 +8,15 @@
     <!--<link rel="stylesheet" href="assets/css/bootstrap.min.css" />-->
     <link rel="stylesheet" href="assets/css/bootstrap-cerulean.css" />
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="assets/css/angular-toastr.css" />
+    <link rel='stylesheet' href='assets/css/loading-bar.css' type='text/css' media='all' />
     <link rel="stylesheet" href="assets/css/site.css" />
     <script type="text/javascript" src="assets/js/angular.js"></script>
     <script type="text/javascript" src="assets/js/angular-route.js"></script>
     <script type="text/javascript" src="assets/js/angular-cookies.js"></script>
+    <script type="text/javascript" src="assets/js/angular-animate.js"></script>
+    <script type="text/javascript" src="assets/js/angular-toastr.tpls.js"></script>
+    <script type="text/javascript" src="assets/js/loading-bar.js"></script>
     <script type="text/javascript" src="app/app.module.js"></script>
     <script type="text/javascript" src="app/app.routes.js"></script>
     <script src="app/appService.js"></script>
@@ -22,6 +27,9 @@
 <body ng-cloak>
 
     <div class="container">
+        <div class="row">
+            <div ng-show="isBusy" class="loader col-md-offset-4"></div>
+        </div>
 
         <div ng-view></div>
 

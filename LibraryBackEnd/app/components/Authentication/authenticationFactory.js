@@ -32,7 +32,9 @@ AuthenticationModule.factory("AuthenticationFactory", [
             getUserByUserName: getUserByUserName,
             activateAccount: activateAccount,
             checkExistingAccount: checkExistingAccount,
-            sendActivationMail: sendActivationMail
+            sendActivationMail: sendActivationMail,
+            forgetPassword: forgetPassword,
+            setPassword: setPassword
         }
 
         //returning the authenticationFactory object
@@ -238,6 +240,34 @@ AuthenticationModule.factory("AuthenticationFactory", [
 
             return deferred.promise;
 
+        }
+
+        function forgetPassword(details) {
+            var deferred = $q.defer();
+
+            $http.post("/api/account/ForgetPassword", details)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                },
+            function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+
+            return deferred.promise;
+        }
+
+        function setPassword(password) {
+            console.log(password);
+            var deferred = $q.defer();
+            $http.post("/api/account/ResetPassword", password)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                },
+            function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+
+            return deferred.promise;
         }
 
     }

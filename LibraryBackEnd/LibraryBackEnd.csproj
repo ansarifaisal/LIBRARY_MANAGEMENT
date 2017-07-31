@@ -266,6 +266,8 @@
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Core\BindingModels\ForgetPasswordBindModel.cs" />
+    <Compile Include="Core\BindingModels\ResetPasswordBindModel.cs" />
     <Compile Include="Core\Services\Class\EntityService.cs" />
     <Compile Include="Core\Services\Class\StudentService.cs" />
     <Compile Include="Core\Services\Interface\ISendEmailService.cs" />
@@ -303,7 +305,7 @@
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Core\Services\Class\SendEmailService.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Core\ViewModels\ConfirmPasswordViewModel.cs" />
+    <Compile Include="Core\BindingModels\ConfirmPasswordBindModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.module.js" />
@@ -314,24 +316,37 @@
     <Content Include="app\components\Authentication\confirm.html" />
     <Content Include="app\components\Authentication\confirmation.html" />
     <Content Include="app\components\Authentication\error.html" />
+    <Content Include="app\components\Authentication\forget.html" />
     <Content Include="app\components\Authentication\login.html" />
+    <Content Include="app\components\Authentication\passwordChanged.html" />
     <Content Include="app\components\Authentication\passwordConfirm.html" />
     <Content Include="app\components\Authentication\register.html" />
+    <Content Include="app\components\Authentication\setPassword.html" />
     <Content Include="app\components\User\home.html" />
     <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="assets\css\angular-toastr.css" />
+    <Content Include="assets\css\angular-toastr.min.css" />
     <Content Include="assets\css\bootstrap-cerulean.css" />
     <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\font-awesome.css" />
     <Content Include="assets\css\font-awesome.min.css" />
+    <Content Include="assets\css\loading-bar.css" />
+    <Content Include="assets\css\loading-bar.min.css" />
     <Content Include="assets\css\site.css" />
+    <Content Include="assets\css\toaster.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\images\icon_graduate.png" />
     <Content Include="assets\images\Rolling.gif" />
+    <Content Include="assets\js\angular-animate.js" />
+    <Content Include="assets\js\angular-animate.min.js" />
     <Content Include="assets\js\angular-cookies.js" />
     <Content Include="assets\js\angular-cookies.min.js" />
     <Content Include="assets\js\angular-route.js" />
     <Content Include="assets\js\angular-route.min.js" />
+    <Content Include="assets\js\angular-toastr.js" />
+    <Content Include="assets\js\angular-toastr.min.js" />
+    <Content Include="assets\js\angular-toastr.tpls.js" />
     <Content Include="assets\js\angular.js" />
     <Content Include="assets\js\angular.min.js" />
     <Content Include="assets\js\app.js" />
@@ -344,6 +359,10 @@
     <Content Include="assets\fonts\FontAwesome.otf" />
     <None Include="assets\js\jquery-3.1.1.intellisense.js" />
     <Content Include="assets\js\jquery-3.1.1.js" />
+    <Content Include="assets\js\loading-bar.js" />
+    <Content Include="assets\js\loading-bar.min.js" />
+    <Content Include="assets\js\toaster.js" />
+    <Content Include="assets\js\toaster.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">

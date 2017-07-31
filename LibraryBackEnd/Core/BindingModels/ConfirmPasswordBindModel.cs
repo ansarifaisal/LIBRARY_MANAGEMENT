@@ -1,6 +1,6 @@
-﻿namespace LibraryBackEnd.Core.ViewModels
+﻿namespace LibraryBackEnd.Core.BindModels
 {
-    public class ConfirmPasswordViewModel
+    public class ConfirmPasswordBindModel
     {
 
         public string UserId { get; set; }

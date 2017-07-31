@@ -1,0 +1,45 @@
+﻿
+<div class="page-header">
+    <h2 class="text-center">Forget Password</h2>
+</div>
+
+<div class="col-md-offset-3 col-md-6">
+
+    <!-- Panel Starts Here -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Forget Password</h3>
+        </div>
+        <!-- Panel Body Starts Here -->
+        <div class="panel-body">
+            <!-- Form Starts Here -->
+            <form name="forgetForm" ng-submit="authCtrl.forgetPassword()" novalidate>
+                <!-- Email Field Starts Here -->
+                <div class="form-group" ng-class="{'has-error has-feedback': forgetForm.email.$invalid && forgetForm.email.$touched || forgetForm.email.$invalid && forgetForm.$submitted,
+                         'has-success has-feedback': forgetForm.email.$valid || forgetForm.email.$valid && forgetForm.$submitted}">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" placeholder="Email" ng-model="authCtrl.forget.userName" class="form-control" required />
+
+                    <span class="glyphicon form-control-feedback"
+                          ng-class="{'glyphicon-ok': forgetForm.email.$valid || forgetForm.email.$valid && forgetForm.$submitted,
+                          'glyphicon-remove': forgetForm.email.$invalid && forgetForm.email.$touched || forgetForm.email.$invalid && forgetForm.$submitted}"></span>
+
+                    <div ng-show="forgetForm.email.$invalid && forgetForm.email.$touched || forgetForm.$submitted">
+                        <span ng-show="forgetForm.email.$error.required" class="text-danger small">Please, provide email.</span>
+                        <span ng-show="forgetForm.email.$error.email" class="text-danger small ">Email id is invalid.</span>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Forget Password" class="btn btn-success form-control" />
+                </div>
+                <!-- Email Field Ends Here -->
+            </form>
+            <!-- Form Ends Here -->
+            <a ng-href="#!/login" href="">Login Now!</a>
+            <a ng-href="#!/register" href="" class="pull-right">Register Now!</a>
+        </div>
+        <!-- Panel Body Ends Here -->
+    </div>
+    <!-- Panel Ends Here -->
+</div>

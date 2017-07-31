@@ -45,7 +45,7 @@
                          'has-success has-feedback': registerForm.Password.$valid || registerForm.Password.$valid && registerForm.$submitted}">
 
                     <label for="Password">Password</label>
-                    <input type="password" class="form-control" placeholder="Enter Password" name="Password" ng-model="authCtrl.newUser.Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" required />
+                    <input type="password" class="form-control" placeholder="Enter Password" name="Password" ng-model="authCtrl.newUser.Password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}" min="8" required />
 
                     <span class="glyphicon form-control-feedback"
                           ng-class="{'glyphicon-ok': registerForm.Password.$valid || registerForm.Password.$valid && registerForm.$submitted,
@@ -55,6 +55,7 @@
                     <div ng-show="registerForm.Password.$invalid && registerForm.Password.$touched || registerForm.$submitted">
                         <span ng-show="registerForm.Password.$error.required" class="text-danger small">Please, provide password.</span>
                         <span ng-show="registerForm.Password.$error.pattern" class="text-danger small">Password must contain numbers, uppercase letter and special charachter.</span>
+                        <span ng-show="registerForm.Password.$error.minlength" class="text-danger small">Password must contain atleast 8 charachters.</span>
                     </div>
 
                 </div>
@@ -92,10 +93,10 @@
 
             <!-- Registration Form Ends Here -->
             <div class="pull-left">
-                <a href="#!/login">Login Now</a>
+                <a ng-href="#!/login" href="">Login Now</a>
             </div>
             <div class="pull-right">
-                <a href="">Forget Password?</a>
+                <a ng-href="#!/forget" href="">Forget Password?</a>
             </div>
         </div>
 

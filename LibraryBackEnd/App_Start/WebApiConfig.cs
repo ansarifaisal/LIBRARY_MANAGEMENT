@@ -36,6 +36,10 @@ namespace LibraryBackEnd
                  routeTemplate: "#!/confirmPassword"
              );
 
+            config.Routes.MapHttpRoute(
+                 name: "ForgetPasswordRoute",
+                 routeTemplate: "#!/setPassword"
+             );
         }
     }
 }

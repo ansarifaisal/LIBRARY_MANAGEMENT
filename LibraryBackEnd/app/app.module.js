@@ -2,6 +2,9 @@
 
     "ngRoute",
     "ngCookies",
+    "angular-loading-bar",
+    "ngAnimate",
+    "toastr",
     "AuthenticationModule"
 
 ]);

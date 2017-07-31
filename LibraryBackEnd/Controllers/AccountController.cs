@@ -1,4 +1,5 @@
 ﻿using LibraryBackEnd.Core.BindingModels;
+using LibraryBackEnd.Core.BindModels;
 using LibraryBackEnd.Core.Models;
 using LibraryBackEnd.Core.Services.Interface;
 using LibraryBackEnd.Core.ViewModels;
@@ -344,6 +345,52 @@ namespace LibraryBackEnd.Controllers
             return Ok();
         }
 
+        // GET /api/account/ForgetPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("ForgetPassword")]
+        public async Task<IHttpActionResult> ForgetPassword(ForgetPasswordBindModel forgetPassword)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Inavlid State");
+
+            var user = _studentService.GetByUserName(forgetPassword.UserName);
+
+            if (user == null)
+                return NotFound();
+
+            string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+            var url = new Uri(Url.Link("ForgetPasswordRoute",
+                new { code = code, userName = user.UserName }));
+            var result = _sendEmailService.SendActivationMail(url, user.Email);
+
+            return Ok("Email Sent Successfully!");
+        }
+
+        // POST /api/account/ResetPassword
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("ResetPassword")]
+        public async Task<IHttpActionResult> ResetPassword(ResetPasswordBindModel resetPassword)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("State Invalid");
+
+            var user = _studentService.GetByUserName(resetPassword.UserName);
+
+            if (user == null)
+                return NotFound();
+
+            var decode = resetPassword.Code.Replace(" ", "+");
+
+            var result = await UserManager.ResetPasswordAsync(user.Id, decode, resetPassword.Password);
+
+            if (!result.Succeeded)
+                return BadRequest();
+
+            return Ok();
+        }
+
         //GET /api/Home/sendActivationMail
         [HttpGet]
         [AllowAnonymous]
@@ -369,7 +416,7 @@ namespace LibraryBackEnd.Controllers
         [AllowAnonymous]
         [Route("ConfirmEmail")]
         [HttpPost]
-        public async Task<IHttpActionResult> ConfirmEmail(ConfirmPasswordViewModel model)
+        public async Task<IHttpActionResult> ConfirmEmail(ConfirmPasswordBindModel model)
         {
             IdentityResult result = null;
 
