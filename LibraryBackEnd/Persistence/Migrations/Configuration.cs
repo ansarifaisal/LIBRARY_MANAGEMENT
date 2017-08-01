@@ -1,9 +1,8 @@
-namespace LibraryBackEnd.Migrations
+namespace LibraryBackEnd.Persistence.Migrations
 {
-    using LibraryBackEnd.Configuration;
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<LibraryBackEnd.Configuration.ApplicationDbContext>
     {
         public Configuration()
         {
@@ -11,7 +10,7 @@ namespace LibraryBackEnd.Migrations
             MigrationsDirectory = @"Persistence\Migrations";
         }
 
-        protected override void Seed(ApplicationDbContext context)
+        protected override void Seed(LibraryBackEnd.Configuration.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

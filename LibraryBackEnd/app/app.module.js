@@ -5,7 +5,8 @@
     "angular-loading-bar",
     "ngAnimate",
     "toastr",
-    "AuthenticationModule"
+    "AuthenticationModule",
+    "PublicationModule"
 
 ]);
 

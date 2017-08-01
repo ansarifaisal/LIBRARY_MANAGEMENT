@@ -1,0 +1,42 @@
+﻿
+{{token.access_token}}
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal">
+    + Add Publication
+</button>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Publication</h4>
+            </div>
+            <div class="modal-body">
+
+                <form name="create" ng-submit="publicationCtrl.addPublication()" novalidate>
+                    <div class="form-group" ng-class="{'has-error has-feedback': create.name.$invalid && create.name.$touched
+         || create.name.$invalid && create.$submitted,
+         'has-success has-feedback': create.name.$valid || create.name.$valid
+         && registerForm.$submitted}">
+                        <label for="name">Publication Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Enter Publication Name" ng-model="publicationCtrl.newPublication.name" required />
+
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': create.name.$valid || create.name.$valid && create.$submitted,
+                          'glyphicon-remove': create.name.$invalid && create.name.$touched
+                           || create.name.$invalid && create.$submitted}">
+                        </span>
+
+                        <div ng-show="create.name.$invalid && create.name.$touched || create.$submitted">
+                            <span ng-show="create.name.$error.required" class="text-danger small">Please, provide name.</span>
+                        </div>
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="Add Publication" />
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

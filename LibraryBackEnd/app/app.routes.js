@@ -3,6 +3,10 @@
 
 window.routes = {
 
+    /*
+     * Loading Authentication Module
+     */
+
     '/login': {
 
         templateUrl: 'app/components/authentication/login.html',
@@ -89,6 +93,9 @@ window.routes = {
         roles: ['GUEST']
     },
 
+    /**
+     * Loading Home Page
+     */
 
     '/home': {
 
@@ -96,10 +103,21 @@ window.routes = {
         controller: 'AuthenticationController',
         controllerAs: 'authCtrl',
         requireLogin: true,
-        roles: ['STUDENT']
-
+        roles: ['STUDENT', 'ADMIN']
     },
 
+    /**
+     * Loading Publication Module
+     */
+
+    '/user/publications': {
+
+        templateUrl: 'app/components/publications/publication.html',
+        controller: 'PublicationController',
+        controllerAs: 'publicationCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
 
 }
 
@@ -197,19 +215,19 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
         }
     });
 
-    $cookies.getObject('user');
-    $cookies.getObject('authenticationData');
+    //$cookies.getObject('user');
+    //$cookies.getObject('authenticationData');
 
-    $(window).on('beforeunload', function () {
+    //$(window).on('beforeunload', function () {
 
-        $cookies.remove('user');
-        $cookies.remove('authenticationData');
-        AuthenticationFactory.setUserIsAuthenticated(false);
+    //    $cookies.remove('user');
+    //    $cookies.remove('authenticationData');
+    //    AuthenticationFactory.setUserIsAuthenticated(false);
 
-    });
+    //});
 
-    $rootScope.logOut = function () {
-        AppService.unLoad();
-        $location.path('/login');
-    }
+    //$rootScope.logOut = function () {
+    //    AppService.unLoad();
+    //    $location.path('/login');
+    //}
 });

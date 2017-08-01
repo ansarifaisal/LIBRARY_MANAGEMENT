@@ -8,6 +8,7 @@
     <!--<link rel="stylesheet" href="assets/css/bootstrap.min.css" />-->
     <link rel="stylesheet" href="assets/css/bootstrap-cerulean.css" />
     <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="assets/css/font-awesome.css" type="text/css"/>
     <link rel="stylesheet" href="assets/css/angular-toastr.css" />
     <link rel='stylesheet' href='assets/css/loading-bar.css' type='text/css' media='all' />
     <link rel="stylesheet" href="assets/css/site.css" />
@@ -20,11 +21,18 @@
     <script type="text/javascript" src="app/app.module.js"></script>
     <script type="text/javascript" src="app/app.routes.js"></script>
     <script src="app/appService.js"></script>
+
     <script type="text/javascript" src="app/components/Authentication/authenticationFactory.js"></script>
     <script type="text/javascript" src="app/components/Authentication/authenticationController.js"></script>
 
+    <script type="text/javascript" src="app/components/Publications/publicationFactory.js"></script>
+    <script type="text/javascript" src="app/components/Publications/publicationController.js"></script>
 </head>
 <body ng-cloak>
+
+    <div ng-show="authenticated">
+        <div ng-include="'/app/shared/navBar.html'"></div>
+    </div>
 
     <div class="container">
         <div class="row">
@@ -35,7 +43,9 @@
 
     </div>
 
+    <div ng-show="authenticated">
+        <div ng-include="'/app/shared/footer.html'"></div>
+    </div>
     <script type="text/javascript" src="assets/js/app.js"></script>
-
 </body>
 </html>

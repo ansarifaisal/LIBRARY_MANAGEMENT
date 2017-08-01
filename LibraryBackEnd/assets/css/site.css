@@ -1,4 +1,10 @@
-﻿.panel-margin-top {
+﻿
+body {
+    padding-bottom: 70px;
+    padding-top: 70px;
+}
+
+.panel-margin-top {
     margin-top: 75px;
 }
 
@@ -26,6 +32,38 @@
     position: center;
 }
 
+.badge-notify {
+    background: red;
+    position: relative;
+    top: -10px;
+    left: -15px;
+    font-size: 12px;
+}
+
+
+.navbar-header > a.navbar-brand:hover {
+    color: black;
+}
+
+.fa-6x {
+    font-size: 6em;
+}
+
+.fa-7x {
+    font-size: 7em;
+}
+
+.margin-4x {
+    margin-left: 4%;
+}
+
+a>.text-center>.fa{
+    color:#2F2F2F;
+}
+
+a>.text-center>.fa:hover{
+    color:black;
+}
 
 .loader {
     border: 16px solid #f3f3f3;
@@ -33,10 +71,10 @@
     border-top: 16px solid #3498db;
     width: 120px;
     height: 120px;
-    position:absolute;
+    position: absolute;
     margin-top: 275px;
     z-index: 999;
-    background-color:white;
+    background-color: white;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
 }

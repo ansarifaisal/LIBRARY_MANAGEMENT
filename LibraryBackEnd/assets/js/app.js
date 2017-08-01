@@ -2,6 +2,14 @@
 var settings = function () {
     "use strict"
 
+    $('#notification').popover({
+        content: "This is a test",
+        html: true,
+        placement: "bottom",
+        title: "Notification",
+        trigger: "focus"
+
+    });
 
 
 };

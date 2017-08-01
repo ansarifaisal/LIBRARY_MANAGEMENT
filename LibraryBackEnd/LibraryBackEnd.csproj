@@ -265,10 +265,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PublicationController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Core\BindingModels\ForgetPasswordBindModel.cs" />
     <Compile Include="Core\BindingModels\ResetPasswordBindModel.cs" />
     <Compile Include="Core\Services\Class\EntityService.cs" />
+    <Compile Include="Core\Services\Interface\IPublicationService.cs" />
+    <Compile Include="Core\Services\Class\PublicationService.cs" />
     <Compile Include="Core\Services\Class\StudentService.cs" />
     <Compile Include="Core\Services\Interface\ISendEmailService.cs" />
     <Compile Include="Core\Services\Interface\IEntityService.cs" />
@@ -277,17 +280,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Core\IUnitOfWork.cs" />
-    <Compile Include="Persistence\Migrations\201707241258277_InitialMigration.cs" />
-    <Compile Include="Persistence\Migrations\201707241258277_InitialMigration.Designer.cs">
-      <DependentUpon>201707241258277_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\BindingModels\AddExternalLoginBindingModel.cs" />
     <Compile Include="Core\BindingModels\ChangePasswordBindingModel.cs" />
     <Compile Include="Core\BindingModels\RegisterBindingModel.cs" />
     <Compile Include="Core\BindingModels\RegisterExternalBindingModel.cs" />
     <Compile Include="Core\BindingModels\RemoveLoginBindingModel.cs" />
     <Compile Include="Core\BindingModels\SetPasswordBindingModel.cs" />
+    <Compile Include="Persistence\Migrations\201708012029550_addPublicationModify.cs" />
+    <Compile Include="Persistence\Migrations\201708012029550_addPublicationModify.Designer.cs">
+      <DependentUpon>201708012029550_addPublicationModify.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
     <Compile Include="Core\ViewModels\ExternalLoginViewModel.cs" />
@@ -296,7 +299,10 @@
     <Compile Include="Core\ViewModels\UserLoginInfoViewModel.cs" />
     <Compile Include="Core\IRepositories\IGenericRepository.cs" />
     <Compile Include="Core\IRepositories\IStudentRepository.cs" />
+    <Compile Include="Core\Models\Publication.cs" />
     <Compile Include="Persistence\Repositories\GenericRepository.cs" />
+    <Compile Include="Core\IRepositories\IPublicationRepository.cs" />
+    <Compile Include="Persistence\Repositories\PublicationRepository.cs" />
     <Compile Include="Persistence\Repositories\StudentRepository.cs" />
     <Compile Include="Persistence\Repositories\test.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -318,11 +324,15 @@
     <Content Include="app\components\Authentication\error.html" />
     <Content Include="app\components\Authentication\forget.html" />
     <Content Include="app\components\Authentication\login.html" />
-    <Content Include="app\components\Authentication\passwordChanged.html" />
     <Content Include="app\components\Authentication\passwordConfirm.html" />
     <Content Include="app\components\Authentication\register.html" />
     <Content Include="app\components\Authentication\setPassword.html" />
+    <Content Include="app\components\Publications\publication.html" />
+    <Content Include="app\components\Publications\publicationController.js" />
+    <Content Include="app\components\Publications\publicationFactory.js" />
     <Content Include="app\components\User\home.html" />
+    <Content Include="app\shared\footer.html" />
+    <Content Include="app\shared\navBar.html" />
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="assets\css\angular-toastr.css" />
     <Content Include="assets\css\angular-toastr.min.css" />
@@ -361,8 +371,6 @@
     <Content Include="assets\js\jquery-3.1.1.js" />
     <Content Include="assets\js\loading-bar.js" />
     <Content Include="assets\js\loading-bar.min.js" />
-    <Content Include="assets\js\toaster.js" />
-    <Content Include="assets\js\toaster.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
@@ -378,7 +386,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\shared\" />
     <Folder Include="App_Data\" />
     <Folder Include="Persistence\EntityConfigurations\" />
   </ItemGroup>
@@ -391,8 +398,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Persistence\Migrations\201707241258277_InitialMigration.resx">
-      <DependentUpon>201707241258277_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Persistence\Migrations\201708012029550_addPublicationModify.resx">
+      <DependentUpon>201708012029550_addPublicationModify.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

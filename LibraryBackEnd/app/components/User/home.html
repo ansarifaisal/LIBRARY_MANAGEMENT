@@ -1,7 +1,257 @@
-﻿Home Will Come Here
+﻿<!-- ADMIN Section Starts Here -->
+<div ng-show="user.role == 'ADMIN'">
+    <!-- Member Panel Starts Here -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Members Panel</h3>
+        </div>
+        <!-- Panel-Body starts here -->
+        <div class="panel-body">
+            <!-- Author panel starts here -->
+            <div class="panel panel-primary col-md-2">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-users fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Authors</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Author panel ends here -->
+            <!-- Student panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-address-card fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Students</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Student panel Ends here -->
+            <!-- Librarians panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-user-circle-o fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">
+                            Librarians
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- Librarian panel Ends here -->
+        </div>
+        <!-- Panel-Body ends here -->
+    </div>
+    <!-- Member panel ends here -->
+    <!-- Book panel starts here -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Books Panel</h3>
+        </div>
+        <!-- panel-body starts here -->
+        <div class="panel-body">
+            <!-- Publications panel starts here -->
+            <div class="panel panel-primary col-md-2">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/user/publications">
+                        <div class="text-center">
+                            <i class="fa fa-pencil-square-o fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Publications</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Publications panel ends here -->
+            <!-- Courses panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-graduation-cap fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">
+                            Courses
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- Courses panel ends here -->
+            <!-- University panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-university fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">
+                            Semesters
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- University panel ends here -->
+            <!-- Subjects panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-stack-overflow fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">
+                            Subjects
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- Subjects panel ends here -->
+            <!-- Book panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-book fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">
+                            Books
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- Book panel ends here -->
+        </div>
+        <!-- panel-body ends here -->
+    </div>
+    <!-- Book panel ends here -->
+    <!-- Action panel starts here -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Action Panel</h3>
+        </div>
+        <!-- Panel body starts here -->
+        <div class="panel-body">
+            <!-- Issued book panel starts here -->
+            <div class="panel panel-primary col-md-2">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-address-book-o fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Issued Books</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Issued book panel ends here -->
+            <!-- Returned book panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-reply fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Returned Books</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Returned book panel ends here -->
+            <!-- Statistics panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-line-chart fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Statistics</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Statistics panel ends here -->
+        </div>
+        <!-- Panel body ends here -->
+    </div>
+    <!-- Action panel ends here -->
+</div>
+<!-- ADMIN section ends here -->
+<!-- STUDENT section starts here -->
+<div ng-show="user.role == 'STUDENT'">
 
-<div>{{authenticated}}</div>
+    <div class="alert alert-danger">
+        <marquee behavior="alternate" scrollamount="5">Alert Goes Here</marquee>
+    </div>
 
-<div>{{token.access_token}}</div>
-
-<div>{{user}}</div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Student Panel</h3>
+        </div>
+        <!-- Panel body starts here -->
+        <div class="panel-body">
+            <!-- Book panel starts here -->
+            <div class="panel panel-primary col-md-2">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-book fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Books</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Book panel ends here -->
+            <!-- Issued book panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-address-book-o fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Issued Books</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Issued book panel ends here -->
+            <!-- Returned book panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-reply fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Returned Books</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Returned book panel ends here -->
+            <!-- Order Book panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-cart-plus fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Requested Books</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Order Book panel ends here -->
+            <!-- Setting panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="">
+                        <div class="text-center">
+                            <i class="fa fa-wrench fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Settings</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Setting panel ends here -->
+        </div>
+        <!-- Panel body ends here -->
+    </div>
+</div>
+<!-- STUDENT section ends here -->
