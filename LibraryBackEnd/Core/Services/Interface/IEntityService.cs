@@ -8,5 +8,6 @@ namespace LibraryBackEnd.Core.Services.Interface
         void Delete(T entity);
         IEnumerable<T> GetAll();
         void Update(T entity);
+        T SelectById(object Id);
     }
 }

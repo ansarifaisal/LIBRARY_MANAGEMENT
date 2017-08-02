@@ -21,7 +21,7 @@ namespace LibraryBackEnd.Core.Services.Class
             if (entity == null)
                 throw new ArgumentNullException("Entity Not Found");
             _repository.Insert(entity);
-            _unitOfWork.Complete();
+            _repository.Complete();
         }
 
         public void Delete(T entity)
@@ -43,6 +43,13 @@ namespace LibraryBackEnd.Core.Services.Class
                 throw new ArgumentNullException("Entity Not Found");
             _repository.Update(entity);
             _unitOfWork.Complete();
+        }
+
+        public T SelectById(object Id)
+        {
+            if (Id == null)
+                throw new ArgumentNullException("Id Not Found");
+            return _repository.SelectById(Id);
         }
     }
 }

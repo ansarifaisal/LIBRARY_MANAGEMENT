@@ -330,6 +330,7 @@
     <Content Include="app\components\Publications\publication.html" />
     <Content Include="app\components\Publications\publicationController.js" />
     <Content Include="app\components\Publications\publicationFactory.js" />
+    <Content Include="app\components\Publications\publicationForm.html" />
     <Content Include="app\components\User\home.html" />
     <Content Include="app\shared\footer.html" />
     <Content Include="app\shared\navBar.html" />
@@ -339,6 +340,8 @@
     <Content Include="assets\css\bootstrap-cerulean.css" />
     <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\dataTables.bootstrap.css" />
+    <Content Include="assets\css\datatables.bootstrap.min.css" />
     <Content Include="assets\css\font-awesome.css" />
     <Content Include="assets\css\font-awesome.min.css" />
     <Content Include="assets\css\loading-bar.css" />
@@ -352,6 +355,13 @@
     <Content Include="assets\js\angular-animate.min.js" />
     <Content Include="assets\js\angular-cookies.js" />
     <Content Include="assets\js\angular-cookies.min.js" />
+    <Content Include="assets\css\angular-datatables.css" />
+    <Content Include="assets\js\angular-datatables.bootstrap.js" />
+    <Content Include="assets\js\angular-datatables.bootstrap.min.js" />
+    <Content Include="assets\js\angular-datatables.buttons.js" />
+    <Content Include="assets\js\angular-datatables.buttons.min.js" />
+    <Content Include="assets\js\angular-datatables.js" />
+    <Content Include="assets\js\angular-datatables.min.js" />
     <Content Include="assets\js\angular-route.js" />
     <Content Include="assets\js\angular-route.min.js" />
     <Content Include="assets\js\angular-toastr.js" />
@@ -369,8 +379,11 @@
     <Content Include="assets\fonts\FontAwesome.otf" />
     <None Include="assets\js\jquery-3.1.1.intellisense.js" />
     <Content Include="assets\js\jquery-3.1.1.js" />
+    <Content Include="assets\js\jquery.dataTables.js" />
+    <Content Include="assets\js\jquery.dataTables.min.js" />
     <Content Include="assets\js\loading-bar.js" />
     <Content Include="assets\js\loading-bar.min.js" />
+    <Content Include="assets\js\ui-bootstrap-tpls-2.5.0.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">

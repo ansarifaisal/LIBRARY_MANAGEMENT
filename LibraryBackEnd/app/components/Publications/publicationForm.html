@@ -1,0 +1,29 @@
+﻿
+<div class="modal-header">
+    <h4>Add New Publisher</h4>
+</div>
+
+<div class="modal-body">
+    <form name="create" ng-submit="modalInstanceCtrl.submitPublicationForm()" novalidate>
+        <div class="form-group" ng-class="{'has-error has-feedback': create.name.$invalid && create.name.$touched
+         || create.name.$invalid && create.$submitted,
+         'has-success has-feedback': create.name.$valid || create.name.$valid
+         && registerForm.$submitted}">
+            <label for="name">Publication Name</label>
+            <input type="text" name="name" class="form-control" placeholder="Enter Publication Name" ng-model="modalInstanceCtrl.newPublication.name" required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': create.name.$valid || create.name.$valid && create.$submitted,
+                          'glyphicon-remove': create.name.$invalid && create.name.$touched
+                           || create.name.$invalid && create.$submitted}">
+            </span>
+
+            <div ng-show="create.name.$invalid && create.name.$touched || create.$submitted">
+                <span ng-show="create.name.$error.required" class="text-danger small">Please, provide name.</span>
+            </div>
+        </div>
+        <input type="submit" value="Add Publication" class="btn btn-primary" ng-click="modalInstanceCtrl.ok()" />
+        <button class="btn btn-default" ng-click="modalInstanceCtrl.cancel()">Close</button>
+
+    </form>
+</div>

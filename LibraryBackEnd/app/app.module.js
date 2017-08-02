@@ -5,6 +5,10 @@
     "angular-loading-bar",
     "ngAnimate",
     "toastr",
+    "ui.bootstrap",
+    "datatables",
+    "datatables.bootstrap",
+    "datatables.buttons",
     "AuthenticationModule",
     "PublicationModule"
 
