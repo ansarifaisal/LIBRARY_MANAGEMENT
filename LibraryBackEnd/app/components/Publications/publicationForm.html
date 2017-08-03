@@ -8,7 +8,7 @@
         <div class="form-group" ng-class="{'has-error has-feedback': create.name.$invalid && create.name.$touched
          || create.name.$invalid && create.$submitted,
          'has-success has-feedback': create.name.$valid || create.name.$valid
-         && registerForm.$submitted}">
+         && create.$submitted}">
             <label for="name">Publication Name</label>
             <input type="text" name="name" class="form-control" placeholder="Enter Publication Name"  ng-model="modalInstanceCtrl.publication.name" required />
 
@@ -18,9 +18,8 @@
                            || create.name.$invalid && create.$submitted}">
             </span>
 
-            <div ng-show="create.name.$invalid && create.name.$touched || create.$submitted || modalInstanceCtrl.exists">
+            <div ng-show="create.name.$invalid && create.name.$touched || create.$submitted">
                 <span ng-show="create.name.$error.required" class="text-danger small">Please, provide name.</span>
-                <span ng-show="modalInstanceCtrl.exists" class="text-danger small">Publication already exists.</span>
             </div>
         </div>
         <input type="submit" value="{{modalInstanceCtrl.btnText}}" class="btn btn-primary" ng-click="modalInstanceCtrl.ok()" />

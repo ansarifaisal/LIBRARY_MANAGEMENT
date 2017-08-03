@@ -110,11 +110,24 @@ window.routes = {
      * Loading Publication Module
      */
 
-    '/user/publications': {
+    '/admin/publications': {
 
         templateUrl: 'app/components/publications/publication.html',
         controller: 'PublicationController',
         controllerAs: 'publicationCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+    /*
+     * Loading Author Module
+     */
+
+    '/admin/authors': {
+
+        templateUrl: 'app/components/authors/authors.html',
+        controller: 'AuthorController',
+        controllerAs: 'authorCtrl',
         requireLogin: true,
         roles: ['ADMIN']
     },

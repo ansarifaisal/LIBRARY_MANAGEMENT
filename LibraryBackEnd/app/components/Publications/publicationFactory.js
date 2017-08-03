@@ -3,8 +3,7 @@
 PublicationModule.factory("PublicationFactory", [
     "$http",
     "$q",
-    "$uibModal",
-    function ($http, $q, $uibModal) {
+    function ($http, $q) {
 
         var publicationFactory = {
             addPublication: addPublication,
@@ -12,9 +11,6 @@ PublicationModule.factory("PublicationFactory", [
             getPublication: getPublication,
             editPublication: editPublication,
             deletePublication: deletePublication,
-            checkExisting: checkExisting,
-            showModal: showModal,
-            showDeleteModal: showDeleteModal,
             addOrEdit: addOrEdit
         }
 
@@ -73,54 +69,6 @@ PublicationModule.factory("PublicationFactory", [
                     deferred.reject(errorResponse);
                 });
             return deferred.promise;
-        }
-
-
-        function checkExisting(name) {
-            var deferred = $q.defer();
-            $http.get("/api/publication/checkExisting?name=" + name)
-                .then(function (response) {
-                    deferred.resolve(response.data);
-                }, function (errorResponse) {
-                    deferred.reject(errorResponse);
-                });
-            return deferred.promise;
-        }
-
-        function showModal(publicationModal, templateURL, controller, controllerAs) {
-            $uibModal.open({
-                animation: true,
-                backdrop: true,
-                keyboard: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: '/app/components/' + templateURL,
-                controller: controller,
-                controllerAs: controllerAs,
-                resolve: {
-                    publicationModal: function () {
-                        return publicationModal;
-                    }
-                }
-            });
-        }
-
-        function showDeleteModal(publicationModal) {
-            $uibModal.open({
-                animation: true,
-                backdrop: true,
-                keyboard: true,
-                ariaLabelledBy: 'modal-title',
-                ariaDescribedBy: 'modal-body',
-                templateUrl: '/app/components/publications/deletePublication.html',
-                controller: 'ModalInstanceController',
-                controllerAs: 'modalInstanceCtrl',
-                resolve: {
-                    publicationModal: function () {
-                        return publicationModal;
-                    }
-                }
-            });
         }
 
         function addOrEdit(publication) {

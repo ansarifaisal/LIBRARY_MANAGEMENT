@@ -1,5 +1,6 @@
 ﻿PublicationModule.controller("PublicationController", [
     "PublicationFactory",
+    "AppService",
     "$scope",
     "$location",
     "$route",
@@ -7,11 +8,10 @@
     "$timeout",
     "$rootScope",
     "toastr",
-    "$uibModal",
     "DTOptionsBuilder",
     "DTColumnDefBuilder",
-    function (PublicationFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
-        toastr, $uibModal, DTOptionsBuilder, DTColumnDefBuilder) {
+    function (PublicationFactory, AppService, $scope, $location, $route, $routeParams, $timeout, $rootScope,
+        toastr, DTOptionsBuilder, DTColumnDefBuilder) {
 
         me = this;
 
@@ -33,7 +33,7 @@
             me.publicationModal.publication = me.publication;
             me.publicationModal.title = "Add New Publication";
             me.publicationModal.btnText = "Add Publication";
-            PublicationFactory.showModal(me.publicationModal,
+            AppService.showModal(me.publicationModal,
                 "publications/publicationForm.html",
                 "ModalInstanceController",
                 "modalInstanceCtrl");
@@ -44,17 +44,11 @@
                 me.publicationModal.publication = publication;
                 me.publicationModal.title = "Edit Publication";
                 me.publicationModal.btnText = "Save Changes";
-                PublicationFactory.showModal(me.publicationModal,
+                AppService.showModal(me.publicationModal,
                 "publications/publicationForm.html",
                 "ModalInstanceController",
                 "modalInstanceCtrl");
             });
-        }
-
-        me.successMsg = function () {
-
-            toastr.success("Data copied to clipboard.");
-
         }
 
         me.deletePublicationModal = function (id) {
@@ -62,7 +56,7 @@
                 me.publicationModal.publication = publication;
                 me.publicationModal.title = "Delete Publication";
                 me.publicationModal.btnText = "Delete";
-                PublicationFactory.showModal(me.publicationModal,
+                AppService.showModal(me.publicationModal,
                "publications/deletePublication.html",
                "ModalInstanceController",
                "modalInstanceCtrl");

@@ -10,7 +10,8 @@
     "datatables.bootstrap",
     "datatables.buttons",
     "AuthenticationModule",
-    "PublicationModule"
+    "PublicationModule",
+    "AuthorModule"
 
 ]);
 

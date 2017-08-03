@@ -8,6 +8,7 @@ namespace LibraryBackEnd.Configuration
     {
 
         public DbSet<Publication> Publications { get; set; }
+        public DbSet<Author> Authors { get; set; }
 
         //intializing the dbcontext with DefaultConnection 
         public ApplicationDbContext()

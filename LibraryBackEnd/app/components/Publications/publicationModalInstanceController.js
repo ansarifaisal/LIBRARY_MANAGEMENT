@@ -6,8 +6,8 @@ PublicationModule.controller('ModalInstanceController', [
     "$route",
     "toastr",
     "$rootScope",
-    "publicationModal",
-    function ($uibModalInstance, PublicationFactory, $scope, $route, toastr, $rootScope, publicationModal) {
+    "modal",
+    function ($uibModalInstance, PublicationFactory, $scope, $route, toastr, $rootScope, modal) {
 
         var $ctrl = this;
 
@@ -21,9 +21,9 @@ PublicationModule.controller('ModalInstanceController', [
             $uibModalInstance.dismiss("cancel");
         };
 
-        $ctrl.publication = publicationModal.publication;
-        $ctrl.title = publicationModal.title;
-        $ctrl.btnText = publicationModal.btnText;
+        $ctrl.publication = modal.publication;
+        $ctrl.title = modal.title;
+        $ctrl.btnText = modal.btnText;
 
         $ctrl.submitPublicationForm = function () {
             if ($ctrl.publication.name === "")
@@ -59,19 +59,6 @@ PublicationModule.controller('ModalInstanceController', [
                 toastr.error("Error Deleting Publication");
             }).finally(function () {
                 $rootScope.isBusy = false;
-            });
-        }
-
-        $ctrl.checkExisting = function () {
-            var name = $ctrl.publication.name;
-            PublicationFactory.checkExisting(name).then(function (exists) {
-                $ctrl.exists = false;
-                if (exists === true)
-                    $ctrl.exists = true;
-                return $ctrl.exists;
-
-            }, function (errorResponse) {
-                toastr.error("Error checking publication");
             });
         }
 

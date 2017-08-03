@@ -1,0 +1,33 @@
+﻿
+<div class="modal-header">
+    <h4 class="modal-title">{{authorModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+
+    <form name="createEdit" ng-submit="authorModalCtrl.submitForm()" role="form" novalidate>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.name.$invalid && createEdit.name.$touched
+         || createEdit.name.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.name.$valid || createEdit.name.$valid
+         && createEdit.$submitted}">
+            <label for="name">Name</label>
+            <input type="text" name="name" class="form-control" ng-model="authorModalCtrl.author.name" placeholder="Enter Name" required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.name.$valid || createEdit.name.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.name.$invalid && createEdit.name.$touched
+                           || createEdit.name.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.name.$invalid && createEdit.name.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.name.$error.required" class="text-danger small">Please, provide name.</span>
+            </div>
+
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="{{authorModalCtrl.btnText}}" ng-click="authorModalCtrl.ok()" />
+        <button type="button" class="btn btn-default" ng-click="authorModalCtrl.cancel()">Close</button>
+    </form>
+
+</div>

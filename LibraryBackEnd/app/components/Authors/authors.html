@@ -1,1 +1,31 @@
-﻿
+﻿<div ng-init="authorCtrl.getAuthors()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li class="active">Authors</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Authors</h3>
+    </div>
+
+    <table datatable="ng" dt-options="authorCtrl.dtOptions" dt-column-defs="authorCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">FirstName</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="author in authorCtrl.authors">
+                <td>{{ author.id }}</td>
+                <td>{{ author.name}}</td>
+                <td class="text-center">
+                    <a href="" ng-click="authorCtrl.getAuthor(author.id)" class="btn btn-warning"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                    <a href="" ng-click="authorCtrl.deleteAuthorModal(author.id)" class="btn btn-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

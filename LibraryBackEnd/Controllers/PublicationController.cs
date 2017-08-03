@@ -44,6 +44,9 @@ namespace LibraryBackEnd.Controllers
         [HttpPost]
         public IHttpActionResult Edit(Publication publication)
         {
+            if (!ModelState.IsValid)
+                return BadRequest("Model is Invalid");
+
             _publicationService.Update(publication);
             return Ok();
         }
@@ -52,6 +55,9 @@ namespace LibraryBackEnd.Controllers
         [HttpPost]
         public IHttpActionResult Delete(Publication publication)
         {
+            if (!ModelState.IsValid)
+                return BadRequest("Model is Invalid");
+
             _publicationService.Delete(publication);
             return Ok();
         }
