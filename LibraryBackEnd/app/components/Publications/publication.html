@@ -1,6 +1,15 @@
 ﻿<div ng-init="publicationCtrl.getPublications()">
 
-    <table datatable="ng" dt-options="publicationCtrl.dtOptions" dt-column-defs="publicationCtrl.dtColumnDefs" class="table-striped">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li class="active">Publications</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Publications</h3>
+    </div>
+
+    <table datatable="ng" dt-options="publicationCtrl.dtOptions" dt-column-defs="publicationCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>
                 <th class="text-center">ID</th>
@@ -13,8 +22,8 @@
                 <td>{{ publication.id }}</td>
                 <td>{{ publication.name}}</td>
                 <td class="text-center">
-                    <a href="" ng-click="publicationCtrl.getPublication(publication.id)" class="btn btn-warning">Edit</a>
-                    <a href="" class="btn btn-danger">Delete</a>
+                    <a href="" ng-click="publicationCtrl.getPublication(publication.id)" class="btn btn-warning"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                    <a href="" ng-click="publicationCtrl.deletePublicationModal(publication.id)" class="btn btn-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
                 </td>
             </tr>
         </tbody>

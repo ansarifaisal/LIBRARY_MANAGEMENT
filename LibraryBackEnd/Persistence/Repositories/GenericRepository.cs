@@ -57,7 +57,16 @@ namespace LibraryBackEnd.Persistence.Repositories
         //delete object
         public virtual void Delete(T obj)
         {
-            _entity.Remove(obj);
+            try
+            {
+                _entity.Attach(obj);
+
+                _entity.Remove(obj);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void Complete()

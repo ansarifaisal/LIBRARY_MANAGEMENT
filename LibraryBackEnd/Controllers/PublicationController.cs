@@ -23,8 +23,12 @@ namespace LibraryBackEnd.Controllers
             if (!ModelState.IsValid)
                 return BadRequest("Model is Invalid");
 
-            _publicationService.Create(publication);
+            var flag = CheckExisting(publication.Name);
 
+            if (flag == true)
+                return BadRequest("true");
+
+            _publicationService.Create(publication);
             return Ok("Added Successfully!");
         }
 
@@ -34,6 +38,34 @@ namespace LibraryBackEnd.Controllers
         {
             var publications = _publicationService.GetAll();
             return Ok(publications);
+        }
+
+        [Route("edit")]
+        [HttpPost]
+        public IHttpActionResult Edit(Publication publication)
+        {
+            _publicationService.Update(publication);
+            return Ok();
+        }
+
+        [Route("delete")]
+        [HttpPost]
+        public IHttpActionResult Delete(Publication publication)
+        {
+            _publicationService.Delete(publication);
+            return Ok();
+        }
+
+        [Route("checkExisting")]
+        [HttpGet]
+        public bool CheckExisting(string name)
+        {
+            if (name == null)
+                return false;
+            var publication = _publicationService.GetByName(name);
+            if (publication == null)
+                return false;
+            return true;
         }
 
         [Route("get/{Id}")]

@@ -29,7 +29,7 @@ namespace LibraryBackEnd.Core.Services.Class
             if (entity == null)
                 throw new ArgumentNullException("Entity Not Found");
             _repository.Delete(entity);
-            _unitOfWork.Complete();
+            _repository.Complete();
         }
 
         public IEnumerable<T> GetAll()
@@ -42,7 +42,7 @@ namespace LibraryBackEnd.Core.Services.Class
             if (entity == null)
                 throw new ArgumentNullException("Entity Not Found");
             _repository.Update(entity);
-            _unitOfWork.Complete();
+            _repository.Complete();
         }
 
         public T SelectById(object Id)

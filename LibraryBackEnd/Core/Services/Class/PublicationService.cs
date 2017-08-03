@@ -15,5 +15,10 @@ namespace LibraryBackEnd.Core.Services.Class
             _repository = repository;
             _unitOfWork = unitOfWork;
         }
+
+        public Publication GetByName(string name)
+        {
+            return _repository.GetByName(name);
+        }
     }
 }
