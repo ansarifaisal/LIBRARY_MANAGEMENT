@@ -264,18 +264,24 @@
     <Compile Include="Configuration\LibraryDbContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HttpArgumentNullException.cs" />
     <Compile Include="Controllers\PublicationController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Core\BindingModels\AuthorBindingModel.cs" />
     <Compile Include="Core\BindingModels\ForgetPasswordBindModel.cs" />
     <Compile Include="Core\BindingModels\ResetPasswordBindModel.cs" />
     <Compile Include="Core\IRepositories\IAuthorRepository.cs" />
+    <Compile Include="Core\IRepositories\ICourseRepository.cs" />
     <Compile Include="Core\Models\Author.cs" />
+    <Compile Include="Core\Models\Course.cs" />
     <Compile Include="Core\Services\Class\AuthorService.cs" />
+    <Compile Include="Core\Services\Class\CourseService.cs" />
     <Compile Include="Core\Services\Class\EntityService.cs" />
     <Compile Include="Core\Services\Interface\IAuthorService.cs" />
+    <Compile Include="Core\Services\Interface\ICourseService.cs" />
     <Compile Include="Core\Services\Interface\IPublicationService.cs" />
     <Compile Include="Core\Services\Class\PublicationService.cs" />
     <Compile Include="Core\Services\Class\StudentService.cs" />
@@ -308,6 +314,14 @@
     <Compile Include="Persistence\Migrations\201708031847259_AddAuthor2.Designer.cs">
       <DependentUpon>201708031847259_AddAuthor2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708051259371_addCourse.cs" />
+    <Compile Include="Persistence\Migrations\201708051259371_addCourse.Designer.cs">
+      <DependentUpon>201708051259371_addCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708051304470_modifyPublication.cs" />
+    <Compile Include="Persistence\Migrations\201708051304470_modifyPublication.Designer.cs">
+      <DependentUpon>201708051304470_modifyPublication.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -319,6 +333,7 @@
     <Compile Include="Core\IRepositories\IStudentRepository.cs" />
     <Compile Include="Core\Models\Publication.cs" />
     <Compile Include="Persistence\Repositories\AuthorRepository.cs" />
+    <Compile Include="Persistence\Repositories\CourseRepository.cs" />
     <Compile Include="Persistence\Repositories\GenericRepository.cs" />
     <Compile Include="Core\IRepositories\IPublicationRepository.cs" />
     <Compile Include="Persistence\Repositories\PublicationRepository.cs" />
@@ -349,7 +364,15 @@
     <Content Include="app\components\Authors\authorController.js" />
     <Content Include="app\components\Authors\authorFactory.js" />
     <Content Include="app\components\Authors\authorForm.html" />
+    <Content Include="app\components\Authors\authorModalController.js" />
     <Content Include="app\components\Authors\authors.html" />
+    <Content Include="app\components\Authors\deleteAuthor.html" />
+    <Content Include="app\components\Courses\courseController.js" />
+    <Content Include="app\components\Courses\courseFactory.js" />
+    <Content Include="app\components\Courses\courseForm.html" />
+    <Content Include="app\components\Courses\courseModalController.js" />
+    <Content Include="app\components\Courses\courses.html" />
+    <Content Include="app\components\Courses\deleteCourse.html" />
     <Content Include="app\components\Publications\deletePublication.html" />
     <Content Include="app\components\Publications\publicationModalInstanceController.js" />
     <Content Include="app\components\Publications\publication.html" />
@@ -452,6 +475,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708031847259_AddAuthor2.resx">
       <DependentUpon>201708031847259_AddAuthor2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708051259371_addCourse.resx">
+      <DependentUpon>201708051259371_addCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708051304470_modifyPublication.resx">
+      <DependentUpon>201708051304470_modifyPublication.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

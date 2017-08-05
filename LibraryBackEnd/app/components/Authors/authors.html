@@ -19,7 +19,7 @@
         <tbody>
             <tr ng-repeat="author in authorCtrl.authors">
                 <td>{{ author.id }}</td>
-                <td>{{ author.name}}</td>
+                <td>{{ author.name }}</td>
                 <td class="text-center">
                     <a href="" ng-click="authorCtrl.getAuthor(author.id)" class="btn btn-warning"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
                     <a href="" ng-click="authorCtrl.deleteAuthorModal(author.id)" class="btn btn-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>

@@ -2,7 +2,7 @@
 
 namespace LibraryBackEnd.Core.Models
 {
-    public class Author
+    public class Course
     {
         [Required]
         public int Id { get; set; }
@@ -13,9 +13,17 @@ namespace LibraryBackEnd.Core.Models
         [Required]
         public int NoOfBooks { get; set; }
 
-        public Author()
+        [Required]
+        public int NoOfSemester { get; set; }
+
+        [Required]
+        public int NoOfStudent { get; set; }
+
+        public Course()
         {
             NoOfBooks = 0;
+            NoOfSemester = 0;
+            NoOfStudent = 0;
         }
     }
 }

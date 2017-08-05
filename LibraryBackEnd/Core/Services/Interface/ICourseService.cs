@@ -2,8 +2,8 @@
 
 namespace LibraryBackEnd.Core.Services.Interface
 {
-    public interface IAuthorService : IEntityService<Author>
+    public interface ICourseService : IEntityService<Course>
     {
-        Author GetByName(string name);
+        Course GetByName(string name);
     }
 }

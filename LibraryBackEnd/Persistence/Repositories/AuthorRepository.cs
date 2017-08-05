@@ -1,6 +1,7 @@
 ﻿using LibraryBackEnd.Configuration;
 using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
+using System.Linq;
 
 namespace LibraryBackEnd.Persistence.Repositories
 {
@@ -12,6 +13,14 @@ namespace LibraryBackEnd.Persistence.Repositories
             : base(context)
         {
             _context = context;
+        }
+
+        public Author GetByName(string name)
+        {
+            return _context.Authors
+                    .Where(a => a.Name == name)
+                    .SingleOrDefault();
+
         }
     }
 }

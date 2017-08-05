@@ -1,6 +1,5 @@
-﻿
-AuthorModule.controller("AuthorController", [
-    "AuthorFactory",
+﻿CourseModule.controller("CourseController", [
+    "CourseFactory",
     "AppService",
     "$scope",
     "$location",
@@ -11,61 +10,59 @@ AuthorModule.controller("AuthorController", [
     "toastr",
     "DTOptionsBuilder",
     "DTColumnDefBuilder",
-    function (AuthorFactory, AppService, $scope, $location, $route, $routeParams, $timeout, $rootScope,
+    function (CourseFactory, AppService, $scope, $location, $route, $routeParams, $timeout, $rootScope,
         toastr, DTOptionsBuilder, DTColumnDefBuilder) {
 
         var me = this;
 
-        me.author = {
-            id: undefined,
+        me.course = {
             name: ''
-        };
+        }
 
-        me.authors = [];
+        me.courses = [];
 
-        me.authorModal = {
-            author: undefined,
+        me.courseModal = {
+            course: undefined,
             title: '',
             btnText: ''
         }
 
-
-        me.showAuthorForm = function () {
-            me.authorModal.author = me.author;
-            me.authorModal.title = "Add New Author";
-            me.authorModal.btnText = "Add Author";
-            AppService.showModal(me.authorModal,
-                "authors/authorForm.html",
-                "AuthorModalController",
-                "authorModalCtrl");
+        me.showCourseForm = function () {
+            me.courseModal.course = me.course;
+            me.courseModal.title = "Add New Course";
+            me.courseModal.btnText = "Add Course";
+            AppService.showModal(me.courseModal,
+                "courses/courseForm.html",
+                "CourseModalController",
+                "courseModalCtrl");
         }
 
-        me.getAuthor = function (id) {
-            AuthorFactory.getAuthor(id).then(function (author) {
-                me.authorModal.author = author;
-                me.authorModal.title = "Edit Author";
-                me.authorModal.btnText = "Save Changes";
-                AppService.showModal(me.authorModal,
-               "authors/authorForm.html",
-               "AuthorModalController",
-               "authorModalCtrl");
+        me.getCourse = function (id) {
+            CourseFactory.getCourse(id).then(function (course) {
+                me.courseModal.course = course;
+                me.courseModal.title = "Edit Course";
+                me.courseModal.btnText = "Save Changes";
+                AppService.showModal(me.courseModal,
+               "courses/courseForm.html",
+               "CourseModalController",
+               "courseModalCtrl");
             });
         }
 
-        me.deleteAuthorModal = function (id) {
-            AuthorFactory.getAuthor(id).then(function (author) {
-                me.authorModal.author = author;
-                me.authorModal.title = "Delete Author";
-                me.authorModal.btnText = "Delete";
-                AppService.showModal(me.authorModal,
-               "authors/deleteAuthor.html",
-               "AuthorModalController",
-               "authorModalCtrl");
+        me.deleteCourseModal = function (id) {
+            CourseFactory.getCourse(id).then(function (course) {
+                me.courseModal.course = course;
+                me.courseModal.title = "Delete Course";
+                me.courseModal.btnText = "Delete";
+                AppService.showModal(me.courseModal,
+               "courses/deleteCourse.html",
+               "CourseModalController",
+               "courseModalCtrl");
             });
         }
 
         //get all publisher
-        me.getAuthors = function () {
+        me.getCourses = function () {
             $rootScope.isBusy = true;
             me.dtOptions = DTOptionsBuilder.newOptions()
                 .withPaginationType('full_numbers')
@@ -97,11 +94,11 @@ AuthorModule.controller("AuthorController", [
                         }
                     },
                     {
-                        text: "<i class='fa fa-plus fa-lg'></i> Add Author",
+                        text: "<i class='fa fa-plus fa-lg'></i> Add Course",
                         key: '1',
                         className: 'btn btn-success margin-4x',
                         action: function (e, dt, node, config) {
-                            me.showAuthorForm();
+                            me.showCourseForm();
                         }
                     }
                 ]);
@@ -109,8 +106,8 @@ AuthorModule.controller("AuthorController", [
                 DTColumnDefBuilder.newColumnDef(2).notSortable(),
             ];
 
-            AuthorFactory.getAuthors().then(function (authors) {
-                me.authors = authors;
+            CourseFactory.getCourses().then(function (courses) {
+                me.courses = courses;
             }).finally(function () {
                 $rootScope.isBusy = false;
             });

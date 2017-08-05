@@ -22,7 +22,9 @@ namespace LibraryBackEnd.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is Invalid");
-
+            var flag = CheckExisting(author.Name);
+            if (flag == true)
+                return BadRequest("true");
             _authorService.Create(author);
 
             return Ok("Added Successfully!");
@@ -42,7 +44,9 @@ namespace LibraryBackEnd.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is Invalid");
-
+            var flag = CheckExisting(author.Name);
+            if (flag == true)
+                return BadRequest("true");
             _authorService.Update(author);
             return Ok();
         }
@@ -53,6 +57,18 @@ namespace LibraryBackEnd.Controllers
         {
             _authorService.Delete(author);
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("checkExisting")]
+        public bool CheckExisting(string name)
+        {
+            if (name == null)
+                return false;
+            var author = _authorService.GetByName(name);
+            if (author == null)
+                return false;
+            return true;
         }
 
         [Route("get/{Id}")]

@@ -5,24 +5,24 @@ using System;
 
 namespace LibraryBackEnd.Core.Services.Class
 {
-    public class AuthorService : EntityService<Author>, IAuthorService
+    public class CourseService : EntityService<Course>, ICourseService
     {
-        private IAuthorRepository _authorRepository;
+        private ICourseRepository _courseRepository;
         private IUnitOfWork _unitOfWork;
 
-        public AuthorService(IAuthorRepository repository, IUnitOfWork unitOfWork)
+        public CourseService(ICourseRepository repository, IUnitOfWork unitOfWork)
             : base(repository, unitOfWork)
         {
-            _authorRepository = repository;
+            _courseRepository = repository;
             _unitOfWork = unitOfWork;
         }
 
-        public Author GetByName(string name)
+        public Course GetByName(string name)
         {
             if (name == null)
                 throw new ArgumentNullException();
-
-            return _authorRepository.GetByName(name);
+            return _courseRepository.GetByName(name);
         }
+
     }
 }
