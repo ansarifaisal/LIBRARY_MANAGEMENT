@@ -267,19 +267,22 @@
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HttpArgumentNullException.cs" />
     <Compile Include="Controllers\PublicationController.cs" />
+    <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Core\BindingModels\AuthorBindingModel.cs" />
     <Compile Include="Core\BindingModels\ForgetPasswordBindModel.cs" />
     <Compile Include="Core\BindingModels\ResetPasswordBindModel.cs" />
     <Compile Include="Core\IRepositories\IAuthorRepository.cs" />
     <Compile Include="Core\IRepositories\ICourseRepository.cs" />
+    <Compile Include="Core\IRepositories\ISubjectRepository.cs" />
     <Compile Include="Core\Models\Author.cs" />
     <Compile Include="Core\Models\Course.cs" />
+    <Compile Include="Core\Models\Subject.cs" />
     <Compile Include="Core\Services\Class\AuthorService.cs" />
     <Compile Include="Core\Services\Class\CourseService.cs" />
     <Compile Include="Core\Services\Class\EntityService.cs" />
+    <Compile Include="Core\Services\Class\SubjectService.cs" />
     <Compile Include="Core\Services\Interface\IAuthorService.cs" />
     <Compile Include="Core\Services\Interface\ICourseService.cs" />
     <Compile Include="Core\Services\Interface\IPublicationService.cs" />
@@ -288,6 +291,7 @@
     <Compile Include="Core\Services\Interface\ISendEmailService.cs" />
     <Compile Include="Core\Services\Interface\IEntityService.cs" />
     <Compile Include="Core\Services\Interface\IStudentService.cs" />
+    <Compile Include="Core\Services\Interface\ISubjectService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -342,6 +346,7 @@
     <Compile Include="Core\IRepositories\IPublicationRepository.cs" />
     <Compile Include="Persistence\Repositories\PublicationRepository.cs" />
     <Compile Include="Persistence\Repositories\StudentRepository.cs" />
+    <Compile Include="Persistence\Repositories\SubjectRepository.cs" />
     <Compile Include="Persistence\Repositories\test.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -383,12 +388,10 @@
     <Content Include="app\components\Publications\publicationController.js" />
     <Content Include="app\components\Publications\publicationFactory.js" />
     <Content Include="app\components\Publications\publicationForm.html" />
-    <Content Include="app\components\Semesters\semesterController.js" />
-    <Content Include="app\components\Semesters\semesterDelete.html" />
-    <Content Include="app\components\Semesters\semesterFactory.js" />
-    <Content Include="app\components\Semesters\semesterForm.html" />
-    <Content Include="app\components\Semesters\semesterModalController.js" />
-    <Content Include="app\components\Semesters\semesters.html" />
+    <Content Include="app\components\Subjects\subjectController.js" />
+    <Content Include="app\components\Subjects\subjectFactory.js" />
+    <Content Include="app\components\Subjects\subjectModalController.js" />
+    <Content Include="app\components\Subjects\subjects.html" />
     <Content Include="app\components\User\home.html" />
     <Content Include="app\shared\footer.html" />
     <Content Include="app\shared\navBar.html" />

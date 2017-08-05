@@ -12,7 +12,8 @@
     "AuthenticationModule",
     "PublicationModule",
     "AuthorModule",
-    "CourseModule"
+    "CourseModule",
+    "SubjectModule"
 
 ]);
 

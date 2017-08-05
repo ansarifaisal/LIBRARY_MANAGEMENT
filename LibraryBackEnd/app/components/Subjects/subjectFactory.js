@@ -1,25 +1,24 @@
-﻿var CourseModule = angular.module("CourseModule", []);
+﻿var SubjectModule = angular.module("SubjectModule", []);
 
-CourseModule.factory("CourseFactory", [
+SubjectModule.factory("SubjectFactory", [
     "$http",
     "$q",
     function ($http, $q) {
 
-        var courseFactory = {
-            addCourse: addCourse,
-            getCourses: getCourses,
-            getCourse: getCourse,
-            editCourse: editCourse,
-            deleteCourse: deleteCourse,
+        var subjectFactory = {
+            addSubject: addSubject,
+            getSubjects: getSubjects,
+            getSubject: getSubject,
+            editSubject: editSubject,
+            deleteSubject: deleteSubject,
             addOrEdit: addOrEdit,
             getSemesters: getSemesters
         }
+        return subjectFactory;
 
-        return courseFactory;
-
-        function addCourse(course) {
+        function addSubject(subject) {
             var deferred = $q.defer();
-            $http.post("/api/course/add", course).then(function (response) {
+            $http.post("/api/subject/add", subject).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResonse) {
                 deferred.reject(errorResponse);
@@ -27,9 +26,9 @@ CourseModule.factory("CourseFactory", [
             return deferred.promise;
         }
 
-        function getCourses() {
+        function getSubjects() {
             var deferred = $q.defer();
-            $http.get("/api/course/all")
+            $http.get("/api/subject/all")
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (errorResponse) {
@@ -38,9 +37,9 @@ CourseModule.factory("CourseFactory", [
             return deferred.promise;
         }
 
-        function getCourse(id) {
+        function getSubject(id) {
             var deferred = $q.defer();
-            $http.get("/api/course/get/" + id)
+            $http.get("/api/subject/get/" + id)
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (errorResponse) {
@@ -49,9 +48,9 @@ CourseModule.factory("CourseFactory", [
             return deferred.promise;
         }
 
-        function editCourse(course) {
+        function editSubject(subject) {
             var deferred = $q.defer();
-            $http.post("/api/course/edit", course)
+            $http.post("/api/subject/edit", subject)
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (errorResponse) {
@@ -60,9 +59,9 @@ CourseModule.factory("CourseFactory", [
             return deferred.promise;
         }
 
-        function deleteCourse(course) {
+        function deleteSubject(subject) {
             var deferred = $q.defer();
-            $http.post("/api/course/delete", course)
+            $http.post("/api/subject/delete", subject)
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (errorResponse) {
@@ -71,16 +70,16 @@ CourseModule.factory("CourseFactory", [
             return deferred.promise;
         }
 
-        function addOrEdit(course) {
+        function addOrEdit(subject) {
             var toDo = {};
-            if (course.id === undefined) {
-                toDo.action = addCourse(course);
-                toDo.errorMessage = "Error Adding Course";
-                toDo.successMessage = "Course Added Successfully!";
+            if (subject.id === undefined) {
+                toDo.action = addSubject(subject);
+                toDo.errorMessage = "Error Adding Subject";
+                toDo.successMessage = "Subject Added Successfully!";
             } else {
-                toDo.action = editCourse(course);
-                toDo.errorMessage = "Error Editing Course";
-                toDo.successMessage = "Course Edited Successfully!";
+                toDo.action = editSubject(subject);
+                toDo.errorMessage = "Error Editing Subject";
+                toDo.successMessage = "Subject Edited Successfully!";
             }
             return toDo;
         }

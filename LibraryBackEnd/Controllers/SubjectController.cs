@@ -6,23 +6,23 @@ using System.Web.Http;
 namespace LibraryBackEnd.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/course")]
-    public class CourseController : ApiController
+    [RoutePrefix("api/subject")]
+    public class SubjectController : ApiController
     {
-        private ICourseService _courseService;
+        private ISubjectService _subjectService;
 
-        public CourseController(ICourseService courseService)
+        public SubjectController(ISubjectService subjectService)
         {
-            _courseService = courseService;
+            _subjectService = subjectService;
         }
 
         [Route("add")]
         [HttpPost]
-        public IHttpActionResult add(Course course)
+        public IHttpActionResult add(Subject subject)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is invalid");
-            _courseService.Create(course);
+            _subjectService.Create(subject);
             return Ok("Added Successfully!");
         }
 
@@ -30,27 +30,27 @@ namespace LibraryBackEnd.Controllers
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            var courses = _courseService.GetAll();
+            var courses = _subjectService.GetAll();
             return Ok(courses);
         }
 
         [Route("edit")]
         [HttpPost]
-        public IHttpActionResult Edit(Course course)
+        public IHttpActionResult Edit(Subject subject)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is Invalid");
-            _courseService.Update(course);
+            _subjectService.Update(subject);
             return Ok("Updated Successfully!");
         }
 
         [HttpPost]
         [Route("delete")]
-        public IHttpActionResult Delete(Course course)
+        public IHttpActionResult Delete(Subject subject)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is Invalid");
-            _courseService.Delete(course);
+            _subjectService.Delete(subject);
             return Ok("Deleted Successfully!");
         }
 
@@ -58,7 +58,7 @@ namespace LibraryBackEnd.Controllers
         {
             if (name == null)
                 throw new ArgumentNullException();
-            var course = _courseService.GetByName(name);
+            var course = _subjectService.GetByName(name);
             if (course == null)
                 return false;
             return true;
@@ -70,7 +70,7 @@ namespace LibraryBackEnd.Controllers
         {
             if (Id == 0)
                 throw new ArgumentNullException();
-            var course = _courseService.SelectById(Id);
+            var course = _subjectService.SelectById(Id);
             if (course == null)
                 return BadRequest();
 

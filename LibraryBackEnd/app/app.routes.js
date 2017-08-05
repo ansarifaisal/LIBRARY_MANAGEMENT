@@ -145,6 +145,18 @@ window.routes = {
         roles: ['ADMIN']
     },
 
+    /*
+    * Loading Course Module
+    */
+
+    '/admin/subjects': {
+
+        templateUrl: 'app/components/subjects/subjects.html',
+        controller: 'SubjectController',
+        controllerAs: 'subjectCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
 }
 
 //Load all the routes

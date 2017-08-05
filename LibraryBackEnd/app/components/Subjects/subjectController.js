@@ -1,5 +1,5 @@
-﻿CourseModule.controller("CourseController", [
-    "CourseFactory",
+﻿SubjectModule.controller("SubjectController", [
+    "SubjectFactory",
     "AppService",
     "$scope",
     "$location",
@@ -10,64 +10,64 @@
     "toastr",
     "DTOptionsBuilder",
     "DTColumnDefBuilder",
-    function (CourseFactory, AppService, $scope, $location, $route, $routeParams, $timeout, $rootScope,
+    function (SubjectFactory, AppService, $scope, $location, $route, $routeParams, $timeout, $rootScope,
         toastr, DTOptionsBuilder, DTColumnDefBuilder) {
 
         var me = this;
 
-        me.course = {
+        me.subject = {
             name: '',
             noOfSemesters: undefined
         }
 
-        me.courses = [];
+        me.subjects = [];
 
-        me.courseModal = {
-            course: undefined,
+        me.subjectModal = {
+            subject: undefined,
             semesters: undefined,
             title: '',
             btnText: ''
         }
 
-        me.showCourseForm = function () {
-            me.courseModal.course = me.course;
-            me.courseModal.semesters = CourseFactory.getSemesters();
-            me.courseModal.title = "Add New Course";
-            me.courseModal.btnText = "Add Course";
-            AppService.showModal(me.courseModal,
-                "courses/courseForm.html",
-                "CourseModalController",
-                "courseModalCtrl");
+        me.showSubjectForm = function () {
+            me.subjectModal.subject = me.subject;
+            me.subjectModal.semesters = SubjectFactory.getSemesters();
+            me.subjectModal.title = "Add New Subject";
+            me.subjectModal.btnText = "Add Subject";
+            AppService.showModal(me.subjectModal,
+                "subjects/subjectForm.html",
+                "SubjectModalController",
+                "subjectModalCtrl");
         }
 
-        me.getCourse = function (id) {
-            CourseFactory.getCourse(id).then(function (course) {
-                console.log(course);
-                me.courseModal.course = course;
-                me.courseModal.semesters = CourseFactory.getSemesters();
-                me.courseModal.title = "Edit Course";
-                me.courseModal.btnText = "Save Changes";
-                AppService.showModal(me.courseModal,
-               "courses/courseForm.html",
-               "CourseModalController",
-               "courseModalCtrl");
+        me.getSubject = function (id) {
+            SubjectFactory.getSubject(id).then(function (subject) {
+                console.log(subject);
+                me.subjectModal.subject = subject;
+                me.subjectModal.semesters = SubjectFactory.getSemesters();
+                me.subjectModal.title = "Edit Subject";
+                me.subjectModal.btnText = "Save Changes";
+                AppService.showModal(me.subjectModal,
+               "subjects/subjectForm.html",
+               "SubjectModalController",
+               "subjectModalCtrl");
             });
         }
 
-        me.deleteCourseModal = function (id) {
-            CourseFactory.getCourse(id).then(function (course) {
-                me.courseModal.course = course;
-                me.courseModal.title = "Delete Course";
-                me.courseModal.btnText = "Delete";
-                AppService.showModal(me.courseModal,
-               "courses/deleteCourse.html",
-               "CourseModalController",
-               "courseModalCtrl");
+        me.deleteSubjectModal = function (id) {
+            SubjectFactory.getSubject(id).then(function (subject) {
+                me.subjectModal.subject = subject;
+                me.subjectModal.title = "Delete Subject";
+                me.subjectModal.btnText = "Delete";
+                AppService.showModal(me.subjectModal,
+               "subjects/deleteSubject.html",
+               "SubjectModalController",
+               "subjectModalCtrl");
             });
         }
 
         //get all publisher
-        me.getCourses = function () {
+        me.getSubjects = function () {
             $rootScope.isBusy = true;
             me.dtOptions = DTOptionsBuilder.newOptions()
                 .withPaginationType('full_numbers')
@@ -99,11 +99,11 @@
                         }
                     },
                     {
-                        text: "<i class='fa fa-plus fa-lg'></i> Add Course",
+                        text: "<i class='fa fa-plus fa-lg'></i> Add Subject",
                         key: '1',
                         className: 'btn btn-success margin-4x',
                         action: function (e, dt, node, config) {
-                            me.showCourseForm();
+                            me.showSubjectForm();
                         }
                     }
                 ]);
@@ -111,8 +111,8 @@
                 DTColumnDefBuilder.newColumnDef(4).notSortable(),
             ];
 
-            CourseFactory.getCourses().then(function (courses) {
-                me.courses = courses;
+            SubjectFactory.getSubjects().then(function (subjects) {
+                me.subjects = subjects;
             }).finally(function () {
                 $rootScope.isBusy = false;
             });
