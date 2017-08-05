@@ -26,6 +26,22 @@
 
         </div>
 
+        <div class="form-group" ng-class="{'has-error': createEdit.semester.$invalid && createEdit.semester.$touched
+         || createEdit.semester.$invalid && createEdit.$submitted,
+         'has-success': createEdit.semester.$valid || createEdit.semester.$valid
+         && createEdit.$submitted}">
+            <label for="semester">Semesters</label>
+            <select class="form-control" name="semester" ng-model="courseModalCtrl.course.noOfSemesters"
+                    ng-options="semester for semester in courseModalCtrl.semesters" required>
+
+                <option value="" selected="selected">Select Semester</option>
+
+            </select>
+            <div ng-show="createEdit.semester.$invalid && createEdit.semester.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.semester.$error.required" class="text-danger small">Please, provide semester.</span>
+            </div>
+        </div>
+
         <input type="submit" class="btn btn-primary" value="{{courseModalCtrl.btnText}}" ng-click="courseModalCtrl.ok()" />
         <button type="button" class="btn btn-default" ng-click="courseModalCtrl.cancel()">Close</button>
     </form>

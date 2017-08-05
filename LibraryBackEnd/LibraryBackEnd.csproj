@@ -322,6 +322,10 @@
     <Compile Include="Persistence\Migrations\201708051304470_modifyPublication.Designer.cs">
       <DependentUpon>201708051304470_modifyPublication.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708051638141_modifyCourse.cs" />
+    <Compile Include="Persistence\Migrations\201708051638141_modifyCourse.Designer.cs">
+      <DependentUpon>201708051638141_modifyCourse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -379,6 +383,12 @@
     <Content Include="app\components\Publications\publicationController.js" />
     <Content Include="app\components\Publications\publicationFactory.js" />
     <Content Include="app\components\Publications\publicationForm.html" />
+    <Content Include="app\components\Semesters\semesterController.js" />
+    <Content Include="app\components\Semesters\semesterDelete.html" />
+    <Content Include="app\components\Semesters\semesterFactory.js" />
+    <Content Include="app\components\Semesters\semesterForm.html" />
+    <Content Include="app\components\Semesters\semesterModalController.js" />
+    <Content Include="app\components\Semesters\semesters.html" />
     <Content Include="app\components\User\home.html" />
     <Content Include="app\shared\footer.html" />
     <Content Include="app\shared\navBar.html" />
@@ -481,6 +491,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708051304470_modifyPublication.resx">
       <DependentUpon>201708051304470_modifyPublication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708051638141_modifyCourse.resx">
+      <DependentUpon>201708051638141_modifyCourse.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

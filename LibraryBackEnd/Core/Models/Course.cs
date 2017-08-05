@@ -14,16 +14,16 @@ namespace LibraryBackEnd.Core.Models
         public int NoOfBooks { get; set; }
 
         [Required]
-        public int NoOfSemester { get; set; }
+        public int NoOfSemesters { get; set; }
 
         [Required]
-        public int NoOfStudent { get; set; }
+        public int NoOfStudents { get; set; }
 
         public Course()
         {
             NoOfBooks = 0;
-            NoOfSemester = 0;
-            NoOfStudent = 0;
+            NoOfSemesters = 0;
+            NoOfStudents = 0;
         }
     }
 }

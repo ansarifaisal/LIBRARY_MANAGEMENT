@@ -11,7 +11,8 @@ CourseModule.factory("CourseFactory", [
             getCourse: getCourse,
             editCourse: editCourse,
             deleteCourse: deleteCourse,
-            addOrEdit: addOrEdit
+            addOrEdit: addOrEdit,
+            getSemesters: getSemesters
         }
 
         return courseFactory;
@@ -82,6 +83,14 @@ CourseModule.factory("CourseFactory", [
                 toDo.successMessage = "Course Edited Successfully!";
             }
             return toDo;
+        }
+
+        function getSemesters() {
+            semesters = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            //for (var i = 1; i < 11; i++) {
+            //    semesters.push(i);
+            //}
+            return semesters;
         }
 
     }

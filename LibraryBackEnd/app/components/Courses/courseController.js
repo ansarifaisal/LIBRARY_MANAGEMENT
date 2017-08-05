@@ -16,19 +16,22 @@
         var me = this;
 
         me.course = {
-            name: ''
+            name: '',
+            noOfSemesters: undefined
         }
 
         me.courses = [];
 
         me.courseModal = {
             course: undefined,
+            semesters: undefined,
             title: '',
             btnText: ''
         }
 
         me.showCourseForm = function () {
             me.courseModal.course = me.course;
+            me.courseModal.semesters = CourseFactory.getSemesters();
             me.courseModal.title = "Add New Course";
             me.courseModal.btnText = "Add Course";
             AppService.showModal(me.courseModal,
@@ -39,7 +42,9 @@
 
         me.getCourse = function (id) {
             CourseFactory.getCourse(id).then(function (course) {
+                console.log(course);
                 me.courseModal.course = course;
+                me.courseModal.semesters = CourseFactory.getSemesters();
                 me.courseModal.title = "Edit Course";
                 me.courseModal.btnText = "Save Changes";
                 AppService.showModal(me.courseModal,

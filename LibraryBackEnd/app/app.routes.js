@@ -144,6 +144,7 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN']
     },
+
 }
 
 //Load all the routes
@@ -171,7 +172,7 @@ myApp.config(['$routeProvider',
 
         //config to change the header to authorize the user
         $httpProvider.interceptors.push('httpRequestInterceptor');
-        
+
         //toaster configuration
         angular.extend(toastrConfig, {
             autoDismiss: false,
@@ -187,7 +188,7 @@ myApp.config(['$routeProvider',
             timeOut: 5000,
             progressBar: true,
         });
-        
+
         //loading bar configuration
         cfpLoadingBarProvider.includeSpinner = false;
     }
