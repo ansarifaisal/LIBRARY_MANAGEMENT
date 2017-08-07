@@ -1,6 +1,7 @@
 ﻿SubjectModule.controller("SubjectController", [
     "SubjectFactory",
     "AppService",
+    "CourseFactory",
     "$scope",
     "$location",
     "$route",
@@ -10,28 +11,30 @@
     "toastr",
     "DTOptionsBuilder",
     "DTColumnDefBuilder",
-    function (SubjectFactory, AppService, $scope, $location, $route, $routeParams, $timeout, $rootScope,
+    function (SubjectFactory, AppService, CourseFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
         toastr, DTOptionsBuilder, DTColumnDefBuilder) {
 
         var me = this;
 
         me.subject = {
             name: '',
-            noOfSemesters: undefined
+            CourseName: '',
+            Semester: undefined
         }
+
+        me.courses = [];
 
         me.subjects = [];
 
         me.subjectModal = {
             subject: undefined,
-            semesters: undefined,
+            courses: undefined,
             title: '',
             btnText: ''
         }
 
         me.showSubjectForm = function () {
             me.subjectModal.subject = me.subject;
-            me.subjectModal.semesters = SubjectFactory.getSemesters();
             me.subjectModal.title = "Add New Subject";
             me.subjectModal.btnText = "Add Subject";
             AppService.showModal(me.subjectModal,
@@ -42,9 +45,7 @@
 
         me.getSubject = function (id) {
             SubjectFactory.getSubject(id).then(function (subject) {
-                console.log(subject);
                 me.subjectModal.subject = subject;
-                me.subjectModal.semesters = SubjectFactory.getSemesters();
                 me.subjectModal.title = "Edit Subject";
                 me.subjectModal.btnText = "Save Changes";
                 AppService.showModal(me.subjectModal,

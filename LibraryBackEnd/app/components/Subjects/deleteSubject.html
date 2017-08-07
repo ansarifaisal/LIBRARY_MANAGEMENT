@@ -1,0 +1,13 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{subjectModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    Want To Delete <strong>{{subjectModalCtrl.subject.name}}</strong> ?
+    <div class="small text-danger">Note: Many things will get affected.</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="subjectModalCtrl.cancel()">Close</button>
+    <button class="btn btn-danger" ng-click="subjectModalCtrl.deleteSubject()">{{subjectModalCtrl.btnText}}</button>
+</div>

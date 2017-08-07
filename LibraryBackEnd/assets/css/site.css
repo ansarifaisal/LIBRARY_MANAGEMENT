@@ -72,7 +72,7 @@ a > .text-center > .fa {
     width: 120px;
     height: 120px;
     position: absolute;
-    margin-top: 275px;
+    margin-top: 175px;
     z-index: 999;
     background-color: white;
     -webkit-animation: spin 2s linear infinite;

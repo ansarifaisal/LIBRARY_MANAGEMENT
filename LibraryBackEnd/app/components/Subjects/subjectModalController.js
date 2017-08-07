@@ -5,19 +5,21 @@
     "toastr",
     "$rootScope",
     "modal",
-    function ($uibModalInstance, SubjectFactory, $route, toastr, $rootScope, modal) {
+    "$filter",
+    "CourseFactory",
+    function ($uibModalInstance, SubjectFactory, $route, toastr, $rootScope, modal, $filter, CourseFactory) {
 
         var me = this;
 
         me.subject = modal.subject;
 
-        console.log(me.subject.noOfSemesters);
-
         me.title = modal.title;
 
         me.btnText = modal.btnText;
 
-        me.semesters = modal.semesters;
+        me.courses = modal.courses;
+
+        me.semesters = [];
 
         $rootScope.isBusy = false;
 
@@ -67,6 +69,27 @@
             });
         }
 
+        me.getSemesters = function () {
+            CourseFactory.getCourses().then(function (response) {
+                me.courses = response;
+                var name = me.subject.courseName;
+                if (name === undefined)
+                    return;
+                me.semesters = [];
+                var len = parseInt(me.courses.length);
+                for (var i = 0; i < len; i++) {
+                    var course = me.courses[i];
+                    if (name === course.name) {
+                        me.semesters = SubjectFactory.getSemesters(course.noOfSemesters);
+                    }
+                }
+                return me.semesters;
+            });
+        }
+
+        $uibModalInstance.opened.then(function () {
+            me.getSemesters();
+        });
 
     }
 ]);

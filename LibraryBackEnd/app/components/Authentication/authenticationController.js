@@ -63,6 +63,7 @@ AuthenticationModule.controller("AuthenticationController", [
             $rootScope.isBusy = true;
             AuthenticationFactory.login(me.credentials)
                 .then(function (data) {
+                    console.log(data);
                     me.data = data;
                     //saving token into the cookies
                     AuthenticationFactory.saveToken(me.data);
@@ -244,7 +245,7 @@ AuthenticationModule.controller("AuthenticationController", [
             AuthenticationFactory.setPassword(me.setNewPassword)
                 .then(function () {
                     $route.reload();
-                    $scope.successMessage = "Password changed successfully, You will be redirected in " + $rootScope.count+ " seconds.";
+                    $scope.successMessage = "Password changed successfully, You will be redirected in " + $rootScope.count + " seconds.";
                     me.loginRedirect();
                 }, function (errorResponse) {
                     $scope.errorMessage = "Error while changing password."

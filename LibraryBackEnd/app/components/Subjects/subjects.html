@@ -1,4 +1,4 @@
-﻿<div>
+﻿<div ng-init="subjectCtrl.getSubjects()">
     <ol class="breadcrumb">
         <li><a href="" ng-href="#!/home">Home</a></li>
         <li class="active">Subjects</li>
@@ -7,10 +7,29 @@
     <div class="page-header">
         <h3>Subjects</h3>
     </div>
-    <form name="createEdit" ng-submit="courseModalCtrl.submitForm()" role="form" novalidate>
 
-
-
-    </form>
+    <table datatable="ng" dt-options="subjectCtrl.dtOptions" dt-column-defs="subjectCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Subject Name</th>
+                <th class="text-center">Semester</th>
+                <th class="text-center">Course Name</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="subject in subjectCtrl.subjects">
+                <td>{{ subject.id }}</td>
+                <td>{{ subject.name }}</td>
+                <td>{{ subject.courseName }}</td>
+                <td>{{ subject.semester }}</td>
+                <td class="text-center">
+                    <a href="" ng-click="subjectCtrl.getSubject(subject.id)" class="btn btn-warning"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                    <a href="" ng-click="subjectCtrl.deleteSubjectModal(subject.id)" class="btn btn-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
 </div>

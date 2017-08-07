@@ -330,6 +330,10 @@
     <Compile Include="Persistence\Migrations\201708051638141_modifyCourse.Designer.cs">
       <DependentUpon>201708051638141_modifyCourse.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708061304190_addSubject.cs" />
+    <Compile Include="Persistence\Migrations\201708061304190_addSubject.Designer.cs">
+      <DependentUpon>201708061304190_addSubject.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -390,6 +394,7 @@
     <Content Include="app\components\Publications\publicationForm.html" />
     <Content Include="app\components\Subjects\subjectController.js" />
     <Content Include="app\components\Subjects\subjectFactory.js" />
+    <Content Include="app\components\Subjects\subjectForm.html" />
     <Content Include="app\components\Subjects\subjectModalController.js" />
     <Content Include="app\components\Subjects\subjects.html" />
     <Content Include="app\components\User\home.html" />
@@ -497,6 +502,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708051638141_modifyCourse.resx">
       <DependentUpon>201708051638141_modifyCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708061304190_addSubject.resx">
+      <DependentUpon>201708061304190_addSubject.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

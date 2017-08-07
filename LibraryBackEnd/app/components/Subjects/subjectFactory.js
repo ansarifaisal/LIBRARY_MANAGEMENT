@@ -3,7 +3,8 @@
 SubjectModule.factory("SubjectFactory", [
     "$http",
     "$q",
-    function ($http, $q) {
+    "CourseFactory",
+    function ($http, $q, CourseFactory) {
 
         var subjectFactory = {
             addSubject: addSubject,
@@ -20,7 +21,7 @@ SubjectModule.factory("SubjectFactory", [
             var deferred = $q.defer();
             $http.post("/api/subject/add", subject).then(function (response) {
                 deferred.resolve(response.data);
-            }, function (errorResonse) {
+            }, function (errorResponse) {
                 deferred.reject(errorResponse);
             });
             return deferred.promise;
@@ -84,9 +85,9 @@ SubjectModule.factory("SubjectFactory", [
             return toDo;
         }
 
-        function getSemesters() {
+        function getSemesters(noOfSemesters) {
             semesters = [];
-            for (var i = 1; i < 11; i++) {
+            for (var i = 1; i <= noOfSemesters; i++) {
                 semesters.push(i);
             }
             return semesters;

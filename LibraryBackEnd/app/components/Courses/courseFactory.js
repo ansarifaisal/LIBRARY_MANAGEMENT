@@ -21,7 +21,7 @@ CourseModule.factory("CourseFactory", [
             var deferred = $q.defer();
             $http.post("/api/course/add", course).then(function (response) {
                 deferred.resolve(response.data);
-            }, function (errorResonse) {
+            }, function (errorResponse) {
                 deferred.reject(errorResponse);
             });
             return deferred.promise;

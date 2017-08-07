@@ -15,6 +15,5 @@ namespace LibraryBackEnd.Core.Models
 
         [Required]
         public int Semester { get; set; }
-
     }
 }

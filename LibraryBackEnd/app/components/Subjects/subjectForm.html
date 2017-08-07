@@ -1,0 +1,32 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{subjectModalCtrl.title}}</h4>
+</div>
+<div class="modal-body">
+
+    <form name="createEdit" ng-submit="subjectModalCtrl.submitForm()" role="form" novalidate>
+        <div class="form-group">
+            <label for="subjectName">Subject Name</label>
+            <input type="text" placeholder="Subject Name" name="subjectName"
+                   class="form-control" ng-model="subjectModalCtrl.subject.name" />
+        </div>
+        <div class="form-group">
+            <label for="course">Course</label>
+            <select class="form-control" name="course" ng-model="subjectModalCtrl.subject.courseName"
+                    ng-options="course.name as course.name for course in  subjectModalCtrl.courses" ng-change="subjectModalCtrl.getSemesters()" ng-selected="" required>
+                <option value="">Select Course</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="semester">Semester</label>
+            <select class="form-control" name="semester" ng-model="subjectModalCtrl.subject.semester"
+                    ng-options="semester for semester in  subjectModalCtrl.semesters" required>
+                <option value="">Select Semester</option>
+            </select>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="{{subjectModalCtrl.btnText}}" ng-click="subjectModalCtrl.ok()" />
+        <button type="button" class="btn btn-default" ng-click="subjectModalCtrl.cancel()">Close</button>
+
+    </form>
+
+</div>
