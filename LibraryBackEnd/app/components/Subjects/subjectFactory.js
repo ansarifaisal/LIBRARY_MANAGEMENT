@@ -12,6 +12,7 @@ SubjectModule.factory("SubjectFactory", [
             getSubject: getSubject,
             editSubject: editSubject,
             deleteSubject: deleteSubject,
+            getByCourse: getByCourse,
             addOrEdit: addOrEdit,
             getSemesters: getSemesters
         }
@@ -63,6 +64,17 @@ SubjectModule.factory("SubjectFactory", [
         function deleteSubject(subject) {
             var deferred = $q.defer();
             $http.post("/api/subject/delete", subject)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function getByCourse(courseName, semester) {
+            var deferred = $q.defer();
+            $http.get("/api/subject/byCourse?courseName=" + courseName + "&semester=" + semester)
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (errorResponse) {

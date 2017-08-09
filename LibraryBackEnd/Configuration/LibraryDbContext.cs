@@ -11,6 +11,7 @@ namespace LibraryBackEnd.Configuration
         public DbSet<Author> Authors { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Book> Books { get; set; }
 
         //intializing the dbcontext with DefaultConnection 
         public ApplicationDbContext()

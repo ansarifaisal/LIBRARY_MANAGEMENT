@@ -2,6 +2,7 @@
 using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LibraryBackEnd.Persistence.Repositories
@@ -14,6 +15,16 @@ namespace LibraryBackEnd.Persistence.Repositories
             : base(context)
         {
             _context = context;
+        }
+
+        public IEnumerable<Subject> GetByCourse(string courseName, int semester)
+        {
+            if (courseName == null)
+                throw new ArgumentNullException();
+
+            return _context.Subjects
+                .Where(s => s.CourseName == courseName && s.Semester == semester)
+                .ToList();
         }
 
         public Subject GetByName(string name)

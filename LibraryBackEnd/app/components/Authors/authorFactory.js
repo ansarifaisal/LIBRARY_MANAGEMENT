@@ -11,6 +11,7 @@ AuthorModule.factory("AuthorFactory", [
             getAuthor: getAuthor,
             editAuthor: editAuthor,
             deleteAuthor: deleteAuthor,
+            getByName: getByName,
             addOrEdit: addOrEdit
         }
 
@@ -63,6 +64,17 @@ AuthorModule.factory("AuthorFactory", [
         function deleteAuthor(author) {
             var deferred = $q.defer();
             $http.post("/api/author/delete", author)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function getByName(authorName) {
+            var deferred = $q.defer();
+            $http.get("/api/author/byName?name=" + authorName)
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (errorResponse) {

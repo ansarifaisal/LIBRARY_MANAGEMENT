@@ -264,6 +264,7 @@
     <Compile Include="Configuration\LibraryDbContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
+    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -274,16 +275,20 @@
     <Compile Include="Core\BindingModels\ForgetPasswordBindModel.cs" />
     <Compile Include="Core\BindingModels\ResetPasswordBindModel.cs" />
     <Compile Include="Core\IRepositories\IAuthorRepository.cs" />
+    <Compile Include="Core\IRepositories\IBookRepository.cs" />
     <Compile Include="Core\IRepositories\ICourseRepository.cs" />
     <Compile Include="Core\IRepositories\ISubjectRepository.cs" />
     <Compile Include="Core\Models\Author.cs" />
+    <Compile Include="Core\Models\Book.cs" />
     <Compile Include="Core\Models\Course.cs" />
     <Compile Include="Core\Models\Subject.cs" />
     <Compile Include="Core\Services\Class\AuthorService.cs" />
+    <Compile Include="Core\Services\Class\BookService.cs" />
     <Compile Include="Core\Services\Class\CourseService.cs" />
     <Compile Include="Core\Services\Class\EntityService.cs" />
     <Compile Include="Core\Services\Class\SubjectService.cs" />
     <Compile Include="Core\Services\Interface\IAuthorService.cs" />
+    <Compile Include="Core\Services\Interface\IBookService.cs" />
     <Compile Include="Core\Services\Interface\ICourseService.cs" />
     <Compile Include="Core\Services\Interface\IPublicationService.cs" />
     <Compile Include="Core\Services\Class\PublicationService.cs" />
@@ -334,6 +339,18 @@
     <Compile Include="Persistence\Migrations\201708061304190_addSubject.Designer.cs">
       <DependentUpon>201708061304190_addSubject.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708081056276_addBookModule.cs" />
+    <Compile Include="Persistence\Migrations\201708081056276_addBookModule.Designer.cs">
+      <DependentUpon>201708081056276_addBookModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708081410513_modifyBookModule.cs" />
+    <Compile Include="Persistence\Migrations\201708081410513_modifyBookModule.Designer.cs">
+      <DependentUpon>201708081410513_modifyBookModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708092037191_modifyBook.cs" />
+    <Compile Include="Persistence\Migrations\201708092037191_modifyBook.Designer.cs">
+      <DependentUpon>201708092037191_modifyBook.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -345,6 +362,7 @@
     <Compile Include="Core\IRepositories\IStudentRepository.cs" />
     <Compile Include="Core\Models\Publication.cs" />
     <Compile Include="Persistence\Repositories\AuthorRepository.cs" />
+    <Compile Include="Persistence\Repositories\BookRepository.cs" />
     <Compile Include="Persistence\Repositories\CourseRepository.cs" />
     <Compile Include="Persistence\Repositories\GenericRepository.cs" />
     <Compile Include="Core\IRepositories\IPublicationRepository.cs" />
@@ -380,6 +398,12 @@
     <Content Include="app\components\Authors\authorModalController.js" />
     <Content Include="app\components\Authors\authors.html" />
     <Content Include="app\components\Authors\deleteAuthor.html" />
+    <Content Include="app\components\Books\bookController.js" />
+    <Content Include="app\components\Books\bookFactory.js" />
+    <Content Include="app\components\Books\bookForm.html" />
+    <Content Include="app\components\Books\bookModalController.js" />
+    <Content Include="app\components\Books\books.html" />
+    <Content Include="app\components\Books\deleteBook.html" />
     <Content Include="app\components\Courses\courseController.js" />
     <Content Include="app\components\Courses\courseFactory.js" />
     <Content Include="app\components\Courses\courseForm.html" />
@@ -393,6 +417,7 @@
     <Content Include="app\components\Publications\publicationFactory.js" />
     <Content Include="app\components\Publications\publicationForm.html" />
     <Content Include="app\components\Subjects\subjectController.js" />
+    <Content Include="app\components\Subjects\deleteSubject.html" />
     <Content Include="app\components\Subjects\subjectFactory.js" />
     <Content Include="app\components\Subjects\subjectForm.html" />
     <Content Include="app\components\Subjects\subjectModalController.js" />
@@ -505,6 +530,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708061304190_addSubject.resx">
       <DependentUpon>201708061304190_addSubject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708081056276_addBookModule.resx">
+      <DependentUpon>201708081056276_addBookModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708081410513_modifyBookModule.resx">
+      <DependentUpon>201708081410513_modifyBookModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708092037191_modifyBook.resx">
+      <DependentUpon>201708092037191_modifyBook.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

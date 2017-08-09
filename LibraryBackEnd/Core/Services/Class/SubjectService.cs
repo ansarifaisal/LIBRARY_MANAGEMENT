@@ -2,6 +2,7 @@
 using LibraryBackEnd.Core.Models;
 using LibraryBackEnd.Core.Services.Interface;
 using System;
+using System.Collections.Generic;
 
 namespace LibraryBackEnd.Core.Services.Class
 {
@@ -16,6 +17,14 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             _subjectRepository = repository;
             _unitOfWork = unitOfWork;
+        }
+
+        public IEnumerable<Subject> GetByCourse(string courseName, int semester)
+        {
+            if (courseName == null)
+                throw new ArgumentException();
+
+            return _subjectRepository.GetByCourse(courseName, semester);
         }
 
         public Subject GetByName(string name)

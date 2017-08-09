@@ -146,7 +146,7 @@ window.routes = {
     },
 
     /*
-    * Loading Course Module
+    * Loading Subject Module
     */
 
     '/admin/subjects': {
@@ -154,6 +154,28 @@ window.routes = {
         templateUrl: 'app/components/subjects/subjects.html',
         controller: 'SubjectController',
         controllerAs: 'subjectCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+    /*
+     * Loading Book Module
+     */
+
+    '/admin/books': {
+
+        templateUrl: 'app/components/books/books.html',
+        controller: 'BookController',
+        controllerAs: 'bookCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+    '/admin/book/addEdit': {
+
+        templateUrl: 'app/components/books/bookForm.html',
+        controller: 'BookController',
+        controllerAs: 'bookCtrl',
         requireLogin: true,
         roles: ['ADMIN']
     },

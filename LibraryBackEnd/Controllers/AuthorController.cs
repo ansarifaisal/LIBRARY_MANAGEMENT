@@ -60,6 +60,18 @@ namespace LibraryBackEnd.Controllers
         }
 
         [HttpGet]
+        [Route("byName")]
+        public IHttpActionResult GetByName(string name)
+        {
+            if (name == null)
+                return BadRequest();
+            var authors = _authorService.matchName(name);
+            if (authors == null)
+                return BadRequest();
+            return Ok(authors);
+        }
+
+        [HttpGet]
         [Route("checkExisting")]
         public bool CheckExisting(string name)
         {

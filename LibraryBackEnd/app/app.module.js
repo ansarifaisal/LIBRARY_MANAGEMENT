@@ -13,7 +13,8 @@
     "PublicationModule",
     "AuthorModule",
     "CourseModule",
-    "SubjectModule"
+    "SubjectModule",
+    "BookModule"
 
 ]);
 

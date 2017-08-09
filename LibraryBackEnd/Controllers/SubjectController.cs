@@ -77,5 +77,17 @@ namespace LibraryBackEnd.Controllers
             return Ok(course);
         }
 
+        [HttpGet]
+        [Route("byCourse")]
+        public IHttpActionResult GetByCourse(string courseName, int semester)
+        {
+            if (courseName == null)
+                throw new ArgumentNullException();
+            var courses = _subjectService.GetByCourse(courseName, semester);
+            if (courses == null)
+                return BadRequest();
+            return Ok(courses);
+        }
+
     }
 }

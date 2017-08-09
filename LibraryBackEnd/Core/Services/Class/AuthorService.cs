@@ -2,6 +2,7 @@
 using LibraryBackEnd.Core.Models;
 using LibraryBackEnd.Core.Services.Interface;
 using System;
+using System.Collections.Generic;
 
 namespace LibraryBackEnd.Core.Services.Class
 {
@@ -23,6 +24,14 @@ namespace LibraryBackEnd.Core.Services.Class
                 throw new ArgumentNullException();
 
             return _authorRepository.GetByName(name);
+        }
+
+        public IEnumerable<Author> matchName(string name)
+        {
+            if (name == null)
+                throw new ArgumentNullException();
+
+            return _authorRepository.matchName(name);
         }
     }
 }
