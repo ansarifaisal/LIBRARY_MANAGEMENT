@@ -11,38 +11,20 @@
     "toastr",
     "DTOptionsBuilder",
     "DTColumnDefBuilder",
+    "$window",
     function (BookFactory, AppService, CourseFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
-        toastr, DTOptionsBuilder, DTColumnDefBuilder) {
+        toastr, DTOptionsBuilder, DTColumnDefBuilder, $window) {
 
 
         var me = this;
 
-        me.book = {
-            //accessionNumber: undefined,
-            //title: '',
-            //pages: '',
-            //author: '',
-            //publisher: '',
-            //placeOfPublication: '',
-            //dateOfPublication: undefined,
-            //course: '',
-            //semester: undefined,
-            //subject: '',
-            //typeOfBook: '',
-            //source: '',
-            //edition: '',
-            //classNo: undefined,
-            //actualPrice: undefined,
-            //discount: undefined,
-            //discountPrice: undefined,
-            //billNo: '',
-            //billDate: undefined,
-            //status: ''
-        }
+        me.book = {}
 
         me.courses = [];
 
         me.books = [];
+
+        me.titles = [];
 
         me.bookModal = {
             book: undefined,
@@ -79,7 +61,7 @@
             opened: false
         };
 
-        $scope.dateOptions = {
+        me.publicationDateOptions = {
             formatYear: 'yy',
             maxDate: new Date(),
             minMode: "month",
@@ -87,44 +69,84 @@
             startingDay: 1
         };
 
+        me.dateOptions = {
+            formatYear: 'yy',
+            maxDate: new Date(),
+            startingDay: 1,
+            showWeeks: false
+        };
 
-        me.showBookForm = function () {
 
-            me.addBookForm();
+        me.showAddBookForm = function () {
+            $window.location.href = '#!/admin/book/add';
+        }
+
+        me.showEditBookForm = function (id) {
+            $window.location.href = "#!/admin/book/edit/" + id;
+        }
+
+        me.getSemesters = function (courses, courseName) {
+            return me.bookForm.semesters = BookFactory.getSemesters(courses, courseName);
+        }
+
+        me.getSubjects = function (courseName, semester) {
+            return me.bookForm.subjects = BookFactory.getSubjects(courseName, semester);
+        }
+
+        me.getPublishers = function () {
+            return me.bookForm.publishers = BookFactory.getPublishers();
+        }
+
+        me.getCourses = function () {
+            return me.bookForm.courses = BookFactory.getCourses();
+        }
+
+        me.getTypeOfBook = function () {
+            return me.bookForm.typesOfBook = BookFactory.getTypeOfBook();
+        }
+
+        me.getStatus = function () {
+            return me.bookForm.status = BookFactory.getStatus();
+        }
+
+        me.calculateDiscount = function (price, discount) {
+            return me.bookForm.book.discountPrice = BookFactory.calculateDiscount(price, discount);
+        }
+
+        me.getTitles = function () {
+            var titles = []
+            BookFactory.getTitles().then(function (response) {
+                angular.copy(response, me.titles);
+            });
+            return titles;
         }
 
         me.addBookForm = function () {
-
+            me.titles = me.getTitles();
+            console.log(me.titles);
             me.bookForm.book = me.book;
-            me.bookForm.courses = BookFactory.getCourses();
-            me.bookForm.publishers = BookFactory.getPublishers();
-            me.bookForm.typesOfBook = BookFactory.getTypeOfBook();
-            me.bookForm.status = BookFactory.getStatus();
+            me.getPublishers();
             me.bookForm.title = "Add Book Form",
             me.bookForm.btnText = "Add Book";
         }
 
-        me.getSemesters = function (courses, courseName) {
-            me.bookForm.semesters = BookFactory.getSemesters(courses, courseName);
-        }
-
-        me.getSubjects = function (courseName, semester) {
-            me.bookForm.subjects = BookFactory.getSubjects(courseName, semester);
-        }
-
-        me.getPublishers = function () {
-            me.bookForm.publishers = BookFactory.getPublishers();
-        }
-
-        me.getBook = function (id) {
+        me.getBook = function () {
+            var id = $routeParams.id;
             BookFactory.getBook(id).then(function (book) {
-                me.bookModal.book = book;
-                me.bookModal.title = "Edit Book";
-                me.bookModal.btnText = "Save Changes";
-                AppService.showModal(me.bookModal,
-               "books/bookForm.html",
-               "BookModalController",
-               "bookModalCtrl");
+                me.bookForm.book = book;
+                me.bookForm.book.dateOfPublication = BookFactory.parseDate(me.bookForm.book.dateOfPublication);
+                me.getPublishers();
+                me.getCourses();
+                $timeout(function () {
+                    me.getSemesters(me.bookForm.courses, me.bookForm.book.course);
+                    me.getSubjects(me.bookForm.book.course, me.bookForm.book.semester);
+                }, 100);
+                me.bookForm.book.billDate = BookFactory.parseDate(me.bookForm.book.billDate);
+                me.calculateDiscount(me.bookForm.book.actualPrice, me.bookForm.book.discount);
+                me.getTypeOfBook();
+                me.getStatus();
+                me.bookForm.title = "Edit Book Form",
+                me.bookForm.btnText = "Save Changes";
             });
         }
 
@@ -144,10 +166,13 @@
         me.getBooks = function () {
             $rootScope.isBusy = true;
             me.dtOptions = DTOptionsBuilder.newOptions()
-                .withPaginationType('full_numbers')
-                .withDOM('Bfrtip')
-                .withBootstrap()
-                .withButtons([
+               .withBootstrap()
+               .withPaginationType('full_numbers')
+               .withDOM('Bfrtip')
+               .withOption('scrollX', '100%')
+               .withOption('scrollY', '100%')
+               .withOption('scrollCollapse', true)
+               .withButtons([
                     {
                         extend: 'copy',
                         className: 'btn btn-default',
@@ -173,16 +198,16 @@
                         }
                     },
                     {
-                        text: "<i class='fa fa-plus fa-lg'></i> Add Book",
+                        text: "<i class='fa fa-plus fa-lg'></i> Add Subject",
                         key: '1',
                         className: 'btn btn-success margin-4x',
                         action: function (e, dt, node, config) {
-                            me.showBookForm();
+                            me.showAddBookForm();
                         }
                     }
-                ]);
+               ]);
             me.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(4).notSortable(),
+                DTColumnDefBuilder.newColumnDef(21).notSortable(),
             ];
 
             BookFactory.getBooks().then(function (books) {
@@ -193,18 +218,18 @@
         }
 
         me.submitForm = function () {
-
-            if (me.bookForm.book.title === "")
+            if (me.bookForm.book.title === undefined)
                 return;
-            console.log(me.bookForm.book);
+
+            me.bookForm.book.billDate = BookFactory.dateParse(me.bookForm.book.billDate);
+            me.bookForm.book.dateOfPublication = BookFactory.dateParse(me.bookForm.book.dateOfPublication);
 
             var addOrEdit = BookFactory.addOrEdit(me.bookForm.book);
-
             $action = addOrEdit.action;
             $rootScope.isBusy = true;
 
             $action.then(function () {
-                $route.reload();
+                $location.path("/admin/books");
                 toastr.success(addOrEdit.successMessage);
             }, function (errorResponse) {
                 $route.reload();

@@ -67,5 +67,13 @@ namespace LibraryBackEnd.Controllers
             return Ok(book);
         }
 
+        [HttpGet]
+        [Route("bookTitles")]
+        public IHttpActionResult BookTitles()
+        {
+            var bookTitle = _bookService.BookTitle();
+            return Ok(bookTitle);
+        }
+
     }
 }

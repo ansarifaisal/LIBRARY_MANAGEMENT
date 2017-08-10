@@ -14,7 +14,8 @@
     "AuthorModule",
     "CourseModule",
     "SubjectModule",
-    "BookModule"
+    "BookModule",
+
 
 ]);
 

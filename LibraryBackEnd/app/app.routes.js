@@ -1,4 +1,5 @@
-﻿
+﻿/// <reference path="components/Books/addBookForm.html" />
+
 //Navigation routes
 
 window.routes = {
@@ -171,9 +172,15 @@ window.routes = {
         roles: ['ADMIN']
     },
 
-    '/admin/book/addEdit': {
-
-        templateUrl: 'app/components/books/bookForm.html',
+    '/admin/book/add': {
+        templateUrl: 'app/components/books/addBookForm.html',
+        controller: 'BookController',
+        controllerAs: 'bookCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+    '/admin/book/edit/:id': {
+        templateUrl: 'app/components/books/editBookForm.html',
         controller: 'BookController',
         controllerAs: 'bookCtrl',
         requireLogin: true,

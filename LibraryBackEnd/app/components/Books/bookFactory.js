@@ -6,7 +6,9 @@ BookModule.factory("BookFactory", [
     "CourseFactory",
     "SubjectFactory",
     "PublicationFactory",
-    function ($http, $q, CourseFactory, SubjectFactory, PublicationFactory) {
+    "$filter",
+    "uibDateParser",
+    function ($http, $q, CourseFactory, SubjectFactory, PublicationFactory, $filter, uibDateParser) {
 
         var bookFactory = {
             addBook: addBook,
@@ -20,7 +22,11 @@ BookModule.factory("BookFactory", [
             getSubjects: getSubjects,
             getPublishers: getPublishers,
             getTypeOfBook: getTypeOfBook,
-            getStatus: getStatus
+            getStatus: getStatus,
+            parseDate: parseDate,
+            dateParse: dateParse,
+            calculateDiscount: calculateDiscount,
+            getTitles: getTitles
         };
 
         return bookFactory;
@@ -138,6 +144,30 @@ BookModule.factory("BookFactory", [
         function getStatus() {
             var status = ["Withdrawl", "Loss", "Available", "Not Available"];
             return status;
+        }
+
+        function parseDate(date) {
+            var filtered = $filter('date')(date, "yyyy/MMM/d");
+            return uibDateParser.parse(filtered, "yyyy/MMM/d");
+        }
+
+        function dateParse(date) {
+            return $filter('date')(date, "yyyy/MMM/d");
+        }
+
+        function calculateDiscount(price, discount) {
+            var discountAmount = (discount / 100) * price;
+            return (price - discountAmount);
+        }
+
+        function getTitles() {
+            var deferred = $q.defer();
+            $http.get("/api/book/bookTitles").then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
         }
     }
 ]);

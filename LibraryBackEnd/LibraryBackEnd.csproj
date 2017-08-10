@@ -400,10 +400,11 @@
     <Content Include="app\components\Authors\deleteAuthor.html" />
     <Content Include="app\components\Books\bookController.js" />
     <Content Include="app\components\Books\bookFactory.js" />
-    <Content Include="app\components\Books\bookForm.html" />
+    <Content Include="app\components\Books\addBookForm.html" />
     <Content Include="app\components\Books\bookModalController.js" />
     <Content Include="app\components\Books\books.html" />
     <Content Include="app\components\Books\deleteBook.html" />
+    <Content Include="app\components\Books\editBookForm.html" />
     <Content Include="app\components\Courses\courseController.js" />
     <Content Include="app\components\Courses\courseFactory.js" />
     <Content Include="app\components\Courses\courseForm.html" />
@@ -451,6 +452,8 @@
     <Content Include="assets\js\angular-datatables.bootstrap.min.js" />
     <Content Include="assets\js\angular-datatables.buttons.js" />
     <Content Include="assets\js\angular-datatables.buttons.min.js" />
+    <Content Include="assets\js\angular-datatables.fixedcolumns.js" />
+    <Content Include="assets\js\angular-datatables.fixedcolumns.min.js" />
     <Content Include="assets\js\angular-datatables.js" />
     <Content Include="assets\js\angular-datatables.min.js" />
     <Content Include="assets\js\angular-route.js" />
@@ -474,6 +477,7 @@
     <Content Include="assets\js\buttons.html5.min.js" />
     <Content Include="assets\js\buttons.print.min.js" />
     <Content Include="assets\js\dataTables.buttons.min.js" />
+    <Content Include="assets\js\dataTables.fixedColumns.min.js" />
     <Content Include="assets\js\jquery-3.1.1.js" />
     <Content Include="assets\js\jquery.dataTables.js" />
     <Content Include="assets\js\jquery.dataTables.min.js" />

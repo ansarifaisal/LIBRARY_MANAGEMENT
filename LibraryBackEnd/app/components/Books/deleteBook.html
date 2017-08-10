@@ -1,9 +1,13 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>deleteBook</title>
-</head>
-<body>
-    
-</body>
-</html>
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{bookModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    Want To Delete <strong>{{bookModalCtrl.book.name}}</strong> ?
+    <div class="small text-danger">Note: Many things will get affected.</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="bookModalCtrl.cancel()">Close</button>
+    <button class="btn btn-danger" ng-click="bookModalCtrl.deleteBook()">{{bookModalCtrl.btnText}}</button>
+</div>

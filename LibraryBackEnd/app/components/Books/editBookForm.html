@@ -1,8 +1,8 @@
-﻿<div ng-init="bookCtrl.showBookForm()">
+﻿<div ng-init="bookCtrl.getBook()">
     <ol class="breadcrumb">
         <li><a href="" ng-href="#!/home">Home</a></li>
         <li><a href="" ng-href="#!/admin/books">Books</a></li>
-        <li class="active">Add Book</li>
+        <li class="active">Edit Book</li>
     </ol>
     <div class="col-md-offset-3 col-md-6">
         <div class="panel panel-primary">
@@ -67,6 +67,7 @@
                         <select class="form-control" name="publisher"
                                 ng-model="bookCtrl.bookForm.book.publisher"
                                 ng-options="publisher.name as publisher.name for publisher in  bookCtrl.bookForm.publishers"
+                                ng-change="bookCtrl.getCourses()"
                                 required>
                             <option value="" disabled>Select Publisher</option>
                         </select>
@@ -91,10 +92,10 @@
                         <div class="input-group">
                             <input type="text" class="form-control"
                                    name="dateOfPublication"
-                                   placeholder="Enter Place of Publication"
+                                   placeholder="Enter Date of Publication"
                                    ng-model="bookCtrl.bookForm.book.dateOfPublication"
-                                   uib-datepicker-popup="yyyy/MM/dd"
-                                   datepicker-options="dateOptions"
+                                   uib-datepicker-popup="MMM, yyyy"
+                                   datepicker-options="bookCtrl.publicationDateOptions"
                                    close-text="Close"
                                    is-open="bookCtrl.dateOfPublicationPopup.opened"
                                    required />
@@ -137,6 +138,7 @@
                         <select class="form-control" name="subject"
                                 ng-model="bookCtrl.bookForm.book.subject"
                                 ng-options="subject.name as subject.name for subject in  bookCtrl.bookForm.subjects"
+                                ng-change="bookCtrl.getTypeOfBook()"
                                 required>
                             <option value="" disabled>Select Subject</option>
 
@@ -149,6 +151,7 @@
                         <select class="form-control" name="typeOfBook"
                                 ng-model="bookCtrl.bookForm.book.typeOfBook"
                                 ng-options="typeOfbook as typeOfbook for typeOfbook in  bookCtrl.bookForm.typesOfBook"
+                                ng-change="bookCtrl.getStatus()"
                                 required>
                             <option value="" disabled>Select Type</option>
                         </select>
@@ -192,6 +195,7 @@
                         <input type="text" class="form-control"
                                name="discount"
                                placeholder="Enter Discount"
+                               ng-blur="bookCtrl.calculateDiscount(bookCtrl.bookForm.book.actualPrice, bookCtrl.bookForm.book.discount)"
                                ng-model="bookCtrl.bookForm.book.discount"
                                required />
                     </div>
@@ -202,6 +206,7 @@
                                name="discountPrice"
                                placeholder="Enter Discount Price"
                                ng-model="bookCtrl.bookForm.book.discountPrice"
+                               disabled
                                required />
                     </div>
 
@@ -221,8 +226,8 @@
                                    name="billDate"
                                    placeholder="Enter Bill Date"
                                    ng-model="bookCtrl.bookForm.book.billDate"
-                                   uib-datepicker-popup="yyyy/MM/dd"
-                                   datepicker-options="dateOptions"
+                                   uib-datepicker-popup="EEE MMM, dd yyyy"
+                                   datepicker-options="bookCtrl.dateOptions"
                                    close-text="Close"
                                    is-open="bookCtrl.billDatePopup.opened"
                                    required />
