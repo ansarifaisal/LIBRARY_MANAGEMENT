@@ -133,6 +133,7 @@
         me.getBook = function () {
             var id = $routeParams.id;
             BookFactory.getBook(id).then(function (book) {
+                me.titles = me.getTitles();
                 me.bookForm.book = book;
                 me.bookForm.book.dateOfPublication = BookFactory.parseDate(me.bookForm.book.dateOfPublication);
                 me.getPublishers();

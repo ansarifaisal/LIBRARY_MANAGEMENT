@@ -18,7 +18,7 @@ namespace LibraryBackEnd.Persistence.Repositories
 
         public IEnumerable<string> BookTitle()
         {
-            return _context.Books.Select(b => b.Title).ToList();
+            return _context.Books.Select(b => b.Title).Distinct().ToList();
         }
     }
 }
