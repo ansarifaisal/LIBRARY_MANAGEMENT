@@ -269,6 +269,7 @@
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PublicationController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Core\BindingModels\AuthorBindingModel.cs" />
@@ -351,6 +352,18 @@
     <Compile Include="Persistence\Migrations\201708092037191_modifyBook.Designer.cs">
       <DependentUpon>201708092037191_modifyBook.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708111249403_ModifyUser.cs" />
+    <Compile Include="Persistence\Migrations\201708111249403_ModifyUser.Designer.cs">
+      <DependentUpon>201708111249403_ModifyUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708111259297_ModifyUser1.cs" />
+    <Compile Include="Persistence\Migrations\201708111259297_ModifyUser1.Designer.cs">
+      <DependentUpon>201708111259297_ModifyUser1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708111746111_ModifyUser2.cs" />
+    <Compile Include="Persistence\Migrations\201708111746111_ModifyUser2.Designer.cs">
+      <DependentUpon>201708111746111_ModifyUser2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -423,7 +436,14 @@
     <Content Include="app\components\Subjects\subjectForm.html" />
     <Content Include="app\components\Subjects\subjectModalController.js" />
     <Content Include="app\components\Subjects\subjects.html" />
+    <Content Include="app\components\User\deleteUser.html" />
+    <Content Include="app\components\User\editStudent.html" />
     <Content Include="app\components\User\home.html" />
+    <Content Include="app\components\User\moreDetails.html" />
+    <Content Include="app\components\User\students.html" />
+    <Content Include="app\components\User\userController.js" />
+    <Content Include="app\components\User\userFactory.js" />
+    <Content Include="app\components\User\userModalController.js" />
     <Content Include="app\shared\footer.html" />
     <Content Include="app\shared\navBar.html" />
     <Content Include="App_Readme\Elmah.txt" />
@@ -543,6 +563,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708092037191_modifyBook.resx">
       <DependentUpon>201708092037191_modifyBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708111249403_ModifyUser.resx">
+      <DependentUpon>201708111249403_ModifyUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708111259297_ModifyUser1.resx">
+      <DependentUpon>201708111259297_ModifyUser1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708111746111_ModifyUser2.resx">
+      <DependentUpon>201708111746111_ModifyUser2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -333,7 +333,18 @@ namespace LibraryBackEnd.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email, Role = model.Role, Status = model.Status };
+            var user = new ApplicationUser()
+            {
+                UserName = model.Email,
+                Email = model.Email,
+                Role = model.Role,
+                Status = model.Status,
+                YearOfAdmission = model.YearOfAdmission,
+                Course = model.Course,
+                IssueCount = model.IssueCount,
+                Fine = model.Fine,
+                Modified = model.Modified,
+            };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 

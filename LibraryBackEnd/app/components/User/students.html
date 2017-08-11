@@ -1,0 +1,45 @@
+﻿<div ng-init="userCtrl.getStudents()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li class="active">Students</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Students</h3>
+    </div>
+
+    <table datatable="ng" dt-options="userCtrl.dtOptions" dt-column-defs="userCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Roll No</th>
+                <th class="text-center">Full Name</th>
+                <th class="text-center">Course</th>
+                <th class="text-center">Book Issued</th>
+                <th class="text-center">Admission Year</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Email Confirmed</th>
+                <th class="text-center">Role</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="student in userCtrl.students">
+                <td>{{ student.rollNo }}</td>
+                <td width="100px">{{ student.fullName}}</td>
+                <td>{{ student.course }}</td>
+                <td>{{ student.issueCount }}</td>
+                <td>{{ student.yearOfAdmission }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.emailConfirmed }}</td>
+                <td>{{ student.role }}</td>
+                <td>{{ student.status }}</td>
+                <td class="text-center" width="500px">
+                    <a href="" ng-click="userCtrl.getStudent(student.userName)" class="btn btn-warning"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                    <a href="" ng-click="userCtrl.deleteUser(student.userName)" class="btn btn-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

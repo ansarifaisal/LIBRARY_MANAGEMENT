@@ -63,7 +63,6 @@ AuthenticationModule.controller("AuthenticationController", [
             $rootScope.isBusy = true;
             AuthenticationFactory.login(me.credentials)
                 .then(function (data) {
-                    console.log(data);
                     me.data = data;
                     //saving token into the cookies
                     AuthenticationFactory.saveToken(me.data);
@@ -87,6 +86,8 @@ AuthenticationModule.controller("AuthenticationController", [
                                 AuthenticationFactory.saveUser(user);
                                 AuthenticationFactory.setUserIsAuthenticated(true);
                                 AuthenticationFactory.setRole(user.role);
+                                if (user.modified === false && user.role === "STUDENT")
+                                    return $location.path("/user/moreDetails");
                                 $location.path("/home");
                             }
                         } else {
@@ -117,8 +118,13 @@ AuthenticationModule.controller("AuthenticationController", [
 
         //Method to register
         me.register = function () {
-            me.newUser.Role = AuthenticationFactory.studentRole();
-            me.newUser.Status = AuthenticationFactory.status();
+            me.newUser.yearOfAdmission = 0;
+            me.newUser.course = "NA";
+            me.newUser.issueCount = 0;
+            me.newUser.fine = 0;
+            me.newUser.modified = false;
+            me.newUser.role = AuthenticationFactory.studentRole();
+            me.newUser.status = AuthenticationFactory.status();
             if (!me.newUser)
                 return;
             $rootScope.isBusy = true;

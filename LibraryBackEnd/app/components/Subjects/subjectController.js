@@ -67,7 +67,7 @@
             });
         }
 
-        //get all publisher
+        //get all Subjects
         me.getSubjects = function () {
             $rootScope.isBusy = true;
             me.dtOptions = DTOptionsBuilder.newOptions()

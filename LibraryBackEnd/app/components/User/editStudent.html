@@ -1,0 +1,102 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{userModalCtrl.title}}</h4>
+</div>
+<div class="modal-body">
+    <form name="createEdit" ng-submit="userModalCtrl.submitForm()" role="form" novalidate>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.rollNo.$invalid && createEdit.rollNo.$touched
+                             || createEdit.rollNo.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.rollNo.$valid || createEdit.rollNo.$valid
+                             && createEdit.$submitted}">
+
+            <label for="rollNo">Roll No</label>
+            <input type="text" class="form-control"
+                   name="rollNo"
+                   placeholder="Enter Roll Number"
+                   ng-model="userModalCtrl.user.rollNo"
+                   ng-pattern="/^[0-9]+$/"
+                   autocomplete="off"
+                   required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.rollNo.$valid || createEdit.rollNo.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.rollNo.$invalid && createEdit.rollNo.$touched
+                           || createEdit.rollNo.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.rollNo.$invalid && createEdit.rollNo.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.rollNo.$error.required" class="text-danger small">Please, provide roll no.</span>
+                <span ng-show="createEdit.rollNo.$error.pattern" class="text-danger small">Please, provide valid number.</span>
+            </div>
+
+        </div>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.fullName.$invalid && createEdit.fullName.$touched
+                             || createEdit.fullName.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.fullName.$valid || createEdit.fullName.$valid
+                             && createEdit.$submitted}">
+            <label for="fullName">Full Name</label>
+            <input type="text" class="form-control"
+                   name="fullName"
+                   placeholder="Enter Full Name"
+                   ng-model="userModalCtrl.user.fullName"
+                   ng-pattern="/^[a-zA-Z0-9\s]+$/"
+                   ng-disabled="userModalCtrl.user.modified"
+                   required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.fullName.$valid || createEdit.fullName.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.fullName.$invalid && createEdit.fullName.$touched
+                           || createEdit.fullName.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.fullName.$invalid && createEdit.fullName.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.fullName.$error.required" class="text-danger small">Please, provide roll no.</span>
+                <span ng-show="createEdit.fullName.$error.pattern" class="text-danger small">This field cannot contain special charachters.</span>
+            </div>
+
+        </div>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.course.$invalid && createEdit.course.$touched
+                             || createEdit.course.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.course.$valid || createEdit.course.$valid
+                             && createEdit.$submitted}">
+            <label for="course">Course</label>
+            <select class="form-control" name="course"
+                    ng-model="userModalCtrl.user.course"
+                    ng-options="course.name as course.name for course in  userModalCtrl.courses"
+                    required>
+                <option value="" disabled>Select Course</option>
+            </select>
+
+            <div ng-show="createEdit.course.$invalid && createEdit.course.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.course.$error.required" class="text-danger small">Please, select course.</span>
+            </div>
+
+        </div>
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.yearOfAdmission.$invalid && createEdit.yearOfAdmission.$touched
+                             || createEdit.yearOfAdmission.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.yearOfAdmission.$valid || createEdit.yearOfAdmission.$valid
+                             && createEdit.$submitted}">
+
+            <label for="yearOfAdmission">Year Of Admission</label>
+            <select class="form-control" name="yearOfAdmission"
+                    ng-model="userModalCtrl.user.yearOfAdmission"
+                    ng-options="year as year for year in  userModalCtrl.years"
+                    ng-disabled="userModalCtrl.user.modified"
+                    required>
+                <option value="" disabled>Select Year</option>
+            </select>
+
+            <div ng-show="createEdit.yearOfAdmission.$invalid && createEdit.yearOfAdmission.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.yearOfAdmission.$error.required" class="text-danger small">Please, select admission year.</span>
+            </div>
+
+        </div>
+
+        <span class="small text-danger" ng-show="createEdit.$valid && !userModalCtrl.user.modified">Verify the above details, once submit you can't change it.</span>
+
+        <input type="submit" value="Save" class="btn btn-success" ng-click="userModalCtrl.ok()" />
+        <button type="button" class="btn btn-default" ng-click="userModalCtrl.cancel()">Close</button>
+    </form>
+</div>

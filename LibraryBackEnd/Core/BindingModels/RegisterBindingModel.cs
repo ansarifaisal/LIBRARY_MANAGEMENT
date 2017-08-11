@@ -22,5 +22,19 @@ namespace LibraryBackEnd.Core.BindingModels
         public string Role { get; set; }
 
         public string Status { get; set; }
+
+        public string FullName { get; set; }
+
+        public string RollNo { get; set; }
+
+        public int YearOfAdmission { get; set; }
+
+        public string Course { get; set; }
+
+        public int IssueCount { get; set; }
+
+        public int Fine { get; set; }
+
+        public bool Modified { get; set; }
     }
 }

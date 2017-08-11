@@ -107,6 +107,24 @@ window.routes = {
         roles: ['STUDENT', 'ADMIN']
     },
 
+    '/user/moreDetails': {
+
+        templateUrl: 'app/components/user/moreDetails.html',
+        controller: 'UserController',
+        controllerAs: 'userCtrl',
+        requireLogin: true,
+        roles: ['STUDENT']
+    },
+
+    '/admin/students': {
+
+        templateUrl: 'app/components/user/students.html',
+        controller: 'UserController',
+        controllerAs: 'userCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
     /**
      * Loading Publication Module
      */
