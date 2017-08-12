@@ -15,6 +15,10 @@
 
         me.btnText = modal.btnText;
 
+        me.roles = UserFactory.getRoles();
+
+        me.status = UserFactory.getStatus();
+
         me.ok = function () {
             return $uibModalInstance.close("Closed");
         }

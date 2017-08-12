@@ -26,7 +26,7 @@
         <tbody>
             <tr ng-repeat="student in userCtrl.students">
                 <td>{{ student.rollNo }}</td>
-                <td width="100px">{{ student.fullName}}</td>
+                <td>{{ student.fullName}}</td>
                 <td>{{ student.course }}</td>
                 <td>{{ student.issueCount }}</td>
                 <td>{{ student.yearOfAdmission }}</td>
@@ -34,7 +34,7 @@
                 <td>{{ student.emailConfirmed }}</td>
                 <td>{{ student.role }}</td>
                 <td>{{ student.status }}</td>
-                <td class="text-center" width="500px">
+                <td class="text-center" width="700px">
                     <a href="" ng-click="userCtrl.getStudent(student.userName)" class="btn btn-warning"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
                     <a href="" ng-click="userCtrl.deleteUser(student.userName)" class="btn btn-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
                 </td>

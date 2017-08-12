@@ -118,13 +118,15 @@ AuthenticationModule.controller("AuthenticationController", [
 
         //Method to register
         me.register = function () {
-            me.newUser.yearOfAdmission = 0;
-            me.newUser.course = "NA";
-            me.newUser.issueCount = 0;
-            me.newUser.fine = 0;
-            me.newUser.modified = false;
-            me.newUser.role = AuthenticationFactory.studentRole();
-            me.newUser.status = AuthenticationFactory.status();
+            //me.newUser.fullName = "NA";
+            //me.newUser.rollNo = "NA";
+            //me.newUser.yearOfAdmission = 0;
+            //me.newUser.course = "NA";
+            //me.newUser.issueCount = 0;
+            //me.newUser.fine = 0;
+            //me.newUser.modified = false;
+            //me.newUser.role = AuthenticationFactory.studentRole();
+            //me.newUser.status = AuthenticationFactory.status();
             if (!me.newUser)
                 return;
             $rootScope.isBusy = true;
@@ -135,6 +137,7 @@ AuthenticationModule.controller("AuthenticationController", [
                     $location.path('/confirmation');
                 },
             function (errorResponse) {
+                console.log(errorResponse);
                 AuthenticationFactory.setUserIsAuthenticated(false);
                 $rootScope.authenticated = AuthenticationFactory.getUserIsAuthenticated();
                 $location.path('/register');

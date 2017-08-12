@@ -364,6 +364,18 @@
     <Compile Include="Persistence\Migrations\201708111746111_ModifyUser2.Designer.cs">
       <DependentUpon>201708111746111_ModifyUser2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708120613391_userRoleBack.cs" />
+    <Compile Include="Persistence\Migrations\201708120613391_userRoleBack.Designer.cs">
+      <DependentUpon>201708120613391_userRoleBack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708120635523_userModifiedAgain.cs" />
+    <Compile Include="Persistence\Migrations\201708120635523_userModifiedAgain.Designer.cs">
+      <DependentUpon>201708120635523_userModifiedAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708120649228_userModifiedAgain1.cs" />
+    <Compile Include="Persistence\Migrations\201708120649228_userModifiedAgain1.Designer.cs">
+      <DependentUpon>201708120649228_userModifiedAgain1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -572,6 +584,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708111746111_ModifyUser2.resx">
       <DependentUpon>201708111746111_ModifyUser2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708120613391_userRoleBack.resx">
+      <DependentUpon>201708120613391_userRoleBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708120635523_userModifiedAgain.resx">
+      <DependentUpon>201708120635523_userModifiedAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708120649228_userModifiedAgain1.resx">
+      <DependentUpon>201708120649228_userModifiedAgain1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

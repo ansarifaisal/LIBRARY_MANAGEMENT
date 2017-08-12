@@ -93,9 +93,46 @@
             </div>
 
         </div>
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.role.$invalid && createEdit.role.$touched
+                             || createEdit.role.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.role.$valid || createEdit.role.$valid
+                             && createEdit.$submitted}">
 
-        <span class="small text-danger" ng-show="createEdit.$valid && !userModalCtrl.user.modified">Verify the above details, once submit you can't change it.</span>
+            <label for="role">Role</label>
+            <select class="form-control" name="role"
+                    ng-model="userModalCtrl.user.role"
+                    ng-options="role as role for role in  userModalCtrl.roles"
+                    required>
+                <option value="" disabled>Select Role</option>
+            </select>
 
+            <div ng-show="createEdit.role.$invalid && createEdit.role.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.role.$error.required" class="text-danger small">Please, select admission year.</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.status.$invalid && createEdit.status.$touched
+                             || createEdit.status.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.status.$valid || createEdit.status.$valid
+                             && createEdit.$submitted}">
+
+            <label for="status">Status</label>
+            <select class="form-control" name="status"
+                    ng-model="userModalCtrl.user.status"
+                    ng-options="status as status for status in  userModalCtrl.status"
+                    required>
+                <option value="" disabled>Select Status</option>
+            </select>
+
+            <div ng-show="createEdit.status.$invalid && createEdit.status.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.status.$error.required" class="text-danger small">Please, select admission year.</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="small text-danger" ng-show="createEdit.$valid && !userModalCtrl.user.modified">
+                <strong>Verify the above details, once submit you can't change it.</strong>
+            </span>
+        </div>
         <input type="submit" value="Save" class="btn btn-success" ng-click="userModalCtrl.ok()" />
         <button type="button" class="btn btn-default" ng-click="userModalCtrl.cancel()">Close</button>
     </form>

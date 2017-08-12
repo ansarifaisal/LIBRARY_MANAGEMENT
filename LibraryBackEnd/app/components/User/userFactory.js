@@ -15,7 +15,9 @@ UserModule.factory("UserFactory", [
             deleteStudent: deleteStudent,
             getUserByUserName: getUserByUserName,
             getCourses: getCourses,
-            getYears: getYears
+            getYears: getYears,
+            getStatus: getStatus,
+            getRoles: getRoles
         }
 
         return userFactory;
@@ -85,11 +87,9 @@ UserModule.factory("UserFactory", [
 
         function getCourses() {
             var courses = [];
-
             CourseFactory.getCourses().then(function (response) {
                 angular.copy(response, courses)
             });
-
             return courses;
         }
 
@@ -100,6 +100,16 @@ UserModule.factory("UserFactory", [
                 years.push(currentYear + offset + i);
             }
             return years;
+        }
+
+        function getStatus() {
+            var status = ["PENDING", "APPROVED", "DEFAULT", "REJECT"];
+            return status;
+        }
+
+        function getRoles() {
+            var role = ["STUDENT", "FACULTY", "LIBRARIAN"];
+            return role;
         }
 
     }

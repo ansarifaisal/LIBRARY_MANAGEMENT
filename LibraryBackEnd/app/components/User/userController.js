@@ -32,8 +32,6 @@
             me.years = UserFactory.getYears(-2, 20);
         }
 
-
-
         me.submitForm = function () {
             me.user.modified = true;
             UserFactory.editStudent(me.user).then(function () {
@@ -46,7 +44,8 @@
         }
 
         me.getStudent = function (userName) {
-            me.userModal.user = UserFactory.getUserByUserName($rootScope.user.userName);
+            me.userModal.user = UserFactory.getUserByUserName(userName);
+            console.log(me.userModal.user);
             me.userModal.title = "Edit User";
             me.userModal.btnText = "Save Changes";
             AppService.showModal(me.userModal,

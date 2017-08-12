@@ -337,13 +337,14 @@ namespace LibraryBackEnd.Controllers
             {
                 UserName = model.Email,
                 Email = model.Email,
-                Role = model.Role,
-                Status = model.Status,
-                YearOfAdmission = model.YearOfAdmission,
-                Course = model.Course,
-                IssueCount = model.IssueCount,
-                Fine = model.Fine,
-                Modified = model.Modified,
+                //Role = model.Role,
+                //Status = model.Status,
+                //FullName = model.FullName,
+                //YearOfAdmission = model.YearOfAdmission,
+                //Course = model.Course,
+                //IssueCount = model.IssueCount,
+                //Fine = model.Fine,
+                //Modified = model.Modified,
             };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);

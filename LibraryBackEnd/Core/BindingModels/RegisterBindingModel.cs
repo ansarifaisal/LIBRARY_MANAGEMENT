@@ -19,22 +19,22 @@ namespace LibraryBackEnd.Core.BindingModels
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public string Role { get; set; }
+        //public string Role { get; set; }
 
-        public string Status { get; set; }
+        //public string Status { get; set; }
 
-        public string FullName { get; set; }
+        //public string FullName { get; set; }
 
-        public string RollNo { get; set; }
+        //public string RollNo { get; set; }
 
-        public int YearOfAdmission { get; set; }
+        //public int YearOfAdmission { get; set; }
 
-        public string Course { get; set; }
+        //public string Course { get; set; }
 
-        public int IssueCount { get; set; }
+        //public int IssueCount { get; set; }
 
-        public int Fine { get; set; }
+        //public int Fine { get; set; }
 
-        public bool Modified { get; set; }
+        //public bool Modified { get; set; }
     }
 }
