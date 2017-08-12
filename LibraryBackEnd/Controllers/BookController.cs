@@ -68,6 +68,19 @@ namespace LibraryBackEnd.Controllers
         }
 
         [HttpGet]
+        [Route("byAccessionNumber/{accessionNumber}")]
+        public IHttpActionResult GetByAccessionNumber(string accessionNumber)
+        {
+            if (accessionNumber == null)
+                throw new ArgumentNullException();
+
+            var book = _bookService.GetByAccessionNumber(accessionNumber);
+            if (book == null)
+                return Ok(book);
+            return Ok(book);
+        }
+
+        [HttpGet]
         [Route("bookTitles")]
         public IHttpActionResult BookTitles()
         {

@@ -26,7 +26,8 @@ BookModule.factory("BookFactory", [
             parseDate: parseDate,
             dateParse: dateParse,
             calculateDiscount: calculateDiscount,
-            getTitles: getTitles
+            getTitles: getTitles,
+            getBookByAccessionNumber: getBookByAccessionNumber
         };
 
         return bookFactory;
@@ -163,6 +164,17 @@ BookModule.factory("BookFactory", [
         function getTitles() {
             var deferred = $q.defer();
             $http.get("/api/book/bookTitles").then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function getBookByAccessionNumber(accessionNumber) {
+
+            var deferred = $q.defer();
+            $http.get("/api/book/byAccessionNumber/" + accessionNumber).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
                 deferred.reject(errorResponse);

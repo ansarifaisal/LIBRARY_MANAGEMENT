@@ -6,5 +6,6 @@ namespace LibraryBackEnd.Core.IRepositories
     public interface IBookRepository : IGenericRepository<Book>
     {
         IEnumerable<string> BookTitle();
+        Book GetByAccessionNumber(string accessionNumber);
     }
 }

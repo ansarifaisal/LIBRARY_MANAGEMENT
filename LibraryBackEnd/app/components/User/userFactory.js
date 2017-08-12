@@ -17,7 +17,8 @@ UserModule.factory("UserFactory", [
             getCourses: getCourses,
             getYears: getYears,
             getStatus: getStatus,
-            getRoles: getRoles
+            getRoles: getRoles,
+            getStudentByRollNo: getStudentByRollNo
         }
 
         return userFactory;
@@ -110,6 +111,17 @@ UserModule.factory("UserFactory", [
         function getRoles() {
             var role = ["STUDENT", "FACULTY", "LIBRARIAN"];
             return role;
+        }
+
+        function getStudentByRollNo(rollNumber) {
+            var deferred = $q.defer();
+            $http.get("/api/student/byRollNo?rollNumber=" + rollNumber)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
         }
 
     }

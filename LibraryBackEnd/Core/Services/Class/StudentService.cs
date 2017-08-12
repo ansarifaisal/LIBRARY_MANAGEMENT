@@ -25,5 +25,10 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _repository.GetByUserName(userName);
         }
+
+        public ApplicationUser GetByRollNo(string rollNumber)
+        {
+            return _repository.GetByRollNo(rollNumber);
+        }
     }
 }

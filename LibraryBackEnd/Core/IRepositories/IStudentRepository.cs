@@ -6,5 +6,6 @@ namespace LibraryBackEnd.Core.IRepositories
     {
         ApplicationUser GetUserById(string Id);
         ApplicationUser GetByUserName(string userName);
+        ApplicationUser GetByRollNo(string rollNumber);
     }
 }

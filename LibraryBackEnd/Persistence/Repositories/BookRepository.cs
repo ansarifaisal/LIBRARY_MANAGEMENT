@@ -20,5 +20,12 @@ namespace LibraryBackEnd.Persistence.Repositories
         {
             return _context.Books.Select(b => b.Title).Distinct().ToList();
         }
+
+        public Book GetByAccessionNumber(string accessionNumber)
+        {
+            return _context.Books
+                .Where(b => b.AccessionNumber == accessionNumber)
+                .SingleOrDefault();
+        }
     }
 }

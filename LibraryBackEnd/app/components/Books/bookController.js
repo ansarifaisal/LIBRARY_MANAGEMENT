@@ -123,7 +123,6 @@
 
         me.addBookForm = function () {
             me.titles = me.getTitles();
-            console.log(me.titles);
             me.bookForm.book = me.book;
             me.getPublishers();
             me.bookForm.title = "Add Book Form",

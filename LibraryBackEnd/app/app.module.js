@@ -16,7 +16,7 @@
     "SubjectModule",
     "BookModule",
     "UserModule",
-
+    "IssueBookModule",
 
 ]);
 

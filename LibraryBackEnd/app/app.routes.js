@@ -204,6 +204,26 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN']
     },
+
+    /*
+   * Loading Book Module
+   */
+
+    '/admin/issuedBooks': {
+
+        templateUrl: 'app/components/issueBook/issuedBooks.html',
+        controller: 'IssueBookController',
+        controllerAs: 'issueBookCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+    '/admin/issueBook/add': {
+        templateUrl: 'app/components/issueBook/issueBook.html',
+        controller: 'IssueBookController',
+        controllerAs: 'issueBookCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
 }
 
 //Load all the routes

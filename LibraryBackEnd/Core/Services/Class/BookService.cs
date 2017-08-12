@@ -21,5 +21,10 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _bookRepository.BookTitle();
         }
+
+        public Book GetByAccessionNumber(string accessionNumber)
+        {
+            return _bookRepository.GetByAccessionNumber(accessionNumber);
+        }
     }
 }

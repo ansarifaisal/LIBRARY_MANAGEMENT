@@ -56,5 +56,16 @@ namespace LibraryBackEnd.Controllers
             return Ok(student);
         }
 
+        [HttpGet]
+        [Route("byRollNo")]
+        public IHttpActionResult GetByRollNo(string rollNumber)
+        {
+            if (rollNumber == null)
+                throw new ArgumentNullException();
+            var student = _studentService.GetByRollNo(rollNumber);
+            if (student == null)
+                return Ok(student);
+            return Ok(student);
+        }
     }
 }

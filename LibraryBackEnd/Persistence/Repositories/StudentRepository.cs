@@ -16,6 +16,11 @@ namespace LibraryBackEnd.Persistence.Repositories
             _context = context;
         }
 
+        public ApplicationUser GetByRollNo(string rollNumber)
+        {
+            return _context.Users.Where(u => u.RollNo == rollNumber).SingleOrDefault();
+        }
+
         public ApplicationUser GetByUserName(string userName)
         {
             return _context.Users.Where(u => u.UserName == userName).SingleOrDefault();

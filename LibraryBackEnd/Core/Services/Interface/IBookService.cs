@@ -6,5 +6,6 @@ namespace LibraryBackEnd.Core.Services.Interface
     public interface IBookService : IEntityService<Book>
     {
         IEnumerable<string> BookTitle();
+        Book GetByAccessionNumber(string accessionNumber);
     }
 }
