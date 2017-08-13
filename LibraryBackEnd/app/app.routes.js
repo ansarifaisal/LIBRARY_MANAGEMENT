@@ -279,7 +279,7 @@ myApp.config(['$routeProvider',
 //when the app run check whether is authenticated to view this page
 //run method is basically use to initialization
 
-myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cookies) {
+myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cookies, IssueBookFactory) {
     //on method is use to listen on event of a given type
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -320,6 +320,8 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
         }
     });
 
+    console.log("test");
+
     //$cookies.getObject('user');
     //$cookies.getObject('authenticationData');
 
@@ -335,4 +337,13 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
     //    AppService.unLoad();
     //    $location.path('/login');
     //}
+
+    var now = new Date();
+    var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 1, 32, 0, 0) - now;
+    if (millisTill10 < 0) {
+        millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
+    }
+    setTimeout(function () {
+        IssueBookFactory.sendNotification("ansarifaisal480@gmail.com");
+    }, millisTill10);
 });

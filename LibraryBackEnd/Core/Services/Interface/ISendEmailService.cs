@@ -6,5 +6,6 @@ namespace LibraryBackEnd.Core.Services.Interface
     {
         bool SendActivationMail(Uri url, string email);
         bool SendEmail(string recipient, string subject, string message);
+        bool sendReminder(string email);
     }
 }

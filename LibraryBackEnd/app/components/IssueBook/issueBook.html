@@ -11,7 +11,7 @@
                 <h3 class="panel-title">Issue Book</h3>
             </div>
             <div class="panel-body">
-                <form name="createEdit" ng-submit="bookCtrl.submitForm()" role="form" novalidate>
+                <form name="createEdit" ng-submit="issueBookCtrl.submitForm()" role="form" novalidate>
 
                     <div class="form-group">
                         <label for="accessionNumber">Accession Number</label>
@@ -27,7 +27,7 @@
                         <input type="text" class="form-control"
                                name="title"
                                placeholder="Enter Book Title"
-                               ng-model="issueBookCtrl.issueBook.title"
+                               ng-model="issueBookCtrl.issueBook.bookTitle"
                                autocomplete="off"
                                disabled
                                required />
@@ -37,7 +37,7 @@
                         <input type="text" class="form-control"
                                name="issueDate"
                                placeholder="Enter Issue Date"
-                               ng-model="issueBookCtrl.issueBook.issueDate"
+                               ng-model="issueBookCtrl.issueBook.issuedDate"
                                close-text="Close"
                                is-open="bookCtrl.billDatePopup.opened"
                                disabled
@@ -58,8 +58,8 @@
                         <input type="text" class="form-control"
                                name="rollNumber"
                                placeholder="Enter Roll Number"
-                               ng-model="issueBookCtrl.issueBook.rollNumber"
-                               ng-blur="issueBookCtrl.getByRollNumber(issueBookCtrl.issueBook.rollNumber)"
+                               ng-model="issueBookCtrl.issueBook.rollNo"
+                               ng-blur="issueBookCtrl.getByRollNumber(issueBookCtrl.issueBook.rollNo)"
                                required />
                     </div>
                     <div class="form-group">

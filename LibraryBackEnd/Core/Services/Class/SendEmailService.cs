@@ -58,5 +58,13 @@ namespace LibraryBackEnd.Core.Services.Class
 
             return true;
         }
+
+        public bool sendReminder(string email)
+        {
+            var message = "You need to submit the book you have taken tomorrow";
+            var subject = "Return Book Reminder";
+            SendEmail(email, subject, message);
+            return true;
+        }
     }
 }

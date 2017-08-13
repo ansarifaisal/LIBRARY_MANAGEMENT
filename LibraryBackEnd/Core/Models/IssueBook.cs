@@ -30,6 +30,9 @@ namespace LibraryBackEnd.Core.Models
         public string RollNo { get; set; }
 
         [Required]
+        public string Email { get; set; }
+
+        [Required]
         public int Fine { get; set; }
 
     }

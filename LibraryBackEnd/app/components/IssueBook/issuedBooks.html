@@ -1,4 +1,4 @@
-﻿<div ng-init="bookCtrl.getBooks()">
+﻿<div ng-init="issueBookCtrl.getIssuedBooks()">
     <ol class="breadcrumb">
         <li><a href="" ng-href="#!/home">Home</a></li>
         <li class="active">Issued Books</li>
@@ -8,6 +8,30 @@
         <h3>Issued Books</h3>
     </div>
 
-    <a href="" ng-href="#!/admin/issueBook/add" class="btn btn-success">Issue Book</a>
+    <table datatable="ng" dt-options="issueBookCtrl.dtOptions" dt-column-defs="issueBookCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Accession Number</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Issue Date</th>
+                <th class="text-center">Return Date</th>
+                <th class="text-center">Fine</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="issuedBook in issueBookCtrl.issuedBooks">
+                <td>{{ issuedBook.accessionNumber }}</td>
+                <td>{{ issuedBook.bookTitle }}</td>
+                <td>{{ issuedBook.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ issuedBook.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ issuedBook.fine }}</td>
+                <td class="text-center">
+                    <a href="" ng-click="issueBookCtrl.showEditBookForm(issuedBook.id)" class="btn btn-warning"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
+                    <a href="" ng-click="issueBookCtrl.deleteIssueBook(issuedBook.id)" class="btn btn-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
 </div>

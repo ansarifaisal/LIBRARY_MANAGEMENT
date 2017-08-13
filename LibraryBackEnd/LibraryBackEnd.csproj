@@ -268,13 +268,14 @@
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IssueController.cs" />
+    <Compile Include="Controllers\IssueBookController.cs" />
     <Compile Include="Controllers\PublicationController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Core\BindingModels\AuthorBindingModel.cs" />
     <Compile Include="Core\BindingModels\ForgetPasswordBindModel.cs" />
+    <Compile Include="Core\BindingModels\IssueBookBindingModel.cs" />
     <Compile Include="Core\BindingModels\ResetPasswordBindModel.cs" />
     <Compile Include="Core\IRepositories\IAuthorRepository.cs" />
     <Compile Include="Core\IRepositories\IBookRepository.cs" />
@@ -393,6 +394,10 @@
     <Compile Include="Persistence\Migrations\201708121534201_modifyIssuedBook1.Designer.cs">
       <DependentUpon>201708121534201_modifyIssuedBook1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708131935413_addEmailInIssueModule.cs" />
+    <Compile Include="Persistence\Migrations\201708131935413_addEmailInIssueModule.Designer.cs">
+      <DependentUpon>201708131935413_addEmailInIssueModule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -454,6 +459,7 @@
     <Content Include="app\components\Courses\courseModalController.js" />
     <Content Include="app\components\Courses\courses.html" />
     <Content Include="app\components\Courses\deleteCourse.html" />
+    <Content Include="app\components\IssueBook\deleteissuebook.html" />
     <Content Include="app\components\IssueBook\issueBook.html" />
     <Content Include="app\components\IssueBook\issueBookController.js" />
     <Content Include="app\components\IssueBook\issuedBooks.html" />
@@ -625,6 +631,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708121534201_modifyIssuedBook1.resx">
       <DependentUpon>201708121534201_modifyIssuedBook1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708131935413_addEmailInIssueModule.resx">
+      <DependentUpon>201708131935413_addEmailInIssueModule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
