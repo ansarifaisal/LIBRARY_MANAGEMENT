@@ -1,6 +1,7 @@
 ﻿using LibraryBackEnd.Configuration;
 using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LibraryBackEnd.Persistence.Repositories
@@ -29,6 +30,11 @@ namespace LibraryBackEnd.Persistence.Repositories
         public ApplicationUser GetUserById(string Id)
         {
             return _context.Users.Find(Id);
+        }
+
+        public IEnumerable<ApplicationUser> GetUsersByRole(string role)
+        {
+            return _context.Users.Where(u => u.Role == role).ToList();
         }
     }
 }

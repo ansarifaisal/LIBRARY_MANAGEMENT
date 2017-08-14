@@ -1,6 +1,7 @@
 ﻿using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
 using LibraryBackEnd.Core.Services.Interface;
+using System.Collections.Generic;
 
 namespace LibraryBackEnd.Core.Services.Class
 {
@@ -29,6 +30,11 @@ namespace LibraryBackEnd.Core.Services.Class
         public ApplicationUser GetByRollNo(string rollNumber)
         {
             return _repository.GetByRollNo(rollNumber);
+        }
+
+        public IEnumerable<ApplicationUser> GetUsersByRole(string role)
+        {
+            return _repository.GetUsersByRole(role);
         }
     }
 }

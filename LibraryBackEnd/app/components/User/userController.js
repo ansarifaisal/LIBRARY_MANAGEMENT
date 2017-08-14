@@ -18,6 +18,10 @@
 
         me.students = [];
 
+        me.faculties = [];
+
+        me.librarians = [];
+
         me.student = {};
 
         me.userModal = {
@@ -45,7 +49,6 @@
 
         me.getStudent = function (userName) {
             me.userModal.user = UserFactory.getUserByUserName(userName);
-            console.log(me.userModal.user);
             me.userModal.title = "Edit User";
             me.userModal.btnText = "Save Changes";
             AppService.showModal(me.userModal,
@@ -53,6 +56,26 @@
            "UserModalController",
            "userModalCtrl");
 
+        }
+
+        me.getFaculty = function (userName) {
+            me.userModal.user = UserFactory.getUserByUserName(userName);
+            me.userModal.title = "Edit Faculty";
+            me.userModal.btnText = "Save Changes";
+            AppService.showModal(me.userModal,
+           "user/editForm.html",
+           "UserModalController",
+           "userModalCtrl");
+        }
+
+        me.getLibrarian = function (userName) {
+            me.userModal.user = UserFactory.getUserByUserName(userName);
+            me.userModal.title = "Edit Librarian";
+            me.userModal.btnText = "Save Changes";
+            AppService.showModal(me.userModal,
+           "user/editForm.html",
+           "UserModalController",
+           "userModalCtrl");
         }
 
         me.deleteUser = function (id) {
@@ -63,9 +86,7 @@
            "user/deleteUser.html",
            "UserModalController",
            "userModalCtrl");
-
         }
-
 
         me.getStudents = function () {
             $rootScope.isBusy = true;
@@ -101,7 +122,7 @@
                     }
                 ]);
             me.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(9).notSortable(),
+                //DTColumnDefBuilder.newColumnDef(9).notSortable(),
             ];
 
             UserFactory.getStudents().then(function (students) {
@@ -111,6 +132,93 @@
             });
         }
 
+        me.getFaculties = function () {
+            $rootScope.isBusy = true;
+            me.dtOptions = DTOptionsBuilder.newOptions()
+                .withPaginationType('full_numbers')
+                .withDOM('Bfrtip')
+                .withBootstrap()
+                .withOption('scrollX', '100%')
+                .withButtons([
+                    {
+                        extend: 'copy',
+                        className: 'btn btn-default',
+                        text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-default',
+                        text: "<i class='fa fa-print fa-lg'></i> Print",
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-default ',
+                        text: "<i class='fa fa-file-excel-o fa-lg'></i> Excel",
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    }
+                ]);
+            me.dtColumnDefs = [
+                //DTColumnDefBuilder.newColumnDef(9).notSortable(),
+            ];
+
+            UserFactory.getFaculties().then(function (faculties) {
+                me.faculties = faculties;
+            }).finally(function () {
+                $rootScope.isBusy = false;
+            });
+        }
+
+        me.getLibrarians = function () {
+            $rootScope.isBusy = true;
+            me.dtOptions = DTOptionsBuilder.newOptions()
+                .withPaginationType('full_numbers')
+                .withDOM('Bfrtip')
+                .withBootstrap()
+                .withOption('scrollX', '100%')
+                .withButtons([
+                    {
+                        extend: 'copy',
+                        className: 'btn btn-default',
+                        text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        className: 'btn btn-default',
+                        text: "<i class='fa fa-print fa-lg'></i> Print",
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    },
+                    {
+                        extend: 'excel',
+                        className: 'btn btn-default ',
+                        text: "<i class='fa fa-file-excel-o fa-lg'></i> Excel",
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    }
+                ]);
+            me.dtColumnDefs = [
+                //DTColumnDefBuilder.newColumnDef(9).notSortable(),
+            ];
+
+            UserFactory.getLibrarians().then(function (librarians) {
+                me.librarians = librarians;
+            }).finally(function () {
+                $rootScope.isBusy = false;
+            });
+        }
 
     }
 ]);

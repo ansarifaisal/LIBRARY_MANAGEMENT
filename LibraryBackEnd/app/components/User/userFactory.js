@@ -10,6 +10,8 @@ UserModule.factory("UserFactory", [
         var userFactory = {
             addStudent: addStudent,
             getStudents: getStudents,
+            getFaculties: getFaculties,
+            getLibrarians: getLibrarians,
             getStudent: getStudent,
             editStudent: editStudent,
             deleteStudent: deleteStudent,
@@ -36,7 +38,29 @@ UserModule.factory("UserFactory", [
 
         function getStudents() {
             var deferred = $q.defer();
-            $http.get("/api/student/all")
+            $http.get("/api/student/students")
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function getFaculties() {
+            var deferred = $q.defer();
+            $http.get("/api/student/faculties")
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function getLibrarians() {
+            var deferred = $q.defer();
+            $http.get("/api/student/librarians")
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (errorResponse) {

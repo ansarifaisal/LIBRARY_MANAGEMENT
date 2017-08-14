@@ -1,0 +1,41 @@
+﻿<div ng-init="userCtrl.getFaculties()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li class="active">Faculties</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Faculties</h3>
+    </div>
+
+    <table datatable="ng" dt-options="userCtrl.dtOptions" dt-column-defs="userCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Id</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Course</th>
+                <th class="text-center">Book Issued</th>
+                <th class="text-center">Email Confirmed</th>
+                <th class="text-center">Role</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="faculty in userCtrl.faculties">
+                <td>{{ faculty.rollNo }}</td>
+                <td>{{ faculty.fullName}}</td>
+                <td>{{ faculty.course }}</td>
+                <td>{{ faculty.issueCount }}</td>
+                <td>{{ faculty.emailConfirmed }}</td>
+                <td>{{ faculty.role }}</td>
+                <td>{{ faculty.status }}</td>
+                <td class="text-center">
+                    <a href="" ng-click="userCtrl.getFaculty(faculty.userName)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                    <a href="" ng-click="userCtrl.deleteUser(faculty.userName)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

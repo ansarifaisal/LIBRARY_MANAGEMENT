@@ -16,11 +16,28 @@ namespace LibraryBackEnd.Controllers
             _studentService = studentService;
         }
 
-        [Route("all")]
-        public IHttpActionResult GetAll()
+        [Route("students")]
+        [HttpGet]
+        public IHttpActionResult GetStudents()
         {
-            var users = _studentService.GetAll();
-            return Ok(users);
+            var students = _studentService.GetUsersByRole("STUDENT");
+            return Ok(students);
+        }
+
+        [Route("faculties")]
+        [HttpGet]
+        public IHttpActionResult GetFactulties()
+        {
+            var faculties = _studentService.GetUsersByRole("FACULTY");
+            return Ok(faculties);
+        }
+
+        [Route("librarians")]
+        [HttpGet]
+        public IHttpActionResult GetLibrarians()
+        {
+            var librarians = _studentService.GetUsersByRole("LIBRARIAN");
+            return Ok(librarians);
         }
 
         [Route("edit")]

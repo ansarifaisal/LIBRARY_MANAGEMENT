@@ -35,7 +35,7 @@ window.routes = {
         controllerAs: 'authCtrl',
         requireLogin: false,
         data: { pageTitle: 'Error' },
-        roles: ['GUEST', 'STUDENT']
+        roles: ['GUEST', 'STUDENT', 'FACULTY', 'LIBRARIAN']
 
     },
 
@@ -104,7 +104,7 @@ window.routes = {
         controller: 'AuthenticationController',
         controllerAs: 'authCtrl',
         requireLogin: true,
-        roles: ['STUDENT', 'ADMIN']
+        roles: ['STUDENT', 'ADMIN', 'FACULTY', 'LIBRARIAN']
     },
 
     '/user/moreDetails': {
@@ -113,12 +113,30 @@ window.routes = {
         controller: 'UserController',
         controllerAs: 'userCtrl',
         requireLogin: true,
-        roles: ['STUDENT']
+        roles: ['STUDENT', 'FACULTY', 'LIBRARIAN']
     },
 
     '/admin/students': {
 
         templateUrl: 'app/components/user/students.html',
+        controller: 'UserController',
+        controllerAs: 'userCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+    '/admin/faculties': {
+
+        templateUrl: 'app/components/user/faculties.html',
+        controller: 'UserController',
+        controllerAs: 'userCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+    '/admin/librarians': {
+
+        templateUrl: 'app/components/user/librarians.html',
         controller: 'UserController',
         controllerAs: 'userCtrl',
         requireLogin: true,

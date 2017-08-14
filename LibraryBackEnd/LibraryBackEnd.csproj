@@ -512,7 +512,9 @@
     <Content Include="app\components\Subjects\subjects.html" />
     <Content Include="app\components\User\deleteUser.html" />
     <Content Include="app\components\User\editStudent.html" />
+    <Content Include="app\components\User\faculties.html" />
     <Content Include="app\components\User\home.html" />
+    <Content Include="app\components\User\librarians.html" />
     <Content Include="app\components\User\moreDetails.html" />
     <Content Include="app\components\User\students.html" />
     <Content Include="app\components\User\userController.js" />
