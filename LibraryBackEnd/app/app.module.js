@@ -17,6 +17,7 @@
     "BookModule",
     "UserModule",
     "IssueBookModule",
+    "ReturnBookModule",
 
 ]);
 

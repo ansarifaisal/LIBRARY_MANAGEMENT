@@ -224,6 +224,27 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN']
     },
+    '/admin/issueBook/edit/:id': {
+        templateUrl: 'app/components/issueBook/editIssueBook.html',
+        controller: 'IssueBookController',
+        controllerAs: 'issueBookCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+    /*
+     * Loading Return Book Module
+     */
+
+    '/admin/returnedBooks': {
+
+        templateUrl: 'app/components/returnBook/returnBooks.html',
+        controller: 'ReturnBookController',
+        controllerAs: 'returnBookCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
 }
 
 //Load all the routes
@@ -299,7 +320,6 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
             //check whether the user is authenticated
             $rootScope.authenticated = AuthenticationFactory.getUserIsAuthenticated();
 
-
             return;
         }
 
@@ -320,8 +340,6 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
         }
     });
 
-    console.log("test");
-
     //$cookies.getObject('user');
     //$cookies.getObject('authenticationData');
 
@@ -338,12 +356,36 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
     //    $location.path('/login');
     //}
 
+    function calculateFine() {
+        IssueBookFactory.getIssuedBooks().then(function (issuedBooks) {
+            var me = this;
+            me.issuedBooks = issuedBooks;
+            console.log(me.issuedBooks);
+            var date = new Date();
+            var tom = new Date();
+            var tomorrow = tom.setDate(tom.getDate() + 1);
+            var returnDate = "";
+            var email = "";
+            for (var i = 0; i < me.issuedBooks.length; i++) {
+                returnDate = me.issuedBooks[i].returnDate;
+                email = me.issuedBooks[i].email;
+                IssueBookFactory.checkToSendNotification(tomorrow, returnDate, email);
+                var fine = IssueBookFactory.calculateFine(date, returnDate);
+                if (fine > 0) {
+                    me.issuedBooks[i].fine = fine;
+                    IssueBookFactory.updateFine(me.issuedBooks[i]);
+                }
+            }
+        });
+    }
+
     var now = new Date();
-    var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 1, 32, 0, 0) - now;
+    var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 30, 0, 0) - now;
+    console.log(millisTill10);
     if (millisTill10 < 0) {
         millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
     }
     setTimeout(function () {
-        IssueBookFactory.sendNotification("ansarifaisal480@gmail.com");
+        calculateFine();
     }, millisTill10);
 });

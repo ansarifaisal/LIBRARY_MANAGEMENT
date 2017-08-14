@@ -45,5 +45,19 @@
             });
         }
 
+        me.returnIssueBook = function (issueBook) {
+            $rootScope.isBusy = true;
+            IssueBookFactory.returnBook(issueBook).then(function () {
+                me.ok();
+                $route.reload();
+                toastr.success("Issue Book Deleted Successfully!");
+                $rootScope.isBusy = false;
+            }, function (errorResponse) {
+                me.cancel();
+                $rootScope.isBusy = false;
+                toastr.error("Error Deleting Issue Book");
+            });
+        }
+
     }
 ]);

@@ -53,6 +53,23 @@
             me.issueBook.returnDate = IssueBookFactory.getReturnDate();
         }
 
+        me.showIssueForm = function () {
+            $window.location.href = "#!/admin/issueBook/add";
+        }
+
+        me.showEditIssueBookForm = function (id) {
+            $window.location.href = "#!/admin/issueBook/edit/" + id;
+        }
+
+        me.getEditData = function () {
+            var id = $routeParams.id;
+            IssueBookFactory.getIssueBook(id).then(function (issueBook) {
+                me.issueBook = issueBook;
+                me.issueBook.issuedDate = IssueBookFactory.formatDate(me.issueBook.issuedDate);
+                me.issueBook.returnDate = IssueBookFactory.formatDate(me.issueBook.returnDate);
+            });
+        }
+
         me.getByAccessionNumber = function (accessionNumber) {
 
             BookFactory.getBookByAccessionNumber(accessionNumber).then(function (response) {
@@ -100,10 +117,6 @@
             });
         }
 
-        me.showIssueForm = function () {
-            $window.location.href = ("#!/admin/issueBook/add");
-        }
-
         me.submitForm = function () {
             me.issueBookBindingModel.issueBook = me.issueBook;
             me.issueBookBindingModel.book = IssueBookFactory.loadBook();
@@ -120,8 +133,18 @@
             });
         }
 
-        me.getIssuedBooks = function () {
+        me.submitEditForm = function () {
+            $rootScope.isBusy = true;
+            IssueBookFactory.editIssueBook(me.issueBook).then(function () {
+                $rootScope.isBusy = false;
+                toastr.success("Issued Book Details Edited Successfully.");
+            }, function (errorResponse) {
+                $rootScope.isBusy = false;
+                toastr.error("Error Editing Issued Book Details.");
+            });
+        }
 
+        me.getIssuedBooks = function () {
             $rootScope.isBusy = true;
             me.dtOptions = DTOptionsBuilder.newOptions()
                .withBootstrap()
@@ -165,18 +188,16 @@
                     }
                ]);
             me.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(5).notSortable(),
+                DTColumnDefBuilder.newColumnDef(6).notSortable(),
             ];
 
             IssueBookFactory.getIssuedBooks().then(function (issuedBooks) {
                 me.issuedBooks = issuedBooks;
-                me.calculateFine(me.issuedBook);
             }).finally(function () {
                 $rootScope.isBusy = false;
             });
 
         }
-
 
         me.deleteIssueBook = function (id) {
             IssueBookFactory.getIssueBook(id).then(function (issueBook) {
@@ -190,23 +211,16 @@
             });
         }
 
-        me.calculateFine = function (issuedBooks) {
-            me.issuedBooks = me.issuedBooks;
-            var date = new Date();
-            var tomorrow = date.setDate(date.getDate() + 1);
-            var convert = new Date(tomorrow);
-            var returnDate = "";
-            for (var i = 0; i < me.issuedBooks.length; i++) {
-                returnDate = new Date(me.issuedBooks[i].returnDate);
-                if ((convert.getDate() === returnDate.getDate()) &&
-                    (convert.getMonth() === returnDate.getMonth()) &&
-                    (convert.getFullYear() === returnDate.getFullYear())) {
-                    IssueBookFactory.sendNotification(me.issuedBooks[i].email);
-                    console.log("true");
-                } else {
-                    console.log("false");
-                }
-            }
+        me.confirmReturnBook = function (id) {
+            IssueBookFactory.getIssueBook(id).then(function (issueBook) {
+                me.bookModal.issueBook = issueBook;
+                me.bookModal.title = "Return Issue Book";
+                me.bookModal.btnText = "Return";
+                AppService.showModal(me.bookModal,
+               "issuebook/returnIssueBook.html",
+               "IssueBookModalController",
+               "issueBookModalCtrl");
+            });
         }
     }
 ]);

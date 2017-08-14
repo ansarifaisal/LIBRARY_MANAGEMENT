@@ -13,6 +13,7 @@ namespace LibraryBackEnd.Configuration
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<IssueBook> IssueBooks { get; set; }
+        public DbSet<ReturnBook> ReturnBooks { get; set; }
 
         //intializing the dbcontext with DefaultConnection 
         public ApplicationDbContext()

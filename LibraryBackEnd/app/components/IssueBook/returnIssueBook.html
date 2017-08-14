@@ -1,0 +1,13 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{issueBookModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    Want To Return <strong>{{issueBookModalCtrl.issueBook.bookTitle}}</strong> ?
+    <div class="small text-danger">Note: Collect fine first.</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="issueBookModalCtrl.cancel()">Close</button>
+    <button class="btn btn-primary" ng-click="issueBookModalCtrl.returnIssueBook(issueBookModalCtrl.issueBook)">{{issueBookModalCtrl.btnText}}</button>
+</div>

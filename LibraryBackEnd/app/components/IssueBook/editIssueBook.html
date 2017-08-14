@@ -1,0 +1,94 @@
+﻿<div ng-init="issueBookCtrl.getEditData()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li><a href="" ng-href="#!/admin/issuedBooks">Issued Books</a></li>
+        <li class="active">Edit Issue Book</li>
+    </ol>
+
+    <div class="col-md-offset-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Edit Issue Book</h3>
+            </div>
+            <div class="panel-body">
+                <form name="createEdit" ng-submit="issueBookCtrl.submitEditForm()" role="form" novalidate>
+
+                    <div class="form-group">
+                        <label for="accessionNumber">Accession Number</label>
+                        <input type="text" class="form-control"
+                               name="accessionNumber"
+                               placeholder="Enter Accession Number"
+                               ng-model="issueBookCtrl.issueBook.accessionNumber"
+                               ng-blur="issueBookCtrl.getByAccessionNumber(issueBookCtrl.issueBook.accessionNumber)"
+                               required />
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control"
+                               name="title"
+                               placeholder="Enter Book Title"
+                               ng-model="issueBookCtrl.issueBook.bookTitle"
+                               autocomplete="off"
+                               disabled
+                               required />
+                    </div>
+                    <div class="form-group">
+                        <label for="issueDate">Issue Date</label>
+                        <input type="text" class="form-control"
+                               name="issueDate"
+                               placeholder="Enter Issue Date"
+                               ng-model="issueBookCtrl.issueBook.issuedDate"
+                               close-text="Close"
+                               is-open="bookCtrl.billDatePopup.opened"
+                               disabled
+                               required />
+                    </div>
+                    <div class="form-group">
+                        <label for="returnDate">Return Date</label>
+                        <input type="text" class="form-control"
+                               name="returnDate"
+                               placeholder="Enter Return Date"
+                               ng-model="issueBookCtrl.issueBook.returnDate"
+                               disabled
+                               required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rollNumber">Roll Number</label>
+                        <input type="text" class="form-control"
+                               name="rollNumber"
+                               placeholder="Enter Roll Number"
+                               ng-model="issueBookCtrl.issueBook.rollNo"
+                               ng-blur="issueBookCtrl.getByRollNumber(issueBookCtrl.issueBook.rollNo)"
+                               required />
+                    </div>
+                    <div class="form-group">
+
+                        <label for="fullName">Full Name</label>
+                        <input type="text" class="form-control"
+                               name="fullName"
+                               placeholder="Enter Full Name"
+                               ng-model="issueBookCtrl.issueBook.fullName"
+                               disabled
+                               required />
+
+                    </div>
+                    <div class="form-group">
+
+
+                        <label for="course">Course</label>
+                        <input type="text" class="form-control"
+                               name="course"
+                               placeholder="Enter Course"
+                               ng-model="issueBookCtrl.issueBook.course"
+                               disabled
+                               required />
+
+                    </div>
+
+                    <input type="submit" ng-disabled="issueBookCtrl.isError" class="btn btn-success col-md-12" value="Save Changes" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -270,10 +270,12 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IssueBookController.cs" />
     <Compile Include="Controllers\PublicationController.cs" />
+    <Compile Include="Controllers\ReturnBookController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Core\BindingModels\AuthorBindingModel.cs" />
+    <Compile Include="Core\BindingModels\FineBindingModel.cs" />
     <Compile Include="Core\BindingModels\ForgetPasswordBindModel.cs" />
     <Compile Include="Core\BindingModels\IssueBookBindingModel.cs" />
     <Compile Include="Core\BindingModels\ResetPasswordBindModel.cs" />
@@ -281,17 +283,20 @@
     <Compile Include="Core\IRepositories\IBookRepository.cs" />
     <Compile Include="Core\IRepositories\ICourseRepository.cs" />
     <Compile Include="Core\IRepositories\IIssueBookRepository.cs" />
+    <Compile Include="Core\IRepositories\IReturnBookRepository.cs" />
     <Compile Include="Core\IRepositories\ISubjectRepository.cs" />
     <Compile Include="Core\Models\Author.cs" />
     <Compile Include="Core\Models\Book.cs" />
     <Compile Include="Core\Models\Course.cs" />
     <Compile Include="Core\Models\IssueBook.cs" />
+    <Compile Include="Core\Models\ReturnBook.cs" />
     <Compile Include="Core\Models\Subject.cs" />
     <Compile Include="Core\Services\Class\AuthorService.cs" />
     <Compile Include="Core\Services\Class\BookService.cs" />
     <Compile Include="Core\Services\Class\CourseService.cs" />
     <Compile Include="Core\Services\Class\EntityService.cs" />
     <Compile Include="Core\Services\Class\IssueBookService.cs" />
+    <Compile Include="Core\Services\Class\ReturnBookService.cs" />
     <Compile Include="Core\Services\Class\SubjectService.cs" />
     <Compile Include="Core\Services\Interface\IAuthorService.cs" />
     <Compile Include="Core\Services\Interface\IBookService.cs" />
@@ -300,6 +305,7 @@
     <Compile Include="Core\Services\Interface\IPublicationService.cs" />
     <Compile Include="Core\Services\Class\PublicationService.cs" />
     <Compile Include="Core\Services\Class\StudentService.cs" />
+    <Compile Include="Core\Services\Interface\IReturnBookService.cs" />
     <Compile Include="Core\Services\Interface\ISendEmailService.cs" />
     <Compile Include="Core\Services\Interface\IEntityService.cs" />
     <Compile Include="Core\Services\Interface\IStudentService.cs" />
@@ -398,6 +404,10 @@
     <Compile Include="Persistence\Migrations\201708131935413_addEmailInIssueModule.Designer.cs">
       <DependentUpon>201708131935413_addEmailInIssueModule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708141214440_addReturnModule.cs" />
+    <Compile Include="Persistence\Migrations\201708141214440_addReturnModule.Designer.cs">
+      <DependentUpon>201708141214440_addReturnModule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -415,6 +425,7 @@
     <Compile Include="Core\IRepositories\IPublicationRepository.cs" />
     <Compile Include="Persistence\Repositories\IssueBookRepository.cs" />
     <Compile Include="Persistence\Repositories\PublicationRepository.cs" />
+    <Compile Include="Persistence\Repositories\ReturnBookRepository.cs" />
     <Compile Include="Persistence\Repositories\StudentRepository.cs" />
     <Compile Include="Persistence\Repositories\SubjectRepository.cs" />
     <Compile Include="Persistence\Repositories\test.cs" />
@@ -460,17 +471,23 @@
     <Content Include="app\components\Courses\courses.html" />
     <Content Include="app\components\Courses\deleteCourse.html" />
     <Content Include="app\components\IssueBook\deleteissuebook.html" />
+    <Content Include="app\components\IssueBook\editIssueBook.html" />
     <Content Include="app\components\IssueBook\issueBook.html" />
     <Content Include="app\components\IssueBook\issueBookController.js" />
     <Content Include="app\components\IssueBook\issuedBooks.html" />
     <Content Include="app\components\IssueBook\issueBookFactory.js" />
     <Content Include="app\components\IssueBook\issueBookModalController.js" />
+    <Content Include="app\components\IssueBook\returnIssueBook.html" />
     <Content Include="app\components\Publications\deletePublication.html" />
     <Content Include="app\components\Publications\publicationModalInstanceController.js" />
     <Content Include="app\components\Publications\publication.html" />
     <Content Include="app\components\Publications\publicationController.js" />
     <Content Include="app\components\Publications\publicationFactory.js" />
     <Content Include="app\components\Publications\publicationForm.html" />
+    <Content Include="app\components\ReturnBook\returnBookController.js" />
+    <Content Include="app\components\ReturnBook\returnBookFactory.js" />
+    <Content Include="app\components\ReturnBook\returnBookModalController.js" />
+    <Content Include="app\components\ReturnBook\returnBooks.html" />
     <Content Include="app\components\Subjects\subjectController.js" />
     <Content Include="app\components\Subjects\deleteSubject.html" />
     <Content Include="app\components\Subjects\subjectFactory.js" />
@@ -634,6 +651,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708131935413_addEmailInIssueModule.resx">
       <DependentUpon>201708131935413_addEmailInIssueModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708141214440_addReturnModule.resx">
+      <DependentUpon>201708141214440_addReturnModule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -10,6 +10,7 @@ IssueBookModule.factory("IssueBookFactory", [
         var issueBookFactory = {
             getIssueDate: getIssueDate,
             getReturnDate: getReturnDate,
+            convertToDate: convertToDate,
             formatDate: formatDate,
             getByAccessionNumber: getByAccessionNumber,
             saveBook: saveBook,
@@ -17,12 +18,17 @@ IssueBookModule.factory("IssueBookFactory", [
             saveUser: saveUser,
             loadUser: loadUser,
             issueBook: issueBook,
+            editIssueBook: editIssueBook,
             parseDate: parseDate,
             getIssuedBooks: getIssuedBooks,
             deleteIssueBook: deleteIssueBook,
             getIssueBook: getIssueBook,
             removeCookies: removeCookies,
-            sendNotification: sendNotification
+            checkToSendNotification: checkToSendNotification,
+            sendNotification: sendNotification,
+            calculateFine: calculateFine,
+            updateFine: updateFine,
+            returnBook: returnBook
         }
         return issueBookFactory;
 
@@ -35,6 +41,10 @@ IssueBookModule.factory("IssueBookFactory", [
             var date = new Date();
             var returnDate = date.setDate(date.getDate() + 7);
             return formatDate(returnDate);
+        }
+
+        function convertToDate(date) {
+            return new Date(date);
         }
 
         function formatDate(date) {
@@ -50,7 +60,7 @@ IssueBookModule.factory("IssueBookFactory", [
         }
 
         function parseDate(date) {
-            var convert = new Date(date);
+            var convert = convertToDate(date);
             return $filter('date')(convert, "yyyy/MMM/d");
         }
 
@@ -73,6 +83,17 @@ IssueBookModule.factory("IssueBookFactory", [
         function issueBook(issueBookBindingModel) {
             var deferred = $q.defer();
             $http.post("/api/issueBook/add", issueBookBindingModel).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                console.log(errorResponse);
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function editIssueBook(issueBook) {
+            var deferred = $q.defer();
+            $http.post("/api/issueBook/edit", issueBook).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
                 console.log(errorResponse);
@@ -119,12 +140,47 @@ IssueBookModule.factory("IssueBookFactory", [
             $cookies.remove('borrower');
         }
 
+        function checkToSendNotification(tomorrow, returnDate, email) {
+            var tempTomDate = parseDate(tomorrow);
+            var tempReturnDate = parseDate(returnDate);
+            if (tempTomDate === tempReturnDate)
+                sendNotification(email);
+        }
+
         function sendNotification(email) {
             var deferred = $q.defer();
             $http.get("/api/issueBook/sendEmail?email=" + email).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
-                console.log(errorResponse);
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function calculateFine(date, returnDate) {
+            var tempDate = parseDate(date);
+            var tempReturnDate = parseDate(returnDate);
+            var numberOfDays = Math.round(convertToDate(tempDate) - convertToDate(tempReturnDate)) / (1000 * 60 * 60 * 24);
+            if (numberOfDays > 0)
+                var fine = numberOfDays * 10;
+            return fine;
+        }
+
+        function updateFine(issuedBook) {
+            var deferred = $q.defer();
+            $http.put("/api/issueBook/fine", issuedBook).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function returnBook(issuedBook) {
+            var deferred = $q.defer();
+            $http.put("/api/issueBook/return", issuedBook).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
                 deferred.reject(errorResponse);
             });
             return deferred.promise;
