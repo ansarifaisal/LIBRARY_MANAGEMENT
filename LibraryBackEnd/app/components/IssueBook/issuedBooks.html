@@ -15,7 +15,9 @@
                 <th class="text-center">Title</th>
                 <th class="text-center">Issue Date</th>
                 <th class="text-center">Return Date</th>
-                <th class="text-center">Borrower Name</th>
+                <th class="text-center">Roll No</th>
+                <th class="text-center">Borrower</th>
+                <th class="text-center">Course</th>
                 <th class="text-center">Fine</th>
                 <th class="text-center">Action</th>
             </tr>
@@ -26,11 +28,14 @@
                 <td>{{ issuedBook.bookTitle }}</td>
                 <td>{{ issuedBook.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
                 <td>{{ issuedBook.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ issuedBook.rollNo }}</td>
                 <td>{{ issuedBook.fullName }}</td>
+                <td>{{ issuedBook.course }}</td>
                 <td>{{ issuedBook.fine }}</td>
                 <td class="text-center">
-                    <a href="" ng-click="issueBookCtrl.showEditIssueBookForm(issuedBook.id)" class="btn btn-warning"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-                    <a href="" ng-click="issueBookCtrl.confirmReturnBook(issuedBook.id)" class="btn btn-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                    <a href="" title="Edit" ng-click="issueBookCtrl.showEditIssueBookForm(issuedBook.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
+                    <a href="" title="Return" ng-click="issueBookCtrl.confirmReturnBook(issuedBook.id)" class="text-success"><i class="fa fa-reply fa-2x" aria-hidden="true"></i></a>
+                    <a href="" title="Lost/Replace" ng-click="issueBookCtrl.confirmReplaceOrLostBook(issuedBook.id)" class="text-danger"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
                 </td>
             </tr>
         </tbody>

@@ -1,0 +1,13 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{lostOrReplaceModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    Want To Replace <strong>{{lostOrReplaceModalCtrl.book.bookTitle}}</strong> ?
+    <div class="small text-danger">Note: Please add the book first.</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="lostOrReplaceModalCtrl.cancel()">Close</button>
+    <button class="btn btn-primary" ng-click="lostOrReplaceModalCtrl.replaceBook(lostOrReplaceModalCtrl.book)">{{lostOrReplaceModalCtrl.btnText}}</button>
+</div>

@@ -1,0 +1,13 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{issueBookModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    <strong>{{issueBookModalCtrl.issueBook.bookTitle}}</strong> is lost?
+    <div class="small text-danger">Note: Ask the student to submit new book.</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="issueBookModalCtrl.cancel()">Close</button>
+    <button class="btn btn-danger" ng-click="issueBookModalCtrl.lostIssueBook(issueBookModalCtrl.issueBook)">{{issueBookModalCtrl.btnText}}</button>
+</div>

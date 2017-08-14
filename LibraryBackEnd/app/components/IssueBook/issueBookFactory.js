@@ -28,7 +28,8 @@ IssueBookModule.factory("IssueBookFactory", [
             sendNotification: sendNotification,
             calculateFine: calculateFine,
             updateFine: updateFine,
-            returnBook: returnBook
+            returnBook: returnBook,
+            lostBook: lostBook,
         }
         return issueBookFactory;
 
@@ -179,6 +180,16 @@ IssueBookModule.factory("IssueBookFactory", [
         function returnBook(issuedBook) {
             var deferred = $q.defer();
             $http.put("/api/issueBook/return", issuedBook).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function lostBook(issuedBook) {
+            var deferred = $q.defer();
+            $http.put("/api/issueBook/lost", issuedBook).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
                 deferred.reject(errorResponse);

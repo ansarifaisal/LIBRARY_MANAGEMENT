@@ -245,6 +245,19 @@ window.routes = {
         roles: ['ADMIN']
     },
 
+    /*
+     * Loading Lost or Replace Book Module
+     */
+
+    '/admin/lostOrReplace': {
+
+        templateUrl: 'app/components/lostOrReplace/lostOrReplace.html',
+        controller: 'LostOrReplaceBookController',
+        controllerAs: 'lostOrReplaceBookCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
 }
 
 //Load all the routes

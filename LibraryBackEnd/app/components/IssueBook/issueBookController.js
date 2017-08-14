@@ -17,6 +17,10 @@
     function (IssueBookFactory, AppService, AuthenticationFactory, BookFactory, UserFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
         toastr, $window, DTOptionsBuilder, DTColumnDefBuilder) {
 
+        $timeout(function () {
+            settings();
+        }, 100);
+
         var me = this;
 
         me.issueBook = {
@@ -188,7 +192,7 @@
                     }
                ]);
             me.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(6).notSortable(),
+                DTColumnDefBuilder.newColumnDef(8).notSortable(),
             ];
 
             IssueBookFactory.getIssuedBooks().then(function (issuedBooks) {
@@ -222,5 +226,18 @@
                "issueBookModalCtrl");
             });
         }
+
+        me.confirmReplaceOrLostBook = function (id) {
+            IssueBookFactory.getIssueBook(id).then(function (issueBook) {
+                me.bookModal.issueBook = issueBook;
+                me.bookModal.title = "Lost Issue Book";
+                me.bookModal.btnText = "Lost";
+                AppService.showModal(me.bookModal,
+               "issuebook/replaceOrLost.html",
+               "IssueBookModalController",
+               "issueBookModalCtrl");
+            });
+        }
+
     }
 ]);

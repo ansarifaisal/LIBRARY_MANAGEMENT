@@ -81,7 +81,8 @@ AuthenticationModule.controller("AuthenticationController", [
                                 return $scope.errorMessage = "Your account request is rejected";
                             } else if (user.emailConfirmed === false) {
                                 return $scope.emailError = true;
-                            } else if (user.emailConfirmed === true && user.status === 'APPROVED') {
+                            } else if (user.emailConfirmed === true && user.status === 'APPROVED'
+                                || user.emailConfirmed === true && user.status === 'DEFAULT') {
                                 //save the user into cookies
                                 AuthenticationFactory.saveUser(user);
                                 AuthenticationFactory.setUserIsAuthenticated(true);

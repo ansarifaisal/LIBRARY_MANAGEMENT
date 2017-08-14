@@ -14,6 +14,7 @@ namespace LibraryBackEnd.Configuration
         public DbSet<Book> Books { get; set; }
         public DbSet<IssueBook> IssueBooks { get; set; }
         public DbSet<ReturnBook> ReturnBooks { get; set; }
+        public DbSet<LostOrReplace> LostOrReplaces { get; set; }
 
         //intializing the dbcontext with DefaultConnection 
         public ApplicationDbContext()

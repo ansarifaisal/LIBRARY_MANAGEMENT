@@ -11,6 +11,7 @@ var settings = function () {
 
     });
 
+    $('[data-toggle="tooltip"]').tooltip();
 
 };
 

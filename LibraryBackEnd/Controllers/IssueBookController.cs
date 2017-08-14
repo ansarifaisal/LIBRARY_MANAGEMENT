@@ -15,19 +15,22 @@ namespace LibraryBackEnd.Controllers
         private IStudentService _studentService;
         private ISendEmailService _sendEmailService;
         private IReturnBookService _returnBookService;
+        private ILostOrReplaceService _lostOrReplaceService;
 
         public IssueBookController(
             IIssueBookService issueBookService,
             IBookService bookService,
             IStudentService studentService,
             ISendEmailService sendEmailService,
-            IReturnBookService returnBookService)
+            IReturnBookService returnBookService,
+            ILostOrReplaceService lostOrReplaceService)
         {
             _issueBookService = issueBookService;
             _bookService = bookService;
             _studentService = studentService;
             _sendEmailService = sendEmailService;
             _returnBookService = returnBookService;
+            _lostOrReplaceService = lostOrReplaceService;
         }
 
         [Route("add")]
@@ -48,8 +51,8 @@ namespace LibraryBackEnd.Controllers
         [HttpGet]
         public IHttpActionResult GetAll()
         {
-            var courses = _issueBookService.GetAll();
-            return Ok(courses);
+            var books = _issueBookService.GetAll();
+            return Ok(books);
         }
 
         [Route("edit")]
@@ -142,6 +145,37 @@ namespace LibraryBackEnd.Controllers
             book.Status = "Available";
             _bookService.Update(book);
             return Ok("Book Returned Successfully!");
+        }
+
+        [HttpPut]
+        [Route("lost")]
+        public IHttpActionResult LostBook(IssueBook issueBook)
+        {
+            var _issueBook = issueBook;
+            _issueBookService.Delete(issueBook);
+            var lostOrReplace = new LostOrReplace
+            {
+                AccessionNumber = _issueBook.AccessionNumber,
+                BookTitle = _issueBook.BookTitle,
+                Course = _issueBook.Course,
+                Email = _issueBook.Email,
+                FullName = _issueBook.FullName,
+                IssuedDate = _issueBook.IssuedDate,
+                RollNo = _issueBook.RollNo,
+                ReturnDate = _issueBook.ReturnDate,
+            };
+            _lostOrReplaceService.Create(lostOrReplace);
+            var book = _bookService.GetByAccessionNumber(issueBook.AccessionNumber);
+            if (book == null)
+                return BadRequest();
+            book.Status = "Lost";
+            _bookService.Update(book);
+            var borrower = _studentService.GetByRollNo(issueBook.RollNo);
+            if (borrower == null)
+                return BadRequest();
+            borrower.Status = "DEFAULT";
+            _studentService.Update(borrower);
+            return Ok("");
         }
 
     }

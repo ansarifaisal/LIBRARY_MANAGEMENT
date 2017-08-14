@@ -30,7 +30,6 @@
 
 
         me.deleteIssueBook = function () {
-
             $rootScope.isBusy = true;
             IssueBookFactory.deleteIssueBook(me.issueBook).then(function () {
                 me.ok();
@@ -42,6 +41,20 @@
                 toastr.error("Error Deleting Issue Book");
             }).finally(function () {
                 $rootScope.isBusy = false;
+            });
+        }
+
+        me.lostIssueBook = function (issueBook) {
+            $rootScope.isBusy = true;
+            IssueBookFactory.lostBook(issueBook).then(function () {
+                me.ok();
+                $route.reload();
+                toastr.success("Issue Book Deleted Successfully!");
+                $rootScope.isBusy = false;
+            }, function (errorResponse) {
+                me.cancel();
+                $rootScope.isBusy = false;
+                toastr.error("Error Deleting Issue Book");
             });
         }
 

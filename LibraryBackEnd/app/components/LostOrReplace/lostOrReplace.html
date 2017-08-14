@@ -1,0 +1,43 @@
+﻿<div ng-init="lostOrReplaceBookCtrl.getLostReplaceBooks()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li class="active">Lost Or Replace Books</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Lost Or Replace Books</h3>
+    </div>
+
+    <table datatable="ng" dt-options="lostOrReplaceBookCtrl.dtOptions" dt-column-defs="lostOrReplaceBookCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Accession Number</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Issue Date</th>
+                <th class="text-center">Return Date</th>
+                <th class="text-center">Roll No</th>
+                <th class="text-center">Borrower</th>
+                <th class="text-center">Course</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="book in lostOrReplaceBookCtrl.books">
+                <td>{{ book.accessionNumber }}</td>
+                <td>{{ book.bookTitle }}</td>
+                <td>{{ book.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ book.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ book.rollNo }}</td>
+                <td>{{ book.fullName }}</td>
+                <td>{{ book.course }}</td>
+                <td>{{ book.status }}</td>
+                <td class="text-center">
+                    <a href="" title="Replace" ng-show="book.status != 'Replace'" ng-click="lostOrReplaceBookCtrl.replaceBook(book.id)" class="text-success"><i class="fa fa-check fa-2x" aria-hidden="true"></i></a>
+                    <a href="" title="Undo Replace" ng-show="book.status != 'Lost'" ng-click="lostOrReplaceBookCtrl.undoReplace(book.id)" class="text-danger"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

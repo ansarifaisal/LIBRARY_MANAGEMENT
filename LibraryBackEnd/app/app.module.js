@@ -18,6 +18,7 @@
     "UserModule",
     "IssueBookModule",
     "ReturnBookModule",
+    "LostOrReplaceModule",
 
 ]);
 

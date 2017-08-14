@@ -21,7 +21,7 @@
         me.returnBooks = [];
 
         me.getReturnBooks = function () {
-
+            $rootScope.isBusy = true;
             me.dtOptions = DTOptionsBuilder.newOptions()
              .withBootstrap()
              .withPaginationType('full_numbers')
@@ -61,7 +61,9 @@
 
             ReturnBookFactory.getReturnBooks().then(function (returnBooks) {
                 me.returnBooks = returnBooks;
+                $rootScope.isBusy = false;
             }, function (errorResponse) {
+                $rootScope.isBusy = false;
                 toastr.error("Error fetching return books");
             });
         }
