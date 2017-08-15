@@ -28,6 +28,39 @@ namespace LibraryBackEnd.Persistence.Repositories
                 .SingleOrDefault();
         }
 
+        public object GetBooksInCourse()
+        {
+            return _context.Books
+                .GroupBy(b => b.Course)
+                .Select(g => new
+                {
+                    CourseName = g.Key,
+                    Count = g.Count()
+                })
+                .ToList();
+        }
 
+        public object GetBooksInSubject()
+        {
+            return _context.Books
+               .GroupBy(b => b.Subject)
+               .Select(g => new
+               {
+                   CourseName = g.Key,
+                   Count = g.Count()
+               })
+               .ToList();
+        }
+
+        public object BookBaughtInYear()
+        {
+            return _context.Books
+                   .GroupBy(b => b.BillDate.Year).Select(g => new
+                   {
+                       CourseName = g.Key,
+                       Count = g.Count()
+                   })
+                   .ToList();
+        }
     }
 }

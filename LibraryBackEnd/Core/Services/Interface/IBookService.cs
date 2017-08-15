@@ -7,5 +7,8 @@ namespace LibraryBackEnd.Core.Services.Interface
     {
         IEnumerable<string> BookTitle();
         Book GetByAccessionNumber(string accessionNumber);
+        object GetBooksInCourse();
+        object GetBooksInSubject();
+        object BookBaughtInYear();
     }
 }

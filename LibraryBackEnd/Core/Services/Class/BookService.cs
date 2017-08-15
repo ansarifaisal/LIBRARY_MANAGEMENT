@@ -26,5 +26,20 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _bookRepository.GetByAccessionNumber(accessionNumber);
         }
+
+        public object GetBooksInCourse()
+        {
+            return _bookRepository.GetBooksInCourse();
+        }
+
+        public object GetBooksInSubject()
+        {
+            return _bookRepository.GetBooksInSubject();
+        }
+
+        public object BookBaughtInYear()
+        {
+            return _bookRepository.BookBaughtInYear();
+        }
     }
 }

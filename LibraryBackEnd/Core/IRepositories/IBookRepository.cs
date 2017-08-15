@@ -7,5 +7,8 @@ namespace LibraryBackEnd.Core.IRepositories
     {
         IEnumerable<string> BookTitle();
         Book GetByAccessionNumber(string accessionNumber);
+        object GetBooksInCourse();
+        object GetBooksInSubject();
+        object BookBaughtInYear();
     }
 }

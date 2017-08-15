@@ -27,6 +27,32 @@ namespace LibraryBackEnd.Persistence.Repositories
             return _context.Users.Where(u => u.UserName == userName).SingleOrDefault();
         }
 
+        public object GetStudentsInCourse()
+        {
+            return _context.Users
+                .Where(u => u.Role == "STUDENT")
+                .GroupBy(u => u.Course)
+                .Select(g => new
+                {
+                    CourseName = g.Key,
+                    Count = g.Count()
+                })
+                .ToList();
+        }
+
+        public object GetStudentsInYear()
+        {
+            return _context.Users
+                 .Where(u => u.Role == "STUDENT")
+                 .GroupBy(u => u.YearOfAdmission)
+                 .Select(g => new
+                 {
+                     CourseName = g.Key,
+                     Count = g.Count()
+                 })
+                 .ToList();
+        }
+
         public ApplicationUser GetUserById(string Id)
         {
             return _context.Users.Find(Id);

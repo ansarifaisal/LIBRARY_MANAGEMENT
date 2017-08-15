@@ -9,5 +9,7 @@ namespace LibraryBackEnd.Core.IRepositories
         ApplicationUser GetByUserName(string userName);
         ApplicationUser GetByRollNo(string rollNumber);
         IEnumerable<ApplicationUser> GetUsersByRole(string role);
+        object GetStudentsInCourse();
+        object GetStudentsInYear();
     }
 }

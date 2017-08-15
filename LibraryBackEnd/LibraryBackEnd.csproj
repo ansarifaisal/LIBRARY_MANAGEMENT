@@ -272,6 +272,7 @@
     <Compile Include="Controllers\LostOrReplaceController.cs" />
     <Compile Include="Controllers\PublicationController.cs" />
     <Compile Include="Controllers\ReturnBookController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -504,6 +505,9 @@
     <Content Include="app\components\ReturnBook\returnBookController.js" />
     <Content Include="app\components\ReturnBook\returnBookFactory.js" />
     <Content Include="app\components\ReturnBook\returnBooks.html" />
+    <Content Include="app\components\Statistics\statisticsController.js" />
+    <Content Include="app\components\Statistics\statistics.html" />
+    <Content Include="app\components\Statistics\statisticsFactory.js" />
     <Content Include="app\components\Subjects\subjectController.js" />
     <Content Include="app\components\Subjects\deleteSubject.html" />
     <Content Include="app\components\Subjects\subjectFactory.js" />
@@ -511,6 +515,7 @@
     <Content Include="app\components\Subjects\subjectModalController.js" />
     <Content Include="app\components\Subjects\subjects.html" />
     <Content Include="app\components\User\deleteUser.html" />
+    <Content Include="app\components\User\editForm.html" />
     <Content Include="app\components\User\editStudent.html" />
     <Content Include="app\components\User\faculties.html" />
     <Content Include="app\components\User\home.html" />

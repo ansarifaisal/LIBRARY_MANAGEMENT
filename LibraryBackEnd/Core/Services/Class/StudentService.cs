@@ -36,5 +36,15 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _repository.GetUsersByRole(role);
         }
+
+        public object GetStudentsInCourse()
+        {
+            return _repository.GetStudentsInCourse();
+        }
+
+        public object GetStudentsInYear()
+        {
+            return _repository.GetStudentsInYear();
+        }
     }
 }

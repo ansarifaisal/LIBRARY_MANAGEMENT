@@ -276,6 +276,19 @@ window.routes = {
         roles: ['ADMIN']
     },
 
+    /*
+    * Loading Statistics Module
+    */
+
+    '/admin/statistics': {
+
+        templateUrl: 'app/components/statistics/statistics.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
 }
 
 //Load all the routes
