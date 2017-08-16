@@ -1,4 +1,5 @@
 ﻿using LibraryBackEnd.Configuration;
+using LibraryBackEnd.Core.BindingModels;
 using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
 using System.Collections.Generic;
@@ -19,6 +20,11 @@ namespace LibraryBackEnd.Persistence.Repositories
         public IEnumerable<string> BookTitle()
         {
             return _context.Books.Select(b => b.Title).Distinct().ToList();
+        }
+
+        public IEnumerable<string> GetAccessionNumbers()
+        {
+            return _context.Books.Select(b => b.AccessionNumber).Distinct().ToList();
         }
 
         public Book GetByAccessionNumber(string accessionNumber)
@@ -102,5 +108,17 @@ namespace LibraryBackEnd.Persistence.Repositories
                  .Where(b => b.Title == title)
                  .ToList();
         }
+
+        public IEnumerable<Book> GetSearchResults(SearchBindingModel searchBindingModel)
+        {
+            return _context.Books
+                    .Where(u => u.AccessionNumber == searchBindingModel.AccessionNumber
+                    || u.Title == searchBindingModel.Title
+                    || u.Course == searchBindingModel.Course
+                    || u.Status == searchBindingModel.Status)
+                    .ToList();
+        }
+
+
     }
 }

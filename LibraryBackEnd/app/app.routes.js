@@ -157,19 +157,6 @@ window.routes = {
     },
 
     /*
-     * Loading Author Module
-     */
-
-    '/admin/authors': {
-
-        templateUrl: 'app/components/authors/authors.html',
-        controller: 'AuthorController',
-        controllerAs: 'authorCtrl',
-        requireLogin: true,
-        roles: ['ADMIN']
-    },
-
-    /*
      * Loading Course Module
      */
 
@@ -333,6 +320,19 @@ window.routes = {
         templateUrl: 'app/components/statistics/studentsByCourse.html',
         controller: 'StatisticsController',
         controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+    /*
+   * Loading Statistics Module
+   */
+
+    '/admin/search': {
+
+        templateUrl: 'app/components/search/search.html',
+        controller: 'SearchController',
+        controllerAs: 'searchCtrl',
         requireLogin: true,
         roles: ['ADMIN']
     },

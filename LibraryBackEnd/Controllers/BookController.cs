@@ -88,5 +88,13 @@ namespace LibraryBackEnd.Controllers
             return Ok(bookTitle);
         }
 
+        [HttpGet]
+        [Route("accessionNumbers")]
+        public IHttpActionResult GetAccessionNumbers()
+        {
+            var accessionNumbers = _bookService.GetAccessionNumbers();
+            return Ok(accessionNumbers);
+        }
+
     }
 }

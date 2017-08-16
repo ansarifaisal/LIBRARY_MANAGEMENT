@@ -198,7 +198,7 @@
                         }
                     },
                     {
-                        text: "<i class='fa fa-plus fa-lg'></i> Add Subject",
+                        text: "<i class='fa fa-plus fa-lg'></i> Add Book",
                         key: '1',
                         className: 'btn btn-success margin-4x',
                         action: function (e, dt, node, config) {

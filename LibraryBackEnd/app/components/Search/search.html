@@ -1,0 +1,114 @@
+﻿<div>
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li class="active">Search For Books</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Search For Books</h3>
+    </div>
+
+    <div class="panel panel-primary" ng-init="searchCtrl.loadData()">
+        <div class="panel-heading">
+            <h3 class="panel-title">Search For Books</h3>
+        </div>
+        <div class="panel-body">
+            <form name="createEdit" ng-submit="searchCtrl.searchBooks()" role="form" novalidate>
+                <div class="form-group col-md-3">
+                    <label for="accessionNumber">Accession Number</label>
+                    <input type="text"
+                           class="form-control"
+                           name="accessionNumber"
+                           placeholder="Enter Accession Number"
+                           ng-blur="searchCtrl.searchBooks()"
+                           ng-disabled="searchCtrl.searchBindingModel.title
+                                        || searchCtrl.searchBindingModel.course
+                                        || searchCtrl.searchBindingModel.status"
+                           ng-model="searchCtrl.searchBindingModel.accessionNumber"
+                           uib-typeahead="accesssionNumber for accesssionNumber in searchCtrl.accessionNumbers | filter:$viewValue | limitTo:8"
+                           autocomplete="off" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="title">Title</label>
+                    <input type="text"
+                           class="form-control"
+                           name="title"
+                           placeholder="Enter Title"
+                           ng-blur="searchCtrl.searchBooks()"
+                           ng-disabled="searchCtrl.searchBindingModel.accessionNumber
+                                        || searchCtrl.searchBindingModel.course
+                                        || searchCtrl.searchBindingModel.status"
+                           ng-model="searchCtrl.searchBindingModel.title"
+                           uib-typeahead="title for title in searchCtrl.titles | filter:$viewValue | limitTo:8"
+                           autocomplete="off" />
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="course">Course</label>
+                    <select class="form-control" name="course"
+                            ng-model="searchCtrl.searchBindingModel.course"
+                            ng-options="course.name as course.name for course in  searchCtrl.courses"
+                            ng-change="searchCtrl.searchBooks()"
+                            ng-disabled="searchCtrl.searchBindingModel.title
+                                        || searchCtrl.searchBindingModel.accessionNumber
+                                        || searchCtrl.searchBindingModel.status">
+                        <option value="">Select Course</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="status">Status</label>
+
+                    <select class="form-control" name="status"
+                            ng-model="searchCtrl.searchBindingModel.status"
+                            ng-options="status as status for status in  searchCtrl.status"
+                            ng-change="searchCtrl.searchBooks()"
+                            ng-disabled="searchCtrl.searchBindingModel.title
+                                        || searchCtrl.searchBindingModel.course
+                                        || searchCtrl.searchBindingModel.accessionNumber">
+                        <option value="">Select Status</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div ng-init="searchCtrl.config()">
+        <div class="panel panel-primary" ng-show="searchCtrl.books.length > 0">
+            <div class="panel-heading">
+                <h3 class="panel-title">Search Result</h3>
+            </div>
+            <div class="panel-body">
+                <table datatable="ng" dt-options="searchCtrl.dtOptions" dt-column-defs="searchCtrl.dtColumnDefs" class="table-condensed table-hover">
+                    <thead>
+                        <tr>
+
+                            <th class="text-center">Accession</th>
+                            <th class="text-center">Title</th>
+                            <th class="text-center">Author(s)</th>
+                            <th class="text-center">Publisher</th>
+                            <th class="text-center">Course</th>
+                            <th class="text-center">Semester</th>
+                            <th class="text-center">Subject</th>
+                            <th class="text-center">Type</th>
+                            <th class="text-center">Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="book in searchCtrl.books">
+                            <td>{{ book.accessionNumber }}</td>
+                            <td>{{ book.title }}</td>
+                            <td>{{ book.author }}</td>
+                            <td>{{ book.publisher }}</td>
+                            <td>{{ book.course }}</td>
+                            <td>{{ book.semester }}</td>
+                            <td>{{ book.subject }}</td>
+                            <td>{{ book.typeOfBook }}</td>
+                            <td>{{ book.status }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

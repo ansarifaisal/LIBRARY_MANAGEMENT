@@ -1,4 +1,5 @@
-﻿using LibraryBackEnd.Core.IRepositories;
+﻿using LibraryBackEnd.Core.BindingModels;
+using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
 using LibraryBackEnd.Core.Services.Interface;
 using System.Collections.Generic;
@@ -65,6 +66,16 @@ namespace LibraryBackEnd.Core.Services.Class
         public IEnumerable<Book> GetBooksByTitle(string title)
         {
             return _bookRepository.GetBooksByTitle(title);
+        }
+
+        public IEnumerable<Book> GetSearchResults(SearchBindingModel searchBindingModel)
+        {
+            return _bookRepository.GetSearchResults(searchBindingModel);
+        }
+
+        public IEnumerable<string> GetAccessionNumbers()
+        {
+            return _bookRepository.GetAccessionNumbers();
         }
     }
 }

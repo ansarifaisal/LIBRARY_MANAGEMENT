@@ -11,7 +11,6 @@
     "datatables.buttons",
     "AuthenticationModule",
     "PublicationModule",
-    "AuthorModule",
     "CourseModule",
     "SubjectModule",
     "BookModule",
@@ -20,6 +19,7 @@
     "ReturnBookModule",
     "LostOrReplaceModule",
     "StatisticsModule",
+    "SearchModule",
 
 ]);
 

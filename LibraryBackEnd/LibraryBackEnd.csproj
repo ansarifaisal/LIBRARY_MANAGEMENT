@@ -272,6 +272,7 @@
     <Compile Include="Controllers\LostOrReplaceController.cs" />
     <Compile Include="Controllers\PublicationController.cs" />
     <Compile Include="Controllers\ReturnBookController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
@@ -281,6 +282,7 @@
     <Compile Include="Core\BindingModels\ForgetPasswordBindModel.cs" />
     <Compile Include="Core\BindingModels\IssueBookBindingModel.cs" />
     <Compile Include="Core\BindingModels\ResetPasswordBindModel.cs" />
+    <Compile Include="Core\BindingModels\SearchBindingModel.cs" />
     <Compile Include="Core\IRepositories\IAuthorRepository.cs" />
     <Compile Include="Core\IRepositories\IBookRepository.cs" />
     <Compile Include="Core\IRepositories\ICourseRepository.cs" />
@@ -505,6 +507,9 @@
     <Content Include="app\components\ReturnBook\returnBookController.js" />
     <Content Include="app\components\ReturnBook\returnBookFactory.js" />
     <Content Include="app\components\ReturnBook\returnBooks.html" />
+    <Content Include="app\components\Search\searchController.js" />
+    <Content Include="app\components\Search\search.html" />
+    <Content Include="app\components\Search\searchFactory.js" />
     <Content Include="app\components\Statistics\booksByCourse.html" />
     <Content Include="app\components\Statistics\booksBySubjects.html" />
     <Content Include="app\components\Statistics\booksBought.html" />

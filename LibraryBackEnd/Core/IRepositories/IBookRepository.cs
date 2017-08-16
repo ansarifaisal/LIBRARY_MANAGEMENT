@@ -1,4 +1,5 @@
-﻿using LibraryBackEnd.Core.Models;
+﻿using LibraryBackEnd.Core.BindingModels;
+using LibraryBackEnd.Core.Models;
 using System.Collections.Generic;
 
 namespace LibraryBackEnd.Core.IRepositories
@@ -6,6 +7,7 @@ namespace LibraryBackEnd.Core.IRepositories
     public interface IBookRepository : IGenericRepository<Book>
     {
         IEnumerable<string> BookTitle();
+        IEnumerable<string> GetAccessionNumbers();
         Book GetByAccessionNumber(string accessionNumber);
         object GetBooksInCourse();
         IEnumerable<Book> GetBooksByCourse(string courseName);
@@ -15,5 +17,6 @@ namespace LibraryBackEnd.Core.IRepositories
         IEnumerable<Book> GetBooksByYear(int year);
         object GetBooksTitles();
         IEnumerable<Book> GetBooksByTitle(string title);
+        IEnumerable<Book> GetSearchResults(SearchBindingModel searchBindingModel);
     }
 }

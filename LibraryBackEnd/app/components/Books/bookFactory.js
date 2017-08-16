@@ -27,6 +27,7 @@ BookModule.factory("BookFactory", [
             dateParse: dateParse,
             calculateDiscount: calculateDiscount,
             getTitles: getTitles,
+            getAccessionNumbers: getAccessionNumbers,
             getBookByAccessionNumber: getBookByAccessionNumber
         };
 
@@ -143,7 +144,7 @@ BookModule.factory("BookFactory", [
         }
 
         function getStatus() {
-            var status = ["Withdrawl", "Loss", "Available", "Not Available"];
+            var status = ["Available", "Not Available", "Withdrawl", "Lost", "Issued"];
             return status;
         }
 
@@ -164,6 +165,16 @@ BookModule.factory("BookFactory", [
         function getTitles() {
             var deferred = $q.defer();
             $http.get("/api/book/bookTitles").then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function getAccessionNumbers() {
+            var deferred = $q.defer();
+            $http.get("/api/book/accessionNumbers").then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
                 deferred.reject(errorResponse);
