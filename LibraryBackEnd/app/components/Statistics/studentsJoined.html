@@ -1,0 +1,39 @@
+﻿<div ng-init="statisticsCtrl.loadStudentDataByYear()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li><a href="" ng-href="#!/admin/statistics">Statistics</a></li>
+        <li class="active">Students Joined in Year - {{statisticsCtrl.year}}</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Students Joined in Year - {{statisticsCtrl.year}}</h3>
+    </div>
+
+    <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Roll No</th>
+                <th class="text-center">Full Name</th>
+                <th class="text-center">Course</th>
+                <th class="text-center">Book Issued</th>
+                <th class="text-center">Admission Year</th>
+                <th class="text-center">Email Confirmed</th>
+                <th class="text-center">Role</th>
+                <th class="text-center">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="student in statisticsCtrl.students">
+                <td>{{ student.rollNo }}</td>
+                <td>{{ student.fullName}}</td>
+                <td>{{ student.course }}</td>
+                <td>{{ student.issueCount }}</td>
+                <td>{{ student.yearOfAdmission }}</td>
+                <td>{{ student.emailConfirmed }}</td>
+                <td>{{ student.role }}</td>
+                <td>{{ student.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

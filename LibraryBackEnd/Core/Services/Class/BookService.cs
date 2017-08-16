@@ -41,5 +41,30 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _bookRepository.BookBaughtInYear();
         }
+
+        public object GetBooksTitles()
+        {
+            return _bookRepository.GetBooksTitles();
+        }
+
+        public IEnumerable<Book> GetBooksByCourse(string courseName)
+        {
+            return _bookRepository.GetBooksByCourse(courseName);
+        }
+
+        public IEnumerable<Book> GetBooksBySubject(string subject)
+        {
+            return _bookRepository.GetBooksBySubject(subject);
+        }
+
+        public IEnumerable<Book> GetBooksByYear(int year)
+        {
+            return _bookRepository.GetBooksByYear(year);
+        }
+
+        public IEnumerable<Book> GetBooksByTitle(string title)
+        {
+            return _bookRepository.GetBooksByTitle(title);
+        }
     }
 }

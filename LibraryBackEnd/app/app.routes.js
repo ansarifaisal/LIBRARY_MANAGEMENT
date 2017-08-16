@@ -288,7 +288,54 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN']
     },
+    '/admin/booksByCourse/:courseName': {
 
+        templateUrl: 'app/components/statistics/booksByCourse.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+    '/admin/booksBySubject/:subject': {
+
+        templateUrl: 'app/components/statistics/booksBySubjects.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+    '/admin/booksBought/:year': {
+
+        templateUrl: 'app/components/statistics/booksBought.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+    '/admin/bookTitles/:title': {
+
+        templateUrl: 'app/components/statistics/booksTitles.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+    '/admin/studentsJoined/:year': {
+
+        templateUrl: 'app/components/statistics/studentsJoined.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+    '/admin/studentsByCourse/:courseName': {
+
+        templateUrl: 'app/components/statistics/studentsByCourse.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
 }
 
 //Load all the routes

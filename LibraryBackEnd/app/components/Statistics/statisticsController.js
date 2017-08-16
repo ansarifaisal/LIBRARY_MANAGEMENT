@@ -28,6 +28,8 @@
 
         me.studentsInYear = [];
 
+        me.bookTitles = [];
+
         me.config = function () {
             me.dtOptions = DTOptionsBuilder.newOptions()
                .withPaginationType('full_numbers')
@@ -38,25 +40,19 @@
                        extend: 'copy',
                        className: 'btn btn-default',
                        text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                       exportOptions: {
-                           columns: ':not(:last-child)'
-                       }
+
                    },
                    {
                        extend: 'print',
                        className: 'btn btn-default',
                        text: "<i class='fa fa-print fa-lg'></i> Print",
-                       exportOptions: {
-                           columns: ':not(:last-child)'
-                       }
+
                    },
                    {
                        extend: 'excel',
                        className: 'btn btn-default ',
                        text: "<i class='fa fa-file-excel-o fa-lg'></i> Excel",
-                       exportOptions: {
-                           columns: ':not(:last-child)'
-                       }
+
                    }
                ]);
             me.dtColumnDefs = [
@@ -70,6 +66,7 @@
             me.loadBookBaughtInYear();
             me.loadStudentsInCourse();
             me.loadStudentsInYear();
+            me.loadBooksTitles();
         }
 
         me.loadBooksInCourse = function () {
@@ -86,6 +83,7 @@
             if (me.booksInSubject.length > 0)
                 return;
             StatisticsFactory.getBooksInSubject().then(function (response) {
+
                 me.booksInSubject = response;
             });
         }
@@ -105,7 +103,7 @@
                 return;
             StatisticsFactory.getStudentsInCourse().then(function (response) {
                 me.studentsInCourse = response;
-                console.log(response);
+
             });
         }
 
@@ -115,6 +113,95 @@
                 return;
             StatisticsFactory.getStudentsInYear().then(function (response) {
                 me.studentsInYear = response;
+            });
+        }
+
+        me.loadBooksTitles = function () {
+            me.config();
+            if (me.bookTitles.length > 0)
+                return;
+            StatisticsFactory.getBooksTitles().then(function (response) {
+                me.bookTitles = response;
+            });
+        }
+
+        me.loadDataByCourse = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.courseName = $routeParams.courseName;
+            StatisticsFactory.getBooksByCourse(me.courseName).then(function (response) {
+                me.books = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+
+        }
+
+        me.loadDataBySubject = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.subject = $routeParams.subject;
+            StatisticsFactory.getBooksBySubject(me.subject).then(function (response) {
+                me.books = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+        }
+
+        me.loadDataByYear = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.year = $routeParams.year;
+            StatisticsFactory.getBookBaughtByYear(me.year).then(function (response) {
+                me.books = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+        }
+
+        me.loadDataByTitle = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.title = $routeParams.title;
+            StatisticsFactory.getBooksByTitle(me.title).then(function (response) {
+                me.books = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+        }
+
+        me.loadStudentDataByCourse = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.courseName = $routeParams.courseName;
+            console.log(me.courseName);
+            StatisticsFactory.getStudentsByCourse(me.courseName).then(function (response) {
+                me.students = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+        }
+
+        me.loadStudentDataByYear = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.year = $routeParams.year;
+            StatisticsFactory.getStudentsByYear(me.year).then(function (response) {
+                me.students = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
             });
         }
     }

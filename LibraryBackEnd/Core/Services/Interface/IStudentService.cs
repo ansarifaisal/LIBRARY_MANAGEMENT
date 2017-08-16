@@ -11,5 +11,7 @@ namespace LibraryBackEnd.Core.Services.Interface
         IEnumerable<ApplicationUser> GetUsersByRole(string role);
         object GetStudentsInCourse();
         object GetStudentsInYear();
+        IEnumerable<ApplicationUser> GetStudentsByCourse(string courseName);
+        IEnumerable<ApplicationUser> GetStudentsByYear(int year);
     }
 }

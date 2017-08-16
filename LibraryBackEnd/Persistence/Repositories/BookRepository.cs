@@ -46,7 +46,7 @@ namespace LibraryBackEnd.Persistence.Repositories
                .GroupBy(b => b.Subject)
                .Select(g => new
                {
-                   CourseName = g.Key,
+                   Subject = g.Key,
                    Count = g.Count()
                })
                .ToList();
@@ -57,10 +57,50 @@ namespace LibraryBackEnd.Persistence.Repositories
             return _context.Books
                    .GroupBy(b => b.BillDate.Year).Select(g => new
                    {
-                       CourseName = g.Key,
+                       Year = g.Key,
                        Count = g.Count()
                    })
                    .ToList();
+        }
+
+        public object GetBooksTitles()
+        {
+            return _context.Books
+               .GroupBy(b => b.Title)
+               .Select(g => new
+               {
+                   Title = g.Key,
+                   Count = g.Count()
+               })
+               .ToList();
+        }
+
+        public IEnumerable<Book> GetBooksByCourse(string courseName)
+        {
+            return _context.Books
+                .Where(b => b.Course == courseName)
+                .ToList();
+        }
+
+        public IEnumerable<Book> GetBooksBySubject(string subject)
+        {
+            return _context.Books
+                 .Where(b => b.Subject == subject)
+                 .ToList();
+        }
+
+        public IEnumerable<Book> GetBooksByYear(int year)
+        {
+            return _context.Books
+                 .Where(b => b.BillDate.Year == year)
+                 .ToList();
+        }
+
+        public IEnumerable<Book> GetBooksByTitle(string title)
+        {
+            return _context.Books
+                 .Where(b => b.Title == title)
+                 .ToList();
         }
     }
 }

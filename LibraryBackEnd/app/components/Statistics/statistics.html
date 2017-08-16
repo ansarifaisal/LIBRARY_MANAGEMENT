@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="book in statisticsCtrl.booksInCourse">
-                        <td>{{ book.courseName }}</td>
+                        <td><a href="" ng-href="#!/admin/booksByCourse/{{book.courseName}}">{{ book.courseName }}</a></td>
                         <td>{{ book.count }}</td>
                     </tr>
                 </tbody>
@@ -42,9 +42,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="book in statisticsCtrl.booksInSubject">
-                        <td>{{ book.courseName }}</td>
-                        <td>{{ book.count }}</td>
+                    <tr ng-repeat="subject in statisticsCtrl.booksInSubject">
+                        <td><a href="" ng-href="#!/admin/booksBySubject/{{subject.subject}}">{{ subject.subject }}</a></td>
+                        <td>{{ subject.count }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -63,7 +63,27 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="book in statisticsCtrl.booksBaughtInYear">
-                        <td>{{ book.courseName }}</td>
+                        <td><a href="" ng-href="#!/admin/booksBought/{{book.year}}">{{ book.year }}</a></td>
+                        <td>{{ book.count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div uib-accordion-group class="panel-default">
+            <uib-accordion-heading>
+                Titles Of The Books
+            </uib-accordion-heading>
+            <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Title</th>
+                        <th class="text-center">No Of Books</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="book in statisticsCtrl.bookTitles">
+                        <td><a href="" ng-href="#!/admin/bookTitles/{{book.title}}">{{ book.title }}</a></td>
                         <td>{{ book.count }}</td>
                     </tr>
                 </tbody>
@@ -82,16 +102,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="book in statisticsCtrl.studentsInCourse">
-                        <td>{{ book.courseName }}</td>
-                        <td>{{ book.count }}</td>
+                    <tr ng-repeat="student in statisticsCtrl.studentsInCourse">
+                        <td>
+                            <a href="" ng-href="#!/admin/studentsByCourse/{{student.courseName}}">
+                                {{ student.courseName }}
+                            </a>
+                        </td>
+                        <td>{{ student.count }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div uib-accordion-group class="panel-default">
             <uib-accordion-heading>
-                Student Joined in a Year
+                Students Joined in a Year
             </uib-accordion-heading>
             <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
                 <thead>
@@ -101,9 +125,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="book in statisticsCtrl.studentsInYear">
-                        <td>{{ book.courseName }}</td>
-                        <td>{{ book.count }}</td>
+                    <tr ng-repeat="student in statisticsCtrl.studentsInYear">
+                        <td><a href="" ng-href="#!/admin/studentsJoined/{{student.year}}">{{ student.year }}</a></td>
+                        <td>{{ student.count }}</td>
                     </tr>
                 </tbody>
             </table>

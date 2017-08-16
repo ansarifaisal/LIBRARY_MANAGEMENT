@@ -25,6 +25,15 @@ namespace LibraryBackEnd.Controllers
         }
 
         [HttpGet]
+        [Route("booksByCourse")]
+        public IHttpActionResult GetBooksByCourse(string courseName)
+        {
+            var courses = _bookService.GetBooksByCourse(courseName);
+            return Ok(courses);
+        }
+
+
+        [HttpGet]
         [Route("booksInSubject")]
         public IHttpActionResult GetBooksInSubject()
         {
@@ -33,10 +42,29 @@ namespace LibraryBackEnd.Controllers
         }
 
         [HttpGet]
+        [Route("booksBySubject")]
+        public IHttpActionResult GetBooksBySubject(string subject)
+        {
+            if (subject.Contains("  "))
+                subject = subject.Replace("  ", "++");
+            var books = _bookService.GetBooksBySubject(subject);
+            return Ok(books);
+        }
+
+        [HttpGet]
         [Route("studentsInYear")]
         public IHttpActionResult GetStudentsInYear()
         {
             var students = _studentService.GetStudentsInYear();
+            return Ok(students);
+        }
+
+
+        [HttpGet]
+        [Route("studentsByYear/{year}")]
+        public IHttpActionResult GetStudentsByYear(int year)
+        {
+            var students = _studentService.GetStudentsByYear(year);
             return Ok(students);
         }
 
@@ -49,10 +77,43 @@ namespace LibraryBackEnd.Controllers
         }
 
         [HttpGet]
+        [Route("studentsByCourse")]
+        public IHttpActionResult GetStudentsByCourse(string courseName)
+        {
+            var students = _studentService.GetStudentsByCourse(courseName);
+            return Ok(students);
+        }
+
+
+        [HttpGet]
         [Route("bookBaughtInYear")]
         public IHttpActionResult GetBookBaughtInYear()
         {
             var books = _bookService.BookBaughtInYear();
+            return Ok(books);
+        }
+
+        [HttpGet]
+        [Route("booksByYear/{year}")]
+        public IHttpActionResult GetBooksByYear(int year)
+        {
+            var books = _bookService.GetBooksByYear(year);
+            return Ok(books);
+        }
+
+        [HttpGet]
+        [Route("booksTitles")]
+        public IHttpActionResult GetBooksTitles()
+        {
+            var titles = _bookService.GetBooksTitles();
+            return Ok(titles);
+        }
+
+        [HttpGet]
+        [Route("booksByTitles")]
+        public IHttpActionResult GetBooksByTitle(string title)
+        {
+            var books = _bookService.GetBooksByTitle(title);
             return Ok(books);
         }
     }

@@ -46,5 +46,15 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _repository.GetStudentsInYear();
         }
+
+        public IEnumerable<ApplicationUser> GetStudentsByCourse(string courseName)
+        {
+            return _repository.GetStudentsByCourse(courseName);
+        }
+
+        public IEnumerable<ApplicationUser> GetStudentsByYear(int year)
+        {
+            return _repository.GetStudentsByYear(year);
+        }
     }
 }

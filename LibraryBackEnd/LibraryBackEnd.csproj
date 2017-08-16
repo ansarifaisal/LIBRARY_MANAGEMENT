@@ -505,9 +505,15 @@
     <Content Include="app\components\ReturnBook\returnBookController.js" />
     <Content Include="app\components\ReturnBook\returnBookFactory.js" />
     <Content Include="app\components\ReturnBook\returnBooks.html" />
+    <Content Include="app\components\Statistics\booksByCourse.html" />
+    <Content Include="app\components\Statistics\booksBySubjects.html" />
+    <Content Include="app\components\Statistics\booksBought.html" />
     <Content Include="app\components\Statistics\statisticsController.js" />
     <Content Include="app\components\Statistics\statistics.html" />
     <Content Include="app\components\Statistics\statisticsFactory.js" />
+    <Content Include="app\components\Statistics\booksTitles.html" />
+    <Content Include="app\components\Statistics\studentsByCourse.html" />
+    <Content Include="app\components\Statistics\studentsJoined.html" />
     <Content Include="app\components\Subjects\subjectController.js" />
     <Content Include="app\components\Subjects\deleteSubject.html" />
     <Content Include="app\components\Subjects\subjectFactory.js" />
