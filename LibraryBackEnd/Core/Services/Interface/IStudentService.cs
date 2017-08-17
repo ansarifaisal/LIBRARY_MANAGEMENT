@@ -1,4 +1,5 @@
-﻿using LibraryBackEnd.Core.Models;
+﻿using LibraryBackEnd.Core.BindingModels;
+using LibraryBackEnd.Core.Models;
 using System.Collections.Generic;
 
 namespace LibraryBackEnd.Core.Services.Interface
@@ -13,5 +14,8 @@ namespace LibraryBackEnd.Core.Services.Interface
         object GetStudentsInYear();
         IEnumerable<ApplicationUser> GetStudentsByCourse(string courseName);
         IEnumerable<ApplicationUser> GetStudentsByYear(int year);
+        IEnumerable<ApplicationUser> GetSearchResults(SearchStudentBindingModel searchStudentBindingModel);
+        IEnumerable<string> GetFullName();
+        IEnumerable<string> GetRollNos();
     }
 }

@@ -336,6 +336,15 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN']
     },
+
+    '/admin/searchForStudents': {
+
+        templateUrl: 'app/components/search/searchStudent.html',
+        controller: 'SearchController',
+        controllerAs: 'searchCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
 }
 
 //Load all the routes

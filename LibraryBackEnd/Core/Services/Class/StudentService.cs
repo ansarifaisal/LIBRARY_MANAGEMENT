@@ -1,4 +1,5 @@
-﻿using LibraryBackEnd.Core.IRepositories;
+﻿using LibraryBackEnd.Core.BindingModels;
+using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
 using LibraryBackEnd.Core.Services.Interface;
 using System.Collections.Generic;
@@ -55,6 +56,21 @@ namespace LibraryBackEnd.Core.Services.Class
         public IEnumerable<ApplicationUser> GetStudentsByYear(int year)
         {
             return _repository.GetStudentsByYear(year);
+        }
+
+        public IEnumerable<ApplicationUser> GetSearchResults(SearchStudentBindingModel searchStudentBindingModel)
+        {
+            return _repository.GetSearchResults(searchStudentBindingModel);
+        }
+
+        public IEnumerable<string> GetFullName()
+        {
+            return _repository.GetFullName();
+        }
+
+        public IEnumerable<string> GetRollNos()
+        {
+            return _repository.GetRollNos();
         }
     }
 }

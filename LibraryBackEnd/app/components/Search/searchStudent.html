@@ -1,0 +1,127 @@
+﻿<ol class="breadcrumb">
+    <li><a href="" ng-href="#!/home">Home</a></li>
+    <li class="active">Search For Students</li>
+</ol>
+
+<div class="page-header">
+    <h3>Search For Students</h3>
+</div>
+
+<div class="panel panel-primary" ng-init="searchCtrl.loadStudentData()">
+    <div class="panel-heading">
+        <h3 class="panel-title">Search For Students</h3>
+    </div>
+    <div class="panel-body">
+        <form name="createEdit" ng-submit="searchCtrl.searchStudents()" role="form" novalidate>
+
+            <div class="form-group col-md-3">
+                <label for="rollNo">Roll Number</label>
+                <input type="text"
+                       class="form-control"
+                       name="rollNo"
+                       placeholder="Enter Roll Number"
+                       ng-blur="searchCtrl.searchStudents()"
+                       ng-disabled="searchCtrl.searchStudentsBindingModel.fullName
+                                        || searchCtrl.searchStudentsBindingModel.course
+                                        || searchCtrl.searchStudentsBindingModel.role
+                                        || searchCtrl.searchStudentsBindingModel.status"
+                       ng-model="searchCtrl.searchStudentsBindingModel.rollNo"
+                       uib-typeahead="rollNo for rollNo in searchCtrl.rollNo | filter:$viewValue | limitTo:8"
+                       autocomplete="off" />
+            </div>
+            <div class="form-group col-md-3">
+                <label for="fullName">Full Name</label>
+                <input type="text"
+                       class="form-control"
+                       name="fullName"
+                       placeholder="Enter Full Name"
+                       ng-blur="searchCtrl.searchStudents()"
+                       ng-disabled="searchCtrl.searchStudentsBindingModel.rollNo
+                                        || searchCtrl.searchStudentsBindingModel.course
+                                        || searchCtrl.searchStudentsBindingModel.role
+                                        || searchCtrl.searchStudentsBindingModel.status"
+                       ng-model="searchCtrl.searchStudentsBindingModel.fullName"
+                       uib-typeahead="fullName for fullName in searchCtrl.fullName | filter:$viewValue | limitTo:8"
+                       autocomplete="off" />
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="course">Course</label>
+                <select class="form-control" name="course"
+                        ng-model="searchCtrl.searchStudentsBindingModel.course"
+                        ng-disabled="searchCtrl.searchStudentsBindingModel.fullName
+                                        || searchCtrl.searchStudentsBindingModel.rollNo
+                                        || searchCtrl.searchStudentsBindingModel.role
+                                        || searchCtrl.searchStudentsBindingModel.status"
+                        ng-options="course.name as course.name for course in  searchCtrl.courses"
+                        ng-change="searchCtrl.searchStudents()">
+                    <option value="">Select Course</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="role">Role</label>
+                <select class="form-control" name="role"
+                        ng-model="searchCtrl.searchStudentsBindingModel.role"
+                        ng-disabled="searchCtrl.searchStudentsBindingModel.fullName
+                                        || searchCtrl.searchStudentsBindingModel.course
+                                        || searchCtrl.searchStudentsBindingModel.rollNo
+                                        || searchCtrl.searchStudentsBindingModel.status"
+                        ng-options="role as role for role in  searchCtrl.role"
+                        ng-change="searchCtrl.searchStudents()">
+                    <option value="">Select Role</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="status">Status</label>
+                <select class="form-control" name="status"
+                        ng-model="searchCtrl.searchStudentsBindingModel.status"
+                        ng-disabled="searchCtrl.searchStudentsBindingModel.fullName
+                                        || searchCtrl.searchStudentsBindingModel.course
+                                        || searchCtrl.searchStudentsBindingModel.role
+                                        || searchCtrl.searchStudentsBindingModel.rollNo"
+                        ng-options="status as status for status in  searchCtrl.status"
+                        ng-change="searchCtrl.searchStudents()">
+                    <option value="">Select Status</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div ng-init="searchCtrl.config()">
+    <div class="panel panel-primary" ng-show="searchCtrl.students.length > 0">
+        <div class="panel-heading">
+            <h3 class="panel-title">Search Result</h3>
+        </div>
+        <div class="panel-body">
+            <table datatable="ng" dt-options="searchCtrl.dtOptions" dt-column-defs="searchCtrl.dtColumnDefs" class="table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Roll No</th>
+                        <th class="text-center">Full Name</th>
+                        <th class="text-center">Course</th>
+                        <th class="text-center">Book Issued</th>
+                        <th class="text-center">Admission Year</th>
+                        <th class="text-center">Email Confirmed</th>
+                        <th class="text-center">Role</th>
+                        <th class="text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="student in searchCtrl.students">
+                        <td>{{ student.rollNo }}</td>
+                        <td>{{ student.fullName}}</td>
+                        <td>{{ student.course }}</td>
+                        <td>{{ student.issueCount }}</td>
+                        <td>{{ student.yearOfAdmission }}</td>
+                        <td>{{ student.emailConfirmed }}</td>
+                        <td>{{ student.role }}</td>
+                        <td>{{ student.status }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

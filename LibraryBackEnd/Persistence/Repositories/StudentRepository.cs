@@ -1,4 +1,5 @@
 ﻿using LibraryBackEnd.Configuration;
+using LibraryBackEnd.Core.BindingModels;
 using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
 using System.Collections.Generic;
@@ -25,6 +26,27 @@ namespace LibraryBackEnd.Persistence.Repositories
         public ApplicationUser GetByUserName(string userName)
         {
             return _context.Users.Where(u => u.UserName == userName).SingleOrDefault();
+        }
+
+        public IEnumerable<string> GetFullName()
+        {
+            return _context.Users.Select(u => u.FullName).ToList();
+        }
+
+        public IEnumerable<string> GetRollNos()
+        {
+            return _context.Users.Select(u => u.RollNo).ToList();
+        }
+
+        public IEnumerable<ApplicationUser> GetSearchResults(SearchStudentBindingModel searchStudentBindingModel)
+        {
+            return _context.Users
+                .Where(u => u.FullName == searchStudentBindingModel.FullName
+                || u.Course == searchStudentBindingModel.Course
+                || u.Role == searchStudentBindingModel.Role
+                || u.RollNo == searchStudentBindingModel.RollNo
+                || u.Status == searchStudentBindingModel.Status)
+                .ToList();
         }
 
         public IEnumerable<ApplicationUser> GetStudentsByCourse(string courseName)

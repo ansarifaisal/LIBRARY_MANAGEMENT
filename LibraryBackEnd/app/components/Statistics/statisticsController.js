@@ -83,7 +83,6 @@
             if (me.booksInSubject.length > 0)
                 return;
             StatisticsFactory.getBooksInSubject().then(function (response) {
-
                 me.booksInSubject = response;
             });
         }

@@ -283,6 +283,7 @@
     <Compile Include="Core\BindingModels\IssueBookBindingModel.cs" />
     <Compile Include="Core\BindingModels\ResetPasswordBindModel.cs" />
     <Compile Include="Core\BindingModels\SearchBindingModel.cs" />
+    <Compile Include="Core\BindingModels\SearchStudentBindingModel.cs" />
     <Compile Include="Core\IRepositories\IAuthorRepository.cs" />
     <Compile Include="Core\IRepositories\IBookRepository.cs" />
     <Compile Include="Core\IRepositories\ICourseRepository.cs" />
@@ -510,6 +511,7 @@
     <Content Include="app\components\Search\searchController.js" />
     <Content Include="app\components\Search\search.html" />
     <Content Include="app\components\Search\searchFactory.js" />
+    <Content Include="app\components\Search\searchStudent.html" />
     <Content Include="app\components\Statistics\booksByCourse.html" />
     <Content Include="app\components\Statistics\booksBySubjects.html" />
     <Content Include="app\components\Statistics\booksBought.html" />

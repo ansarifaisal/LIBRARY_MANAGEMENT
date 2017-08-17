@@ -3,6 +3,7 @@
     "AppService",
     "BookFactory",
     "CourseFactory",
+    "UserFactory",
     "$scope",
     "$location",
     "$route",
@@ -13,7 +14,7 @@
     "$window",
     "DTOptionsBuilder",
     "DTColumnDefBuilder",
-    function (SearchFactory, AppService, BookFactory, CourseFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
+    function (SearchFactory, AppService, BookFactory, CourseFactory, UserFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
         toastr, $window, DTOptionsBuilder, DTColumnDefBuilder) {
 
         var me = this;
@@ -23,6 +24,11 @@
         me.searchBindingModel = {
             accessionNumber: '',
             title: ''
+        }
+
+        me.searchStudentsBindingModel = {
+            fullName: '',
+            rollNo: ''
         }
 
         me.loadData = function () {
@@ -35,6 +41,20 @@
             });
             BookFactory.getAccessionNumbers().then(function (accessionNumbers) {
                 me.accessionNumbers = accessionNumbers;
+            });
+        }
+
+        me.loadStudentData = function () {
+            CourseFactory.getCourses().then(function (courses) {
+                me.courses = courses;
+            });
+            me.status = UserFactory.getStatus();
+            me.role = UserFactory.getRoles();
+            SearchFactory.getFullName().then(function (fullName) {
+                me.fullName = fullName;
+            });
+            SearchFactory.getRollNo().then(function (rollNo) {
+                me.rollNo = rollNo;
             });
         }
 
@@ -82,5 +102,12 @@
             });
         }
 
+        me.searchStudents = function () {
+            SearchFactory.getStudentsSearchResults(me.searchStudentsBindingModel).then(function (students) {
+                me.students = students;
+            }, function (errorResponse) {
+                toastr.error("Error Fetching Data.");
+            });
+        }
     }
 ]);

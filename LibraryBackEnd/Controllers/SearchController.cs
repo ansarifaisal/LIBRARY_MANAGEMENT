@@ -9,10 +9,12 @@ namespace LibraryBackEnd.Controllers
     public class SearchController : ApiController
     {
         private IBookService _bookService;
+        private IStudentService _studentService;
 
-        public SearchController(IBookService bookService)
+        public SearchController(IBookService bookService, IStudentService studentService)
         {
             _bookService = bookService;
+            _studentService = studentService;
         }
 
         [Route("books")]
@@ -21,6 +23,30 @@ namespace LibraryBackEnd.Controllers
         {
             var books = _bookService.GetSearchResults(searchBindingModel);
             return Ok(books);
+        }
+
+        [Route("students")]
+        [HttpPost]
+        public IHttpActionResult GetStudentSearchResults(SearchStudentBindingModel searchStudentBindingModel)
+        {
+            var students = _studentService.GetSearchResults(searchStudentBindingModel);
+            return Ok(students);
+        }
+
+        [HttpGet]
+        [Route("fullNames")]
+        public IHttpActionResult GetFullName()
+        {
+            var fullNames = _studentService.GetFullName();
+            return Ok(fullNames);
+        }
+
+        [HttpGet]
+        [Route("rollNos")]
+        public IHttpActionResult GetRollNos()
+        {
+            var rollNos = _studentService.GetRollNos();
+            return Ok(rollNos);
         }
     }
 }
