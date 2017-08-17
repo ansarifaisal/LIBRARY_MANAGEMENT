@@ -1,6 +1,4 @@
-﻿/// <reference path="components/Books/addBookForm.html" />
-
-//Navigation routes
+﻿//Navigation routes
 
 window.routes = {
 
@@ -143,6 +141,15 @@ window.routes = {
         roles: ['ADMIN']
     },
 
+    '/user/get/:id': {
+
+        templateUrl: 'app/components/user/user.html',
+        controller: 'UserController',
+        controllerAs: 'userCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
+
     /**
      * Loading Publication Module
      */
@@ -208,6 +215,14 @@ window.routes = {
         controllerAs: 'bookCtrl',
         requireLogin: true,
         roles: ['ADMIN']
+    },
+
+    '/user/book/:id': {
+        templateUrl: 'app/components/books/book.html',
+        controller: 'BookController',
+        controllerAs: 'bookCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY']
     },
 
     /*

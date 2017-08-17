@@ -1,9 +1,10 @@
 ﻿using LibraryBackEnd.Core.Models;
+using System.Collections.Generic;
 
 namespace LibraryBackEnd.Core.IRepositories
 {
     public interface IReturnBookRepository : IGenericRepository<ReturnBook>
     {
-
+        IEnumerable<ReturnBook> GetReturnBook(string accessionNumber);
     }
 }

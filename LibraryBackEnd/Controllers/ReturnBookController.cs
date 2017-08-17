@@ -29,6 +29,12 @@ namespace LibraryBackEnd.Controllers
             return Ok(returnBooks);
         }
 
-
+        [HttpGet]
+        [Route("get")]
+        public IHttpActionResult GetReturnBook(string accessionNumber)
+        {
+            var returnBook = _returnBookService.GetReturnBook(accessionNumber);
+            return Ok(returnBook);
+        }
     }
 }

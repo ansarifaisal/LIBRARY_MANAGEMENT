@@ -2,6 +2,7 @@
     "BookFactory",
     "AppService",
     "CourseFactory",
+    "ReturnBookFactory",
     "$scope",
     "$location",
     "$route",
@@ -12,7 +13,7 @@
     "DTOptionsBuilder",
     "DTColumnDefBuilder",
     "$window",
-    function (BookFactory, AppService, CourseFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
+    function (BookFactory, AppService, CourseFactory, ReturnBookFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
         toastr, DTOptionsBuilder, DTColumnDefBuilder, $window) {
 
 
@@ -238,6 +239,58 @@
                 toastr.error(addOrEdit.errorMessage);
             }).finally(function () {
                 $rootScope.isBusy = false;
+            });
+        }
+
+        me.getBookData = function () {
+            var id = $routeParams.id;
+            BookFactory.getBook(id).then(function (book) {
+                me.book = book;
+                me.getIssuedData(me.book.accessionNumber);
+            }, function (errorResponse) {
+                toastr.error("Error loading data");
+            });
+
+            me.dtOptions = DTOptionsBuilder.newOptions()
+            .withBootstrap()
+            .withPaginationType('full_numbers')
+            .withDOM('Bfrtip')
+            .withButtons([
+                 {
+                     extend: 'copy',
+                     className: 'btn btn-default',
+                     text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
+                     exportOptions: {
+                         columns: ':not(:last-child)'
+                     }
+                 },
+                 {
+                     extend: 'print',
+                     className: 'btn btn-default',
+                     text: "<i class='fa fa-print fa-lg'></i> Print",
+                     exportOptions: {
+                         columns: ':not(:last-child)'
+                     }
+                 },
+                 {
+                     extend: 'excel',
+                     className: 'btn btn-default ',
+                     text: "<i class='fa fa-file-excel-o fa-lg'></i> Excel",
+                     exportOptions: {
+                         columns: ':not(:last-child)'
+                     }
+                 }
+            ]);
+            me.dtColumnDefs = [
+                //DTColumnDefBuilder.newColumnDef(21).notSortable(),
+            ];
+
+        }
+
+        me.getIssuedData = function (accessionNumber) {
+            ReturnBookFactory.getReturnBook(accessionNumber).then(function (issued) {
+                me.issued = issued;
+                console.log(me.issued);
             });
         }
 

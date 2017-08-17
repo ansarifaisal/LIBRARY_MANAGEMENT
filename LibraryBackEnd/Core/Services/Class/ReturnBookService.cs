@@ -1,6 +1,7 @@
 ﻿using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
 using LibraryBackEnd.Core.Services.Interface;
+using System.Collections.Generic;
 
 namespace LibraryBackEnd.Core.Services.Class
 {
@@ -11,6 +12,11 @@ namespace LibraryBackEnd.Core.Services.Class
             : base(repository, unitOfWork)
         {
             _repository = repository;
+        }
+
+        public IEnumerable<ReturnBook> GetReturnBook(string accessionNumber)
+        {
+            return _repository.GetReturnBook(accessionNumber);
         }
     }
 }

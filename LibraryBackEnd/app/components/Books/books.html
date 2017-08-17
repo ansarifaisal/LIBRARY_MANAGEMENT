@@ -1,4 +1,5 @@
-﻿<div ng-init="bookCtrl.getBooks()">
+﻿
+<div ng-init="bookCtrl.getBooks()">
     <ol class="breadcrumb">
         <li><a href="" ng-href="#!/home">Home</a></li>
         <li class="active">Books</li>
@@ -35,7 +36,7 @@
             <tr ng-repeat="book in bookCtrl.books">
                 <td>{{ book.date | date: "EEE MMM, dd yyyy"}}</td>
                 <td>{{ book.accessionNumber }}</td>
-                <td>{{ book.title }}</td>
+                <td><a href="" ng-href="#!/user/book/{{book.id}}">{{ book.title }}</a></td>
                 <td>{{ book.pages }}</td>
                 <td>{{ book.author }}</td>
                 <td>{{ book.publisher }}</td>

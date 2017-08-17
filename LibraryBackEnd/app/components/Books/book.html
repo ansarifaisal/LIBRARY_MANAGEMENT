@@ -1,0 +1,208 @@
+﻿<div ng-init="bookCtrl.getBookData()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li><a href="" ng-href="#!/admin/books">Books</a></li>
+        <li class="active">{{bookCtrl.book.title}}</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>{{bookCtrl.book.title}}</h3>
+    </div>
+
+    <div ng-show="bookCtrl.book.status == 'Lost'">
+        <div class="alert alert-danger">
+            <div class="text-center">
+                <strong>This book is lost.</strong>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="bookCtrl.book.status == 'Replace'">
+        <div class="alert alert-success">
+            <div class="text-center">
+                <strong>This book is replaced by bookLink.</strong>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="user.role != 'STUDENT' && user.role != 'FACULTY'">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Book Details</h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-hover">
+                    <tr>
+                        <td><strong>Added On</strong></td>
+                        <td>{{bookCtrl.book.date | date: "EEE MMM, dd yyyy"}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Accession Number</strong></td>
+                        <td>{{bookCtrl.book.accessionNumber}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Book Title</strong></td>
+                        <td>{{bookCtrl.book.title}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pages</strong></td>
+                        <td>{{bookCtrl.book.pages}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Author</strong></td>
+                        <td>{{bookCtrl.book.author}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Publisher</strong></td>
+                        <td>{{bookCtrl.book.publisher}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Place Of Publication</strong></td>
+                        <td>{{bookCtrl.book.placeOfPublication}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Date Of Publication</strong></td>
+                        <td>{{bookCtrl.book.dateOfPublication | date: "MMM, yyyy"}}</td>
+                    <tr>
+                        <td><strong>Course</strong></td>
+                        <td>{{bookCtrl.book.course}}</td>
+                    <tr>
+                        <td><strong>Semester</strong></td>
+                        <td>{{bookCtrl.book.semester}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Subject</strong></td>
+                        <td>{{bookCtrl.book.subject}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Type Of Book</strong></td>
+                        <td>{{bookCtrl.book.typeOfBook}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Source</strong></td>
+                        <td>{{bookCtrl.book.source}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Edition</strong></td>
+                        <td>{{bookCtrl.book.edition}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Class No</strong></td>
+                        <td>{{bookCtrl.book.classNo}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Actual Price</strong></td>
+                        <td><i class="fa fa-inr" aria-hidden="true"></i> {{bookCtrl.book.actualPrice}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discount</strong></td>
+                        <td>{{bookCtrl.book.discount}}%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discount Price</strong></td>
+                        <td><i class="fa fa-inr" aria-hidden="true"></i> {{bookCtrl.book.discountPrice}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bill Number</strong></td>
+                        <td>{{bookCtrl.book.billNo}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bill Date</strong></td>
+                        <td>{{bookCtrl.book.billDate | date: "EEE MMM, dd yyyy"}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Status</strong></td>
+                        <td ng-class="{'text-danger': bookCtrl.book.status == 'Lost'}">
+                            <strong>{{bookCtrl.book.status}}</strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Issue Details</h3>
+            </div>
+            <div class="panel-body">
+                <table datatable="ng" dt-options="bookCtrl.dtOptions" dt-column-defs="bookCtrl.dtColumnDefs" class="table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Issue Date</th>
+                            <th class="text-center">Return Date</th>
+                            <th class="text-center">Actual Return Date</th>
+                            <th class="text-center">Roll No</th>
+                            <th class="text-center">Borrower</th>
+                            <th class="text-center">Course</th>
+                            <th class="text-center">Fine</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="issue in bookCtrl.issued">
+                            <td>{{ issue.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
+                            <td>{{ issue.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                            <td>{{ issue.actualReturnDate | date: "EEE MMM, dd yyyy"}}</td>
+                            <td>{{ issue.rollNo }}</td>
+                            <td>{{ issue.fullName }}</td>
+                            <td>{{ issue.course }}</td>
+                            <td>{{ issue.fine }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-show="user.role == 'STUDENT' && user.role == 'FACULTY'">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Book Details</h3>
+        </div>
+        <div class="panel-body">
+
+            <table class="table table-hover">
+                <tr>
+                    <td><strong>Book Title</strong></td>
+                    <td>{{bookCtrl.book.title}}</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Author(s)</strong></td>
+                    <td>{{bookCtrl.book.author}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Publisher</strong></td>
+                    <td>{{bookCtrl.book.publisher}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Course</strong></td>
+                    <td>{{bookCtrl.book.course}}</td>
+                <tr>
+                    <td><strong>Semester</strong></td>
+                    <td>{{bookCtrl.book.semester}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Subject</strong></td>
+                    <td>{{bookCtrl.book.subject}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Type Of Book</strong></td>
+                    <td>{{bookCtrl.book.typeOfBook}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Edition</strong></td>
+                    <td>{{bookCtrl.book.edition}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Status</strong></td>
+                    <td ng-class="{'text-danger': bookCtrl.book.status == 'Lost'}">
+                        <strong>{{bookCtrl.book.status}}</strong>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>

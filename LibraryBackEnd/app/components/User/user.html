@@ -1,0 +1,66 @@
+﻿<div ng-init="userCtrl.getUserByRollNo()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li><a href="" ng-href="#!/admin/students">Students</a></li>
+        <li class="active">{{userCtrl.user.fullName}}</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>User Details</h3>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Book Details</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <tr>
+                    <td><strong>Roll No</strong></td>
+                    <td>{{userCtrl.user.rollNo}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Full Name</strong></td>
+                    <td>{{userCtrl.user.fullName}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Course</strong></td>
+                    <td>{{userCtrl.user.course}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Issue Count</strong></td>
+                    <td>{{userCtrl.user.issueCount}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Year Of Admission</strong></td>
+                    <td>{{userCtrl.user.yearOfAdmission}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Email</strong></td>
+                    <td>{{userCtrl.user.email}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Email Confirmed</strong></td>
+                    <td>{{userCtrl.user.emailConfirmed}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Role</strong></td>
+                    <td>{{userCtrl.user.role}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Status</strong></td>
+                    <td>{{userCtrl.user.status}}</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Book Issue Details</h3>
+        </div>
+        <div class="panel-body">
+
+        </div>
+    </div>
+</div>

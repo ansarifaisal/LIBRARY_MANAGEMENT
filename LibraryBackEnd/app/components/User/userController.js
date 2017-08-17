@@ -220,5 +220,12 @@
             });
         }
 
+        me.getUserByRollNo = function () {
+            var rollNo = $routeParams.id;
+            UserFactory.getStudentByRollNo(rollNo).then(function (user) {
+                me.user = user;
+            });
+        }
+
     }
 ]);

@@ -471,6 +471,7 @@
     <Content Include="app\components\Authors\authorModalController.js" />
     <Content Include="app\components\Authors\authors.html" />
     <Content Include="app\components\Authors\deleteAuthor.html" />
+    <Content Include="app\components\Books\book.html" />
     <Content Include="app\components\Books\bookController.js" />
     <Content Include="app\components\Books\bookFactory.js" />
     <Content Include="app\components\Books\addBookForm.html" />

@@ -5,13 +5,25 @@ ReturnBookModule.factory("ReturnBookFactory", [
     "$http",
     function ($q, $http) {
         var returnBookFactory = {
-            getReturnBooks: getReturnBook
+            getReturnBooks: getReturnBooks,
+            getReturnBook: getReturnBook
         }
         return returnBookFactory;
 
-        function getReturnBook() {
+        function getReturnBooks() {
             var deferred = $q.defer();
             $http.get("/api/returnBook/all").then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                console.log(errorResponse);
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function getReturnBook(accessionNumber) {
+            var deferred = $q.defer();
+            $http.get("/api/returnBook/get?accessionNumber=" + accessionNumber).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
                 console.log(errorResponse);
