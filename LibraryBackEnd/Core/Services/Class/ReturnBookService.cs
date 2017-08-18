@@ -14,6 +14,11 @@ namespace LibraryBackEnd.Core.Services.Class
             _repository = repository;
         }
 
+        public IEnumerable<ReturnBook> GetByRollNo(string rollNo)
+        {
+            return _repository.GetByRollNo(rollNo);
+        }
+
         public IEnumerable<ReturnBook> GetReturnBook(string accessionNumber)
         {
             return _repository.GetReturnBook(accessionNumber);

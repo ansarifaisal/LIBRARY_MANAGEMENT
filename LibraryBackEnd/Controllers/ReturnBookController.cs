@@ -36,5 +36,13 @@ namespace LibraryBackEnd.Controllers
             var returnBook = _returnBookService.GetReturnBook(accessionNumber);
             return Ok(returnBook);
         }
+
+        [HttpGet]
+        [Route("getByRollNo")]
+        public IHttpActionResult GetByRollNo(string rollNo)
+        {
+            var returnBook = _returnBookService.GetByRollNo(rollNo);
+            return Ok(returnBook);
+        }
     }
 }

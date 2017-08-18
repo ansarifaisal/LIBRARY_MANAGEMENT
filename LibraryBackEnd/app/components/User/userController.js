@@ -2,6 +2,7 @@
     "UserFactory",
     "AppService",
     "AuthenticationFactory",
+    "ReturnBookFactory",
     "$scope",
     "$location",
     "$route",
@@ -11,7 +12,7 @@
     "toastr",
     "DTOptionsBuilder",
     "DTColumnDefBuilder",
-    function (UserFactory, AppService, AuthenticationFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
+    function (UserFactory, AppService, AuthenticationFactory, ReturnBookFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
         toastr, DTOptionsBuilder, DTColumnDefBuilder) {
 
         var me = this;
@@ -224,7 +225,53 @@
             var rollNo = $routeParams.id;
             UserFactory.getStudentByRollNo(rollNo).then(function (user) {
                 me.user = user;
+                me.getUserData(me.user.rollNo);
             });
+
+            me.dtOptions = DTOptionsBuilder.newOptions()
+           .withBootstrap()
+           .withPaginationType('full_numbers')
+           .withDOM('Bfrtip')
+           .withButtons([
+                {
+                    extend: 'copy',
+                    className: 'btn btn-default',
+                    text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'print',
+                    className: 'btn btn-default',
+                    text: "<i class='fa fa-print fa-lg'></i> Print",
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                },
+                {
+                    extend: 'excel',
+                    className: 'btn btn-default ',
+                    text: "<i class='fa fa-file-excel-o fa-lg'></i> Excel",
+                    exportOptions: {
+                        columns: ':not(:last-child)'
+                    }
+                }
+           ]);
+            me.dtColumnDefs = [
+                //DTColumnDefBuilder.newColumnDef(21).notSortable(),
+            ];
+
+
+        }
+
+        me.getUserData = function (rollNo) {
+            ReturnBookFactory.getByRollNo(rollNo).then(function (issued) {
+                me.issued = issued;
+            }, function (errorResponse) {
+                toastr.error("Error while loading user data");
+            });
+
         }
 
     }

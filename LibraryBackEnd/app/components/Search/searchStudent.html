@@ -111,7 +111,7 @@
                 <tbody>
                     <tr ng-repeat="student in searchCtrl.students">
                         <td>{{ student.rollNo }}</td>
-                        <td>{{ student.fullName}}</td>
+                        <td><a href="" ng-href="#!/user/get/{{student.rollNo}}">{{ student.fullName}}</a></td>
                         <td>{{ student.course }}</td>
                         <td>{{ student.issueCount }}</td>
                         <td>{{ student.yearOfAdmission }}</td>

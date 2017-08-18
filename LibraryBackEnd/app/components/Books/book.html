@@ -26,6 +26,17 @@
     </div>
 
     <div ng-show="user.role != 'STUDENT' && user.role != 'FACULTY'">
+        <div class="panel panel-default panel-body">
+            <table class="table">
+                <tr>
+                    <td>Actions</td>
+                    <td>
+                        <a href="" ng-click="bookCtrl.showEditBookForm(bookCtrl.book.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
+                        <a href="" ng-click="bookCtrl.deleteBookModal(bookCtrl.book.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Book Details</h3>
@@ -144,7 +155,7 @@
                             <td>{{ issue.returnDate | date: "EEE MMM, dd yyyy"}}</td>
                             <td>{{ issue.actualReturnDate | date: "EEE MMM, dd yyyy"}}</td>
                             <td>{{ issue.rollNo }}</td>
-                            <td>{{ issue.fullName }}</td>
+                            <td><a href="" ng-href="#!/user/get/{{issue.rollNo}}">{{ issue.fullName }}</a></td>
                             <td>{{ issue.course }}</td>
                             <td>{{ issue.fine }}</td>
                         </tr>

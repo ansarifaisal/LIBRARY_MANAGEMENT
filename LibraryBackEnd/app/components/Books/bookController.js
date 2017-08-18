@@ -290,7 +290,6 @@
         me.getIssuedData = function (accessionNumber) {
             ReturnBookFactory.getReturnBook(accessionNumber).then(function (issued) {
                 me.issued = issued;
-                console.log(me.issued);
             });
         }
 

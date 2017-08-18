@@ -6,7 +6,8 @@ ReturnBookModule.factory("ReturnBookFactory", [
     function ($q, $http) {
         var returnBookFactory = {
             getReturnBooks: getReturnBooks,
-            getReturnBook: getReturnBook
+            getReturnBook: getReturnBook,
+            getByRollNo: getByRollNo
         }
         return returnBookFactory;
 
@@ -15,7 +16,6 @@ ReturnBookModule.factory("ReturnBookFactory", [
             $http.get("/api/returnBook/all").then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
-                console.log(errorResponse);
                 deferred.reject(errorResponse);
             });
             return deferred.promise;
@@ -26,7 +26,16 @@ ReturnBookModule.factory("ReturnBookFactory", [
             $http.get("/api/returnBook/get?accessionNumber=" + accessionNumber).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
-                console.log(errorResponse);
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function getByRollNo(rollNo) {
+            var deferred = $q.defer();
+            $http.get("/api/returnBook/getByRollNo?rollNo=" + rollNo).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
                 deferred.reject(errorResponse);
             });
             return deferred.promise;

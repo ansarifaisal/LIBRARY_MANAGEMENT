@@ -6,5 +6,6 @@ namespace LibraryBackEnd.Core.IRepositories
     public interface IReturnBookRepository : IGenericRepository<ReturnBook>
     {
         IEnumerable<ReturnBook> GetReturnBook(string accessionNumber);
+        IEnumerable<ReturnBook> GetByRollNo(string rollNo);
     }
 }

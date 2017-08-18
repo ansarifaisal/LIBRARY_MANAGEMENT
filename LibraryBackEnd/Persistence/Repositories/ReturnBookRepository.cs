@@ -16,6 +16,13 @@ namespace LibraryBackEnd.Persistence.Repositories
             _context = context;
         }
 
+        public IEnumerable<ReturnBook> GetByRollNo(string rollNo)
+        {
+            return _context.ReturnBooks
+                .Where(r => r.RollNo == rollNo)
+                .ToList();
+        }
+
         public IEnumerable<ReturnBook> GetReturnBook(string accessionNumber)
         {
             return _context.ReturnBooks

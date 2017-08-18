@@ -60,7 +60,34 @@
             <h3 class="panel-title">Book Issue Details</h3>
         </div>
         <div class="panel-body">
-
+            <table datatable="ng" dt-options="userCtrl.dtOptions" dt-column-defs="userCtrl.dtColumnDefs" class="table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Accession Number</th>
+                        <th class="text-center">Title</th>
+                        <th class="text-center">Issue Date</th>
+                        <th class="text-center">Return Date</th>
+                        <th class="text-center">Actual Return Date</th>
+                        <th class="text-center">Roll No</th>
+                        <th class="text-center">Borrower</th>
+                        <th class="text-center">Course</th>
+                        <th class="text-center">Fine</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="issue in userCtrl.issued">
+                        <td>{{ issue.accessionNumber }}</td>
+                        <td><a href="" ng-href="#!/user/book/{{issue.id}}">{{ issue.bookTitle }}</a></td>
+                        <td>{{ issue.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
+                        <td>{{ issue.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                        <td>{{ issue.actualReturnDate | date: "EEE MMM, dd yyyy"}}</td>
+                        <td>{{ issue.rollNo }}</td>
+                        <td>{{ issue.fullName }}</td>
+                        <td>{{ issue.course }}</td>
+                        <td>{{ issue.fine }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

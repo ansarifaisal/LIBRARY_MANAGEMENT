@@ -97,7 +97,7 @@
                     <tbody>
                         <tr ng-repeat="book in searchCtrl.books">
                             <td>{{ book.accessionNumber }}</td>
-                            <td>{{ book.title }}</td>
+                            <td><a href="" ng-href="#!/user/book/{{book.id}}">{{ book.title }}</a></td>
                             <td>{{ book.author }}</td>
                             <td>{{ book.publisher }}</td>
                             <td>{{ book.course }}</td>
