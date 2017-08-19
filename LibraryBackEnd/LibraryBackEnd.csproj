@@ -271,6 +271,7 @@
     <Compile Include="Controllers\IssueBookController.cs" />
     <Compile Include="Controllers\LostOrReplaceController.cs" />
     <Compile Include="Controllers\PublicationController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\ReturnBookController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
@@ -289,6 +290,7 @@
     <Compile Include="Core\IRepositories\ICourseRepository.cs" />
     <Compile Include="Core\IRepositories\IIssueBookRepository.cs" />
     <Compile Include="Core\IRepositories\ILostOrReplaceRepository.cs" />
+    <Compile Include="Core\IRepositories\IRequestRepository.cs" />
     <Compile Include="Core\IRepositories\IReturnBookRepository.cs" />
     <Compile Include="Core\IRepositories\ISubjectRepository.cs" />
     <Compile Include="Core\Models\Author.cs" />
@@ -296,6 +298,7 @@
     <Compile Include="Core\Models\Course.cs" />
     <Compile Include="Core\Models\IssueBook.cs" />
     <Compile Include="Core\Models\LostOrReplace.cs" />
+    <Compile Include="Core\Models\Request.cs" />
     <Compile Include="Core\Models\ReturnBook.cs" />
     <Compile Include="Core\Models\Subject.cs" />
     <Compile Include="Core\Services\Class\AuthorService.cs" />
@@ -304,6 +307,7 @@
     <Compile Include="Core\Services\Class\EntityService.cs" />
     <Compile Include="Core\Services\Class\IssueBookService.cs" />
     <Compile Include="Core\Services\Class\LostOrReplaceService.cs" />
+    <Compile Include="Core\Services\Class\RequestService.cs" />
     <Compile Include="Core\Services\Class\ReturnBookService.cs" />
     <Compile Include="Core\Services\Class\SubjectService.cs" />
     <Compile Include="Core\Services\Interface\IAuthorService.cs" />
@@ -314,6 +318,7 @@
     <Compile Include="Core\Services\Interface\IPublicationService.cs" />
     <Compile Include="Core\Services\Class\PublicationService.cs" />
     <Compile Include="Core\Services\Class\StudentService.cs" />
+    <Compile Include="Core\Services\Interface\IRequestService.cs" />
     <Compile Include="Core\Services\Interface\IReturnBookService.cs" />
     <Compile Include="Core\Services\Interface\ISendEmailService.cs" />
     <Compile Include="Core\Services\Interface\IEntityService.cs" />
@@ -421,6 +426,10 @@
     <Compile Include="Persistence\Migrations\201708141423468_addLostModule.Designer.cs">
       <DependentUpon>201708141423468_addLostModule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708191905462_addRequestModule.cs" />
+    <Compile Include="Persistence\Migrations\201708191905462_addRequestModule.Designer.cs">
+      <DependentUpon>201708191905462_addRequestModule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -439,6 +448,7 @@
     <Compile Include="Persistence\Repositories\IssueBookRepository.cs" />
     <Compile Include="Persistence\Repositories\LostOrReplaceRepository.cs" />
     <Compile Include="Persistence\Repositories\PublicationRepository.cs" />
+    <Compile Include="Persistence\Repositories\RequestRepository.cs" />
     <Compile Include="Persistence\Repositories\ReturnBookRepository.cs" />
     <Compile Include="Persistence\Repositories\StudentRepository.cs" />
     <Compile Include="Persistence\Repositories\SubjectRepository.cs" />
@@ -506,6 +516,9 @@
     <Content Include="app\components\Publications\publicationController.js" />
     <Content Include="app\components\Publications\publicationFactory.js" />
     <Content Include="app\components\Publications\publicationForm.html" />
+    <Content Include="app\components\Requests\requestController.js" />
+    <Content Include="app\components\Requests\requestFactory.js" />
+    <Content Include="app\components\Requests\requests.html" />
     <Content Include="app\components\ReturnBook\returnBookController.js" />
     <Content Include="app\components\ReturnBook\returnBookFactory.js" />
     <Content Include="app\components\ReturnBook\returnBooks.html" />
@@ -535,6 +548,7 @@
     <Content Include="app\components\User\home.html" />
     <Content Include="app\components\User\librarians.html" />
     <Content Include="app\components\User\moreDetails.html" />
+    <Content Include="app\components\User\settings.html" />
     <Content Include="app\components\User\students.html" />
     <Content Include="app\components\User\user.html" />
     <Content Include="app\components\User\userController.js" />
@@ -695,6 +709,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708141423468_addLostModule.resx">
       <DependentUpon>201708141423468_addLostModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708191905462_addRequestModule.resx">
+      <DependentUpon>201708191905462_addRequestModule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

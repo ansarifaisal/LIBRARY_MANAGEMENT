@@ -108,7 +108,7 @@
                     }
                 ]);
             me.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(4).notSortable(),
+                DTColumnDefBuilder.newColumnDef(3).notSortable(),
             ];
 
             CourseFactory.getCourses().then(function (courses) {

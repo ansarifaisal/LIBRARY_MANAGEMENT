@@ -12,18 +12,16 @@
     <table datatable="ng" dt-options="publicationCtrl.dtOptions" dt-column-defs="publicationCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>
-                <th class="text-center">ID</th>
                 <th class="text-center">FirstName</th>
                 <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="publication in publicationCtrl.publications">
-                <td>{{ publication.id }}</td>
                 <td>{{ publication.name}}</td>
                 <td class="text-center">
-                    <a href="" ng-click="publicationCtrl.getPublication(publication.id)" class="btn btn-warning"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-                    <a href="" ng-click="publicationCtrl.deletePublicationModal(publication.id)" class="btn btn-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                    <a href="" ng-click="publicationCtrl.getPublication(publication.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                    <a href="" ng-click="publicationCtrl.deletePublicationModal(publication.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
                 </td>
             </tr>
         </tbody>

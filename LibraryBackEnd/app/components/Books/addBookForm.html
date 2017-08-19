@@ -14,7 +14,7 @@
 
                     <!-- Accession Number Field Starts Here -->
                     <div class="form-group" ng-class="{'has-error has-feedback': createEdit.accessionNumber.$invalid && createEdit.accessionNumber.$touched
-                             || createEdit.accessionNumber.$invalid && createEdit.$submitted,
+                             || createEdit.accessionNumber.$invalid && createEdit.$submitted || bookCtrl.exists,
                              'has-success has-feedback': createEdit.accessionNumber.$valid || createEdit.accessionNumber.$valid
                              && createEdit.$submitted}">
 
@@ -22,17 +22,19 @@
                         <input type="text" class="form-control"
                                name="accessionNumber"
                                placeholder="Enter Accession Number"
+                               ng-blur="bookCtrl.getByAccessionNumber(bookCtrl.bookForm.book.accessionNumber)"
                                ng-model="bookCtrl.bookForm.book.accessionNumber"
                                required />
 
                         <span class="glyphicon form-control-feedback"
                               ng-class="{'glyphicon-ok': createEdit.accessionNumber.$valid || createEdit.accessionNumber.$valid && createEdit.$submitted,
                           'glyphicon-remove': createEdit.accessionNumber.$invalid && createEdit.accessionNumber.$touched
-                           || createEdit.accessionNumber.$invalid && createEdit.$submitted}">
+                           || createEdit.accessionNumber.$invalid && createEdit.$submitted || bookCtrl.exists}">
                         </span>
 
-                        <div ng-show="createEdit.accessionNumber.$invalid && createEdit.accessionNumber.$touched || createEdit.$submitted">
+                        <div ng-show="createEdit.accessionNumber.$invalid && createEdit.accessionNumber.$touched || createEdit.$submitted || bookCtrl.exists">
                             <span ng-show="createEdit.accessionNumber.$error.required" class="text-danger small">Please, provide accession number.</span>
+                            <span ng-show="bookCtrl.exists" class="text-danger small">Accession number is already exists.</span>
                         </div>
 
                     </div>

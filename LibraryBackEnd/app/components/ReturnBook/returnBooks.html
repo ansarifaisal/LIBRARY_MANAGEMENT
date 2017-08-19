@@ -1,43 +1,70 @@
-﻿<div ng-init="returnBookCtrl.getReturnBooks()">
-    <ol class="breadcrumb">
-        <li><a href="" ng-href="#!/home">Home</a></li>
-        <li class="active">Returned Books</li>
-    </ol>
+﻿<ol class="breadcrumb">
+    <li><a href="" ng-href="#!/home">Home</a></li>
+    <li class="active">Returned Books</li>
+</ol>
 
-    <div class="page-header">
-        <h3>Returned Books</h3>
+<div class="page-header">
+    <h3>Returned Books</h3>
+</div>
+<div ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
+    <div ng-init="returnBookCtrl.getReturnBooks()">
+        <table datatable="ng" dt-options="returnBookCtrl.dtOptions" dt-column-defs="returnBookCtrl.dtColumnDefs" class="table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">Accession Number</th>
+                    <th class="text-center">Title</th>
+                    <th class="text-center">Issue Date</th>
+                    <th class="text-center">Return Date</th>
+                    <th class="text-center">Roll No</th>
+                    <th class="text-center">Borrower</th>
+                    <th class="text-center">Course</th>
+                    <th class="text-center">Fine</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="returnBook in returnBookCtrl.returnBooks">
+                    <td>{{ returnBook.accessionNumber }}</td>
+                    <td>{{ returnBook.bookTitle }}</td>
+                    <td>{{ returnBook.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
+                    <td>{{ returnBook.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                    <td>{{ returnBook.rollNo }}</td>
+                    <td>{{ returnBook.fullName }}</td>
+                    <td>{{ returnBook.course }}</td>
+                    <td>{{ returnBook.fine }}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
 
-    <table datatable="ng" dt-options="returnBookCtrl.dtOptions" dt-column-defs="returnBookCtrl.dtColumnDefs" class="table-condensed table-hover">
-        <thead>
-            <tr>
-                <th class="text-center">Accession Number</th>
-                <th class="text-center">Title</th>
-                <th class="text-center">Issue Date</th>
-                <th class="text-center">Return Date</th>
-                <th class="text-center">Roll No</th>
-                <th class="text-center">Borrower</th>
-                <th class="text-center">Course</th>
-                <th class="text-center">Fine</th>
-                <!--<th class="text-center">Action</th>-->
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="returnBook in returnBookCtrl.returnBooks">
-                <td>{{ returnBook.accessionNumber }}</td>
-                <td>{{ returnBook.bookTitle }}</td>
-                <td>{{ returnBook.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
-                <td>{{ returnBook.returnDate | date: "EEE MMM, dd yyyy"}}</td>
-                <td>{{ returnBook.rollNo }}</td>
-                <td>{{ returnBook.fullName }}</td>
-                <td>{{ returnBook.course }}</td>
-                <td>{{ returnBook.fine }}</td>
-                <!--<td class="text-center">
-                    <a href="" ng-click="returnBookCtrl.showEditIssueBookForm(returnBook.id)" class="btn btn-warning"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-                    <a href="" ng-click="returnBookCtrl.confirmReturnBook(returnBook.id)" class="btn btn-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
-                </td>-->
-            </tr>
-        </tbody>
-    </table>
+<div ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
 
+    <div ng-init="returnBookCtrl.getByRollNumber()">
+        <table datatable="ng" dt-options="returnBookCtrl.dtOptions" dt-column-defs="returnBookCtrl.dtColumnDefs" class="table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">Accession Number</th>
+                    <th class="text-center">Title</th>
+                    <th class="text-center">Issue Date</th>
+                    <th class="text-center">Return Date</th>
+                    <th class="text-center">Roll No</th>
+                    <th class="text-center">Borrower</th>
+                    <th class="text-center">Course</th>
+                    <th class="text-center">Fine</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="returnBook in returnBookCtrl.returnBooks">
+                    <td>{{ returnBook.accessionNumber }}</td>
+                    <td>{{ returnBook.bookTitle }}</td>
+                    <td>{{ returnBook.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
+                    <td>{{ returnBook.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                    <td>{{ returnBook.rollNo }}</td>
+                    <td>{{ returnBook.fullName }}</td>
+                    <td>{{ returnBook.course }}</td>
+                    <td>{{ returnBook.fine }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

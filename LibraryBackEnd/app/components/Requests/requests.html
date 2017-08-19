@@ -1,0 +1,48 @@
+﻿<div ng-init="requestCtrl.getRequests()">
+
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li class="active">Requests</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Requests</h3>
+    </div>
+
+    <table datatable="ng" dt-options="requestCtrl.dtOptions" dt-column-defs="requestCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Title</th>
+                <th class="text-center">Author</th>
+                <th class="text-center">Publication</th>
+                <th class="text-center">Course</th>
+                <th class="text-center">Semester</th>
+                <th class="text-center">Roll No</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Student Coruse</th>
+                <th class="text-center">Date</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="request in requestCtrl.requests">
+                <td>{{ request.title}}</td>
+                <td>{{ request.author}}</td>
+                <td>{{ request.publication}}</td>
+                <td>{{ request.bookCourse}}</td>
+                <td>{{ request.semester}}</td>
+                <td>{{ request.rollNo}}</td>
+                <td>{{ request.name}}</td>
+                <td>{{ request.studentCourse}}</td>
+                <td>{{ request.date}}</td>
+                <td>{{ request.status}}</td>
+                <td class="text-center">
+                    <a href="" ng-click="requestCntrl.getRequest(request.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                    <a href="" ng-click="requestCtrl.deleteRequestModal(request.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

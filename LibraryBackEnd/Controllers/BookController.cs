@@ -96,5 +96,13 @@ namespace LibraryBackEnd.Controllers
             return Ok(accessionNumbers);
         }
 
+        [HttpGet]
+        [Route("booksByCourse")]
+        public IHttpActionResult GetBooksByCourse(string course)
+        {
+            var books = _bookService.GetDistinctBooksByCourse(course);
+            return Ok(books);
+        }
+
     }
 }

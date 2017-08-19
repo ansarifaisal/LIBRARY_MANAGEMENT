@@ -11,7 +11,7 @@
     <table datatable="ng" dt-options="subjectCtrl.dtOptions" dt-column-defs="subjectCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>
-                <th class="text-center">ID</th>
+
                 <th class="text-center">Subject</th>
                 <th class="text-center">Course</th>
                 <th class="text-center">Semester</th>
@@ -20,13 +20,13 @@
         </thead>
         <tbody>
             <tr ng-repeat="subject in subjectCtrl.subjects">
-                <td>{{ subject.id }}</td>
+
                 <td>{{ subject.name }}</td>
                 <td>{{ subject.courseName }}</td>
                 <td>{{ subject.semester }}</td>
                 <td class="text-center">
-                    <a href="" ng-click="subjectCtrl.getSubject(subject.id)" class="btn btn-warning"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
-                    <a href="" ng-click="subjectCtrl.deleteSubjectModal(subject.id)" class="btn btn-danger"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                    <a href="" ng-click="subjectCtrl.getSubject(subject.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                    <a href="" ng-click="subjectCtrl.deleteSubjectModal(subject.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
                 </td>
             </tr>
         </tbody>

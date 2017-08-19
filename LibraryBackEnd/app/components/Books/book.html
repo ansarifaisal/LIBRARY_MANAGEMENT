@@ -1,7 +1,7 @@
 ﻿<div ng-init="bookCtrl.getBookData()">
     <ol class="breadcrumb">
         <li><a href="" ng-href="#!/home">Home</a></li>
-        <li><a href="" ng-href="#!/admin/books">Books</a></li>
+        <li><a href="" ng-href="#!/user/books">Books</a></li>
         <li class="active">{{bookCtrl.book.title}}</li>
     </ol>
 
@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div ng-show="user.role != 'STUDENT' && user.role != 'FACULTY'">
+    <div ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
         <div class="panel panel-default panel-body">
             <table class="table">
                 <tr>
@@ -166,7 +166,7 @@
     </div>
 </div>
 
-<div ng-show="user.role == 'STUDENT' && user.role == 'FACULTY'">
+<div ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Book Details</h3>

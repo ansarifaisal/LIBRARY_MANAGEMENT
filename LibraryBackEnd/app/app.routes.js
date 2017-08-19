@@ -114,6 +114,15 @@ window.routes = {
         roles: ['STUDENT', 'FACULTY', 'LIBRARIAN']
     },
 
+    '/user/settings': {
+
+        templateUrl: 'app/components/user/settings.html',
+        controller: 'UserController',
+        controllerAs: 'userCtrl',
+        requireLogin: true,
+        roles: ['STUDENT', 'FACULTY', 'LIBRARIAN']
+    },
+
     '/admin/students': {
 
         templateUrl: 'app/components/user/students.html',
@@ -193,13 +202,13 @@ window.routes = {
      * Loading Book Module
      */
 
-    '/admin/books': {
+    '/user/books': {
 
         templateUrl: 'app/components/books/books.html',
         controller: 'BookController',
         controllerAs: 'bookCtrl',
         requireLogin: true,
-        roles: ['ADMIN']
+        roles: ['ADMIN', 'STUDENT', 'LIBRARIAN', 'FACULTY']
     },
 
     '/admin/book/add': {
@@ -229,13 +238,13 @@ window.routes = {
    * Loading Book Module
    */
 
-    '/admin/issuedBooks': {
+    '/user/issuedBooks': {
 
         templateUrl: 'app/components/issueBook/issuedBooks.html',
         controller: 'IssueBookController',
         controllerAs: 'issueBookCtrl',
         requireLogin: true,
-        roles: ['ADMIN']
+        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY']
     },
     '/admin/issueBook/add': {
         templateUrl: 'app/components/issueBook/issueBook.html',
@@ -256,13 +265,13 @@ window.routes = {
      * Loading Return Book Module
      */
 
-    '/admin/returnedBooks': {
+    '/user/returnedBooks': {
 
         templateUrl: 'app/components/returnBook/returnBooks.html',
         controller: 'ReturnBookController',
         controllerAs: 'returnBookCtrl',
         requireLogin: true,
-        roles: ['ADMIN']
+        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY']
     },
 
     /*
@@ -360,6 +369,20 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN']
     },
+
+    /*
+    * Loading Request Module
+    */
+
+    '/user/requests': {
+
+        templateUrl: 'app/components/requests/requests.html',
+        controller: 'RequestController',
+        controllerAs: 'requestCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN', 'FACULTY', 'STUDENT']
+    },
+
 }
 
 //Load all the routes

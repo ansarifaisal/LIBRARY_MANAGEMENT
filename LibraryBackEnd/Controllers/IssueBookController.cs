@@ -178,5 +178,14 @@ namespace LibraryBackEnd.Controllers
             return Ok("");
         }
 
+        [HttpGet]
+        [Route("byRollNumber")]
+        public IHttpActionResult GetByRollNumber(string rollNo)
+        {
+            if (rollNo == null)
+                return BadRequest();
+            var books = _issueBookService.GetByRollNumber(rollNo);
+            return Ok(books);
+        }
     }
 }

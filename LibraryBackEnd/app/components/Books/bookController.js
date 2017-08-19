@@ -34,6 +34,8 @@
             btnText: ''
         }
 
+        me.exists = false;
+
         me.bookForm = {
             book: undefined,
             courses: undefined,
@@ -165,7 +167,12 @@
 
         //get all publisher
         me.getBooks = function () {
+
+            if (user.role === 'STUDENT' || user.role === 'FACULTY')
+                return;
+
             $rootScope.isBusy = true;
+
             me.dtOptions = DTOptionsBuilder.newOptions()
                .withBootstrap()
                .withPaginationType('full_numbers')
@@ -208,7 +215,7 @@
                     }
                ]);
             me.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(21).notSortable(),
+                //DTColumnDefBuilder.newColumnDef(21).notSortable(),
             ];
 
             BookFactory.getBooks().then(function (books) {
@@ -291,6 +298,76 @@
             ReturnBookFactory.getReturnBook(accessionNumber).then(function (issued) {
                 me.issued = issued;
             });
+        }
+
+        me.getByAccessionNumber = function (accessionNumber) {
+            me.exists = false;
+            var id = $routeParams.id;
+            BookFactory.getBookByAccessionNumber(accessionNumber).then(function (book) {
+
+                if (book === null)
+                    return me.exists = false;
+                if (book.accessionNumber === accessionNumber)
+                    return me.exists = false;
+                return me.exists = true;
+            }, function (errorResponse) {
+                toastr.error("Error Getting Response");
+            });
+        }
+
+        me.getUserBooks = function () {
+            var user = $rootScope.user
+
+            if (user.role === 'ADMIN' || user.role === 'LIBRARIAN')
+                return;
+
+            $rootScope.isBusy = true;
+            var course = user.course;
+
+            BookFactory.getByCourse(course).then(function (books) {
+                me.books = books;
+                $rootScope.isBusy = false;
+            }, function (errorResponse) {
+                $rootScope.isBusy = false;
+                toastr.error("Error getting data");
+            });
+
+
+            me.dtOptions = DTOptionsBuilder.newOptions()
+            .withBootstrap()
+            .withPaginationType('full_numbers')
+            .withDOM('Bfrtip')
+            .withButtons([
+                 {
+                     extend: 'copy',
+                     className: 'btn btn-default',
+                     text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
+                     exportOptions: {
+                         columns: ':not(:last-child)'
+                     }
+                 },
+                 {
+                     extend: 'print',
+                     className: 'btn btn-default',
+                     text: "<i class='fa fa-print fa-lg'></i> Print",
+                     exportOptions: {
+                         columns: ':not(:last-child)'
+                     }
+                 },
+                 {
+                     extend: 'excel',
+                     className: 'btn btn-default ',
+                     text: "<i class='fa fa-file-excel-o fa-lg'></i> Excel",
+                     exportOptions: {
+                         columns: ':not(:last-child)'
+                     }
+                 }
+            ]);
+            me.dtColumnDefs = [
+                //DTColumnDefBuilder.newColumnDef(21).notSortable(),
+            ];
+
+
         }
 
     }

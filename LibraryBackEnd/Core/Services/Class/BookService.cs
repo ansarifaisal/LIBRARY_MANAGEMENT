@@ -77,5 +77,10 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _bookRepository.GetAccessionNumbers();
         }
+
+        public object GetDistinctBooksByCourse(string course)
+        {
+            return _bookRepository.GetDistinctBooksByCourse(course);
+        }
     }
 }

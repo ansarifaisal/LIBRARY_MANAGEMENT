@@ -33,16 +33,24 @@
                 <li class="dropdown" ng-show="user.role == 'STUDENT'">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-graduation-cap fa-lg" aria-hidden="true"></i><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href=""><i class="fa fa-book " aria-hidden="true"></i> Books</a></li>
-                        <li><a href=""><i class="fa fa-address-book-o " aria-hidden="true"></i> Issued Books</a></li>
                         <li>
-                            <a href="">
+                            <a href="" ng-href="#!/user/books">
+                                <i class="fa fa-book " aria-hidden="true"></i> Books
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" ng-href="#!/user/issuedBooks">
+                                <i class="fa fa-address-book-o " aria-hidden="true"></i> Issued Books
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" ng-href="#!/user/returnedBooks">
                                 <i class="fa fa-reply " aria-hidden="true"></i>
-                                Books
+                                Returned Book
                             </a>
                         </li>
                         <li><a href=""><i class="fa fa-cart-plus " aria-hidden="true"></i> Requested Books</a></li>
-                        <li><a href=""><i class="fa fa-wrench " aria-hidden="true"></i> Settings</a></li>
+                        <li><a href="" ng-href="#!/user/settings"><i class="fa fa-wrench " aria-hidden="true"></i> Settings</a></li>
                     </ul>
                 </li>
 
@@ -103,7 +111,7 @@
                 <li class="dropdown" ng-show="user.role == 'ADMIN'">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-book fa-lg" aria-hidden="true"></i> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="" ng-href="#!/admin/issuedBooks" class="small"><i class="fa fa-address-book-o " aria-hidden="true"></i> Issued Books</a></li>
+                        <li><a href="" ng-href="#!/user/issuedBooks" class="small"><i class="fa fa-address-book-o " aria-hidden="true"></i> Issued Books</a></li>
                         <li><a href="" ng-href="#!/admin/returnedBooks" class="small"><i class="fa fa-reply " aria-hidden="true"></i> Returned Books</a></li>
                         <li><a href="" ng-href="#!/admin/lostOrReplace" class="small"><i class="fa fa-times " aria-hidden="true"></i> Lost/Replace Books</a></li>
                     </ul>

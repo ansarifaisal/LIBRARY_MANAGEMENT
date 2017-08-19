@@ -28,7 +28,8 @@ BookModule.factory("BookFactory", [
             calculateDiscount: calculateDiscount,
             getTitles: getTitles,
             getAccessionNumbers: getAccessionNumbers,
-            getBookByAccessionNumber: getBookByAccessionNumber
+            getBookByAccessionNumber: getBookByAccessionNumber,
+            getByCourse: getByCourse
         };
 
         return bookFactory;
@@ -186,6 +187,16 @@ BookModule.factory("BookFactory", [
 
             var deferred = $q.defer();
             $http.get("/api/book/byAccessionNumber/" + accessionNumber).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function getByCourse(course) {
+            var deferred = $q.defer();
+            $http.get("/api/book/booksByCourse?course=" + course).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
                 deferred.reject(errorResponse);

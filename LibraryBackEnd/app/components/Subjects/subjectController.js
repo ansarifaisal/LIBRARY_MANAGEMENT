@@ -109,7 +109,7 @@
                     }
                 ]);
             me.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(4).notSortable(),
+                DTColumnDefBuilder.newColumnDef(3).notSortable(),
             ];
 
             SubjectFactory.getSubjects().then(function (subjects) {

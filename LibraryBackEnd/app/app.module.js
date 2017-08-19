@@ -20,6 +20,7 @@
     "LostOrReplaceModule",
     "StatisticsModule",
     "SearchModule",
+    "RequestModule",
 
 ]);
 

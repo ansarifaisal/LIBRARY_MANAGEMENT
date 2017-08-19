@@ -119,6 +119,12 @@ namespace LibraryBackEnd.Persistence.Repositories
                     .ToList();
         }
 
-
+        public object GetDistinctBooksByCourse(string course)
+        {
+            return _context.Books
+                  .Where(b => b.Course == course)
+                  .Distinct()
+                  .ToList();
+        }
     }
 }

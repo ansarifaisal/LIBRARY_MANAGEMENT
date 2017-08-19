@@ -31,6 +31,12 @@
             btnText: ''
         }
 
+        me.passwordModel = {
+            oldPassword: '',
+            newPassword: '',
+            confirmPassword: ''
+        }
+
         me.getData = function () {
             me.user = UserFactory.getUserByUserName($rootScope.user.userName);
             me.courses = UserFactory.getCourses();
@@ -272,6 +278,15 @@
                 toastr.error("Error while loading user data");
             });
 
+        }
+
+        me.changePassword = function () {
+            UserFactory.changePassword(me.passwordModel).then(function () {
+                $route.reload();
+                toastr.success("Password changed successfully");
+            }, function (errorResponse) {
+                toastr.error("Incorrect old password.");
+            });
         }
 
     }

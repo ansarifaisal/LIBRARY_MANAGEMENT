@@ -30,6 +30,7 @@ IssueBookModule.factory("IssueBookFactory", [
             updateFine: updateFine,
             returnBook: returnBook,
             lostBook: lostBook,
+            getByRollNumber: getByRollNumber
         }
         return issueBookFactory;
 
@@ -190,6 +191,16 @@ IssueBookModule.factory("IssueBookFactory", [
         function lostBook(issuedBook) {
             var deferred = $q.defer();
             $http.put("/api/issueBook/lost", issuedBook).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function getByRollNumber(rollNo) {
+            var deferred = $q.defer();
+            $http.get("/api/issueBook/byRollNumber?rollNo=" + rollNo).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
                 deferred.reject(errorResponse);

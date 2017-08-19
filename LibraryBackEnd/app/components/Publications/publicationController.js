@@ -105,7 +105,7 @@
                     }
                 ]);
             me.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(2).notSortable(),
+                DTColumnDefBuilder.newColumnDef(1).notSortable(),
             ];
 
             PublicationFactory.getPublications().then(function (publications) {
