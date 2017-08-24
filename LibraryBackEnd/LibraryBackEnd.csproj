@@ -430,6 +430,10 @@
     <Compile Include="Persistence\Migrations\201708191905462_addRequestModule.Designer.cs">
       <DependentUpon>201708191905462_addRequestModule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708200809224_modifyRequest.cs" />
+    <Compile Include="Persistence\Migrations\201708200809224_modifyRequest.Designer.cs">
+      <DependentUpon>201708200809224_modifyRequest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -518,6 +522,8 @@
     <Content Include="app\components\Publications\publicationForm.html" />
     <Content Include="app\components\Requests\requestController.js" />
     <Content Include="app\components\Requests\requestFactory.js" />
+    <Content Include="app\components\Requests\requestForm.html" />
+    <Content Include="app\components\Requests\requestModalController.js" />
     <Content Include="app\components\Requests\requests.html" />
     <Content Include="app\components\ReturnBook\returnBookController.js" />
     <Content Include="app\components\ReturnBook\returnBookFactory.js" />
@@ -712,6 +718,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708191905462_addRequestModule.resx">
       <DependentUpon>201708191905462_addRequestModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708200809224_modifyRequest.resx">
+      <DependentUpon>201708200809224_modifyRequest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

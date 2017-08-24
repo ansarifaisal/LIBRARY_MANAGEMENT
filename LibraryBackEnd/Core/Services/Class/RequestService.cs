@@ -1,6 +1,7 @@
 ﻿using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
 using LibraryBackEnd.Core.Services.Interface;
+using System.Collections.Generic;
 
 namespace LibraryBackEnd.Core.Services.Class
 {
@@ -13,6 +14,11 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
+        }
+
+        public IEnumerable<Request> GetByRollNo(string rollNo)
+        {
+            return _repository.GetByRollNo(rollNo);
         }
     }
 }

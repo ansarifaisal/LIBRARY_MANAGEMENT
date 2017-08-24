@@ -11,6 +11,7 @@ RequestModule.factory("RequestFactory", [
             getRequest: getRequest,
             editRequest: editRequest,
             deleteRequest: deleteRequest,
+            getByRollNo: getByRollNo,
             addOrEdit: addOrEdit
         }
         return requestFactory;
@@ -71,7 +72,18 @@ RequestModule.factory("RequestFactory", [
             return deferred.promise;
         }
 
-        function addOrEdit(Request) {
+        function getByRollNo(rollNo) {
+            var deferred = $q.defer();
+            $http.get("/api/request/byRollNo?rollNo=" + rollNo)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function addOrEdit(request) {
             var toDo = {};
             if (request.id === undefined) {
                 toDo.action = addRequest(request);

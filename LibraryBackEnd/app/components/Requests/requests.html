@@ -1,4 +1,4 @@
-﻿<div ng-init="requestCtrl.getRequests()">
+﻿<div ng-init="requestCtrl.getByRollNo()">
 
     <ol class="breadcrumb">
         <li><a href="" ng-href="#!/home">Home</a></li>
@@ -17,12 +17,11 @@
                 <th class="text-center">Publication</th>
                 <th class="text-center">Course</th>
                 <th class="text-center">Semester</th>
-                <th class="text-center">Roll No</th>
+                <th class="text-center">R. No</th>
                 <th class="text-center">Name</th>
-                <th class="text-center">Student Coruse</th>
                 <th class="text-center">Date</th>
                 <th class="text-center">Status</th>
-                <th class="text-center">Action</th>
+                <th class="text-center" ng-hide="request.status == 'APPROVED'">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -34,11 +33,10 @@
                 <td>{{ request.semester}}</td>
                 <td>{{ request.rollNo}}</td>
                 <td>{{ request.name}}</td>
-                <td>{{ request.studentCourse}}</td>
-                <td>{{ request.date}}</td>
+                <td>{{ request.date | date: "EEE MMM, dd yyyy"}}</td>
                 <td>{{ request.status}}</td>
-                <td class="text-center">
-                    <a href="" ng-click="requestCntrl.getRequest(request.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                <td class="text-center" ng-hide="request.status == 'APPROVED'">
+                    <a href="" ng-click="requestCtrl.getRequest(request.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
                     <a href="" ng-click="requestCtrl.deleteRequestModal(request.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
                 </td>
             </tr>

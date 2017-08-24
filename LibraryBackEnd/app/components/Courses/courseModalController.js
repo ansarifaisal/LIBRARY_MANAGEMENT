@@ -11,8 +11,6 @@
 
         me.course = modal.course;
 
-        console.log(me.course.noOfSemesters);
-
         me.title = modal.title;
 
         me.btnText = modal.btnText;
