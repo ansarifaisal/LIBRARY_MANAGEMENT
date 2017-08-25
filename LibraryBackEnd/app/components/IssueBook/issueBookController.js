@@ -97,7 +97,6 @@
                     me.issueBook.fullName = me.student.fullName;
                     me.issueBook.course = me.student.course;
                     me.issueBook.email = me.student.email;
-                    console.log(me.issueBook.email);
                     if (me.book.course !== me.student.course) {
                         me.isError = true;
                         return toastr.error(me.student.fullName + " is not from " + me.book.course);
@@ -295,5 +294,8 @@
             });
         }
 
+        me.checkTomorrow = function () {
+            
+        }
     }
 ]);

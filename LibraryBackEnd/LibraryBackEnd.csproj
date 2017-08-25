@@ -270,6 +270,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IssueBookController.cs" />
     <Compile Include="Controllers\LostOrReplaceController.cs" />
+    <Compile Include="Controllers\MagazineController.cs" />
     <Compile Include="Controllers\PublicationController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\ReturnBookController.cs" />
@@ -290,6 +291,7 @@
     <Compile Include="Core\IRepositories\ICourseRepository.cs" />
     <Compile Include="Core\IRepositories\IIssueBookRepository.cs" />
     <Compile Include="Core\IRepositories\ILostOrReplaceRepository.cs" />
+    <Compile Include="Core\IRepositories\IMagazinePublisherRepository.cs" />
     <Compile Include="Core\IRepositories\IRequestRepository.cs" />
     <Compile Include="Core\IRepositories\IReturnBookRepository.cs" />
     <Compile Include="Core\IRepositories\ISubjectRepository.cs" />
@@ -297,9 +299,14 @@
     <Compile Include="Core\Models\Book.cs" />
     <Compile Include="Core\Models\Course.cs" />
     <Compile Include="Core\Models\IssueBook.cs" />
+    <Compile Include="Core\Models\IssueMagazine.cs" />
     <Compile Include="Core\Models\LostOrReplace.cs" />
+    <Compile Include="Core\Models\Magazine.cs" />
+    <Compile Include="Core\Models\MagazinePublisher.cs" />
+    <Compile Include="Core\Models\PeriodicMagazine.cs" />
     <Compile Include="Core\Models\Request.cs" />
     <Compile Include="Core\Models\ReturnBook.cs" />
+    <Compile Include="Core\Models\ReturnMagazine.cs" />
     <Compile Include="Core\Models\Subject.cs" />
     <Compile Include="Core\Services\Class\AuthorService.cs" />
     <Compile Include="Core\Services\Class\BookService.cs" />
@@ -307,6 +314,7 @@
     <Compile Include="Core\Services\Class\EntityService.cs" />
     <Compile Include="Core\Services\Class\IssueBookService.cs" />
     <Compile Include="Core\Services\Class\LostOrReplaceService.cs" />
+    <Compile Include="Core\Services\Class\MagazinePublisherService.cs" />
     <Compile Include="Core\Services\Class\RequestService.cs" />
     <Compile Include="Core\Services\Class\ReturnBookService.cs" />
     <Compile Include="Core\Services\Class\SubjectService.cs" />
@@ -315,6 +323,7 @@
     <Compile Include="Core\Services\Interface\ICourseService.cs" />
     <Compile Include="Core\Services\Interface\IIssueBookService.cs" />
     <Compile Include="Core\Services\Interface\ILostOrReplaceService.cs" />
+    <Compile Include="Core\Services\Interface\IMagazinePublisherService.cs" />
     <Compile Include="Core\Services\Interface\IPublicationService.cs" />
     <Compile Include="Core\Services\Class\PublicationService.cs" />
     <Compile Include="Core\Services\Class\StudentService.cs" />
@@ -434,6 +443,14 @@
     <Compile Include="Persistence\Migrations\201708200809224_modifyRequest.Designer.cs">
       <DependentUpon>201708200809224_modifyRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708250723103_addDonateInBook.cs" />
+    <Compile Include="Persistence\Migrations\201708250723103_addDonateInBook.Designer.cs">
+      <DependentUpon>201708250723103_addDonateInBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201708251811019_addMagazineModule.cs" />
+    <Compile Include="Persistence\Migrations\201708251811019_addMagazineModule.Designer.cs">
+      <DependentUpon>201708251811019_addMagazineModule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -451,6 +468,7 @@
     <Compile Include="Core\IRepositories\IPublicationRepository.cs" />
     <Compile Include="Persistence\Repositories\IssueBookRepository.cs" />
     <Compile Include="Persistence\Repositories\LostOrReplaceRepository.cs" />
+    <Compile Include="Persistence\Repositories\MagazinePublisherRepository.cs" />
     <Compile Include="Persistence\Repositories\PublicationRepository.cs" />
     <Compile Include="Persistence\Repositories\RequestRepository.cs" />
     <Compile Include="Persistence\Repositories\ReturnBookRepository.cs" />
@@ -514,6 +532,16 @@
     <Content Include="app\components\LostOrReplace\lostOrReplaceModalController.js" />
     <Content Include="app\components\LostOrReplace\replaceBook.html" />
     <Content Include="app\components\LostOrReplace\undoReplaceBook.html" />
+    <Content Include="app\components\Magazines\publicationForm.html" />
+    <Content Include="app\components\Magazines\deletePublication.html" />
+    <Content Include="app\components\Magazines\issuedMagazine.html" />
+    <Content Include="app\components\Magazines\magazineController.js" />
+    <Content Include="app\components\Magazines\magazineFactory.js" />
+    <Content Include="app\components\Magazines\magazineModalController.js" />
+    <Content Include="app\components\Magazines\magazines.html" />
+    <Content Include="app\components\Magazines\periodicMagazines.html" />
+    <Content Include="app\components\Magazines\publications.html" />
+    <Content Include="app\components\Magazines\returnMagazine.html" />
     <Content Include="app\components\Publications\deletePublication.html" />
     <Content Include="app\components\Publications\publicationModalInstanceController.js" />
     <Content Include="app\components\Publications\publication.html" />
@@ -721,6 +749,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708200809224_modifyRequest.resx">
       <DependentUpon>201708200809224_modifyRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708250723103_addDonateInBook.resx">
+      <DependentUpon>201708250723103_addDonateInBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708251811019_addMagazineModule.resx">
+      <DependentUpon>201708251811019_addMagazineModule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

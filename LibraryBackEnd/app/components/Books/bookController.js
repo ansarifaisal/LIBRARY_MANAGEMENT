@@ -108,6 +108,19 @@
             return me.bookForm.typesOfBook = BookFactory.getTypeOfBook();
         }
 
+        me.gotBy = function () {
+            return me.bookForm.gotBy = BookFactory.gotBy();
+        }
+
+        me.isBaught = function (gotBy) {
+            me.baught = false;
+            me.getStatus();
+            if (gotBy === 'Baught')
+                return me.baught = true;
+            me.bookForm.book.billDate = new Date();
+            return me.baught;
+        }
+
         me.getStatus = function () {
             return me.bookForm.status = BookFactory.getStatus();
         }
@@ -147,7 +160,8 @@
                 me.bookForm.book.billDate = BookFactory.parseDate(me.bookForm.book.billDate);
                 me.calculateDiscount(me.bookForm.book.actualPrice, me.bookForm.book.discount);
                 me.getTypeOfBook();
-                me.getStatus();
+                me.gotBy();
+                me.isBaught(me.bookForm.book.get);
                 me.bookForm.title = "Edit Book Form",
                 me.bookForm.btnText = "Save Changes";
             });
@@ -237,7 +251,7 @@
             $rootScope.isBusy = true;
 
             $action.then(function () {
-                $location.path("/admin/books");
+                $location.path("/user/books");
                 toastr.success(addOrEdit.successMessage);
             }, function (errorResponse) {
                 $route.reload();

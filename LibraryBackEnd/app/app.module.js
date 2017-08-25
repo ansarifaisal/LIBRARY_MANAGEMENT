@@ -1,4 +1,5 @@
-﻿var myApp = angular.module("myApp", [
+﻿
+var myApp = angular.module("myApp", [
 
     "ngRoute",
     "ngCookies",
@@ -21,6 +22,6 @@
     "StatisticsModule",
     "SearchModule",
     "RequestModule",
-
+    "MagazineModule",
 ]);
 

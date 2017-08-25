@@ -53,19 +53,16 @@ namespace LibraryBackEnd.Core.Models
         [Required]
         public string ClassNo { get; set; }
 
-        [Required]
+        public string Get { get; set; }
+
         public double ActualPrice { get; set; }
 
-        [Required]
         public double Discount { get; set; }
 
-        [Required]
         public double DiscountPrice { get; set; }
 
-        [Required]
         public string BillNo { get; set; }
 
-        [Required]
         public DateTime BillDate { get; set; }
 
         [Required]

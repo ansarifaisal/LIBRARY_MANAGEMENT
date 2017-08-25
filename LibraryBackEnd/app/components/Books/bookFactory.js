@@ -23,6 +23,7 @@ BookModule.factory("BookFactory", [
             getPublishers: getPublishers,
             getTypeOfBook: getTypeOfBook,
             getStatus: getStatus,
+            gotBy: gotBy,
             parseDate: parseDate,
             dateParse: dateParse,
             calculateDiscount: calculateDiscount,
@@ -147,6 +148,11 @@ BookModule.factory("BookFactory", [
         function getStatus() {
             var status = ["Available", "Not Available", "Withdrawl", "Lost", "Issued"];
             return status;
+        }
+
+        function gotBy() {
+            var got = ["Baught", "Donated"];
+            return got;
         }
 
         function parseDate(date) {

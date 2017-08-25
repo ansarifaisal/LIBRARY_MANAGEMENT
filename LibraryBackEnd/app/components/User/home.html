@@ -205,9 +205,10 @@
 <!-- ADMIN section ends here -->
 <!-- STUDENT section starts here -->
 <div ng-show="user.role == 'STUDENT'">
-
-    <div class="alert alert-danger">
-        <marquee behavior="alternate" scrollamount="5">Alert Goes Here</marquee>
+    <div ng-init="authCtrl.checkReturn()">
+        <div class="alert alert-danger" ng-show="authCtrl.submitTom">
+            <marquee behavior="alternate" scrollamount="5">You need to submit book(s) tomorrow, Click Here for more info.</marquee>
+        </div>
     </div>
 
     <div class="panel panel-primary">

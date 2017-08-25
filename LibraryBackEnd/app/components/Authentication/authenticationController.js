@@ -1,6 +1,7 @@
 ﻿
 AuthenticationModule.controller("AuthenticationController", [
     "AuthenticationFactory",
+    "IssueBookFactory",
     "$scope",
     "$location",
     "$timeout",
@@ -8,7 +9,7 @@ AuthenticationModule.controller("AuthenticationController", [
     "$routeParams",
     "$route",
     "toastr",
-    function (AuthenticationFactory, $scope, $location, $timeout, $rootScope, $routeParams, $route, toastr) {
+    function (AuthenticationFactory, IssueBookFactory, $scope, $location, $timeout, $rootScope, $routeParams, $route, toastr) {
 
         //here `me` is use to reffer the current value
         var me = this;
@@ -289,6 +290,28 @@ AuthenticationModule.controller("AuthenticationController", [
                     return;
                 me.countDown();
             }, 1000);
+        }
+
+
+        me.checkReturn = function () {
+            IssueBookFactory.getByRollNumber(user.rollNo).then(function (issuedBooks) {
+                me.issuedBooks = issuedBooks;
+                var date = new Date();
+                var tom = new Date(date.setDate(date.getDate() + 1));
+                var issuedDate = "";
+                var userRollNo = $rootScope.user.rollNo;
+                var rollNo = "";
+                for (var i = 0; i < me.issuedBooks.length; i++) {
+                    issuedDate = me.issuedBooks[i].issuedDate;
+                    rollNo = me.issuedBooks[i].rollNo;
+                    if (userRollNo === rollNo && issuedDate === tom) {
+                        me.submitTom = true;
+                        break;
+                    }
+                }
+            }, function () {
+                toastr.error("Error getting data");
+            });
         }
 
 

@@ -383,6 +383,54 @@ window.routes = {
         roles: ['ADMIN', 'LIBRARIAN', 'FACULTY', 'STUDENT']
     },
 
+    /*
+    * Loading Magazine Module
+    */
+
+    '/admin/magazines': {
+
+        templateUrl: 'app/components/magazines/magazines.html',
+        controller: 'MagazineController',
+        controllerAs: 'magazineCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
+
+    '/admin/magazine/publications': {
+
+        templateUrl: 'app/components/magazines/publications.html',
+        controller: 'MagazineController',
+        controllerAs: 'magazineCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
+
+    '/admin/magazine/periodic': {
+
+        templateUrl: 'app/components/magazines/periodicMagazines.html',
+        controller: 'MagazineController',
+        controllerAs: 'magazineCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
+
+    '/admin/magazine/issued': {
+
+        templateUrl: 'app/components/magazines/issuedMagazine.html',
+        controller: 'MagazineController',
+        controllerAs: 'magazineCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
+
+    '/admin/magazine/returned': {
+
+        templateUrl: 'app/components/magazines/returnMagazine.html',
+        controller: 'MagazineController',
+        controllerAs: 'magazineCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
 }
 
 //Load all the routes

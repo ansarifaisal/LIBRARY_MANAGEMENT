@@ -17,6 +17,12 @@ namespace LibraryBackEnd.Configuration
         public DbSet<LostOrReplace> LostOrReplaces { get; set; }
         public DbSet<Request> Requests { get; set; }
 
+        public DbSet<MagazinePublisher> MagazinePublishers { get; set; }
+        public DbSet<PeriodicMagazine> PeriodicMagazines { get; set; }
+        public DbSet<Magazine> Magazines { get; set; }
+        public DbSet<IssueMagazine> IssueMagazines { get; set; }
+        public DbSet<ReturnMagazine> ReturnMagazines { get; set; }
+
         //intializing the dbcontext with DefaultConnection 
         public ApplicationDbContext()
                 : base("DefaultConnection", throwIfV1Schema: false)
