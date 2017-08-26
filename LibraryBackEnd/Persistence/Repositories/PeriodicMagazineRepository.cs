@@ -5,20 +5,19 @@ using System.Linq;
 
 namespace LibraryBackEnd.Persistence.Repositories
 {
-    public class MagazinePublisherRepository : GenericRepository<MagazinePublisher>, IMagazinePublisherRepository
+    public class PeriodicMagazineRepository : GenericRepository<PeriodicMagazine>, IPeriodicMagazineRepository
     {
         private ApplicationDbContext _context;
-
-        public MagazinePublisherRepository(ApplicationDbContext context)
+        public PeriodicMagazineRepository(ApplicationDbContext context)
             : base(context)
         {
             _context = context;
         }
 
-        public MagazinePublisher GetByTitle(string title)
+        public PeriodicMagazine GetByTitle(string title)
         {
-            return _context.MagazinePublishers
-                .Where(m => m.Title == title)
+            return _context.PeriodicMagazines
+                .Where(p => p.Title == title)
                 .SingleOrDefault();
         }
     }

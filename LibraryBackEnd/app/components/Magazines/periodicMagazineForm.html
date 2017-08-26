@@ -1,0 +1,145 @@
+﻿
+<div class="modal-header">
+    <h4 class="modal-title">{{magazineModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    <form name="createEdit" ng-submit="magazineModalCtrl.submitPeriodicMagazineForm()" novalidate>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.title.$invalid && createEdit.title.$touched
+         || createEdit.title.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.title.$valid || createEdit.title.$valid
+         && createEdit.$submitted}">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control" placeholder="Enter Title" ng-model="magazineModalCtrl.periodicDetail.title" required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.title.$valid || createEdit.title.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.title.$invalid && createEdit.title.$touched
+                           || createEdit.title.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.title.$invalid && createEdit.title.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.title.$error.required" class="text-danger small">Please, provide title.</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="periodicity">Periodicity</label>
+            <input type="text"
+                   name="periodicity"
+                   class="form-control"
+                   placeholder="Enter Periodicity"
+                   ng-model="magazineModalCtrl.periodicDetail.periodicity"
+                   required />
+        </div>
+        <div class="form-group">
+            <label for="subscription">Subscription</label>
+            <input type="text"
+                   name="subscription"
+                   class="form-control"
+                   placeholder="Enter Subscription"
+                   ng-model="magazineModalCtrl.periodicDetail.subscription"
+                   required />
+        </div>
+        <div class="form-group">
+            <label for="from">Subscription From</label>
+            <input type="text"
+                   name="from"
+                   class="form-control"
+                   placeholder="Enter Subscription From"
+                   ng-model="magazineModalCtrl.periodicDetail.from"
+                   required />
+
+        </div>
+        <div class="form-group">
+            <label for="to">Subscription To</label>
+            <input type="text"
+                   name="to"
+                   class="form-control"
+                   placeholder="Enter Subscription To"
+                   ng-model="magazineModalCtrl.periodicDetail.to"
+                   required />
+        </div>
+        <div class="form-group">
+            <label for="volume">Volume</label>
+            <input type="text"
+                   name="volume"
+                   class="form-control"
+                   placeholder="Enter Volume"
+                   ng-model="magazineModalCtrl.periodicDetail.volume"
+                   required />
+        </div>
+        <div class="form-group">
+            <label for="source">Source</label>
+            <input type="text"
+                   name="source"
+                   class="form-control"
+                   placeholder="Enter Source"
+                   ng-model="magazineModalCtrl.periodicDetail.source"
+                   required />
+        </div>
+        <div class="form-group">
+
+            <label for="orderNo">Order Number</label>
+            <input type="text"
+                   name="orderNo"
+                   class="form-control"
+                   placeholder="Enter Order Number"
+                   ng-model="magazineModalCtrl.periodicDetail.orderNo"
+                   required />
+        </div>
+        <div class="form-group">
+            <label for="orderDate">Order Date</label>
+            <input type="text"
+                   name="orderDate"
+                   class="form-control"
+                   placeholder="Enter Order Date"
+                   ng-model="magazineModalCtrl.periodicDetail.orderDate"
+                   required />
+        </div>
+        <div class="form-group">
+            
+            <label for="billNo">Bill Number</label>
+            <input type="text"
+                   name="billNo"
+                   class="form-control"
+                   placeholder="Enter Bill Number"
+                   ng-model="magazineModalCtrl.periodicDetail.billNo"
+                   required />
+        </div>
+        <div class="form-group">
+            <label for="billDate">Bill Date</label>
+            <input type="text"
+                   name="billDate"
+                   class="form-control"
+                   placeholder="Enter Bill Date"
+                   ng-model="magazineModalCtrl.periodicDetail.billDate"
+                   required />
+        </div>
+        <div class="form-group">
+            
+            <label for="amount">Bill Date</label>
+            <input type="text"
+                   name="amount"
+                   class="form-control"
+                   placeholder="Enter Bill Amount"
+                   ng-model="magazineModalCtrl.periodicDetail.amount"
+                   required />
+        </div>
+        <div class="form-group">
+            
+            <label for="chequeNo">Cheque Numeber</label>
+            <input type="text"
+                   name="chequeNo"
+                   class="form-control"
+                   placeholder="Enter Cheque Number"
+                   ng-model="magazineModalCtrl.periodicDetail.chequeNo"
+                   required />
+        </div>
+
+        <input type="submit" value="{{magazineModalCtrl.btnText}}" class="btn btn-primary" ng-click="magazineModalCtrl.ok()" />
+        <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.cancel()">Close</button>
+
+    </form>
+</div>

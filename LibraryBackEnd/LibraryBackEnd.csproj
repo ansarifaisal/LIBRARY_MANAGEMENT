@@ -271,6 +271,7 @@
     <Compile Include="Controllers\IssueBookController.cs" />
     <Compile Include="Controllers\LostOrReplaceController.cs" />
     <Compile Include="Controllers\MagazineController.cs" />
+    <Compile Include="Controllers\PeriodicMagazineController.cs" />
     <Compile Include="Controllers\PublicationController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\ReturnBookController.cs" />
@@ -292,6 +293,7 @@
     <Compile Include="Core\IRepositories\IIssueBookRepository.cs" />
     <Compile Include="Core\IRepositories\ILostOrReplaceRepository.cs" />
     <Compile Include="Core\IRepositories\IMagazinePublisherRepository.cs" />
+    <Compile Include="Core\IRepositories\IPeriodicMagazineRepository.cs" />
     <Compile Include="Core\IRepositories\IRequestRepository.cs" />
     <Compile Include="Core\IRepositories\IReturnBookRepository.cs" />
     <Compile Include="Core\IRepositories\ISubjectRepository.cs" />
@@ -315,6 +317,7 @@
     <Compile Include="Core\Services\Class\IssueBookService.cs" />
     <Compile Include="Core\Services\Class\LostOrReplaceService.cs" />
     <Compile Include="Core\Services\Class\MagazinePublisherService.cs" />
+    <Compile Include="Core\Services\Class\PeriodicMagazineService.cs" />
     <Compile Include="Core\Services\Class\RequestService.cs" />
     <Compile Include="Core\Services\Class\ReturnBookService.cs" />
     <Compile Include="Core\Services\Class\SubjectService.cs" />
@@ -324,6 +327,7 @@
     <Compile Include="Core\Services\Interface\IIssueBookService.cs" />
     <Compile Include="Core\Services\Interface\ILostOrReplaceService.cs" />
     <Compile Include="Core\Services\Interface\IMagazinePublisherService.cs" />
+    <Compile Include="Core\Services\Interface\IPeriodicMagazineService.cs" />
     <Compile Include="Core\Services\Interface\IPublicationService.cs" />
     <Compile Include="Core\Services\Class\PublicationService.cs" />
     <Compile Include="Core\Services\Class\StudentService.cs" />
@@ -469,6 +473,7 @@
     <Compile Include="Persistence\Repositories\IssueBookRepository.cs" />
     <Compile Include="Persistence\Repositories\LostOrReplaceRepository.cs" />
     <Compile Include="Persistence\Repositories\MagazinePublisherRepository.cs" />
+    <Compile Include="Persistence\Repositories\PeriodicMagazineRepository.cs" />
     <Compile Include="Persistence\Repositories\PublicationRepository.cs" />
     <Compile Include="Persistence\Repositories\RequestRepository.cs" />
     <Compile Include="Persistence\Repositories\ReturnBookRepository.cs" />
@@ -532,8 +537,9 @@
     <Content Include="app\components\LostOrReplace\lostOrReplaceModalController.js" />
     <Content Include="app\components\LostOrReplace\replaceBook.html" />
     <Content Include="app\components\LostOrReplace\undoReplaceBook.html" />
+    <Content Include="app\components\Magazines\periodicMagazineForm.html" />
     <Content Include="app\components\Magazines\publicationForm.html" />
-    <Content Include="app\components\Magazines\deletePublication.html" />
+    <Content Include="app\components\Magazines\deletePublisher.html" />
     <Content Include="app\components\Magazines\issuedMagazine.html" />
     <Content Include="app\components\Magazines\magazineController.js" />
     <Content Include="app\components\Magazines\magazineFactory.js" />

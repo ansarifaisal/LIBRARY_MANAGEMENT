@@ -1,0 +1,13 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{magazineModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    Want To Delete <strong>{{magazineModalCtrl.publisher.name}}</strong> ?
+    <div class="small text-danger">Note: Many things will get affected.</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="magazineModalCtrl.cancel()">Close</button>
+    <button class="btn btn-danger" ng-click="magazineModalCtrl.deletePublisher()">{{magazineModalCtrl.btnText}}</button>
+</div>

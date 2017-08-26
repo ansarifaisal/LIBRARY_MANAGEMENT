@@ -10,16 +10,23 @@ namespace LibraryBackEnd.Controllers
     public class MagazineController : ApiController
     {
         private IMagazinePublisherService _magazinePublisherService;
+
         public MagazineController(IMagazinePublisherService magazinePublisherService)
         {
             _magazinePublisherService = magazinePublisherService;
         }
 
         [Route("publisher/add")]
+        [HttpPost]
         public IHttpActionResult AddPublication(MagazinePublisher magazinePublisher)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is Invalid");
+
+            var flag = CheckExistingPublisher(magazinePublisher.Title);
+
+            if (flag == true)
+                return BadRequest("true");
 
             _magazinePublisherService.Create(magazinePublisher);
             return Ok("Added Successfully!");
@@ -68,6 +75,18 @@ namespace LibraryBackEnd.Controllers
                 return NotFound();
 
             return Ok(magazinePublisher);
+        }
+
+        [Route("publisher/checkExisting")]
+        [HttpGet]
+        public bool CheckExistingPublisher(string title)
+        {
+            if (title == null)
+                return false;
+            var publisher = _magazinePublisherService.GetByTitle(title);
+            if (publisher == null)
+                return false;
+            return true;
         }
 
     }

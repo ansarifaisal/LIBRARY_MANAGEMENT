@@ -42,7 +42,6 @@
 
         me.getCourse = function (id) {
             CourseFactory.getCourse(id).then(function (course) {
-                console.log(course);
                 me.courseModal.course = course;
                 me.courseModal.semesters = CourseFactory.getSemesters();
                 me.courseModal.title = "Edit Course";

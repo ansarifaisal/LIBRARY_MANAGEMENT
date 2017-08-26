@@ -4,6 +4,6 @@ namespace LibraryBackEnd.Core.Services.Interface
 {
     public interface IMagazinePublisherService : IEntityService<MagazinePublisher>
     {
-
+        MagazinePublisher GetByTitle(string title);
     }
 }
