@@ -36,8 +36,18 @@
                 <td>{{ magazine.remark}}</td>
                 <td>{{ magazine.status}}</td>
                 <td class="text-center">
-                    <a href="" ng-click="magazineCtrl.getMagazine(magazine.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                    <a href="" ng-click="magazineCtrl.deleteMagazineModal(magazine.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                    <a href=""
+                       ng-click="magazineCtrl.getMagazine(magazine.id)"
+                       ng-show="magazine.status == 'Available'"
+                       class="text-warning">
+                        <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
+                    </a>&nbsp;&nbsp;
+                    <a href=""
+                       ng-click="magazineCtrl.deleteMagazineModal(magazine.id)"
+                       ng-show="magazine.status == 'Available' || magazine.status == 'Replaced' "
+                       class="text-danger">
+                        <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                    </a>
                 </td>
             </tr>
         </tbody>

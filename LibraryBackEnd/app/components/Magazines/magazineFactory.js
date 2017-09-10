@@ -49,6 +49,7 @@ MagazineModule.factory("MagazineFactory", [
             addOrEditLostMagazine: addOrEditLostMagazine,
             getReturnMagazines: getReturnMagazines,
             getMagazineByNumber: getMagazineByNumber,
+            getStatus: getStatus,
         }
         return magazineFactory;
 
@@ -488,6 +489,8 @@ MagazineModule.factory("MagazineFactory", [
             return toDo;
         }
 
-
+        function getStatus() {
+            return status = ["Available", "Donated"]
+        }
     }
 ]);

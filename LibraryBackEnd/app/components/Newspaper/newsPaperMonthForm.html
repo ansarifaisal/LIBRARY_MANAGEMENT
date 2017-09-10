@@ -1,0 +1,37 @@
+﻿
+<div class="modal-header">
+    <h4 class="modal-title">{{newsPaperModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    <form name="createEdit" ng-submit="newsPaperModalCtrl.submitPeriodicDetailsForm()" novalidate>
+
+        <div class="form-group">
+            <label for="month">Month</label>
+            <div class="input-group">
+                <input type="text"
+                       name="month"
+                       placeholder="Enter Month"
+                       class="form-control"
+                       ng-model="newsPaperModalCtrl.newsPaperMonth.month"
+                       uib-datepicker-popup="MMM, yyyy"
+                       datepicker-options="newsPaperModalCtrl.monthPickerOptions"
+                       close-text="Close"
+                       is-open="newsPaperModalCtrl.fromMonthPicker.opened" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="newsPaperModalCtrl.fromMonthPickers()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div ng-show="createEdit.from.$invalid && createEdit.from.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.from.$error.required" class="text-danger small">Please, provide month.</span>
+            </div>
+        </div>
+        <div class="form-group"></div>
+        <div class="form-group"></div>
+        <div class="form-group"></div>
+
+        <input type="submit" ng-disabled="createEdit.$invalid" value="{{newsPaperModalCtrl.btnText}}" class="btn btn-primary" ng-click="newsPaperModalCtrl.ok()" />
+        <button type="button" class="btn btn-default" ng-click="newsPaperModalCtrl.cancel()">Close</button>
+
+    </form>
+</div>

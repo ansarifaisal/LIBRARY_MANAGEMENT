@@ -448,6 +448,10 @@
             });
         }
 
+        me.getStatus = function () {
+            return me.status = MagazineFactory.getStatus();
+        }
+
         $uibModalInstance.opened.then(function () {
             if (me.periodicDetail) {
                 me.getPublishers();
@@ -460,7 +464,8 @@
                 if (me.periodicDetail.paidBy !== undefined)
                     me.isPaidByCheque(me.periodicDetail.paidBy);
             }
-
+            if (me.magazine)
+                me.getStatus();
         });
     }
 ]);

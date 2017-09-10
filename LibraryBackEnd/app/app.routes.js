@@ -440,6 +440,42 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN', 'LIBRARIAN']
     },
+
+    /*
+    * Loading Newspaper Module
+    */
+
+    '/admin/newspaper/publication': {
+        templateUrl: 'app/components/newspaper/newsPaperPublisher.html',
+        controller: 'NewspaperController',
+        controllerAs: 'newsPaperCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
+
+    '/admin/newspaper/periodic': {
+        templateUrl: 'app/components/newspaper/periodicNewsPapers.html',
+        controller: 'NewspaperController',
+        controllerAs: 'newsPaperCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
+
+    '/admin/newspaper/month/:title': {
+        templateUrl: 'app/components/newspaper/newsPaperMonths.html',
+        controller: 'NewspaperController',
+        controllerAs: 'newsPaperCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
+
+    '/admin/newspapers': {
+        templateUrl: 'app/components/newspaper/newspapers.html',
+        controller: 'NewspaperController',
+        controllerAs: 'newsPaperCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
 }
 
 //Load all the routes

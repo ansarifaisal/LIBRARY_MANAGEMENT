@@ -59,7 +59,6 @@
             number: '',
             dateOfRecieved: '',
             recievedBy: '',
-            status: '',
             remark: ''
         };
 

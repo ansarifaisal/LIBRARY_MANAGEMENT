@@ -274,7 +274,11 @@
     <Compile Include="Controllers\LostOrReplaceMagazineController.cs" />
     <Compile Include="Controllers\MagazineController.cs" />
     <Compile Include="Controllers\MagazinePublisherController.cs" />
+    <Compile Include="Controllers\NewspaperController.cs" />
+    <Compile Include="Controllers\NewspaperMonthController.cs" />
+    <Compile Include="Controllers\NewspaperPublisherController.cs" />
     <Compile Include="Controllers\PeriodicMagazineController.cs" />
+    <Compile Include="Controllers\PeriodicNewspaperController.cs" />
     <Compile Include="Controllers\PublicationController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\ReturnBookController.cs" />
@@ -300,7 +304,11 @@
     <Compile Include="Core\IRepositories\ILostOrReplaceRepository.cs" />
     <Compile Include="Core\IRepositories\IMagazinePublisherRepository.cs" />
     <Compile Include="Core\IRepositories\IMagazineRepository.cs" />
+    <Compile Include="Core\IRepositories\INewspaperMonthRepository.cs" />
+    <Compile Include="Core\IRepositories\INewspaperPublisherRepository.cs" />
+    <Compile Include="Core\IRepositories\INewspaperRepository.cs" />
     <Compile Include="Core\IRepositories\IPeriodicMagazineRepository.cs" />
+    <Compile Include="Core\IRepositories\IPeriodicNewspaperRepository.cs" />
     <Compile Include="Core\IRepositories\IRequestRepository.cs" />
     <Compile Include="Core\IRepositories\IReturnBookRepository.cs" />
     <Compile Include="Core\IRepositories\IReturnMagazineRepository.cs" />
@@ -314,7 +322,11 @@
     <Compile Include="Core\Models\LostOrReplaceMagazine.cs" />
     <Compile Include="Core\Models\Magazine.cs" />
     <Compile Include="Core\Models\MagazinePublisher.cs" />
+    <Compile Include="Core\Models\Newspaper.cs" />
+    <Compile Include="Core\Models\NewspaperMonth.cs" />
+    <Compile Include="Core\Models\NewspaperPublisher.cs" />
     <Compile Include="Core\Models\PeriodicMagazine.cs" />
+    <Compile Include="Core\Models\PeriodicNewspaper.cs" />
     <Compile Include="Core\Models\Request.cs" />
     <Compile Include="Core\Models\ReturnBook.cs" />
     <Compile Include="Core\Models\ReturnMagazine.cs" />
@@ -329,7 +341,11 @@
     <Compile Include="Core\Services\Class\LostOrReplaceService.cs" />
     <Compile Include="Core\Services\Class\MagazinePublisherService.cs" />
     <Compile Include="Core\Services\Class\MagazineService.cs" />
+    <Compile Include="Core\Services\Class\NewspaperMonthService.cs" />
+    <Compile Include="Core\Services\Class\NewsPaperPublisherService.cs" />
+    <Compile Include="Core\Services\Class\NewspaperService.cs" />
     <Compile Include="Core\Services\Class\PeriodicMagazineService.cs" />
+    <Compile Include="Core\Services\Class\PeriodicNewspaperService.cs" />
     <Compile Include="Core\Services\Class\RequestService.cs" />
     <Compile Include="Core\Services\Class\ReturnBookService.cs" />
     <Compile Include="Core\Services\Class\ReturnMagazineService.cs" />
@@ -343,7 +359,11 @@
     <Compile Include="Core\Services\Interface\ILostOrReplaceService.cs" />
     <Compile Include="Core\Services\Interface\IMagazinePublisherService.cs" />
     <Compile Include="Core\Services\Interface\IMagazineService.cs" />
+    <Compile Include="Core\Services\Interface\INewspaperMonthService.cs" />
+    <Compile Include="Core\Services\Interface\INewspaperPublisherService.cs" />
+    <Compile Include="Core\Services\Interface\INewspaperService.cs" />
     <Compile Include="Core\Services\Interface\IPeriodicMagazineService.cs" />
+    <Compile Include="Core\Services\Interface\IPeriodicNewspaperService.cs" />
     <Compile Include="Core\Services\Interface\IPublicationService.cs" />
     <Compile Include="Core\Services\Class\PublicationService.cs" />
     <Compile Include="Core\Services\Class\StudentService.cs" />
@@ -516,6 +536,18 @@
     <Compile Include="Persistence\Migrations\201709100955333_modifyReturnMagazine1.Designer.cs">
       <DependentUpon>201709100955333_modifyReturnMagazine1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709101357306_addNewsPaperModule.cs" />
+    <Compile Include="Persistence\Migrations\201709101357306_addNewsPaperModule.Designer.cs">
+      <DependentUpon>201709101357306_addNewsPaperModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709101607218_modifyNewsPaperModule.cs" />
+    <Compile Include="Persistence\Migrations\201709101607218_modifyNewsPaperModule.Designer.cs">
+      <DependentUpon>201709101607218_modifyNewsPaperModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709102108255_modifyNewsPaperModule1.cs" />
+    <Compile Include="Persistence\Migrations\201709102108255_modifyNewsPaperModule1.Designer.cs">
+      <DependentUpon>201709102108255_modifyNewsPaperModule1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -538,7 +570,11 @@
     <Compile Include="Persistence\Repositories\LostOrReplaceRepository.cs" />
     <Compile Include="Persistence\Repositories\MagazinePublisherRepository.cs" />
     <Compile Include="Persistence\Repositories\MagazineRepository.cs" />
+    <Compile Include="Persistence\Repositories\NewspaperMonthRepository.cs" />
+    <Compile Include="Persistence\Repositories\NewspaperPublisherRepository.cs" />
+    <Compile Include="Persistence\Repositories\NewspaperRepository.cs" />
     <Compile Include="Persistence\Repositories\PeriodicMagazineRepository.cs" />
+    <Compile Include="Persistence\Repositories\PeriodicNewspaperRepository.cs" />
     <Compile Include="Persistence\Repositories\PublicationRepository.cs" />
     <Compile Include="Persistence\Repositories\RequestRepository.cs" />
     <Compile Include="Persistence\Repositories\ReturnBookRepository.cs" />
@@ -623,6 +659,17 @@
     <Content Include="app\components\Magazines\periodicMagazines.html" />
     <Content Include="app\components\Magazines\publications.html" />
     <Content Include="app\components\Magazines\returnMagazines.html" />
+    <Content Include="app\components\Newspaper\confirmDeletePeriodicDetails.html" />
+    <Content Include="app\components\Newspaper\confirmDeletePublisher.html" />
+    <Content Include="app\components\Newspaper\newspaperController.js" />
+    <Content Include="app\components\Newspaper\newspaperFactory.js" />
+    <Content Include="app\components\Newspaper\newspaperModalController.js" />
+    <Content Include="app\components\Newspaper\newsPaperMonths.html" />
+    <Content Include="app\components\Newspaper\newsPaperPublisher.html" />
+    <Content Include="app\components\Newspaper\newspapers.html" />
+    <Content Include="app\components\Newspaper\periodicNewsPapers.html" />
+    <Content Include="app\components\Newspaper\periodicNewsPaperForm.html" />
+    <Content Include="app\components\Newspaper\publisherForm.html" />
     <Content Include="app\components\Publications\deletePublication.html" />
     <Content Include="app\components\Publications\publicationModalInstanceController.js" />
     <Content Include="app\components\Publications\publication.html" />
@@ -869,6 +916,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709100955333_modifyReturnMagazine1.resx">
       <DependentUpon>201709100955333_modifyReturnMagazine1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709101357306_addNewsPaperModule.resx">
+      <DependentUpon>201709101357306_addNewsPaperModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709101607218_modifyNewsPaperModule.resx">
+      <DependentUpon>201709101607218_modifyNewsPaperModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709102108255_modifyNewsPaperModule1.resx">
+      <DependentUpon>201709102108255_modifyNewsPaperModule1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

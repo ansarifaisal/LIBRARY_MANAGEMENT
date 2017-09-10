@@ -23,5 +23,6 @@ var myApp = angular.module("myApp", [
     "SearchModule",
     "RequestModule",
     "MagazineModule",
+    "NewspaperModule"
 ]);
 

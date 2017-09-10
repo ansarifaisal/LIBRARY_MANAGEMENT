@@ -1,0 +1,29 @@
+﻿
+<div class="modal-header">
+    <h4 class="modal-title">{{newsPaperModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    <form name="createEdit" ng-submit="newsPaperModalCtrl.submitPublisherForm()" novalidate>
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.title.$invalid && createEdit.title.$touched
+         || createEdit.title.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.title.$valid || createEdit.title.$valid
+         && createEdit.$submitted}">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control" placeholder="Enter Title" ng-model="newsPaperModalCtrl.publisher.title" required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.title.$valid || createEdit.title.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.title.$invalid && createEdit.title.$touched
+                           || createEdit.title.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.title.$invalid && createEdit.title.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.title.$error.required" class="text-danger small">Please, provide title.</span>
+            </div>
+        </div>
+        <input type="submit" value="{{newsPaperModalCtrl.btnText}}" class="btn btn-primary" ng-click="newsPaperModalCtrl.ok()" />
+        <button type="button" class="btn btn-default" ng-click="newsPaperModalCtrl.cancel()">Close</button>
+
+    </form>
+</div>

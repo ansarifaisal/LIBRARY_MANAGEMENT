@@ -1,0 +1,37 @@
+﻿<div ng-init="newsPaperCtrl.getPeriodicDetails()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li class="active">Periodic Details</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Periodic Details</h3>
+    </div>
+
+    <table datatable="ng" dt-options="newsPaperCtrl.dtOptions" dt-column-defs="newsPaperCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Title</th>
+                <th class="text-center">Publisher</th>
+                <th class="text-center">Amount</th>
+                <th class="text-center">Librarian</th>
+                <th class="text-center">Remark</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="periodicNewspaper in newsPaperCtrl.periodicNewspapers">
+                <td><a href="" ng-href="#!/admin/newspaper/month/{{periodicNewspaper.title}}">{{ periodicNewspaper.title}}</a></td>
+                <td>{{periodicNewspaper.publisher}}</td>
+                <td>{{periodicNewspaper.amount}}</td>
+                <td>{{periodicNewspaper.librarian}}</td>
+                <td>{{periodicNewspaper.remark}}</td>
+                <td class="text-center">
+                    <a href="" ng-click="newsPaperCtrl.getPeriodicDetail(periodicNewspaper.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                    <a href="" ng-click="newsPaperCtrl.deletePeriodicDetailModal(periodicNewspaper.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
