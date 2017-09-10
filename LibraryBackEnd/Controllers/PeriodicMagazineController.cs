@@ -45,12 +45,6 @@ namespace LibraryBackEnd.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is Invalid");
-
-            var flag = CheckExisting(periodicMagazine.Title);
-
-            if (flag == true)
-                return BadRequest("true");
-
             _periodicMagazineService.Update(periodicMagazine);
             return Ok();
         }
@@ -81,8 +75,6 @@ namespace LibraryBackEnd.Controllers
             return Ok(magazinePublisher);
         }
 
-        [Route("periodic/checkExisting")]
-        [HttpGet]
         public bool CheckExisting(string title)
         {
             if (title == null)
@@ -92,6 +84,17 @@ namespace LibraryBackEnd.Controllers
                 return false;
             return true;
         }
+
+        [Route("periodic/checkExisting")]
+        [HttpGet]
+        public IHttpActionResult checkExisting(string title)
+        {
+            if (title == null)
+                throw new ArgumentNullException();
+            var periodicMagazine = _periodicMagazineService.GetByTitle(title);
+            return Ok(periodicMagazine);
+        }
+
 
     }
 }

@@ -9,67 +9,62 @@ namespace LibraryBackEnd.Controllers
     [RoutePrefix("api/magazine")]
     public class MagazineController : ApiController
     {
-        private IMagazinePublisherService _magazinePublisherService;
-
-        public MagazineController(IMagazinePublisherService magazinePublisherService)
+        private IMagazineService _magazineService;
+        public MagazineController(IMagazineService magazineService)
         {
-            _magazinePublisherService = magazinePublisherService;
+            _magazineService = magazineService;
         }
 
-        [Route("publisher/add")]
+        [Route("add")]
         [HttpPost]
-        public IHttpActionResult AddPublication(MagazinePublisher magazinePublisher)
+        public IHttpActionResult Add(Magazine magazine)
         {
+            magazine.Date = DateTime.Now;
             if (!ModelState.IsValid)
                 return BadRequest("Model is Invalid");
 
-            var flag = CheckExistingPublisher(magazinePublisher.Title);
-
-            if (flag == true)
-                return BadRequest("true");
-
-            _magazinePublisherService.Create(magazinePublisher);
+            _magazineService.Create(magazine);
             return Ok("Added Successfully!");
         }
 
-        [Route("publisher/all")]
+        [Route("all")]
         [HttpGet]
-        public IHttpActionResult All()
+        public IHttpActionResult All(string title)
         {
-            var publishers = _magazinePublisherService.GetAll();
-            return Ok(publishers);
+            var magazines = _magazineService.GetMagazines(title);
+            return Ok(magazines);
         }
 
-        [Route("publisher/edit")]
+        [Route("edit")]
         [HttpPost]
-        public IHttpActionResult Edit(MagazinePublisher magazinePublisher)
+        public IHttpActionResult Edit(Magazine magazine)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is Invalid");
 
-            _magazinePublisherService.Update(magazinePublisher);
+            _magazineService.Update(magazine);
             return Ok();
         }
 
-        [Route("publisher/delete")]
+        [Route("delete")]
         [HttpPost]
-        public IHttpActionResult Delete(MagazinePublisher magazinePublisher)
+        public IHttpActionResult Delete(Magazine magazine)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is Invalid");
 
-            _magazinePublisherService.Delete(magazinePublisher);
+            _magazineService.Delete(magazine);
             return Ok();
         }
 
-        [Route("get/publisher/{Id}")]
+        [Route("get/{Id}")]
         [HttpGet]
         public IHttpActionResult Get(int Id)
         {
             if (Id == 0)
                 throw new ArgumentNullException();
 
-            var magazinePublisher = _magazinePublisherService.SelectById(Id);
+            var magazinePublisher = _magazineService.SelectById(Id);
 
             if (magazinePublisher == null)
                 return NotFound();
@@ -77,16 +72,15 @@ namespace LibraryBackEnd.Controllers
             return Ok(magazinePublisher);
         }
 
-        [Route("publisher/checkExisting")]
+        [Route("getByNumber/{number}")]
         [HttpGet]
-        public bool CheckExistingPublisher(string title)
+        public IHttpActionResult GetByNumber(string number)
         {
-            if (title == null)
-                return false;
-            var publisher = _magazinePublisherService.GetByTitle(title);
-            if (publisher == null)
-                return false;
-            return true;
+            if (number == "")
+                throw new ArgumentNullException();
+
+            var magazine = _magazineService.GetByNumber(number);
+            return Ok(magazine);
         }
 
     }

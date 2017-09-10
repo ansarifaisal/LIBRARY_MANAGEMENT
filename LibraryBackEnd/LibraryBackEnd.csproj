@@ -269,12 +269,16 @@
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IssueBookController.cs" />
+    <Compile Include="Controllers\IssueMagazineController.cs" />
     <Compile Include="Controllers\LostOrReplaceController.cs" />
+    <Compile Include="Controllers\LostOrReplaceMagazineController.cs" />
     <Compile Include="Controllers\MagazineController.cs" />
+    <Compile Include="Controllers\MagazinePublisherController.cs" />
     <Compile Include="Controllers\PeriodicMagazineController.cs" />
     <Compile Include="Controllers\PublicationController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\ReturnBookController.cs" />
+    <Compile Include="Controllers\ReturnMagazineController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -291,11 +295,15 @@
     <Compile Include="Core\IRepositories\IBookRepository.cs" />
     <Compile Include="Core\IRepositories\ICourseRepository.cs" />
     <Compile Include="Core\IRepositories\IIssueBookRepository.cs" />
+    <Compile Include="Core\IRepositories\IIssueMagazineRepository.cs" />
+    <Compile Include="Core\IRepositories\ILostOrReplaceMagazineRepository.cs" />
     <Compile Include="Core\IRepositories\ILostOrReplaceRepository.cs" />
     <Compile Include="Core\IRepositories\IMagazinePublisherRepository.cs" />
+    <Compile Include="Core\IRepositories\IMagazineRepository.cs" />
     <Compile Include="Core\IRepositories\IPeriodicMagazineRepository.cs" />
     <Compile Include="Core\IRepositories\IRequestRepository.cs" />
     <Compile Include="Core\IRepositories\IReturnBookRepository.cs" />
+    <Compile Include="Core\IRepositories\IReturnMagazineRepository.cs" />
     <Compile Include="Core\IRepositories\ISubjectRepository.cs" />
     <Compile Include="Core\Models\Author.cs" />
     <Compile Include="Core\Models\Book.cs" />
@@ -303,6 +311,7 @@
     <Compile Include="Core\Models\IssueBook.cs" />
     <Compile Include="Core\Models\IssueMagazine.cs" />
     <Compile Include="Core\Models\LostOrReplace.cs" />
+    <Compile Include="Core\Models\LostOrReplaceMagazine.cs" />
     <Compile Include="Core\Models\Magazine.cs" />
     <Compile Include="Core\Models\MagazinePublisher.cs" />
     <Compile Include="Core\Models\PeriodicMagazine.cs" />
@@ -315,24 +324,32 @@
     <Compile Include="Core\Services\Class\CourseService.cs" />
     <Compile Include="Core\Services\Class\EntityService.cs" />
     <Compile Include="Core\Services\Class\IssueBookService.cs" />
+    <Compile Include="Core\Services\Class\IssueMagazineService.cs" />
+    <Compile Include="Core\Services\Class\LostOrReplaceMagazineService.cs" />
     <Compile Include="Core\Services\Class\LostOrReplaceService.cs" />
     <Compile Include="Core\Services\Class\MagazinePublisherService.cs" />
+    <Compile Include="Core\Services\Class\MagazineService.cs" />
     <Compile Include="Core\Services\Class\PeriodicMagazineService.cs" />
     <Compile Include="Core\Services\Class\RequestService.cs" />
     <Compile Include="Core\Services\Class\ReturnBookService.cs" />
+    <Compile Include="Core\Services\Class\ReturnMagazineService.cs" />
     <Compile Include="Core\Services\Class\SubjectService.cs" />
     <Compile Include="Core\Services\Interface\IAuthorService.cs" />
     <Compile Include="Core\Services\Interface\IBookService.cs" />
     <Compile Include="Core\Services\Interface\ICourseService.cs" />
     <Compile Include="Core\Services\Interface\IIssueBookService.cs" />
+    <Compile Include="Core\Services\Interface\IIssueMagazineService.cs" />
+    <Compile Include="Core\Services\Interface\ILostOrReplaceMagazineService.cs" />
     <Compile Include="Core\Services\Interface\ILostOrReplaceService.cs" />
     <Compile Include="Core\Services\Interface\IMagazinePublisherService.cs" />
+    <Compile Include="Core\Services\Interface\IMagazineService.cs" />
     <Compile Include="Core\Services\Interface\IPeriodicMagazineService.cs" />
     <Compile Include="Core\Services\Interface\IPublicationService.cs" />
     <Compile Include="Core\Services\Class\PublicationService.cs" />
     <Compile Include="Core\Services\Class\StudentService.cs" />
     <Compile Include="Core\Services\Interface\IRequestService.cs" />
     <Compile Include="Core\Services\Interface\IReturnBookService.cs" />
+    <Compile Include="Core\Services\Interface\IReturnMagazineService.cs" />
     <Compile Include="Core\Services\Interface\ISendEmailService.cs" />
     <Compile Include="Core\Services\Interface\IEntityService.cs" />
     <Compile Include="Core\Services\Interface\IStudentService.cs" />
@@ -455,6 +472,50 @@
     <Compile Include="Persistence\Migrations\201708251811019_addMagazineModule.Designer.cs">
       <DependentUpon>201708251811019_addMagazineModule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201708271612317_modifyMagazine.cs" />
+    <Compile Include="Persistence\Migrations\201708271612317_modifyMagazine.Designer.cs">
+      <DependentUpon>201708271612317_modifyMagazine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709030723466_modifyMagazine1.cs" />
+    <Compile Include="Persistence\Migrations\201709030723466_modifyMagazine1.Designer.cs">
+      <DependentUpon>201709030723466_modifyMagazine1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709030752563_modifyMagazine2.cs" />
+    <Compile Include="Persistence\Migrations\201709030752563_modifyMagazine2.Designer.cs">
+      <DependentUpon>201709030752563_modifyMagazine2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709031400082_modifyIssueMagazine.cs" />
+    <Compile Include="Persistence\Migrations\201709031400082_modifyIssueMagazine.Designer.cs">
+      <DependentUpon>201709031400082_modifyIssueMagazine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709041540239_modifyIssueMagazine1.cs" />
+    <Compile Include="Persistence\Migrations\201709041540239_modifyIssueMagazine1.Designer.cs">
+      <DependentUpon>201709041540239_modifyIssueMagazine1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709050647026_modifyMagazine3.cs" />
+    <Compile Include="Persistence\Migrations\201709050647026_modifyMagazine3.Designer.cs">
+      <DependentUpon>201709050647026_modifyMagazine3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709051712212_modifyMagazine4.cs" />
+    <Compile Include="Persistence\Migrations\201709051712212_modifyMagazine4.Designer.cs">
+      <DependentUpon>201709051712212_modifyMagazine4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709091139364_modifyMagazineNumber.cs" />
+    <Compile Include="Persistence\Migrations\201709091139364_modifyMagazineNumber.Designer.cs">
+      <DependentUpon>201709091139364_modifyMagazineNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709091635382_modifyReturnMagazine.cs" />
+    <Compile Include="Persistence\Migrations\201709091635382_modifyReturnMagazine.Designer.cs">
+      <DependentUpon>201709091635382_modifyReturnMagazine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709091948073_addLostOrReplaceMagazine.cs" />
+    <Compile Include="Persistence\Migrations\201709091948073_addLostOrReplaceMagazine.Designer.cs">
+      <DependentUpon>201709091948073_addLostOrReplaceMagazine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709100955333_modifyReturnMagazine1.cs" />
+    <Compile Include="Persistence\Migrations\201709100955333_modifyReturnMagazine1.Designer.cs">
+      <DependentUpon>201709100955333_modifyReturnMagazine1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -470,13 +531,18 @@
     <Compile Include="Persistence\Repositories\CourseRepository.cs" />
     <Compile Include="Persistence\Repositories\GenericRepository.cs" />
     <Compile Include="Core\IRepositories\IPublicationRepository.cs" />
+    <Compile Include="Persistence\Repositories\IReturnMagazine.cs" />
     <Compile Include="Persistence\Repositories\IssueBookRepository.cs" />
+    <Compile Include="Persistence\Repositories\IssueMagazineRepository.cs" />
+    <Compile Include="Persistence\Repositories\LostOrReplaceMagazineRepository.cs" />
     <Compile Include="Persistence\Repositories\LostOrReplaceRepository.cs" />
     <Compile Include="Persistence\Repositories\MagazinePublisherRepository.cs" />
+    <Compile Include="Persistence\Repositories\MagazineRepository.cs" />
     <Compile Include="Persistence\Repositories\PeriodicMagazineRepository.cs" />
     <Compile Include="Persistence\Repositories\PublicationRepository.cs" />
     <Compile Include="Persistence\Repositories\RequestRepository.cs" />
     <Compile Include="Persistence\Repositories\ReturnBookRepository.cs" />
+    <Compile Include="Persistence\Repositories\ReturnMagazineRepository.cs" />
     <Compile Include="Persistence\Repositories\StudentRepository.cs" />
     <Compile Include="Persistence\Repositories\SubjectRepository.cs" />
     <Compile Include="Persistence\Repositories\test.cs" />
@@ -537,6 +603,15 @@
     <Content Include="app\components\LostOrReplace\lostOrReplaceModalController.js" />
     <Content Include="app\components\LostOrReplace\replaceBook.html" />
     <Content Include="app\components\LostOrReplace\undoReplaceBook.html" />
+    <Content Include="app\components\Magazines\confirmReplaceMagazine.html" />
+    <Content Include="app\components\Magazines\confirmReturnMagazine.html" />
+    <Content Include="app\components\Magazines\confirmUndoReplaceMagazine.html" />
+    <Content Include="app\components\Magazines\deleteMagazine.html" />
+    <Content Include="app\components\Magazines\deletePeriodicDetails.html" />
+    <Content Include="app\components\Magazines\issueMagazineForm.html" />
+    <Content Include="app\components\Magazines\confirmLostOrReplaceMagazine.html" />
+    <Content Include="app\components\Magazines\lostOrReplaceMagazines.html" />
+    <Content Include="app\components\Magazines\magazineForm.html" />
     <Content Include="app\components\Magazines\periodicMagazineForm.html" />
     <Content Include="app\components\Magazines\publicationForm.html" />
     <Content Include="app\components\Magazines\deletePublisher.html" />
@@ -547,7 +622,7 @@
     <Content Include="app\components\Magazines\magazines.html" />
     <Content Include="app\components\Magazines\periodicMagazines.html" />
     <Content Include="app\components\Magazines\publications.html" />
-    <Content Include="app\components\Magazines\returnMagazine.html" />
+    <Content Include="app\components\Magazines\returnMagazines.html" />
     <Content Include="app\components\Publications\deletePublication.html" />
     <Content Include="app\components\Publications\publicationModalInstanceController.js" />
     <Content Include="app\components\Publications\publication.html" />
@@ -761,6 +836,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201708251811019_addMagazineModule.resx">
       <DependentUpon>201708251811019_addMagazineModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201708271612317_modifyMagazine.resx">
+      <DependentUpon>201708271612317_modifyMagazine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709030723466_modifyMagazine1.resx">
+      <DependentUpon>201709030723466_modifyMagazine1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709030752563_modifyMagazine2.resx">
+      <DependentUpon>201709030752563_modifyMagazine2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709031400082_modifyIssueMagazine.resx">
+      <DependentUpon>201709031400082_modifyIssueMagazine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709041540239_modifyIssueMagazine1.resx">
+      <DependentUpon>201709041540239_modifyIssueMagazine1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709050647026_modifyMagazine3.resx">
+      <DependentUpon>201709050647026_modifyMagazine3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709051712212_modifyMagazine4.resx">
+      <DependentUpon>201709051712212_modifyMagazine4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709091139364_modifyMagazineNumber.resx">
+      <DependentUpon>201709091139364_modifyMagazineNumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709091635382_modifyReturnMagazine.resx">
+      <DependentUpon>201709091635382_modifyReturnMagazine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709091948073_addLostOrReplaceMagazine.resx">
+      <DependentUpon>201709091948073_addLostOrReplaceMagazine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709100955333_modifyReturnMagazine1.resx">
+      <DependentUpon>201709100955333_modifyReturnMagazine1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

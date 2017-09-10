@@ -1,0 +1,45 @@
+﻿<div ng-init="magazineCtrl.getReturnMagazines()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li><a href="" ng-href="#!/admin/magazine/periodic">Magazines</a></li>
+        <li class="active">Returned Magazine</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Returned Magazines</h3>
+    </div>
+
+    <table datatable="ng" dt-options="magazineCtrl.dtOptions" dt-column-defs="magazineCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Title</th>
+                <th class="text-center">Number</th>
+                <th class="text-center">Volume</th>
+                <th class="text-center">Issue Date</th>
+                <th class="text-center">Return Date</th>
+                <th class="text-center">Actual Return Date</th>
+                <th class="text-center">Roll Number</th>
+                <th class="text-center">Full Name</th>
+                <th class="text-center">Course</th>
+                <th class="text-center">Received By</th>
+                <th class="text-center">Fine</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="magazine in magazineCtrl.magazines">
+                <td>{{ magazine.title}}</td>
+                <td>{{ magazine.number}}</td>
+                <td>{{ magazine.volume}}</td>
+                <td>{{ magazine.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ magazine.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ magazine.actualReturnDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ magazine.rollNo}}</td>
+                <td>{{ magazine.fullName}}</td>
+                <td>{{ magazine.course}}</td>
+                <td>{{ magazine.recievedBy}}</td>
+                <td>{{ magazine.fine}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

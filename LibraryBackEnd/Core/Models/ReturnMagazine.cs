@@ -10,6 +10,8 @@ namespace LibraryBackEnd.Core.Models
 
         public string Number { get; set; }
 
+        public string Volume { get; set; }
+
         public DateTime IssuedDate { get; set; }
 
         public DateTime ReturnDate { get; set; }
@@ -20,13 +22,13 @@ namespace LibraryBackEnd.Core.Models
 
         public string RollNo { get; set; }
 
+        public string Course { get; set; }
+
         public string Email { get; set; }
+
+        public string RecievedBy { get; set; }
 
         public int Fine { get; set; }
 
-        public ReturnMagazine()
-        {
-            ActualReturnDate = DateTime.Now;
-        }
     }
 }

@@ -1,0 +1,139 @@
+﻿<div ng-init="magazineModalCtrl.checkIssueMagazine()">
+    <div class="modal-header">
+        <h4 class="modal-title">{{magazineModalCtrl.title}}</h4>
+    </div>
+
+    <div class="modal-body">
+        <form name="createEdit" ng-submit="magazineModalCtrl.submitIssueMagazineForm()" novalidate>
+
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.number.$invalid && createEdit.number.$touched
+         || createEdit.number.$invalid && createEdit.$submitted || magazineModalCtrl.magazineExists == false,
+         'has-success has-feedback': createEdit.number.$valid || createEdit.number.$valid
+         && createEdit.$submitted || magazineModalCtrl.magazineExists == true}">
+                <label for="number">Number</label>
+                <input type="text"
+                       class="form-control"
+                       name="number"
+                       ng-blur="magazineModalCtrl.getMagazineByNumber()"
+                       ng-model="magazineModalCtrl.issueMagazine.number"
+                       ng-pattern="/^[0-9]/"
+                       ng-maxlength="6"
+                       placeholder="Enter Magazine Number"
+                       required />
+                <span class="glyphicon form-control-feedback"
+                      ng-class="{'glyphicon-ok': createEdit.number.$valid || createEdit.number.$valid && createEdit.$submitted || magazineModalCtrl.magazineExists == true,
+                          'glyphicon-remove': createEdit.number.$invalid && createEdit.number.$touched
+                           || createEdit.number.$invalid && createEdit.$submitted || magazineModalCtrl.magazineExists == false}">
+                </span>
+
+                <div ng-show="createEdit.number.$invalid && createEdit.number.$touched || createEdit.$submitted || magazineModalCtrl.magazineExists == false">
+                    <div ng-show="createEdit.number.$error.required" class="text-danger small">Please, provide number.</div>
+                    <div ng-show="createEdit.number.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
+                    <div ng-show="createEdit.number.$error.maxlength" class="text-danger small">This field can contain 6 characters only.</div>
+                    <div ng-show="magazineModalCtrl.magazineExists == false" class="text-danger small">Magazine doesn't exists, Please provide valid magazine number.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text"
+                       class="form-control"
+                       name="title"
+                       ng-model="magazineModalCtrl.issueMagazine.title"
+                       placeholder="Enter Magazine Title"
+                       disabled />
+            </div>
+            <div class="form-group">
+                <label for="volume">Volume</label>
+                <input type="text"
+                       class="form-control"
+                       name="volume"
+                       ng-model="magazineModalCtrl.issueMagazine.volume"
+                       placeholder="Enter Volume"
+                       disabled />
+            </div>
+            <div class="form-group">
+                <label for="issuedDate">Issue Date</label>
+                <input type="text"
+                       class="form-control"
+                       name="issuedDate"
+                       ng-model="magazineModalCtrl.issueMagazine.issuedDate"
+                       placeholder="Enter Issue Date"
+                       disabled />
+            </div>
+            <div class="form-group">
+                <label for="returnDate">Return Date</label>
+                <input type="text"
+                       class="form-control"
+                       name="returnDate"
+                       ng-model="magazineModalCtrl.issueMagazine.returnDate"
+                       placeholder="Enter Return Date"
+                       disabled />
+            </div>
+
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.rollNo.$invalid && createEdit.rollNo.$touched
+         || createEdit.rollNo.$invalid && createEdit.$submitted || magazineModalCtrl.userExists == false,
+         'has-success has-feedback': createEdit.rollNo.$valid || createEdit.rollNo.$valid
+         && createEdit.$submitted || magazineModalCtrl.userExists == true}">
+                <label for="rollNo">Roll Number</label>
+                <input type="text"
+                       class="form-control"
+                       name="rollNo"
+                       ng-blur="magazineModalCtrl.getByRollNumber()"
+                       ng-model="magazineModalCtrl.issueMagazine.rollNo"
+                       ng-pattern="/^[0-9]/"
+                       ng-maxlength="6"
+                       placeholder="Enter Roll Number"
+                       required />
+                <span class="glyphicon form-control-feedback"
+                      ng-class="{'glyphicon-ok': createEdit.rollNo.$valid || createEdit.rollNo.$valid && createEdit.$submitted || magazineModalCtrl.userExists == true,
+                          'glyphicon-remove': createEdit.rollNo.$invalid && createEdit.rollNo.$touched
+                           || createEdit.rollNo.$invalid && createEdit.$submitted || magazineModalCtrl.userExists == false}">
+                </span>
+
+                <div ng-show="createEdit.rollNo.$invalid && createEdit.rollNo.$touched || createEdit.$submitted || magazineModalCtrl.userExists == false">
+                    <div ng-show="createEdit.rollNo.$error.required" class="text-danger small">Please, provide number.</div>
+                    <div ng-show="createEdit.rollNo.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
+                    <div ng-show="createEdit.rollNo.$error.maxlength" class="text-danger small">This field can contain 6 characters only.</div>
+                    <div ng-show="magazineModalCtrl.userExists == false" class="text-danger small">User doesn't exists, Please provide valid roll number.</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text"
+                       class="form-control"
+                       name="fullName"
+                       ng-model="magazineModalCtrl.issueMagazine.fullName"
+                       placeholder="Enter Full Name"
+                       disabled />
+            </div>
+            <div class="form-group">
+                <label for="course">Course</label>
+                <input type="text"
+                       class="form-control"
+                       name="course"
+                       ng-model="magazineModalCtrl.issueMagazine.course"
+                       placeholder="Enter Course"
+                       disabled />
+            </div>
+
+            <div ng-show="magazineModalCtrl.eligible || magazineModalCtrl.isIssued">
+                <span class="text-danger small"><strong>Note: {{magazineModalCtrl.errorMsg}}</strong></span>
+            </div>
+
+            <div ng-hide="magazineModalCtrl.eligible || magazineModalCtrl.isIssued">
+                <span class="text-danger small"><strong>Note: Verify the above details you can't edit it once updated.</strong></span>
+            </div>
+
+            <input type="submit"
+                   ng-disabled="createEdit.$invalid || magazineModalCtrl.userExists == false
+                                || magazineModalCtrl.magazineExists == false || magazineModalCtrl.eligible
+                                || magazineModalCtrl.isIssued"
+                   value="{{magazineModalCtrl.btnText}}"
+                   class="btn btn-primary"
+                   ng-click="magazineModalCtrl.ok()" />
+            <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.cancel()">Close</button>
+
+        </form>
+    </div>
+</div>

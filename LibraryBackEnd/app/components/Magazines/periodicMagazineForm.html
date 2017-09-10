@@ -7,33 +7,68 @@
     <form name="createEdit" ng-submit="magazineModalCtrl.submitPeriodicMagazineForm()" novalidate>
 
         <div class="form-group" ng-class="{'has-error has-feedback': createEdit.title.$invalid && createEdit.title.$touched
-         || createEdit.title.$invalid && createEdit.$submitted,
+         || createEdit.title.$invalid && createEdit.$submitted || magazineModalCtrl.exists == true,
          'has-success has-feedback': createEdit.title.$valid || createEdit.title.$valid
-         && createEdit.$submitted}">
+         && createEdit.$submitted || magazineModalCtrl.exists == false}">
             <label for="title">Title</label>
-            <input type="text" name="title" class="form-control" placeholder="Enter Title" ng-model="magazineModalCtrl.periodicDetail.title" required />
+            <input type="text"
+                   name="title"
+                   class="form-control"
+                   placeholder="Enter Title"
+                   ng-model="magazineModalCtrl.periodicDetail.title"
+                   ng-change="magazineModalCtrl.checkExistingPeriodicDetails(magazineModalCtrl.periodicDetail.title)"
+                   required />
 
             <span class="glyphicon form-control-feedback"
-                  ng-class="{'glyphicon-ok': createEdit.title.$valid || createEdit.title.$valid && createEdit.$submitted,
+                  ng-class="{'glyphicon-ok': createEdit.title.$valid || createEdit.title.$valid && createEdit.$submitted || magazineModalCtrl.exists == false,
                           'glyphicon-remove': createEdit.title.$invalid && createEdit.title.$touched
-                           || createEdit.title.$invalid && createEdit.$submitted}">
+                           || createEdit.title.$invalid && createEdit.$submitted || magazineModalCtrl.exists == true}">
             </span>
 
-            <div ng-show="createEdit.title.$invalid && createEdit.title.$touched || createEdit.$submitted">
+            <div ng-show="createEdit.title.$invalid && createEdit.title.$touched || createEdit.$submitted || magazineModalCtrl.exists == true">
                 <span ng-show="createEdit.title.$error.required" class="text-danger small">Please, provide title.</span>
+                <span ng-show="magazineModalCtrl.exists == true" class="text-danger small">This title already exists.</span>
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.periodicity.$invalid && createEdit.periodicity.$touched
+         || createEdit.periodicity.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.periodicity.$valid || createEdit.periodicity.$valid
+         && createEdit.$submitted}">
             <label for="periodicity">Periodicity</label>
-            <input type="text"
-                   name="periodicity"
-                   class="form-control"
-                   placeholder="Enter Periodicity"
-                   ng-model="magazineModalCtrl.periodicDetail.periodicity"
-                   required />
+            <select class="form-control" name="periodicity"
+                    ng-model="magazineModalCtrl.periodicDetail.periodicity"
+                    ng-options="periodicity as periodicity for periodicity in  magazineModalCtrl.periodicity"
+                    required>
+                <option value="" disabled>Select Periodicity</option>
+            </select>
+
+
+            <div ng-show="createEdit.periodicity.$invalid && createEdit.periodicity.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.periodicity.$error.required" class="text-danger small">Please, select periodicity.</span>
+            </div>
         </div>
-        <div class="form-group">
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.publisher.$invalid && createEdit.publisher.$touched
+         || createEdit.publisher.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.publisher.$valid || createEdit.publisher.$valid
+         && createEdit.$submitted}">
+            <label for="publisher">Publisher</label>
+            <select class="form-control" name="publisher"
+                    ng-model="magazineModalCtrl.periodicDetail.publisher"
+                    ng-options="publisher.title as publisher.title for publisher in  magazineModalCtrl.publishers"
+                    required>
+                <option value="" disabled>Select Publisher</option>
+            </select>
+            <div ng-show="createEdit.publisher.$invalid && createEdit.publisher.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.publisher.$error.required" class="text-danger small">Please, select publisher.</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.subscription.$invalid && createEdit.subscription.$touched
+         || createEdit.subscription.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.subscription.$valid || createEdit.subscription.$valid
+         && createEdit.$submitted}">
             <label for="subscription">Subscription</label>
             <input type="text"
                    name="subscription"
@@ -41,36 +76,98 @@
                    placeholder="Enter Subscription"
                    ng-model="magazineModalCtrl.periodicDetail.subscription"
                    required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.subscription.$valid || createEdit.subscription.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.subscription.$invalid && createEdit.subscription.$touched
+                           || createEdit.subscription.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.subscription.$invalid && createEdit.subscription.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.subscription.$error.required" class="text-danger small">Please, provide subscription.</span>
+            </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.from.$invalid && createEdit.from.$touched
+         || createEdit.from.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.from.$valid || createEdit.from.$valid
+         && createEdit.$submitted}">
             <label for="from">Subscription From</label>
-            <input type="text"
-                   name="from"
-                   class="form-control"
-                   placeholder="Enter Subscription From"
-                   ng-model="magazineModalCtrl.periodicDetail.from"
-                   required />
+            <div class="input-group">
+                <input type="text"
+                       name="from"
+                       class="form-control"
+                       placeholder="Enter Subscription From"
+                       ng-model="magazineModalCtrl.periodicDetail.from"
+                       uib-datepicker-popup="MMM, yyyy"
+                       datepicker-options="magazineModalCtrl.monthPickerOptions"
+                       close-text="Close"
+                       is-open="magazineModalCtrl.fromMonthPicker.opened"
+                       required />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.fromMonthPickers()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div ng-show="createEdit.from.$invalid && createEdit.from.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.from.$error.required" class="text-danger small">Please, provide subscription from.</span>
+            </div>
+        </div>
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.to.$invalid && createEdit.to.$touched
+         || createEdit.to.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.to.$valid || createEdit.to.$valid
+         && createEdit.$submitted}">
+            <label for="to">Subscription To</label>
+            <div class="input-group">
+                <input type="text"
+                       name="to"
+                       class="form-control"
+                       placeholder="Enter Subscription To"
+                       ng-model="magazineModalCtrl.periodicDetail.to"
+                       uib-datepicker-popup="MMM, yyyy"
+                       datepicker-options="magazineModalCtrl.monthPickerOptions"
+                       close-text="Close"
+                       is-open="magazineModalCtrl.toMonthPicker.opened"
+                       required />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.toMonthPickers()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+
+            <div ng-show="createEdit.to.$invalid && createEdit.to.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.to.$error.required" class="text-danger small">Please, provide subscription to.</span>
+            </div>
 
         </div>
-        <div class="form-group">
-            <label for="to">Subscription To</label>
-            <input type="text"
-                   name="to"
-                   class="form-control"
-                   placeholder="Enter Subscription To"
-                   ng-model="magazineModalCtrl.periodicDetail.to"
-                   required />
-        </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.volume.$invalid && createEdit.volume.$touched
+         || createEdit.volume.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.volume.$valid || createEdit.volume.$valid
+         && createEdit.$submitted}">
             <label for="volume">Volume</label>
             <input type="text"
                    name="volume"
                    class="form-control"
                    placeholder="Enter Volume"
+                   ng-pattern="/^[0-9]/"
+                   ng-maxlength="3"
                    ng-model="magazineModalCtrl.periodicDetail.volume"
                    required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.volume.$valid || createEdit.volume.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.volume.$invalid && createEdit.volume.$touched
+                           || createEdit.volume.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.volume.$invalid && createEdit.volume.$touched || createEdit.$submitted">
+                <div ng-show="createEdit.volume.$error.required" class="text-danger small">Please, provide volume.</div>
+                <div ng-show="createEdit.volume.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
+                <div ng-show="createEdit.volume.$error.maxlength" class="text-danger small">This field can contain 4 characters only.</div>
+            </div>
+
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.source.$invalid && createEdit.source.$touched
+         || createEdit.source.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.source.$valid || createEdit.source.$valid
+         && createEdit.$submitted}">
             <label for="source">Source</label>
             <input type="text"
                    name="source"
@@ -78,8 +175,20 @@
                    placeholder="Enter Source"
                    ng-model="magazineModalCtrl.periodicDetail.source"
                    required />
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.source.$valid || createEdit.source.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.source.$invalid && createEdit.source.$touched
+                           || createEdit.source.$invalid && createEdit.$submitted}">
+            </span>
+            <div ng-show="createEdit.source.$invalid && createEdit.source.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.source.$error.required" class="text-danger small">Please, provide source.</span>
+            </div>
         </div>
-        <div class="form-group">
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.orderNo.$invalid && createEdit.orderNo.$touched
+         || createEdit.orderNo.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.orderNo.$valid || createEdit.orderNo.$valid
+         && createEdit.$submitted}">
 
             <label for="orderNo">Order Number</label>
             <input type="text"
@@ -88,18 +197,46 @@
                    placeholder="Enter Order Number"
                    ng-model="magazineModalCtrl.periodicDetail.orderNo"
                    required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.orderNo.$valid || createEdit.orderNo.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.orderNo.$invalid && createEdit.orderNo.$touched
+                           || createEdit.orderNo.$invalid && createEdit.$submitted}">
+            </span>
+            <div ng-show="createEdit.orderNo.$invalid && createEdit.orderNo.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.orderNo.$error.required" class="text-danger small">Please, provide order number.</span>
+            </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.orderDate.$invalid && createEdit.orderDate.$touched
+         || createEdit.orderDate.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.orderDate.$valid || createEdit.orderDate.$valid
+         && createEdit.$submitted}">
             <label for="orderDate">Order Date</label>
-            <input type="text"
-                   name="orderDate"
-                   class="form-control"
-                   placeholder="Enter Order Date"
-                   ng-model="magazineModalCtrl.periodicDetail.orderDate"
-                   required />
+            <div class="input-group">
+                <input type="text"
+                       name="orderDate"
+                       class="form-control"
+                       placeholder="Enter Order Date"
+                       ng-model="magazineModalCtrl.periodicDetail.orderDate"
+                       uib-datepicker-popup="EEE MMM, dd yyyy"
+                       datepicker-options="magazineModalCtrl.datePickerOptions"
+                       close-text="Close"
+                       is-open="magazineModalCtrl.orderDatePicker.opened"
+                       required />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.orderDatePickers()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div ng-show="createEdit.orderDate.$invalid && createEdit.orderDate.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.orderDate.$error.required" class="text-danger small">Please, provide Order Date.</span>
+            </div>
         </div>
-        <div class="form-group">
-            
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.billNo.$invalid && createEdit.billNo.$touched
+         || createEdit.billNo.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.billNo.$valid || createEdit.billNo.$valid
+         && createEdit.$submitted}">
+
             <label for="billNo">Bill Number</label>
             <input type="text"
                    name="billNo"
@@ -107,38 +244,102 @@
                    placeholder="Enter Bill Number"
                    ng-model="magazineModalCtrl.periodicDetail.billNo"
                    required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.billNo.$valid || createEdit.billNo.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.billNo.$invalid && createEdit.billNo.$touched
+                           || createEdit.billNo.$invalid && createEdit.$submitted}">
+            </span>
+            <div ng-show="createEdit.billNo.$invalid && createEdit.billNo.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.billNo.$error.required" class="text-danger small">Please, provide bill number.</span>
+            </div>
+
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.billDate.$invalid && createEdit.billDate.$touched
+         || createEdit.billDate.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.billDate.$valid || createEdit.billDate.$valid
+         && createEdit.$submitted}">
             <label for="billDate">Bill Date</label>
-            <input type="text"
-                   name="billDate"
-                   class="form-control"
-                   placeholder="Enter Bill Date"
-                   ng-model="magazineModalCtrl.periodicDetail.billDate"
-                   required />
+
+            <div class="input-group">
+                <input type="text"
+                       name="billDate"
+                       class="form-control"
+                       placeholder="Enter Bill Date"
+                       ng-model="magazineModalCtrl.periodicDetail.billDate"
+                       uib-datepicker-popup="EEE MMM, dd yyyy"
+                       datepicker-options="magazineModalCtrl.datePickerOptions"
+                       close-text="Close"
+                       is-open="magazineModalCtrl.billDatePicker.opened"
+                       required />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.billDatePickers()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+
+            <div ng-show="createEdit.billDate.$invalid && createEdit.billDate.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.billDate.$error.required" class="text-danger small">Please, provide Bill Date.</span>
+            </div>
+
         </div>
-        <div class="form-group">
-            
-            <label for="amount">Bill Date</label>
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.amount.$invalid && createEdit.amount.$touched
+         || createEdit.amount.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.amount.$valid || createEdit.amount.$valid
+         && createEdit.$submitted}">
+
+            <label for="amount">Amount</label>
             <input type="text"
                    name="amount"
                    class="form-control"
                    placeholder="Enter Bill Amount"
                    ng-model="magazineModalCtrl.periodicDetail.amount"
+                   ng-pattern="/^[0-9]/"
+                   ng-maxlength="5"
                    required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.amount.$valid || createEdit.amount.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.amount.$invalid && createEdit.amount.$touched
+                           || createEdit.amount.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.amount.$invalid && createEdit.amount.$touched || createEdit.$submitted">
+                <div ng-show="createEdit.amount.$error.required" class="text-danger small">Please, provide amount.</div>
+                <div ng-show="createEdit.amount.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
+                <div ng-show="createEdit.amount.$error.maxlength" class="text-danger small">This field can contain 5 characters only.</div>
+            </div>
         </div>
-        <div class="form-group">
-            
-            <label for="chequeNo">Cheque Numeber</label>
+
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.paidBy.$invalid && createEdit.paidBy.$touched
+         || createEdit.paidBy.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.paidBy.$valid || createEdit.paidBy.$valid
+         && createEdit.$submitted}">
+
+            <label for="paidBy">Paid By</label>
+            <select class="form-control" name="paidBy"
+                    ng-model="magazineModalCtrl.periodicDetail.paidBy"
+                    ng-options="paidBy as paidBy for paidBy in  magazineModalCtrl.paidBy"
+                    ng-change="magazineModalCtrl.isPaidByCheque(magazineModalCtrl.periodicDetail.paidBy)"
+                    required>
+                <option value="" disabled>Select Paid By</option>
+            </select>
+            <div ng-show="createEdit.paidBy.$invalid && createEdit.paidBy.$touched || createEdit.$submitted">
+                <div ng-show="createEdit.paidBy.$error.required" class="text-danger small">Please, select an option.</div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-show="magazineModalCtrl.cheque == true">
+
+            <label for="chequeNo">Cheque Number</label>
             <input type="text"
                    name="chequeNo"
                    class="form-control"
                    placeholder="Enter Cheque Number"
-                   ng-model="magazineModalCtrl.periodicDetail.chequeNo"
-                   required />
+                   ng-model="magazineModalCtrl.periodicDetail.chequeNo" />
         </div>
 
-        <input type="submit" value="{{magazineModalCtrl.btnText}}" class="btn btn-primary" ng-click="magazineModalCtrl.ok()" />
+        <input type="submit" ng-disabled="createEdit.$invalid" value="{{magazineModalCtrl.btnText}}" class="btn btn-primary" ng-click="magazineModalCtrl.ok()" />
         <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.cancel()">Close</button>
 
     </form>

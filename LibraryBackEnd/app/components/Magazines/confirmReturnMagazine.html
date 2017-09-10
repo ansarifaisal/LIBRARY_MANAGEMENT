@@ -1,0 +1,13 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{magazineModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    Want To Return <strong>Volume {{magazineModalCtrl.issueMagazine.volume}} of {{magazineModalCtrl.issueMagazine.title}}</strong> ?
+    <div class="small text-danger">Note: Collect fine first.</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="magazineModalCtrl.cancel()">Close</button>
+    <button class="btn btn-primary" ng-click="magazineModalCtrl.returnIssueMagazine(magazineModalCtrl.issueMagazine)">{{magazineModalCtrl.btnText}}</button>
+</div>

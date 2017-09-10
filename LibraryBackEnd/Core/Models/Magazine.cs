@@ -6,7 +6,7 @@ namespace LibraryBackEnd.Core.Models
     {
         public int Id { get; set; }
 
-        public string Title { get; set; }
+        public string PeriodicTitle { get; set; }
 
         public DateTime Date { get; set; }
 
@@ -14,12 +14,15 @@ namespace LibraryBackEnd.Core.Models
 
         public int Volume { get; set; }
 
-        public int Number { get; set; }
+        public string Number { get; set; }
 
-        public string DateOfRecieved { get; set; }
+        public DateTime DateOfRecieved { get; set; }
 
         public string RecievedBy { get; set; }
 
+        public string Status { get; set; }
+
         public string Remark { get; set; }
+
     }
 }

@@ -1,0 +1,16 @@
+﻿<div ng-init="magazineModalCtrl.setData()">
+
+    <div class="modal-header">
+        <h4 class="modal-title">{{magazineModalCtrl.title}}</h4>
+    </div>
+
+    <div class="modal-body">
+        Want to Replace <strong>Volume {{magazineModalCtrl.lostOrReplace.volume}}</strong> of <strong>{{magazineModalCtrl.lostOrReplace.title}}</strong> ?
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-default" ng-click="magazineModalCtrl.cancel()">Close</button>
+        <button class="btn btn-primary" ng-click="magazineModalCtrl.replaceMagazine(magazineModalCtrl.lostOrReplace)">{{magazineModalCtrl.btnText}}</button>
+    </div>
+
+</div>

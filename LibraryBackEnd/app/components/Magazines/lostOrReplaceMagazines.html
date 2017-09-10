@@ -1,0 +1,48 @@
+﻿<div ng-init="magazineCtrl.getLostMagazines()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li><a href="" ng-href="#!/admin/magazine/periodic">Magazines</a></li>
+        <li class="active">Lost/Replace Magazines</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Lost/Replace Magazines</h3>
+    </div>
+
+    <table datatable="ng" dt-options="magazineCtrl.dtOptions" dt-column-defs="magazineCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Title</th>
+                <th class="text-center">Number</th>
+                <th class="text-center">Volume</th>
+                <th class="text-center">Issue Date</th>
+                <th class="text-center">Return Date</th>
+                <th class="text-center">Roll Number</th>
+                <th class="text-center">Full Name</th>
+                <th class="text-center">Course</th>
+                <th class="text-center">Received By</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="lostMagazine in magazineCtrl.lostMagazines">
+                <td>{{ lostMagazine.title}}</td>
+                <td>{{ lostMagazine.number}}</td>
+                <td>{{ lostMagazine.volume}}</td>
+                <td>{{ lostMagazine.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ lostMagazine.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ lostMagazine.rollNo}}</td>
+                <td>{{ lostMagazine.fullName}}</td>
+                <td>{{ lostMagazine.course}}</td>
+                <td>{{ lostMagazine.receivedBy}}</td>
+                <td>{{ lostMagazine.status}}</td>
+                <td class="text-center">
+                    <a href="" title="Replace" ng-show="lostMagazine.status == 'Lost'" ng-click="magazineCtrl.confirmReplaceMagazine(lostMagazine.id)" class="text-success"><i class="fa fa-check fa-2x" aria-hidden="true"></i></a>
+                    <a href="" title="Undo Replace" ng-show="lostMagazine.status == 'Replaced'" ng-click="magazineCtrl.confirmUndoReplaceMagazine(lostMagazine.id)" class="text-danger"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

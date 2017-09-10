@@ -1,9 +1,45 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>magazines</title>
-</head>
-<body>
-    
-</body>
-</html>
+﻿<div ng-init="magazineCtrl.getMagazines()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li><a href="" ng-href="#!/admin/magazine/periodic">Magazines</a></li>
+        <li class="active">Details of {{magazineCtrl.title}}</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Details of {{magazineCtrl.title}}</h3>
+    </div>
+
+    <table datatable="ng" dt-options="magazineCtrl.dtOptions" dt-column-defs="magazineCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Title</th>
+                <th class="text-center">Date</th>
+                <th class="text-center">Month</th>
+                <th class="text-center">Volume</th>
+                <th class="text-center">Number</th>
+                <th class="text-center">Received Date</th>
+                <th class="text-center">Received By</th>
+                <th class="text-center">Remark</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="magazine in magazineCtrl.magazines">
+                <td>{{ magazine.periodicTitle}}</td>
+                <td>{{ magazine.date | date: 'EEE MMM, dd yyyy'}}</td>
+                <td>{{ magazine.month | date: 'MMM, yyyy'}}</td>
+                <td>{{ magazine.volume}}</td>
+                <td>{{ magazine.number}}</td>
+                <td>{{ magazine.dateOfRecieved | date: 'EEE MMM, dd yyyy'}}</td>
+                <td>{{ magazine.recievedBy}}</td>
+                <td>{{ magazine.remark}}</td>
+                <td>{{ magazine.status}}</td>
+                <td class="text-center">
+                    <a href="" ng-click="magazineCtrl.getMagazine(magazine.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                    <a href="" ng-click="magazineCtrl.deleteMagazineModal(magazine.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

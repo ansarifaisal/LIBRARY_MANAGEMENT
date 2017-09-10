@@ -22,6 +22,7 @@ namespace LibraryBackEnd.Configuration
         public DbSet<Magazine> Magazines { get; set; }
         public DbSet<IssueMagazine> IssueMagazines { get; set; }
         public DbSet<ReturnMagazine> ReturnMagazines { get; set; }
+        public DbSet<LostOrReplaceMagazine> lostOrReplaceMagazines { get; set; }
 
         //intializing the dbcontext with DefaultConnection 
         public ApplicationDbContext()

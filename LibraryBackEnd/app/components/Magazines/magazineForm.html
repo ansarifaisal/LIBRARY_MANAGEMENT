@@ -1,0 +1,142 @@
+﻿
+<div class="modal-header">
+    <h4 class="modal-title">{{magazineModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    <form name="createEdit" ng-submit="magazineModalCtrl.submitMagazineForm()" novalidate>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.month.$invalid && createEdit.month.$touched
+         || createEdit.month.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.month.$valid || createEdit.month.$valid
+         && createEdit.$submitted}">
+            <label for="month">Month</label>
+            <div class="input-group">
+                <input type="text"
+                       name="month"
+                       class="form-control"
+                       placeholder="Month"
+                       ng-model="magazineModalCtrl.magazine.month"
+                       uib-datepicker-popup="MMM, yyyy"
+                       datepicker-options="magazineModalCtrl.monthPickerOptions"
+                       close-text="Close"
+                       is-open="magazineModalCtrl.fromMonthPicker.opened"
+                       required />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.fromMonthPickers()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div ng-show="createEdit.month.$invalid && createEdit.month.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.month.$error.required" class="text-danger small">Please, provide month.</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.volume.$invalid && createEdit.volume.$touched
+         || createEdit.volume.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.volume.$valid || createEdit.volume.$valid
+         && createEdit.$submitted}">
+            <label for="volume">Volume</label>
+            <input type="text"
+                   name="volume"
+                   class="form-control"
+                   placeholder="Enter Volume"
+                   ng-pattern="/^[0-9]/"
+                   ng-maxlength="4"
+                   ng-model="magazineModalCtrl.magazine.volume"
+                   required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.volume.$valid || createEdit.volume.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.volume.$invalid && createEdit.volume.$touched
+                           || createEdit.volume.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.volume.$invalid && createEdit.volume.$touched || createEdit.$submitted">
+                <div ng-show="createEdit.volume.$error.required" class="text-danger small">Please, provide volume.</div>
+                <div ng-show="createEdit.volume.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
+                <div ng-show="createEdit.volume.$error.maxlength" class="text-danger small">This field can contain 4 characters only.</div>
+            </div>
+
+        </div>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.number.$invalid && createEdit.number.$touched
+         || createEdit.number.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.number.$valid || createEdit.number.$valid
+         && createEdit.$submitted}">
+            <label for="number">Magazine Number</label>
+            <input type="text"
+                   name="number"
+                   class="form-control"
+                   placeholder="Enter Magazine Number"
+                   ng-pattern="/^[0-9]/"
+                   ng-maxlength="6"
+                   ng-model="magazineModalCtrl.magazine.number"
+                   required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.number.$valid || createEdit.number.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.number.$invalid && createEdit.number.$touched
+                           || createEdit.number.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.number.$invalid && createEdit.number.$touched || createEdit.$submitted">
+                <div ng-show="createEdit.number.$error.required" class="text-danger small">Please, provide magazine number.</div>
+                <div ng-show="createEdit.number.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
+                <div ng-show="createEdit.number.$error.maxlength" class="text-danger small">This field can contain 6 characters only.</div>
+            </div>
+
+        </div>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.dateOfRecieved.$invalid && createEdit.dateOfRecieved.$touched
+         || createEdit.dateOfRecieved.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.dateOfRecieved.$valid || createEdit.dateOfRecieved.$valid
+         && createEdit.$submitted}">
+            <label for="dateOfRecieved">Recieved Date</label>
+            <div class="input-group">
+                <input type="text"
+                       name="dateOfRecieved"
+                       class="form-control"
+                       placeholder="Enter Order Date"
+                       ng-model="magazineModalCtrl.magazine.dateOfRecieved"
+                       uib-datepicker-popup="EEE MMM, dd yyyy"
+                       datepicker-options="magazineModalCtrl.datePickerOptions"
+                       close-text="Close"
+                       is-open="magazineModalCtrl.orderDatePicker.opened"
+                       required />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.orderDatePickers()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div ng-show="createEdit.dateOfRecieved.$invalid && createEdit.dateOfRecieved.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.dateOfRecieved.$error.required" class="text-danger small">Please, provide recieved date.</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.remark.$invalid && createEdit.remark.$touched
+         || createEdit.remark.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.remark.$valid || createEdit.remark.$valid
+         && createEdit.$submitted}">
+            <label for="remark">Remark</label>
+            <input type="text"
+                   name="remark"
+                   class="form-control"
+                   placeholder="Enter Remark"
+                   ng-model="magazineModalCtrl.magazine.remark"
+                   required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.remark.$valid || createEdit.remark.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.remark.$invalid && createEdit.remark.$touched
+                           || createEdit.remark.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.remark.$invalid && createEdit.remark.$touched || createEdit.$submitted">
+                <div ng-show="createEdit.remark.$error.required" class="text-danger small">Please, provide remark.</div>
+            </div>
+        </div>
+
+        <input type="submit" ng-disabled="createEdit.$invalid" value="{{magazineModalCtrl.btnText}}" class="btn btn-primary" ng-click="magazineModalCtrl.ok()" />
+        <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.cancel()">Close</button>
+
+    </form>
+</div>

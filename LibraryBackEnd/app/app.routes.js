@@ -387,7 +387,7 @@ window.routes = {
     * Loading Magazine Module
     */
 
-    '/admin/magazines': {
+    '/admin/magazines/:title': {
 
         templateUrl: 'app/components/magazines/magazines.html',
         controller: 'MagazineController',
@@ -425,7 +425,16 @@ window.routes = {
 
     '/admin/magazine/returned': {
 
-        templateUrl: 'app/components/magazines/returnMagazine.html',
+        templateUrl: 'app/components/magazines/returnMagazines.html',
+        controller: 'MagazineController',
+        controllerAs: 'magazineCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
+
+    '/admin/magazine/lost': {
+
+        templateUrl: 'app/components/magazines/lostOrReplaceMagazines.html',
         controller: 'MagazineController',
         controllerAs: 'magazineCtrl',
         requireLogin: true,
