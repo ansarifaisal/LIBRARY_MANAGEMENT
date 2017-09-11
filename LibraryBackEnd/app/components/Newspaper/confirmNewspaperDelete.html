@@ -1,0 +1,13 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{newsPaperModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    Want To Delete Newspaper <strong>{{newsPaperModalCtrl.newsPaper.title}}</strong> of Date  <strong>{{newsPaperModalCtrl.newsPaper.date | date: 'EEE dd MMM, yyyy'}}</strong>?
+    <div class="small text-danger">Note: Many things will get affected.</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="newsPaperModalCtrl.cancel()">Close</button>
+    <button class="btn btn-danger" ng-click="newsPaperModalCtrl.deleteNewspaper()">{{newsPaperModalCtrl.btnText}}</button>
+</div>

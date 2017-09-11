@@ -21,7 +21,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="periodicNewspaper in newsPaperCtrl.periodicNewspapers">
-                <td><a href="" ng-href="#!/admin/newspaper/month/{{periodicNewspaper.title}}">{{ periodicNewspaper.title}}</a></td>
+                <td><a href="" ng-href="#!/admin/newspaper/month/{{periodicNewspaper.title}}?publisher={{periodicNewspaper.publisher}}">{{ periodicNewspaper.title}}</a></td>
                 <td>{{periodicNewspaper.publisher}}</td>
                 <td>{{periodicNewspaper.amount}}</td>
                 <td>{{periodicNewspaper.librarian}}</td>

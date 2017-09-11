@@ -1,0 +1,72 @@
+﻿<div ng-init="newsPaperModalCtrl.initNewspaperData()">
+    <div class="modal-header">
+        <h4 class="modal-title">{{newsPaperModalCtrl.title}}</h4>
+    </div>
+
+    <div class="modal-body">
+        <form name="createEdit" ng-submit="newsPaperModalCtrl.submitNewspaperForm()" novalidate>
+
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.price.$invalid && createEdit.price.$touched
+         || createEdit.price.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.price.$valid || createEdit.price.$valid
+         && createEdit.$submitted}">
+                <label for="price">Price</label>
+                <input type="text"
+                       name="price"
+                       class="form-control"
+                       placeholder="Enter Price"
+                       ng-pattern="/^[0-9]/"
+                       ng-maxlength="4"
+                       ng-model="newsPaperModalCtrl.newsPaper.price"
+                       required />
+                <span class="glyphicon form-control-feedback"
+                      ng-class="{'glyphicon-ok': createEdit.price.$valid || createEdit.price.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.price.$invalid && createEdit.price.$touched
+                           || createEdit.price.$invalid && createEdit.$submitted}">
+                </span>
+
+                <div ng-show="createEdit.price.$invalid && createEdit.price.$touched || createEdit.$submitted">
+                    <div ng-show="createEdit.price.$error.required" class="text-danger small">Please, provide price.</div>
+                    <div ng-show="createEdit.price.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
+                    <div ng-show="createEdit.price.$error.maxlength" class="text-danger small">This field can contain 4 characters only.</div>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.date.$invalid && createEdit.date.$touched
+                                 || createEdit.date.$invalid && createEdit.$submitted,
+                                 'has-success has-feedback': createEdit.date.$valid || createEdit.date.$valid
+                                 && createEdit.$submitted}">
+                <label for="date">Date</label>
+                <div class="input-group">
+                    <input type="text"
+                           name="date"
+                           class="form-control"
+                           placeholder="Enter Date"
+                           ng-model="newsPaperModalCtrl.newsPaper.date"
+                           uib-datepicker-popup="EEE dd MMM, yyyy"
+                           datepicker-options="newsPaperModalCtrl.datePickerOptions"
+                           close-text="Close"
+                           is-open="newsPaperModalCtrl.newsPaperDatePicker.opened"
+                           required />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="newsPaperModalCtrl.newsPaperDatePickers()"><i class="fa fa-calendar"></i></button>
+                    </span>
+                </div>
+                <div ng-show="createEdit.date.$invalid && createEdit.date.$touched || createEdit.$submitted">
+                    <span ng-show="createEdit.date.$error.required" class="text-danger small">Please, provide date.</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="remark">Remark</label>
+                <input type="text"
+                       name="remark"
+                       class="form-control"
+                       placeholder="Enter Remark"
+                       ng-model="newsPaperModalCtrl.newsPaper.remark" />
+            </div>
+
+            <input type="submit" value="{{newsPaperModalCtrl.btnText}}" ng-disabled="createEdit.$invalid" class="btn btn-primary" ng-click="newsPaperModalCtrl.ok()" />
+            <button type="button" class="btn btn-default" ng-click="newsPaperModalCtrl.cancel()">Close</button>
+
+        </form>
+    </div>
+</div>

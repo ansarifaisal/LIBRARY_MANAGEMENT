@@ -4,9 +4,12 @@
 </div>
 
 <div class="modal-body">
-    <form name="createEdit" ng-submit="newsPaperModalCtrl.submitPeriodicDetailsForm()" novalidate>
+    <form name="createEdit" ng-submit="newsPaperModalCtrl.submitNewspaperMonthForm()" novalidate>
 
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.month.$invalid && createEdit.month.$touched
+                     || createEdit.month.$invalid && createEdit.$submitted,
+                     'has-success has-feedback': createEdit.month.$valid && createEdit.month.$touched || createEdit.month.$valid
+                     && createEdit.$submitted}">
             <label for="month">Month</label>
             <div class="input-group">
                 <input type="text"
@@ -17,18 +20,84 @@
                        uib-datepicker-popup="MMM, yyyy"
                        datepicker-options="newsPaperModalCtrl.monthPickerOptions"
                        close-text="Close"
+                       is-open="newsPaperModalCtrl.monthPicker.opened"
+                       required />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="newsPaperModalCtrl.monthPickers()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div ng-show="createEdit.month.$invalid && createEdit.month.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.month.$error.required" class="text-danger small">Please, provide month.</span>
+            </div>
+        </div>
+        <div class="form-group">
+
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.billNumber.$invalid && createEdit.billNumber.$touched
+                     || createEdit.billNumber.$invalid && createEdit.$submitted,
+                     'has-success has-feedback': createEdit.billNumber.$valid && createEdit.billNumber.$touched || createEdit.billNumber.$valid
+                     && createEdit.$submitted}">
+
+                <label for="billNumber">Bill Number</label>
+                <input type="text"
+                       name="billNumber"
+                       class="form-control"
+                       placeholder="Enter Bill Number"
+                       ng-model="newsPaperModalCtrl.newsPaperMonth.billNumber"
+                       ng-pattern="/^[0-9]/" />
+
+                <span class="glyphicon form-control-feedback"
+                      ng-class="{'glyphicon-ok': createEdit.billNumber.$valid && createEdit.billNumber.$touched || createEdit.billNumber.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.billNumber.$invalid && createEdit.billNumber.$touched
+                           || createEdit.billNumber.$invalid && createEdit.$submitted}">
+                </span>
+                <div ng-show="createEdit.billNumber.$invalid && createEdit.billNumber.$touched || createEdit.$submitted">
+                    <div ng-show="createEdit.billNumber.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.billDate.$invalid && createEdit.billDate.$touched
+                     || createEdit.billDate.$invalid && createEdit.$submitted,
+                     'has-success has-feedback': createEdit.billDate.$valid || createEdit.billDate.$valid
+                     && createEdit.$submitted}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="from">From</label>
+            <div class="input-group">
+                <input type="text"
+                       name="from"
+                       placeholder="Enter From"
+                       class="form-control"
+                       ng-model="newsPaperModalCtrl.newsPaperMonth.from"
+                       uib-datepicker-popup="MMM, yyyy"
+                       datepicker-options="newsPaperModalCtrl.monthPickerOptions"
+                       close-text="Close"
                        is-open="newsPaperModalCtrl.fromMonthPicker.opened" />
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="newsPaperModalCtrl.fromMonthPickers()"><i class="fa fa-calendar"></i></button>
                 </span>
             </div>
-            <div ng-show="createEdit.from.$invalid && createEdit.from.$touched || createEdit.$submitted">
-                <span ng-show="createEdit.from.$error.required" class="text-danger small">Please, provide month.</span>
-            </div>
+
         </div>
-        <div class="form-group"></div>
-        <div class="form-group"></div>
-        <div class="form-group"></div>
+
+        <div class="form-group">
+
+            <label for="to">From</label>
+            <div class="input-group">
+                <input type="text"
+                       name="to"
+                       placeholder="Enter To"
+                       class="form-control"
+                       ng-model="newsPaperModalCtrl.newsPaperMonth.to"
+                       uib-datepicker-popup="MMM, yyyy"
+                       datepicker-options="newsPaperModalCtrl.monthPickerOptions"
+                       close-text="Close"
+                       is-open="newsPaperModalCtrl.toMonthPicker.opened" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="newsPaperModalCtrl.toMonthPickers()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+
+        </div>
 
         <input type="submit" ng-disabled="createEdit.$invalid" value="{{newsPaperModalCtrl.btnText}}" class="btn btn-primary" ng-click="newsPaperModalCtrl.ok()" />
         <button type="button" class="btn btn-default" ng-click="newsPaperModalCtrl.cancel()">Close</button>

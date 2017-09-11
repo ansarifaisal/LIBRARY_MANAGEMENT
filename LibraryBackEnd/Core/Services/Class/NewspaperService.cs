@@ -1,6 +1,8 @@
 ﻿using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
 using LibraryBackEnd.Core.Services.Interface;
+using System;
+using System.Collections.Generic;
 
 namespace LibraryBackEnd.Core.Services.Class
 {
@@ -13,6 +15,11 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
+        }
+
+        public IEnumerable<Newspaper> GetByMonth(string title, DateTime month)
+        {
+            return _repository.GetByMonth(title, month);
         }
     }
 }

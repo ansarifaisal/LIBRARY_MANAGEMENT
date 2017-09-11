@@ -1,9 +1,40 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>newspapers</title>
-</head>
-<body>
-    
-</body>
-</html>
+﻿<div ng-init="newsPaperCtrl.getNewspapers()">
+
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li><a href="" ng-href="#!/admin/newspaper/periodic">Newspapers</a></li>
+        <li><a href="" ng-href="#!/admin/newspaper/month/{{newsPaperCtrl.title}}">{{newsPaperCtrl.title}}</a></li>
+        <li class="active">Newspaper</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Newspaper Months</h3>
+    </div>
+
+    <table datatable="ng" dt-options="newsPaperCtrl.dtOptions" dt-column-defs="newsPaperCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Title</th>
+                <th class="text-center">Date</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">Librarian</th>
+                <th class="text-center">Remark</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="newsPaper in newsPaperCtrl.newsPapers">
+                <td>{{ newsPaper.title}}</td>
+                <td>{{ newsPaper.date | date : 'EEE dd MMM, yyyy'}}</td>
+                <td>{{ newsPaper.price}}</td>
+                <td>{{ newsPaper.librarian}}</td>
+                <td>{{ newsPaper.remark}}</td>
+                <td class="text-center">
+                    <a href="" ng-click="newsPaperCtrl.getNewsPaper(newsPaper.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                    <a href="" ng-click="newsPaperCtrl.deleteNewsPaperModal(newsPaper.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

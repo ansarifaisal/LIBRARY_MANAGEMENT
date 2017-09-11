@@ -23,6 +23,16 @@
 
         me.newsPaperMonth = modal.newsPaperMonth;
 
+        me.newsPaper = modal.newsPaper;
+
+        me.monthPickers = function () {
+            me.monthPicker.opened = true;
+        };
+
+        me.monthPicker = {
+            opened: false
+        };
+
         me.fromMonthPickers = function () {
             me.fromMonthPicker.opened = true;
         };
@@ -55,6 +65,15 @@
         me.billDatePicker = {
             opened: false
         };
+
+        me.newsPaperDatePickers = function () {
+            me.newsPaperDatePicker.opened = true;
+        };
+
+        me.newsPaperDatePicker = {
+            opened: false
+        };
+
 
         me.monthPickerOptions = {
             formatYear: 'yy',
@@ -123,7 +142,8 @@
         }
 
         me.submitPeriodicDetailsForm = function () {
-
+            if (me.periodicNewspaper.title === "")
+                return;
             if (me.periodicNewspaper.amount === "")
                 me.periodicNewspaper.amount = 0;
             if (me.periodicNewspaper.remark === "")
@@ -160,5 +180,106 @@
             });
         }
 
+        me.submitNewspaperMonthForm = function () {
+
+            var publisher = $routeParams.publisher;
+
+            if (me.newsPaperMonth.amount === "")
+                me.newsPaperMonth.amount = 0;
+
+            if (me.newsPaperMonth.billNumber === "")
+                me.newsPaperMonth.billNumber = 0;
+
+            if (me.newsPaperMonth.publisher === "" || me.newsPaperMonth.publisher === null)
+                me.newsPaperMonth.publisher = publisher;
+
+            if (me.newsPaperMonth.title === "")
+                me.newsPaperMonth.title = $routeParams.title;
+
+
+            me.newsPaperMonth.librarian = $rootScope.user.fullName;
+            if (me.newsPaperMonth.month)
+                me.newsPaperMonth.month = NewspaperFactory.dateParse(me.newsPaperMonth.month);
+
+            if (me.newsPaperMonth.from === "")
+                me.newsPaperMonth.from = NewspaperFactory.dateParse(me.newsPaperMonth.from);
+
+            if (me.newsPaperMonth.to === "")
+                me.newsPaperMonth.to = NewspaperFactory.dateParse(me.newsPaperMonth.to);
+
+            var addOrEdit = NewspaperFactory.addOrEditNewspaperMonth(me.newsPaperMonth);
+
+            $action = addOrEdit.action;
+            $rootScope.isBusy = true;
+
+            $action.then(function () {
+                $route.reload();
+                toastr.success(addOrEdit.successMessage);
+            }, function (errorResponse) {
+                $route.reload();
+                toastr.error(addOrEdit.errorMessage);
+            }).finally(function () {
+                $rootScope.isBusy = false;
+            });
+        }
+
+        me.deleteNewspaperMonth = function () {
+            $rootScope.isBusy = true;
+            NewspaperFactory.deleteNewspaperMonth(me.newsPaperMonth).then(function () {
+                me.ok();
+                $route.reload();
+                toastr.success("Newspaper Month Deleted Successfully!");
+            }, function (errorResponse) {
+                me.cancel();
+                toastr.error("Error Deleting Newspaper Month.");
+            }).finally(function () {
+                $rootScope.isBusy = false;
+            });
+        }
+
+        me.initNewspaperData = function () {
+            me.newsPaper.date = NewspaperFactory.parseDate(new Date);
+        }
+
+        me.submitNewspaperForm = function () {
+
+            if (me.newsPaper.price === "")
+                return;
+            me.newsPaper.title = $routeParams.title;
+            me.newsPaper.month = NewspaperFactory.dateParse($routeParams.month);
+            me.newsPaper.publisher = $routeParams.publisher;
+            me.newsPaper.librarian = $rootScope.user.fullName;
+            me.newsPaper.date = NewspaperFactory.dateParse(me.newsPaper.date);
+            if (me.newsPaper.remark === "")
+                me.newsPaper.remark = "NA";
+            var addOrEdit = NewspaperFactory.addOrEditNewspaper(me.newsPaper);
+            $action = addOrEdit.action;
+            $rootScope.isBusy = true;
+
+            $action.then(function () {
+                me.ok();
+                $route.reload();
+                toastr.success(addOrEdit.successMessage);
+            }, function (errorResponse) {
+                $route.reload();
+                toastr.error(addOrEdit.errorMessage);
+            }).finally(function () {
+                $rootScope.isBusy = false;
+            });
+        }
+
+        me.deleteNewspaper = function () {
+            $rootScope.isBusy = true;
+            NewspaperFactory.deleteNewspaper(me.newsPaper).then(function () {
+                me.ok();
+                $route.reload();
+                toastr.success("Newspaper Deleted Successfully!");
+            }, function (errorResponse) {
+                me.cancel();
+                toastr.error("Error Deleting Newspaper.");
+            }).finally(function () {
+                $rootScope.isBusy = false;
+            });
+        }
     }
 ]);

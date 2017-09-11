@@ -66,6 +66,24 @@
             btnText: ''
         }
 
+        me.newsPapers = [];
+
+        me.newsPaper = {
+            title: '',
+            month: '',
+            publisher: '',
+            date: '',
+            price: '',
+            librarian: '',
+            remark: ''
+        };
+
+        me.newsPaperModal = {
+            newsPaper: undefined,
+            title: '',
+            btnText: ''
+        }
+
         me.getPublishers = function () {
             $rootScope.isBusy = true;
             me.dtOptions = DTOptionsBuilder.newOptions()
@@ -281,6 +299,10 @@
                 //DTColumnDefBuilder.newColumnDef(6).notSortable(),
             ];
             NewspaperFactory.getNewspaperMonths(title).then(function (newsPaperMonths) {
+                for (var i = 0; i < newsPaperMonths.length; i++) {
+                    newsPaperMonths[i].from = NewspaperFactory.formatDate(newsPaperMonths[i].from);
+                    newsPaperMonths[i].to = NewspaperFactory.formatDate(newsPaperMonths[i].to);
+                }
                 me.newsPaperMonths = newsPaperMonths;
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
@@ -298,6 +320,128 @@
                 "newspaper/newsPaperMonthForm.html",
                 "NewsPaperModalController",
                 "newsPaperModalCtrl");
+        }
+
+        me.getNewspaperMonth = function (id) {
+            NewspaperFactory.getNewspaperMonth(id).then(function (newsPaperMonth) {
+                newsPaperMonth.month = NewspaperFactory.parseDate(newsPaperMonth.month);
+                newsPaperMonth.from = NewspaperFactory.parseDate(newsPaperMonth.from);
+                newsPaperMonth.to = NewspaperFactory.parseDate(newsPaperMonth.to);
+                me.newsPaperMonthModal.newsPaperMonth = newsPaperMonth;
+                me.newsPaperMonthModal.title = "Edit Month";
+                me.newsPaperMonthModal.btnText = "Save Changes";
+                AppService.showModal(me.newsPaperMonthModal,
+                    "newspaper/newsPaperMonthForm.html",
+                    "NewsPaperModalController",
+                    "newsPaperModalCtrl");
+            }, function (errorResponse) {
+                toastr.error("Error getting response");
+            });
+        }
+
+        me.deleteNewspaperMonthModal = function (id) {
+            NewspaperFactory.getNewspaperMonth(id).then(function (newsPaperMonth) {
+                me.newsPaperMonthModal.newsPaperMonth = newsPaperMonth;
+                me.newsPaperMonthModal.title = "Delete Month";
+                me.newsPaperMonthModal.btnText = "Delete";
+                AppService.showModal(me.newsPaperMonthModal,
+                    "newspaper/confirmDeletePublisherMonth.html",
+                    "NewsPaperModalController",
+                    "newsPaperModalCtrl");
+            }, function (errorResponse) {
+                toastr.error("Error getting response");
+            });
+        }
+
+        me.getNewspapers = function () {
+            me.title = $routeParams.title;
+            me.month = $routeParams.month;
+
+            $rootScope.isBusy = true;
+            me.dtOptions = DTOptionsBuilder.newOptions()
+          .withBootstrap()
+          .withPaginationType('full_numbers')
+          .withDOM('Bfrtip')
+          .withOption('scrollX', '100%')
+          .withOption('scrollY', '100%')
+          .withOption('scrollCollapse', true)
+          .withButtons([
+               {
+                   extend: 'copy',
+                   className: 'btn btn-default',
+                   text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
+                   exportOptions: {
+                       columns: ':not(:last-child)'
+                   }
+               },
+               {
+                   extend: 'print',
+                   className: 'btn btn-default',
+                   text: "<i class='fa fa-print fa-lg'></i> Print",
+                   exportOptions: {
+                       columns: ':not(:last-child)'
+                   }
+               },
+               {
+                   text: "<i class='fa fa-plus'></i> Add Newspaper",
+                   key: '1',
+                   className: 'btn btn-success margin-4x',
+                   action: function (e, dt, node, config) {
+                       me.showNewspaperForm();
+                   }
+               }
+
+          ]);
+            me.dtColumnDefs = [
+                //DTColumnDefBuilder.newColumnDef(6).notSortable(),
+            ];
+            NewspaperFactory.getNewspapers(me.title, me.month).then(function (newsPapers) {
+                me.newsPapers = newsPapers;
+                $rootScope.isBusy = false;
+            }, function (errorResponse) {
+                console.log(errorResponse);
+                $rootScope.isBusy = false;
+                toastr.error("Error Fetching Publishers");
+            });
+
+        }
+
+        me.showNewspaperForm = function () {
+            me.newsPaperModal.newsPaper = me.newsPaper;
+            me.newsPaperModal.title = "Add New Newspaper";
+            me.newsPaperModal.btnText = "Add Newspaper";
+            AppService.showModal(me.newsPaperModal,
+                "newspaper/newsPaperForm.html",
+                "NewsPaperModalController",
+                "newsPaperModalCtrl");
+        }
+
+        me.getNewsPaper = function (id) {
+            NewspaperFactory.getNewspaper(id).then(function (newsPaper) {
+                me.newsPaperModal.newsPaper = newsPaper;
+                me.newsPaperModal.title = "Edit Newspaper";
+                me.newsPaperModal.btnText = "Save Changes";
+                AppService.showModal(me.newsPaperModal,
+                    "newspaper/newsPaperForm.html",
+                    "NewsPaperModalController",
+                    "newsPaperModalCtrl");
+            }, function (errorResponse) {
+                toastr.error("Error getting response");
+            });
+        }
+
+        me.deleteNewsPaperModal = function (id) {
+            NewspaperFactory.getNewspaper(id).then(function (newsPaper) {
+                me.newsPaperModal.newsPaper = newsPaper;
+                me.newsPaperModal.title = "Delete Newspaper";
+                me.newsPaperModal.btnText = "Delete";
+                AppService.showModal(me.newsPaperModal,
+                    "newspaper/confirmNewspaperDelete.html",
+                    "NewsPaperModalController",
+                    "newsPaperModalCtrl");
+            }, function (errorResponse) {
+                toastr.error("Error getting response");
+            });
         }
     }
 ]);

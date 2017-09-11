@@ -548,6 +548,10 @@
     <Compile Include="Persistence\Migrations\201709102108255_modifyNewsPaperModule1.Designer.cs">
       <DependentUpon>201709102108255_modifyNewsPaperModule1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709111040276_modifyNewspaperMonth.cs" />
+    <Compile Include="Persistence\Migrations\201709111040276_modifyNewspaperMonth.Designer.cs">
+      <DependentUpon>201709111040276_modifyNewspaperMonth.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -661,9 +665,12 @@
     <Content Include="app\components\Magazines\returnMagazines.html" />
     <Content Include="app\components\Newspaper\confirmDeletePeriodicDetails.html" />
     <Content Include="app\components\Newspaper\confirmDeletePublisher.html" />
+    <Content Include="app\components\Newspaper\confirmDeletePublisherMonth.html" />
     <Content Include="app\components\Newspaper\newspaperController.js" />
     <Content Include="app\components\Newspaper\newspaperFactory.js" />
+    <Content Include="app\components\Newspaper\newspaperForm.html" />
     <Content Include="app\components\Newspaper\newspaperModalController.js" />
+    <Content Include="app\components\Newspaper\newsPaperMonthForm.html" />
     <Content Include="app\components\Newspaper\newsPaperMonths.html" />
     <Content Include="app\components\Newspaper\newsPaperPublisher.html" />
     <Content Include="app\components\Newspaper\newspapers.html" />
@@ -925,6 +932,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709102108255_modifyNewsPaperModule1.resx">
       <DependentUpon>201709102108255_modifyNewsPaperModule1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709111040276_modifyNewspaperMonth.resx">
+      <DependentUpon>201709111040276_modifyNewspaperMonth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

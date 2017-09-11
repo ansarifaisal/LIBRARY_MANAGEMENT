@@ -469,6 +469,14 @@ window.routes = {
         roles: ['ADMIN', 'LIBRARIAN']
     },
 
+    '/admin/newspaper/month/:title/:month': {
+        templateUrl: 'app/components/newspaper/newspapers.html',
+        controller: 'NewspaperController',
+        controllerAs: 'newsPaperCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
+
     '/admin/newspapers': {
         templateUrl: 'app/components/newspaper/newspapers.html',
         controller: 'NewspaperController',

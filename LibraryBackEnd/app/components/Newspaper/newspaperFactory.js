@@ -2,7 +2,9 @@
 NewspaperModule.factory("NewspaperFactory", [
     "$http",
     "$q",
-    function ($http, $q) {
+    "$filter",
+    "uibDateParser",
+    function ($http, $q, $filter, uibDateParser) {
         var newsPaperFactory = {
             getPublishers: getPublishers,
             getPublisher: getPublisher,
@@ -22,6 +24,15 @@ NewspaperModule.factory("NewspaperFactory", [
             editNewspaperMonth: editNewspaperMonth,
             deleteNewspaperMonth: deleteNewspaperMonth,
             addOrEditNewspaperMonth: addOrEditNewspaperMonth,
+            dateParse: dateParse,
+            parseDate: parseDate,
+            formatDate: formatDate,
+            getNewspapers: getNewspapers,
+            getNewspaper: getNewspaper,
+            addNewspaper: addNewspaper,
+            editNewspaper: editNewspaper,
+            deleteNewspaper: deleteNewspaper,
+            addOrEditNewspaper: addOrEditNewspaper,
         }
         return newsPaperFactory;
 
@@ -188,10 +199,12 @@ NewspaperModule.factory("NewspaperFactory", [
 
         function addNewspaperMonth(newsPaperMonth) {
             var deferred = $q.defer();
+            console.log(newsPaperMonth);
             $http.post("/api/newspaper/month/add", newsPaperMonth)
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (errorResponse) {
+                    console.log(errorResponse);
                     deferred.reject(errorResponse);
                 });
             return deferred.promise;
@@ -229,6 +242,92 @@ NewspaperModule.factory("NewspaperFactory", [
                 toDo.action = editNewspaperMonth(newsPaperMonth);
                 toDo.errorMessage = "Error Editing Newspaper Month";
                 toDo.successMessage = "Newspaper Month Edited Successfully!";
+            }
+            return toDo;
+        }
+
+        function dateParse(date) {
+            return $filter('date')(date, "yyyy/MMM/d");
+        }
+
+        function parseDate(date) {
+            var filtered = $filter('date')(date, "yyyy/MMM/d");
+            return uibDateParser.parse(filtered, "yyyy/MMM/d");
+        }
+
+        function formatDate(date) {
+            if (date === "")
+                return "NA";
+            var tempDate = new Date(date);
+            return $filter('date')(tempDate, "MMM, yyyy");
+        }
+
+        function getNewspapers(title, month) {
+            var deferred = $q.defer();
+            $http.get("/api/newspaper/paper/all?title=" + title + "&month=" + month)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function getNewspaper(id) {
+            var deferred = $q.defer();
+            $http.get("/api/newspaper/paper/get/" + id)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function addNewspaper(newsPaper) {
+            var deferred = $q.defer();
+            $http.post("/api/newspaper/paper/add", newsPaper)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    console.log(errorResponse);
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function editNewspaper(newsPaper) {
+            var deferred = $q.defer();
+            $http.post("/api/newspaper/paper/edit", newsPaper)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function deleteNewspaper(newsPaper) {
+            var deferred = $q.defer();
+            $http.post("/api/newspaper/paper/delete", newsPaper)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function addOrEditNewspaper(newsPaper) {
+            var toDo = {};
+            if (newsPaper.id === undefined) {
+                toDo.action = addNewspaper(newsPaper);
+                toDo.errorMessage = "Error Adding Newspaper";
+                toDo.successMessage = "Newspaper Added Successfully!";
+            } else {
+                toDo.action = editNewspaper(newsPaper);
+                toDo.errorMessage = "Error Editing Newspaper";
+                toDo.successMessage = "Newspaper Edited Successfully!";
             }
             return toDo;
         }

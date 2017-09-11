@@ -16,11 +16,11 @@ namespace LibraryBackEnd.Core.Models
 
         public string Title { get; set; }
 
-        public String Librarian { get; set; }
+        public string Librarian { get; set; }
 
-        public DateTime From { get; set; }
+        public string From { get; set; }
 
-        public DateTime To { get; set; }
+        public string To { get; set; }
 
     }
 }

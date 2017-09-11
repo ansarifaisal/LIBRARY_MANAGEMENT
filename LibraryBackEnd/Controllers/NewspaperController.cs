@@ -29,9 +29,9 @@ namespace LibraryBackEnd.Controllers
 
         [Route("all")]
         [HttpGet]
-        public IHttpActionResult All()
+        public IHttpActionResult All(string title, DateTime month)
         {
-            var publishers = _newsPaperService.GetAll();
+            var publishers = _newsPaperService.GetByMonth(title, month);
             return Ok(publishers);
         }
 
