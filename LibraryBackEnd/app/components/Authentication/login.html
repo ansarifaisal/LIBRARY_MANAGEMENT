@@ -1,12 +1,10 @@
-﻿
-<!--<div class="page-header" style="padding:0px;">
+﻿<!--<div class="page-header" style="padding:0px;">
     <h2 class="text-center">Welcome To Our Library</h2>
 </div>-->
 
 
 <div class="col-md-offset-3 col-md-6">
     <!-- Panel Starts Here -->
-
     <div id="msg" ng-show="emailError" class="alert alert-msg alert-info alert-dismissible" role="alert">
         Please confirm your email, Haven't got the mail <a href="" ng-click='authCtrl.sendActivationLink()' class='alert-link'>Click Here</a> to resend
     </div>
@@ -32,7 +30,12 @@
                      ng-class="{'has-error has-feedback': loginForm.username.$invalid && loginForm.username.$touched || loginForm.username.$invalid && loginForm.$submitted,
                          'has-success has-feedback': loginForm.username.$valid || loginForm.username.$valid && LoginForm.$submitted}">
                     <label for="username">Email</label>
-                    <input type="email" name="username" class="form-control" placeholder="Enter Email" ng-model="authCtrl.credentials.username" required />
+                    <input type="email"
+                           name="username"
+                           class="form-control"
+                           placeholder="Enter Email"
+                           ng-model="authCtrl.credentials.username"
+                           required />
                     <span class="glyphicon form-control-feedback"
                           ng-class="{'glyphicon-ok': loginForm.username.$valid || loginForm.username.$valid && loginForm.$submitted,
                           'glyphicon-remove': loginForm.username.$invalid && loginForm.username.$touched || loginForm.username.$invalid && loginForm.$submitted}"></span>
@@ -56,24 +59,24 @@
                 <!--Password Field Ends Here-->
                 <!-- Submit Button Starts Here -->
                 <div class="form-group">
-                    <input type="submit" name="login" value="Login" class="btn btn-success form-control" />
+                    <input type="submit"
+                           ng-disabled="loginForm.$invalid"
+                           name="login"
+                           value="Login"
+                           class="btn btn-success col-md-12" />
                 </div>
                 <!-- Submit Button Ends Here -->
-
             </form>
-
             <!-- Login Form Ends Here -->
 
-            <div class="pull-left">
+            <div class="pull-left text-padding-top">
                 <a ng-href="#!/register">Register Now!</a>
             </div>
-            <div class="pull-right">
+            <div class="pull-right text-padding-top">
                 <a ng-href="#!/forget">Forget Password?</a>
             </div>
         </div>
-
         <!-- Panel Body Ends Here -->
     </div>
-
     <!-- Panel Ends Here -->
 </div>

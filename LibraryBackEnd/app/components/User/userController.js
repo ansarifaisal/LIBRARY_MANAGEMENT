@@ -43,6 +43,18 @@
             me.years = UserFactory.getYears(-2, 20);
         }
 
+        me.checkByRollNumber = function (rollNo) {
+            console.log(rollNo);
+            UserFactory.getStudentByRollNo(rollNo).then(function (user) {
+                me.exists = false;
+                if (user)
+                    me.exists = true;
+                return me.exists;
+            }, function (errorResponse) {
+
+            });
+        }
+
         me.submitForm = function () {
             me.user.modified = true;
             UserFactory.editStudent(me.user).then(function () {
@@ -289,6 +301,6 @@
             });
         }
 
-     
+
     }
 ]);

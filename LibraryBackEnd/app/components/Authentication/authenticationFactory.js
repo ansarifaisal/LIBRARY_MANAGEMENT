@@ -104,7 +104,6 @@ AuthenticationModule.factory("AuthenticationFactory", [
                     deferred.resolve(response.data);
                 }, function (errorResponse) {
                     //error response
-                    console.log("Registeration fail");
                     deferred.reject(errorResponse);
                 });
             //returning promise object
@@ -157,7 +156,6 @@ AuthenticationModule.factory("AuthenticationFactory", [
                     deferred.resolve(response.data);
                 }, function (errorResponse) {
                     //error response
-                    console.log("Registeration fail");
                     deferred.reject(errorResponse);
                 });
             //returning promise object
@@ -184,7 +182,6 @@ AuthenticationModule.factory("AuthenticationFactory", [
                     deferred.resolve(response.data);
                 },
             function (errorResponse) {
-                console.log("Failed to get the user")
                 deferred.reject(errorResponse);
             });
 
@@ -201,7 +198,6 @@ AuthenticationModule.factory("AuthenticationFactory", [
                     deferred.resolve(response.data);
                 },
             function (errorResponse) {
-                console.log("Failed To Activate User")
                 deferred.reject(errorResponse);
             });
 
@@ -218,14 +214,13 @@ AuthenticationModule.factory("AuthenticationFactory", [
                     deferred.resolve(response.data);
                 },
             function (errorResponse) {
-                console.log("Error Checking User");
                 deferred.reject(errorResponse);
             });
 
             return deferred.promise;
         }
 
-        function sendActivationMail(userName){
+        function sendActivationMail(userName) {
 
             var deferred = $q.defer();
 
@@ -234,7 +229,6 @@ AuthenticationModule.factory("AuthenticationFactory", [
                     deferred.resolve(response.data);
                 },
             function (errorResponse) {
-                console.log("Error Checking User");
                 deferred.reject(errorResponse);
             });
 

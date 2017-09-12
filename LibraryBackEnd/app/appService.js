@@ -16,10 +16,13 @@ myApp.factory('httpRequestInterceptor', function ($rootScope) {
 
 myApp.service('AppService', [
     "$uibModal",
-    function ($uibModal) {
+    "$cookies",
+    "AuthenticationFactory",
+    function ($uibModal, $cookies, AuthenticationFactory) {
 
         return {
-            showModal: showModal
+            showModal: showModal,
+            unLoad: unLoad,
         }
 
         function showModal(modal, templateURL, controller, controllerAs) {
@@ -38,6 +41,12 @@ myApp.service('AppService', [
                     }
                 }
             });
+        }
+
+        function unLoad() {
+            $cookies.remove('user');
+            $cookies.remove('authenticationData');
+            AuthenticationFactory.setUserIsAuthenticated(false);
         }
 
         function dataTable() {

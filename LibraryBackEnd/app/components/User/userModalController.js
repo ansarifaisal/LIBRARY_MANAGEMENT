@@ -29,7 +29,7 @@
 
         $uibModalInstance.opened.then(function () {
             me.courses = UserFactory.getCourses();
-            me.years = UserFactory.getYears(-2, 20);
+            me.years = UserFactory.getYears(-2, 1);
         });
 
         me.submitForm = function () {

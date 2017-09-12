@@ -24,7 +24,13 @@
                          'has-success has-feedback': registerForm.username.$valid || registerForm.username.$valid && registerForm.$submitted}">
 
                     <label for="username">Email</label>
-                    <input type="email" class="form-control" placeholder="Enter Email" name="username" ng-model="authCtrl.newUser.Email" ng-blur="authCtrl.checkExistingAccount()" required />
+                    <input type="email"
+                           class="form-control"
+                           placeholder="Enter Email"
+                           name="username"
+                           ng-model="authCtrl.newUser.Email"
+                           ng-blur="authCtrl.checkExistingAccount(authCtrl.newUser.Email)"
+                           required />
 
                     <span class="glyphicon form-control-feedback"
                           ng-class="{'glyphicon-ok': registerForm.username.$valid || registerForm.username.$valid && registerForm.$submitted,
@@ -63,20 +69,25 @@
                 <!-- Password Field Ends Here -->
                 <!-- Confirm Password Field Starts Here -->
 
-                <div class="form-group" ng-class="{'has-error has-feedback': registerForm.ConfirmPassword.$invalid && registerForm.ConfirmPassword.$touched || registerForm.ConfirmPassword.$invalid && registerForm.$submitted,
-                         'has-success has-feedback': registerForm.ConfirmPassword.$valid || registerForm.ConfirmPassword.$valid && registerForm.$submitted}">
+                <div class="form-group" ng-class="{'has-error has-feedback': registerForm.ConfirmPassword.$invalid && registerForm.ConfirmPassword.$touched || registerForm.ConfirmPassword.$invalid && registerForm.$submitted|| authCtrl.newUser.Password !== authCtrl.newUser.ConfirmPassword,
+                         'has-success has-feedback': registerForm.ConfirmPassword.$valid || registerForm.ConfirmPassword.$valid && registerForm.$submitted || authCtrl.newUser.Password === authCtrl.newUser.ConfirmPassword && registerForm.ConfirmPassword.$touched}">
 
                     <label for="ConfirmPassword">Confirm Password</label>
-                    <input type="password" class="form-control" placeholder="Enter Confirm Password" name="ConfirmPassword" ng-model="authCtrl.newUser.ConfirmPassword" required />
+                    <input type="password"
+                           class="form-control"
+                           placeholder="Enter Confirm Password"
+                           name="ConfirmPassword"
+                           ng-model="authCtrl.newUser.ConfirmPassword"
+                           required />
 
                     <span class="glyphicon form-control-feedback"
-                          ng-class="{'glyphicon-ok': registerForm.ConfirmPassword.$valid || registerForm.ConfirmPassword.$valid && registerForm.$submitted,
-                          'glyphicon-remove': registerForm.ConfirmPassword.$invalid && registerForm.ConfirmPassword.$touched || registerForm.ConfirmPassword.$invalid && registerForm.$submitted}">
+                          ng-class="{'glyphicon-ok': registerForm.ConfirmPassword.$valid || registerForm.ConfirmPassword.$valid && registerForm.$submitted || authCtrl.newUser.Password === authCtrl.newUser.ConfirmPassword && registerForm.ConfirmPassword.$touched,
+                          'glyphicon-remove': registerForm.ConfirmPassword.$invalid && registerForm.ConfirmPassword.$touched || registerForm.ConfirmPassword.$invalid && registerForm.$submitted || authCtrl.newUser.Password !== authCtrl.newUser.ConfirmPassword}">
                     </span>
 
-                    <div ng-show="registerForm.ConfirmPassword.$invalid && registerForm.ConfirmPassword.$touched || registerForm.$submitted">
-                        <span ng-show="registerForm.ConfirmPassword.$error.required" class="text-danger small">Please, provide same as above.</span>
-                        <span ng-show="authCtrl.newUser.Password !== authCtrl.newUser.ConfirmPassword" class="text-danger small">Password doesn't match.</span>
+                    <div ng-show="registerForm.ConfirmPassword.$invalid && registerForm.ConfirmPassword.$touched || registerForm.$submitted || authCtrl.newUser.Password !== authCtrl.newUser.ConfirmPassword">
+                        <div ng-show="registerForm.ConfirmPassword.$error.required" class="text-danger small">Please, provide password same as above.</div>
+                        <div ng-show="authCtrl.newUser.Password !== authCtrl.newUser.ConfirmPassword" class="text-danger small">Password doesn't match.</div>
                     </div>
                 </div>
 
@@ -86,16 +97,19 @@
                 </div>
                 <!-- Submit Button Starts Here -->
                 <div class="form-group">
-                    <input type="submit" value="Register" class="btn btn-success form-control" />
+                    <input type="submit"
+                           value="Register"
+                           ng-disabled="registerForm.$invalid"
+                           class="btn btn-success col-md-12" />
                 </div><!-- Submit Button Ends Here -->
 
             </form>
 
             <!-- Registration Form Ends Here -->
-            <div class="pull-left">
+            <div class="pull-left text-padding-top">
                 <a ng-href="#!/login" href="">Login Now</a>
             </div>
-            <div class="pull-right">
+            <div class="pull-right text-padding-top">
                 <a ng-href="#!/forget" href="">Forget Password?</a>
             </div>
         </div>

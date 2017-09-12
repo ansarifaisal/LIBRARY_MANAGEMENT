@@ -519,7 +519,7 @@ myApp.config(['$routeProvider',
             maxOpened: 3,
             newestOnTop: true,
             positionClass: 'toast-top-right',
-            preventDuplicates: true,
+            preventDuplicates: false,
             preventOpenDuplicates: true,
             target: 'body',
             allowHtml: true,
@@ -539,7 +539,7 @@ myApp.config(['$routeProvider',
 //when the app run check whether is authenticated to view this page
 //run method is basically use to initialization
 
-myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cookies, IssueBookFactory) {
+myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cookies, $timeout, IssueBookFactory, AppService) {
     //on method is use to listen on event of a given type
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -583,17 +583,33 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
     //$cookies.getObject('authenticationData');
 
     //$(window).on('beforeunload', function () {
-
-    //    $cookies.remove('user');
-    //    $cookies.remove('authenticationData');
-    //    AuthenticationFactory.setUserIsAuthenticated(false);
-
+    //    AppService.unLoad();
     //});
 
-    //$rootScope.logOut = function () {
-    //    AppService.unLoad();
-    //    $location.path('/login');
-    //}
+    $rootScope.logOut = function () {
+        AppService.unLoad();
+        $location.path('/login');
+    }
+
+    //Method to redirect on login page
+    $rootScope.loginRedirect = function () {
+        $rootScope.count = 5;
+        AppService.unLoad();
+        $rootScope.countDown();
+        $timeout(function () {
+            $location.path("/login");
+        }, 5000);
+    }
+
+    //Method to show count down
+    $rootScope.countDown = function () {
+        $timeout(function () {
+            $rootScope.count--;
+            if ($rootScope.count === -1)
+                return;
+            $rootScope.countDown();
+        }, 1000);
+    }
 
     function calculateFine() {
         IssueBookFactory.getIssuedBooks().then(function (issuedBooks) {

@@ -8,6 +8,10 @@ body {
     margin-top: 75px;
 }
 
+.text-padding-top {
+    padding-top: 10px;
+}
+
 .form-control:focus {
     border: #66afe9 2px solid;
     -webkit-box-shadow: none;
@@ -98,4 +102,3 @@ a > .text-center > .fa {
         transform: rotate(360deg);
     }
 }
-

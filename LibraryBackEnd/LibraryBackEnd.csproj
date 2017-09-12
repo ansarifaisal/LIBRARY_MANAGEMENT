@@ -287,7 +287,6 @@
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Core\BindingModels\AuthorBindingModel.cs" />
     <Compile Include="Core\BindingModels\FineBindingModel.cs" />
     <Compile Include="Core\BindingModels\ForgetPasswordBindModel.cs" />
@@ -585,7 +584,6 @@
     <Compile Include="Persistence\Repositories\ReturnMagazineRepository.cs" />
     <Compile Include="Persistence\Repositories\StudentRepository.cs" />
     <Compile Include="Persistence\Repositories\SubjectRepository.cs" />
-    <Compile Include="Persistence\Repositories\test.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -666,6 +664,7 @@
     <Content Include="app\components\Newspaper\confirmDeletePeriodicDetails.html" />
     <Content Include="app\components\Newspaper\confirmDeletePublisher.html" />
     <Content Include="app\components\Newspaper\confirmDeletePublisherMonth.html" />
+    <Content Include="app\components\Newspaper\confirmNewspaperDelete.html" />
     <Content Include="app\components\Newspaper\newspaperController.js" />
     <Content Include="app\components\Newspaper\newspaperFactory.js" />
     <Content Include="app\components\Newspaper\newspaperForm.html" />

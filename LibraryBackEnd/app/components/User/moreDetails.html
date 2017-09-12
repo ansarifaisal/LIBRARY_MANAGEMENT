@@ -8,9 +8,9 @@
             <div class="panel-body">
                 <form name="createEdit" ng-submit="userCtrl.submitForm()" role="form" novalidate>
                     <div class="form-group" ng-class="{'has-error has-feedback': createEdit.rollNo.$invalid && createEdit.rollNo.$touched
-                             || createEdit.rollNo.$invalid && createEdit.$submitted,
+                             || createEdit.rollNo.$invalid && createEdit.$submitted || userCtrl.exists,
                              'has-success has-feedback': createEdit.rollNo.$valid || createEdit.rollNo.$valid
-                             && createEdit.$submitted}">
+                             && createEdit.$submitted || !userCtrl.exists}">
 
                         <label for="rollNo">Roll No</label>
                         <input type="text" class="form-control"
@@ -19,21 +19,27 @@
                                ng-model="userCtrl.user.rollNo"
                                ng-disabled="userCtrl.user.modified"
                                ng-pattern="/^[0-9]+$/"
+                               ng-maxlength="6"
+                               ng-blur="userCtrl.checkByRollNumber(userCtrl.user.rollNo)"
                                autocomplete="off"
                                required />
 
                         <span class="glyphicon form-control-feedback"
-                              ng-class="{'glyphicon-ok': createEdit.rollNo.$valid || createEdit.rollNo.$valid && createEdit.$submitted,
+                              ng-class="{'glyphicon-ok': createEdit.rollNo.$valid || createEdit.rollNo.$valid && createEdit.$submitted || !userCtrl.exists,
                           'glyphicon-remove': createEdit.rollNo.$invalid && createEdit.rollNo.$touched
-                           || createEdit.rollNo.$invalid && createEdit.$submitted}">
+                           || createEdit.rollNo.$invalid && createEdit.$submitted|| userCtrl.exists}">
                         </span>
 
-                        <div ng-show="createEdit.rollNo.$invalid && createEdit.rollNo.$touched || createEdit.$submitted">
-                            <span ng-show="createEdit.rollNo.$error.required" class="text-danger small">Please, provide roll no.</span>
-                            <span ng-show="createEdit.rollNo.$error.pattern" class="text-danger small">Please, provide valid number.</span>
+                        <div ng-show="createEdit.rollNo.$invalid && createEdit.rollNo.$touched || createEdit.$submitted || userCtrl.exists">
+                            <div ng-show="createEdit.rollNo.$error.required" class="text-danger small">
+                                Please, provide roll number.
+                            </div>
+                            <div ng-show="createEdit.rollNo.$error.maxlength" class="text-danger small">This field can contain maximum 6 charachters.</div>
+                            <div ng-show="createEdit.rollNo.$error.pattern" class="text-danger small">Please, provide valid number.</div>
+                            <div ng-show="userCtrl.exists" class="text-danger small">Roll number is in use.</div>
                         </div>
-
                     </div>
+
 
                     <div class="form-group" ng-class="{'has-error has-feedback': createEdit.fullName.$invalid && createEdit.fullName.$touched
                              || createEdit.fullName.$invalid && createEdit.$submitted,
@@ -55,7 +61,7 @@
                         </span>
 
                         <div ng-show="createEdit.fullName.$invalid && createEdit.fullName.$touched || createEdit.$submitted">
-                            <span ng-show="createEdit.fullName.$error.required" class="text-danger small">Please, provide roll no.</span>
+                            <span ng-show="createEdit.fullName.$error.required" class="text-danger small">Please, provide full name.</span>
                             <span ng-show="createEdit.fullName.$error.pattern" class="text-danger small">This field cannot contain special charachters.</span>
                         </div>
 
@@ -99,9 +105,9 @@
 
                     </div>
 
-                    <span class="small text-danger" ng-show="createEdit.$valid && !userCtrl.user.modified">Verify the above details, once submit you can't change it.</span>
+                    <span class="small text-danger" ng-show="createEdit.$valid"><strong>Note: Verify the above details, once submit you can't change it.</strong></span>
 
-                    <input type="submit" value="Save" ng-disabled="userCtrl.user.modified" class="btn col-md-12 btn-success" />
+                    <input type="submit" value="Save" ng-disabled="userCtrl.user.modified || createEdit.$invalid || userCtrl.exists" class="btn col-md-12 btn-success" />
 
                 </form>
             </div>

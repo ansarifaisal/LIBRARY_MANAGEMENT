@@ -20,8 +20,6 @@ AuthenticationModule.controller("AuthenticationController", [
             password: ''
         };
 
-        $scope.count = 5;
-
         $scope.errorMessage = "";
 
         $scope.successMessage = "";
@@ -75,6 +73,7 @@ AuthenticationModule.controller("AuthenticationController", [
 
                     //getting the user
                     AuthenticationFactory.getUserByUserName(me.data.userName).then(function (user) {
+
                         if (user) {
                             if (user.status === 'PENDING') {
                                 return $scope.errorMessage = "Your account is pending"
@@ -120,15 +119,6 @@ AuthenticationModule.controller("AuthenticationController", [
 
         //Method to register
         me.register = function () {
-            //me.newUser.fullName = "NA";
-            //me.newUser.rollNo = "NA";
-            //me.newUser.yearOfAdmission = 0;
-            //me.newUser.course = "NA";
-            //me.newUser.issueCount = 0;
-            //me.newUser.fine = 0;
-            //me.newUser.modified = false;
-            //me.newUser.role = AuthenticationFactory.studentRole();
-            //me.newUser.status = AuthenticationFactory.status();
             if (!me.newUser)
                 return;
             $rootScope.isBusy = true;
@@ -160,7 +150,7 @@ AuthenticationModule.controller("AuthenticationController", [
             if (!me.confirmAccount) {
                 if (!me.confirmAccount.code && !me.confirmAccount.userName && !me.confirmAccount.userId) {
                     toastr.error("Sorry! there is nothing you can do, You will be redirect in " + $scope.count + " seconds");
-                    me.loginRedirect();
+                    $rootScope.loginRedirect();
                 }
                 return;
             }
@@ -182,8 +172,9 @@ AuthenticationModule.controller("AuthenticationController", [
 
 
         //check whether the user exists
-        me.checkExistingAccount = function () {
-            var userName = me.newUser.Email;
+        me.checkExistingAccount = function (userName) {
+            if (userName === "")
+                return;
             AuthenticationFactory.checkExistingAccount(userName).then(function (exists) {
                 me.exists = false;
                 if (exists === true)
@@ -256,8 +247,8 @@ AuthenticationModule.controller("AuthenticationController", [
             AuthenticationFactory.setPassword(me.setNewPassword)
                 .then(function () {
                     $route.reload();
-                    $scope.successMessage = "Password changed successfully, You will be redirected in " + $rootScope.count + " seconds.";
-                    me.loginRedirect();
+                    $scope.successMessage = "Password changed successfully, You will be redirected in 5 seconds.";
+                    $rootScope.loginRedirect();
                 }, function (errorResponse) {
                     $scope.errorMessage = "Error while changing password."
                 }).finally(function () {
@@ -273,25 +264,6 @@ AuthenticationModule.controller("AuthenticationController", [
                     $rootScope.isBusy = false;
                 });
         }
-
-        //Method to redirect on login page
-        me.loginRedirect = function () {
-            me.countDown();
-            $timeout(function () {
-                $location.path("/login");
-            }, 5000);
-        }
-
-        //Method to show count down
-        me.countDown = function () {
-            $timeout(function () {
-                $scope.count--;
-                if ($scope.count === -1)
-                    return;
-                me.countDown();
-            }, 1000);
-        }
-
 
         me.checkReturn = function () {
             IssueBookFactory.getByRollNumber(user.rollNo).then(function (issuedBooks) {
