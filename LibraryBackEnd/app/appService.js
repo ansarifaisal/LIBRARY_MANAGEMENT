@@ -18,11 +18,15 @@ myApp.service('AppService', [
     "$uibModal",
     "$cookies",
     "AuthenticationFactory",
-    function ($uibModal, $cookies, AuthenticationFactory) {
+    "DTOptionsBuilder",
+    "$route",
+    function ($uibModal, $cookies, AuthenticationFactory, DTOptionsBuilder, $route) {
 
         return {
             showModal: showModal,
             unLoad: unLoad,
+            dataTableWithFunction: dataTableWithFunction,
+            dataTableWithOutFunction: dataTableWithOutFunction
         }
 
         function showModal(modal, templateURL, controller, controllerAs) {
@@ -49,11 +53,59 @@ myApp.service('AppService', [
             AuthenticationFactory.setUserIsAuthenticated(false);
         }
 
-        function dataTable() {
-            DTOptionsBuilder.newOptions()
+        function dataTableWithFunction(btnName, actionCalled) {
+            var dtOptions = DTOptionsBuilder.newOptions()
+                .withPaginationType('full_numbers')
+                .withDOM('Bfrtip')
+                .withOption('scrollX', '100%')
+                .withOption('scrollY', '100%')
+                .withOption('scrollCollapse', true)
+                .withBootstrap()
+                .withButtons([
+                     {
+                         extend: 'copy',
+                         className: 'btn btn-default',
+                         text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
+                         exportOptions: {
+                             columns: ':not(:last-child)'
+                         }
+                     },
+                     {
+                         extend: 'print',
+                         className: 'btn btn-default',
+                         text: "<i class='fa fa-print fa-lg'></i> Print",
+                         exportOptions: {
+                             columns: ':not(:last-child)'
+                         }
+                     },
+                     {
+                         text: "<i class='fa fa-refresh fa-lg'></i> Refresh",
+                         key: '1',
+                         className: 'btn btn-default margin-4x',
+                         action: function (e, dt, node, config) {
+                             $route.reload();
+                         }
+                     },
+                       {
+                           text: "<i class='fa fa-plus fa-lg'></i> " + btnName,
+                           key: '1',
+                           className: 'btn btn-success margin-4x',
+                           action: function (e, dt, node, config) {
+                               actionCalled();
+                           }
+                       }
+                ]);
+            return dtOptions;
+        }
+
+        function dataTableWithOutFunction() {
+            var dtOptions = DTOptionsBuilder.newOptions()
                 .withPaginationType('full_numbers')
                 .withDOM('Bfrtip')
                 .withBootstrap()
+                .withOption('scrollX', '100%')
+                .withOption('scrollY', '100%')
+                .withOption('scrollCollapse', true)
                 .withButtons([
                     {
                         extend: 'copy',
@@ -72,25 +124,15 @@ myApp.service('AppService', [
                         }
                     },
                     {
-                        extend: 'excel',
-                        className: 'btn btn-default ',
-                        text: "<i class='fa fa-file-excel-o fa-lg'></i> Excel",
-                        exportOptions: {
-                            columns: ':not(:last-child)'
-                        }
-                    },
-                    {
-                        text: "<i class='fa fa-plus fa-lg'></i> Add Publication",
+                        text: "<i class='fa fa-refresh fa-lg'></i> Refresh",
                         key: '1',
-                        className: 'btn btn-success margin-4x',
+                        className: 'btn btn-default margin-4x',
                         action: function (e, dt, node, config) {
-                            me.showPublicationForm();
+                            $route.reload();
                         }
                     }
                 ]);
-            me.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(2).notSortable(),
-            ];
+            return dtOptions;
         }
     }
 ]);

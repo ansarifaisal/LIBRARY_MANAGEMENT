@@ -28,42 +28,7 @@
 
         me.getLostReplaceBooks = function () {
             $rootScope.isBusy = true;
-            me.dtOptions = DTOptionsBuilder.newOptions()
-          .withBootstrap()
-          .withPaginationType('full_numbers')
-          .withDOM('Bfrtip')
-          .withOption('scrollX', '100%')
-          .withOption('scrollY', '100%')
-          .withOption('scrollCollapse', true)
-          .withButtons([
-               {
-                   extend: 'copy',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   extend: 'print',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-print fa-lg'></i> Print",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   extend: 'excel',
-                   className: 'btn btn-default ',
-                   text: "<i class='fa fa-file-excel-o fa-lg'></i> Excel",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               }
-          ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(6).notSortable(),
-            ];
+            me.dtOptions = AppService.dataTableWithOutFunction();
             LostOrReplaceFactory.getBooks().then(function (books) {
                 me.books = books;
                 $rootScope.isBusy = false;

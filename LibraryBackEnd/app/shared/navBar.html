@@ -14,15 +14,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-            <!--<form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>-->
             <ul class="nav navbar-nav navbar-right">
 
-                <li class="dropdown">
+                <li class="dropdown" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-search fa-lg" aria-hidden="true"></i><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="" ng-href="#!/admin/search">Search for Books</a></li>
@@ -30,7 +24,7 @@
                     </ul>
                 </li>
 
-                <li class="dropdown" ng-show="user.role == 'STUDENT'">
+                <li class="dropdown" ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-graduation-cap fa-lg" aria-hidden="true"></i><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
@@ -59,7 +53,7 @@
                 </li>
 
 
-                <li class="dropdown" ng-show="user.role == 'ADMIN'">
+                <li class="dropdown" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href=""><i class="fa fa-pencil-square-o " aria-hidden="true"></i> Publication</a></li>
@@ -71,7 +65,7 @@
                         <li><a href=""><i class="fa fa-address-card " aria-hidden="true"></i> Student</a></li>
                     </ul>
                 </li>
-                <li class="dropdown" ng-show="user.role == 'ADMIN'">
+                <li class="dropdown" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs fa-lg" aria-hidden="true"></i> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li>
@@ -112,7 +106,7 @@
                     </ul>
                 </li>
 
-                <li class="dropdown" ng-show="user.role == 'ADMIN'">
+                <li class="dropdown" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-book fa-lg" aria-hidden="true"></i> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="" ng-href="#!/user/issuedBooks" class="small"><i class="fa fa-address-book-o " aria-hidden="true"></i> Issued Books</a></li>
@@ -121,13 +115,10 @@
                     </ul>
                 </li>
 
-                <li><a href="" id="notification"><i class="fa fa-globe fa-lg" aria-hidden="true"></i> <span class="badge badge-notify">4</span></a></li>
+                <!--<li><a href="" id="notification"><i class="fa fa-globe fa-lg" aria-hidden="true"></i> <span class="badge badge-notify">4</span></a></li>-->
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user-circle fa-lg" aria-hidden="true"></i> {{user.userName}} <span class="caret"></span></a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user-circle fa-lg" aria-hidden="true"></i> {{user.fullName}} <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="" class="small">Profile</a></li>
-                        <li><a href="" class="small">Account</a></li>
-                        <li role="separator" class="divider"></li>
                         <li><a href="" ng-click="logOut()" class="small">Log Out</a></li>
                     </ul>
                 </li>

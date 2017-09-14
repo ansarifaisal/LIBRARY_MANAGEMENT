@@ -1,10 +1,12 @@
-﻿<div ng-show="user.role == 'ADMIN'">
+﻿<div ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
     <div ng-init="bookCtrl.getBooks()">
         <ol class="breadcrumb">
             <li><a href="" ng-href="#!/home">Home</a></li>
             <li class="active">Books</li>
         </ol>
-
+        <div class="page-header">
+            <h3>Books</h3>
+        </div>
         <table datatable="ng" dt-options="bookCtrl.dtOptions" dt-column-defs="bookCtrl.dtColumnDefs" class="table-condensed table-hover">
             <thead>
                 <tr>
@@ -65,13 +67,17 @@
     </div>
 </div>
 
-<div ng-show="user.role == 'STUDENT'">
+<div ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
 
     <div ng-init="bookCtrl.getUserBooks()">
         <ol class="breadcrumb">
             <li><a href="" ng-href="#!/home">Home</a></li>
             <li class="active">Books</li>
         </ol>
+
+        <div class="page-header">
+            <h3>Books</h3>
+        </div>
 
         <table datatable="ng" dt-options="bookCtrl.dtOptions" dt-column-defs="bookCtrl.dtColumnDefs" class="table-condensed table-hover">
             <thead>

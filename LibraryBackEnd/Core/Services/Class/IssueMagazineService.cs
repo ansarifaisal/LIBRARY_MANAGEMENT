@@ -1,6 +1,7 @@
 ﻿using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
 using LibraryBackEnd.Core.Services.Interface;
+using System.Collections.Generic;
 
 namespace LibraryBackEnd.Core.Services.Class
 {
@@ -14,6 +15,11 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
+        }
+
+        public IEnumerable<IssueMagazine> GetMagazinesByRollNo(string rollNo)
+        {
+            return _repository.GetMagazinesByRollNo(rollNo);
         }
     }
 }

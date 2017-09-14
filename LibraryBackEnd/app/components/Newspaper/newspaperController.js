@@ -13,10 +13,8 @@
     "$rootScope",
     "toastr",
     "$window",
-    "DTOptionsBuilder",
-    "DTColumnDefBuilder",
     function (NewspaperFactory, AppService, AuthenticationFactory, IssueBookFactory, BookFactory, UserFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
-        toastr, $window, DTOptionsBuilder, DTColumnDefBuilder) {
+        toastr, $window) {
 
         var me = this;
 
@@ -86,43 +84,8 @@
 
         me.getPublishers = function () {
             $rootScope.isBusy = true;
-            me.dtOptions = DTOptionsBuilder.newOptions()
-          .withBootstrap()
-          .withPaginationType('full_numbers')
-          .withDOM('Bfrtip')
-          .withOption('scrollX', '100%')
-          .withOption('scrollY', '100%')
-          .withOption('scrollCollapse', true)
-          .withButtons([
-               {
-                   extend: 'copy',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   extend: 'print',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-print fa-lg'></i> Print",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   text: "<i class='fa fa-plus'></i> Add Publisher",
-                   key: '1',
-                   className: 'btn btn-success margin-4x',
-                   action: function (e, dt, node, config) {
-                       me.showPublisherForm();
-                   }
-               }
+            me.dtOptions = AppService.dataTableWithFunction("Add Publisher", me.showPublisherForm);
 
-          ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(6).notSortable(),
-            ];
             NewspaperFactory.getPublishers().then(function (publishers) {
                 me.publishers = publishers;
                 $rootScope.isBusy = false;
@@ -173,43 +136,9 @@
 
         me.getPeriodicDetails = function () {
             $rootScope.isBusy = true;
-            me.dtOptions = DTOptionsBuilder.newOptions()
-          .withBootstrap()
-          .withPaginationType('full_numbers')
-          .withDOM('Bfrtip')
-          .withOption('scrollX', '100%')
-          .withOption('scrollY', '100%')
-          .withOption('scrollCollapse', true)
-          .withButtons([
-               {
-                   extend: 'copy',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   extend: 'print',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-print fa-lg'></i> Print",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   text: "<i class='fa fa-plus'></i> Add Periodic Details",
-                   key: '1',
-                   className: 'btn btn-success margin-4x',
-                   action: function (e, dt, node, config) {
-                       me.showPeriodicDetailsForm();
-                   }
-               }
 
-          ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(6).notSortable(),
-            ];
+            me.dtOptions = AppService.dataTableWithFunction("Add Periodic Details", me.showPeriodicDetailsForm);
+
             NewspaperFactory.getPeriodicNewsPapers().then(function (periodicNewspapers) {
                 me.periodicNewspapers = periodicNewspapers;
                 $rootScope.isBusy = false;
@@ -261,43 +190,9 @@
         me.getNewspaperMonths = function () {
             var title = $routeParams.title;
             $rootScope.isBusy = true;
-            me.dtOptions = DTOptionsBuilder.newOptions()
-          .withBootstrap()
-          .withPaginationType('full_numbers')
-          .withDOM('Bfrtip')
-          .withOption('scrollX', '100%')
-          .withOption('scrollY', '100%')
-          .withOption('scrollCollapse', true)
-          .withButtons([
-               {
-                   extend: 'copy',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   extend: 'print',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-print fa-lg'></i> Print",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   text: "<i class='fa fa-plus'></i> Add Month",
-                   key: '1',
-                   className: 'btn btn-success margin-4x',
-                   action: function (e, dt, node, config) {
-                       me.showNewspaperMonthForm();
-                   }
-               }
 
-          ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(6).notSortable(),
-            ];
+            me.dtOptions = AppService.dataTableWithFunction("Add Month", me.showNewspaperMonthForm);
+
             NewspaperFactory.getNewspaperMonths(title).then(function (newsPaperMonths) {
                 for (var i = 0; i < newsPaperMonths.length; i++) {
                     newsPaperMonths[i].from = NewspaperFactory.formatDate(newsPaperMonths[i].from);
@@ -358,43 +253,9 @@
             me.month = $routeParams.month;
 
             $rootScope.isBusy = true;
-            me.dtOptions = DTOptionsBuilder.newOptions()
-          .withBootstrap()
-          .withPaginationType('full_numbers')
-          .withDOM('Bfrtip')
-          .withOption('scrollX', '100%')
-          .withOption('scrollY', '100%')
-          .withOption('scrollCollapse', true)
-          .withButtons([
-               {
-                   extend: 'copy',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   extend: 'print',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-print fa-lg'></i> Print",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   text: "<i class='fa fa-plus'></i> Add Newspaper",
-                   key: '1',
-                   className: 'btn btn-success margin-4x',
-                   action: function (e, dt, node, config) {
-                       me.showNewspaperForm();
-                   }
-               }
 
-          ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(6).notSortable(),
-            ];
+            me.dtOptions = AppService.dataTableWithFunction("Add Newspaper", me.showNewspaperForm);
+
             NewspaperFactory.getNewspapers(me.title, me.month).then(function (newsPapers) {
                 me.newsPapers = newsPapers;
                 $rootScope.isBusy = false;

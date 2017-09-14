@@ -23,5 +23,13 @@ namespace LibraryBackEnd.Controllers
             return Ok(returnMagazines);
         }
 
+        [Route("byRollNo")]
+        [HttpGet]
+        public IHttpActionResult GetMagazineByRollNumber(string rollNo)
+        {
+            var returnMagazines = _returnMagazineService.GetMagazineByRollNumber(rollNo);
+            return Ok(returnMagazines);
+        }
+
     }
 }

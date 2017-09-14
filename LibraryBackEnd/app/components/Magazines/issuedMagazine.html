@@ -1,4 +1,4 @@
-﻿<div ng-init="magazineCtrl.getIssuedMagazines()">
+﻿<div ng-init="magazineCtrl.getIssuedMagazines()" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
     <ol class="breadcrumb">
         <li><a href="" ng-href="#!/home">Home</a></li>
         <li><a href="" ng-href="#!/admin/magazine/periodic">Magazines</a></li>
@@ -47,3 +47,44 @@
     </table>
 
 </div>
+
+<div ng-init="magazineCtrl.getIssuedMagazineByRollNo()" ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li class="active">Issued Magazine</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Issued Magazines</h3>
+    </div>
+
+    <table datatable="ng" dt-options="magazineCtrl.dtOptions" dt-column-defs="magazineCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Title</th>
+                <th class="text-center">Number</th>
+                <th class="text-center">Volume</th>
+                <th class="text-center">Issue Date</th>
+                <th class="text-center">Return Date</th>
+                <th class="text-center">Issued By</th>
+                <th class="text-center">Fine</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="issuedMagazine in magazineCtrl.issuedMagazines">
+                <td>{{ issuedMagazine.title}}</td>
+                <td>{{ issuedMagazine.number}}</td>
+                <td>{{ issuedMagazine.volume}}</td>
+                <td>{{ issuedMagazine.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ issuedMagazine.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ issuedMagazine.rollNo}}</td>
+                <td>{{ issuedMagazine.fullName}}</td>
+                <td>{{ issuedMagazine.course}}</td>
+                <td>{{ issuedMagazine.issuedBy}}</td>
+                <td>{{ issuedMagazine.fine}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+

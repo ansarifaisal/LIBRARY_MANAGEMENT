@@ -87,7 +87,7 @@ AuthenticationModule.controller("AuthenticationController", [
                                 AuthenticationFactory.saveUser(user);
                                 AuthenticationFactory.setUserIsAuthenticated(true);
                                 AuthenticationFactory.setRole(user.role);
-                                if (user.modified === false && user.role === "STUDENT")
+                                if (user.modified === false && user.role === "STUDENT" || user.modified === false && user.role === "FACULTY")
                                     return $location.path("/user/moreDetails");
                                 $location.path("/home");
                             }

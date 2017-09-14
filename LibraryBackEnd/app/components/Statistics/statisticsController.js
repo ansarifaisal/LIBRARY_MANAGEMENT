@@ -9,10 +9,8 @@
     "$rootScope",
     "toastr",
     "$window",
-    "DTOptionsBuilder",
-    "DTColumnDefBuilder",
     function (StatisticsFactory, AppService, $scope, $location, $route, $routeParams, $timeout, $rootScope,
-        toastr, $window, DTOptionsBuilder, DTColumnDefBuilder) {
+        toastr, $window) {
 
         var me = this;
 
@@ -31,33 +29,7 @@
         me.bookTitles = [];
 
         me.config = function () {
-            me.dtOptions = DTOptionsBuilder.newOptions()
-               .withPaginationType('full_numbers')
-               .withDOM('Bfrtip')
-               .withBootstrap()
-               .withButtons([
-                   {
-                       extend: 'copy',
-                       className: 'btn btn-default',
-                       text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-
-                   },
-                   {
-                       extend: 'print',
-                       className: 'btn btn-default',
-                       text: "<i class='fa fa-print fa-lg'></i> Print",
-
-                   },
-                   {
-                       extend: 'excel',
-                       className: 'btn btn-default ',
-                       text: "<i class='fa fa-file-excel-o fa-lg'></i> Excel",
-
-                   }
-               ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(4).notSortable(),
-            ];
+            me.dtOptions = AppService.dataTableWithOutFunction();
         }
 
         me.loadData = function () {

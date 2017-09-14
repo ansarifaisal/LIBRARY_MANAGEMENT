@@ -13,10 +13,8 @@
     "$rootScope",
     "toastr",
     "$window",
-    "DTOptionsBuilder",
-    "DTColumnDefBuilder",
     function (MagazineFactory, AppService, AuthenticationFactory, IssueBookFactory, BookFactory, UserFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
-        toastr, $window, DTOptionsBuilder, DTColumnDefBuilder) {
+        toastr, $window) {
 
         var me = this;
 
@@ -106,48 +104,12 @@
 
         me.getPublishers = function () {
             $rootScope.isBusy = true;
-            me.dtOptions = DTOptionsBuilder.newOptions()
-          .withBootstrap()
-          .withPaginationType('full_numbers')
-          .withDOM('Bfrtip')
-          .withOption('scrollX', '100%')
-          .withOption('scrollY', '100%')
-          .withOption('scrollCollapse', true)
-          .withButtons([
-               {
-                   extend: 'copy',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   extend: 'print',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-print fa-lg'></i> Print",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   text: "<i class='fa fa-plus'></i> Add Publisher",
-                   key: '1',
-                   className: 'btn btn-success margin-4x',
-                   action: function (e, dt, node, config) {
-                       me.showPublisherForm();
-                   }
-               }
+            me.dtOptions = AppService.dataTableWithFunction("Add Publisher", me.showPublisherForm);
 
-          ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(6).notSortable(),
-            ];
             MagazineFactory.getPublishers().then(function (publishers) {
                 me.publishers = publishers;
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
-                console.log(errorResponse);
                 $rootScope.isBusy = false;
                 toastr.error("Error Fetching Publishers");
             });
@@ -189,48 +151,12 @@
 
         me.getPeriodicDetails = function () {
             $rootScope.isBusy = true;
-            me.dtOptions = DTOptionsBuilder.newOptions()
-              .withBootstrap()
-              .withPaginationType('full_numbers')
-              .withDOM('Bfrtip')
-              .withOption('scrollX', '100%')
-              .withOption('scrollY', '100%')
-              .withOption('scrollCollapse', true)
-              .withButtons([
-               {
-                   extend: 'copy',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   extend: 'print',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-print fa-lg'></i> Print",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   text: "<i class='fa fa-plus'></i> Add Periodic Details",
-                   key: '1',
-                   className: 'btn btn-success margin-4x',
-                   action: function (e, dt, node, config) {
-                       me.showPeriodicDetailForm();
-                   }
-               }
+            me.dtOptions = AppService.dataTableWithFunction("Add Periodic Details", me.showPeriodicDetailForm);
 
-              ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(6).notSortable(),
-            ];
             MagazineFactory.getPeriodicDetails().then(function (periodicDetails) {
                 me.periodicDetails = periodicDetails;
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
-                console.log(errorResponse);
                 $rootScope.isBusy = false;
                 toastr.error("Error Fetching Publishers");
             });
@@ -273,48 +199,13 @@
         me.getMagazines = function () {
             me.title = $routeParams.title;
             $rootScope.isBusy = true;
-            me.dtOptions = DTOptionsBuilder.newOptions()
-              .withBootstrap()
-              .withPaginationType('full_numbers')
-              .withDOM('Bfrtip')
-              .withOption('scrollX', '100%')
-              .withOption('scrollY', '100%')
-              .withOption('scrollCollapse', true)
-              .withButtons([
-               {
-                   extend: 'copy',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   extend: 'print',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-print fa-lg'></i> Print",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   text: "<i class='fa fa-plus'></i> Add Magazine",
-                   key: '1',
-                   className: 'btn btn-success margin-4x',
-                   action: function (e, dt, node, config) {
-                       me.showMagazineForm();
-                   }
-               }
+            me.dtOptions = AppService.dataTableWithFunction("Add Magazine", me.showMagazineForm);
 
-              ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(6).notSortable(),
-            ];
             MagazineFactory.getMagazines(me.title).then(function (magazines) {
                 me.magazines = magazines;
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
-                console.log(errorResponse);
+
                 $rootScope.isBusy = false;
                 toastr.error("Error Fetching Publishers");
             });
@@ -361,51 +252,38 @@
         }
 
         me.getIssuedMagazines = function () {
+            var user = $rootScope.user;
+            if (user.role === 'FACULTY' || user.role === 'STUDENT')
+                return;
             $rootScope.isBusy = true;
-            me.dtOptions = DTOptionsBuilder.newOptions()
-              .withBootstrap()
-              .withPaginationType('full_numbers')
-              .withDOM('Bfrtip')
-              .withOption('scrollX', '100%')
-              .withOption('scrollY', '100%')
-              .withOption('scrollCollapse', true)
-              .withButtons([
-               {
-                   extend: 'copy',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   extend: 'print',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-print fa-lg'></i> Print",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   text: "<i class='fa fa-plus'></i> Issue Magazine",
-                   key: '1',
-                   className: 'btn btn-success margin-4x',
-                   action: function (e, dt, node, config) {
-                       me.showIssueMagazineForm();
-                   }
-               }
+            me.dtOptions = AppService.dataTableWithFunction("Issue Magazine", me.showIssueMagazineForm);
 
-              ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(6).notSortable(),
-            ];
             MagazineFactory.getIssuedMagazines().then(function (issuedMagazines) {
                 me.issuedMagazines = issuedMagazines;
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
-                console.log(errorResponse);
                 $rootScope.isBusy = false;
-                toastr.error("Error Fetching Publishers");
+                toastr.error("Error Fetching Issued Magazine");
+            });
+
+        }
+
+        me.getIssuedMagazineByRollNo = function () {
+            var user = $rootScope.user;
+
+            if (user.role === 'ADMIN' || user.role === 'LIBRARIAN')
+                return;
+
+            $rootScope.isBusy = true;
+
+            me.dtOptions = AppService.dataTableWithOutFunction();
+
+            MagazineFactory.getIssuedMagazineByRollNumber(user.rollNo).then(function (issuedMagazines) {
+                me.issuedMagazines = issuedMagazines;
+                $rootScope.isBusy = false;
+            }, function (errorResponse) {
+                $rootScope.isBusy = false;
+                toastr.error("Error Fetching Issued Magazine");
             });
         }
 
@@ -470,40 +348,13 @@
 
         me.getLostMagazines = function () {
             $rootScope.isBusy = true;
-            me.dtOptions = DTOptionsBuilder.newOptions()
-              .withBootstrap()
-              .withPaginationType('full_numbers')
-              .withDOM('Bfrtip')
-              .withOption('scrollX', '100%')
-              .withOption('scrollY', '100%')
-              .withOption('scrollCollapse', true)
-              .withButtons([
-               {
-                   extend: 'copy',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   extend: 'print',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-print fa-lg'></i> Print",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
 
-              ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(6).notSortable(),
-            ];
+            me.dtOptions = AppService.dataTableWithOutFunction();
+
             MagazineFactory.getLostMagazines().then(function (lostMagazines) {
                 me.lostMagazines = lostMagazines;
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
-                console.log(errorResponse);
                 $rootScope.isBusy = false;
                 toastr.error("Error Fetching Magazines");
             });
@@ -538,41 +389,33 @@
         }
 
         me.getReturnMagazines = function () {
+            var user = $rootScope.user;
+            if (user.role === 'FACULTY' || user.role === 'STUDENT')
+                return;
             $rootScope.isBusy = true;
-            me.dtOptions = DTOptionsBuilder.newOptions()
-              .withBootstrap()
-              .withPaginationType('full_numbers')
-              .withDOM('Bfrtip')
-              .withOption('scrollX', '100%')
-              .withOption('scrollY', '100%')
-              .withOption('scrollCollapse', true)
-              .withButtons([
-               {
-                   extend: 'copy',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
-               {
-                   extend: 'print',
-                   className: 'btn btn-default',
-                   text: "<i class='fa fa-print fa-lg'></i> Print",
-                   exportOptions: {
-                       columns: ':not(:last-child)'
-                   }
-               },
+            me.dtOptions = AppService.dataTableWithOutFunction();
 
-              ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(6).notSortable(),
-            ];
             MagazineFactory.getReturnMagazines().then(function (magazines) {
                 me.magazines = magazines;
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
-                console.log(errorResponse);
+                $rootScope.isBusy = false;
+                toastr.error("Error Fetching Magazines");
+            });
+
+        }
+
+        me.getReturnMagazineByRollNumber = function () {
+            var user = $rootScope.user;
+            if (user.role === 'ADMIN' || user.role === 'LIBRARIAN')
+                return;
+            $rootScope.isBusy = true;
+            me.dtOptions = AppService.dataTableWithOutFunction();
+
+            MagazineFactory.getReturnedMagazineByRollNo(user.rollNo).then(function (magazines) {
+                me.magazines = magazines;
+                $rootScope.isBusy = false;
+            }, function (errorResponse) {
                 $rootScope.isBusy = false;
                 toastr.error("Error Fetching Magazines");
             });

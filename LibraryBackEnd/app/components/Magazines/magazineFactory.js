@@ -50,6 +50,8 @@ MagazineModule.factory("MagazineFactory", [
             getReturnMagazines: getReturnMagazines,
             getMagazineByNumber: getMagazineByNumber,
             getStatus: getStatus,
+            getIssuedMagazineByRollNumber: getIssuedMagazineByRollNumber,
+            getReturnedMagazineByRollNo: getReturnedMagazineByRollNo,
         }
         return magazineFactory;
 
@@ -491,6 +493,28 @@ MagazineModule.factory("MagazineFactory", [
 
         function getStatus() {
             return status = ["Available", "Donated"]
+        }
+
+        function getIssuedMagazineByRollNumber(rollNo) {
+            var deferred = $q.defer();
+            $http.get("/api/issuedMagazine/getByRollNo?rollNo=" + rollNo)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function getReturnedMagazineByRollNo(rollNo) {
+            var deferred = $q.defer();
+            $http.get("/api/magazine/return/byRollNo?rollNo=" + rollNo)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
         }
     }
 ]);

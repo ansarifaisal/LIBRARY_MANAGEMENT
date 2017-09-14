@@ -186,52 +186,7 @@
                 return;
 
             $rootScope.isBusy = true;
-
-            me.dtOptions = DTOptionsBuilder.newOptions()
-               .withBootstrap()
-               .withPaginationType('full_numbers')
-               .withDOM('Bfrtip')
-               .withOption('scrollX', '100%')
-               .withOption('scrollY', '100%')
-               .withOption('scrollCollapse', true)
-               .withButtons([
-                    {
-                        extend: 'copy',
-                        className: 'btn btn-default',
-                        text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                        exportOptions: {
-                            columns: ':not(:last-child)'
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        className: 'btn btn-default',
-                        text: "<i class='fa fa-print fa-lg'></i> Print",
-                        exportOptions: {
-                            columns: ':not(:last-child)'
-                        }
-                    },
-                    {
-                        extend: 'excel',
-                        className: 'btn btn-default ',
-                        text: "<i class='fa fa-file-excel-o fa-lg'></i> Excel",
-                        exportOptions: {
-                            columns: ':not(:last-child)'
-                        }
-                    },
-                    {
-                        text: "<i class='fa fa-plus fa-lg'></i> Add Book",
-                        key: '1',
-                        className: 'btn btn-success margin-4x',
-                        action: function (e, dt, node, config) {
-                            me.showAddBookForm();
-                        }
-                    }
-               ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(21).notSortable(),
-            ];
-
+            me.dtOptions = AppService.dataTableWithFunction("Add Book", me.showAddBookForm);
             BookFactory.getBooks().then(function (books) {
                 me.books = books;
             }).finally(function () {
@@ -264,47 +219,21 @@
         }
 
         me.getBookData = function () {
+            $rootScope.isBusy = true;
+
+            me.dtOptions = AppService.dataTableWithOutFunction();
+
             var id = $routeParams.id;
             BookFactory.getBook(id).then(function (book) {
                 me.book = book;
                 me.getIssuedData(me.book.accessionNumber);
+                $rootScope.isBusy = false;
             }, function (errorResponse) {
+                $rootScope.isBusy = false;
                 toastr.error("Error loading data");
             });
 
-            me.dtOptions = DTOptionsBuilder.newOptions()
-            .withBootstrap()
-            .withPaginationType('full_numbers')
-            .withDOM('Bfrtip')
-            .withButtons([
-                 {
-                     extend: 'copy',
-                     className: 'btn btn-default',
-                     text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                     exportOptions: {
-                         columns: ':not(:last-child)'
-                     }
-                 },
-                 {
-                     extend: 'print',
-                     className: 'btn btn-default',
-                     text: "<i class='fa fa-print fa-lg'></i> Print",
-                     exportOptions: {
-                         columns: ':not(:last-child)'
-                     }
-                 },
-                 {
-                     extend: 'excel',
-                     className: 'btn btn-default ',
-                     text: "<i class='fa fa-file-excel-o fa-lg'></i> Excel",
-                     exportOptions: {
-                         columns: ':not(:last-child)'
-                     }
-                 }
-            ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(21).notSortable(),
-            ];
+
 
         }
 
@@ -336,8 +265,8 @@
                 return;
 
             $rootScope.isBusy = true;
+            me.dtOptions = AppService.dataTableWithOutFunction();
             var course = user.course;
-
             BookFactory.getByCourse(course).then(function (books) {
                 me.books = books;
                 $rootScope.isBusy = false;
@@ -345,43 +274,6 @@
                 $rootScope.isBusy = false;
                 toastr.error("Error getting data");
             });
-
-
-            me.dtOptions = DTOptionsBuilder.newOptions()
-            .withBootstrap()
-            .withPaginationType('full_numbers')
-            .withDOM('Bfrtip')
-            .withButtons([
-                 {
-                     extend: 'copy',
-                     className: 'btn btn-default',
-                     text: "<i class='fa fa-clipboard fa-lg'></i> Copy",
-                     exportOptions: {
-                         columns: ':not(:last-child)'
-                     }
-                 },
-                 {
-                     extend: 'print',
-                     className: 'btn btn-default',
-                     text: "<i class='fa fa-print fa-lg'></i> Print",
-                     exportOptions: {
-                         columns: ':not(:last-child)'
-                     }
-                 },
-                 {
-                     extend: 'excel',
-                     className: 'btn btn-default ',
-                     text: "<i class='fa fa-file-excel-o fa-lg'></i> Excel",
-                     exportOptions: {
-                         columns: ':not(:last-child)'
-                     }
-                 }
-            ]);
-            me.dtColumnDefs = [
-                //DTColumnDefBuilder.newColumnDef(21).notSortable(),
-            ];
-
-
         }
 
     }

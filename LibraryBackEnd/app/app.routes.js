@@ -414,22 +414,22 @@ window.routes = {
         roles: ['ADMIN', 'LIBRARIAN']
     },
 
-    '/admin/magazine/issued': {
+    '/user/magazine/issued': {
 
         templateUrl: 'app/components/magazines/issuedMagazine.html',
         controller: 'MagazineController',
         controllerAs: 'magazineCtrl',
         requireLogin: true,
-        roles: ['ADMIN', 'LIBRARIAN']
+        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY']
     },
 
-    '/admin/magazine/returned': {
+    '/user/magazine/returned': {
 
         templateUrl: 'app/components/magazines/returnMagazines.html',
         controller: 'MagazineController',
         controllerAs: 'magazineCtrl',
         requireLogin: true,
-        roles: ['ADMIN', 'LIBRARIAN']
+        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY']
     },
 
     '/admin/magazine/lost': {

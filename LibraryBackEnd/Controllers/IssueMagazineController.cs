@@ -121,5 +121,17 @@ namespace LibraryBackEnd.Controllers
             return Ok(issueMagazine);
         }
 
+        [Route("getByRollNo")]
+        [HttpGet]
+        public IHttpActionResult GetByRollNo(string rollNo)
+        {
+            if (rollNo == "")
+                throw new ArgumentNullException();
+            var issueMagazines = _issueMagazineService.GetMagazinesByRollNo(rollNo);
+            if (issueMagazines == null)
+                return NotFound();
+            return Ok(issueMagazines);
+        }
+
     }
 }
