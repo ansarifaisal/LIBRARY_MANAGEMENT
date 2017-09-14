@@ -120,7 +120,7 @@ window.routes = {
         controller: 'UserController',
         controllerAs: 'userCtrl',
         requireLogin: true,
-        roles: ['STUDENT', 'FACULTY', 'LIBRARIAN']
+        roles: ['STUDENT', 'FACULTY', 'LIBRARIAN', 'ADMIN']
     },
 
     '/admin/students': {

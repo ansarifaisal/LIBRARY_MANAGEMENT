@@ -68,9 +68,7 @@
         //get all publisher
         me.getCourses = function () {
             $rootScope.isBusy = true;
-
             me.dtOptions = AppService.dataTableWithFunction("Add Course", me.showCourseForm);
-
             CourseFactory.getCourses().then(function (courses) {
                 me.courses = courses;
             }).finally(function () {

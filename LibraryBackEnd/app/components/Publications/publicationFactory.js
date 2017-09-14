@@ -11,7 +11,8 @@ PublicationModule.factory("PublicationFactory", [
             getPublication: getPublication,
             editPublication: editPublication,
             deletePublication: deletePublication,
-            addOrEdit: addOrEdit
+            addOrEdit: addOrEdit,
+            checkExisting: checkExisting
         }
 
         return publicationFactory;
@@ -85,6 +86,15 @@ PublicationModule.factory("PublicationFactory", [
             return toDo;
         }
 
-
+        function checkExisting(name) {
+            var deferred = $q.defer();
+            $http.get("/api/publication/checkExistingName?name=" + name)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
     }
 ]);

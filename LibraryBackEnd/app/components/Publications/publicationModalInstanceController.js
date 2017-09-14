@@ -22,6 +22,7 @@ PublicationModule.controller('ModalInstanceController', [
         };
 
         $ctrl.publication = modal.publication;
+        $ctrl.change = false;
         $ctrl.title = modal.title;
         $ctrl.btnText = modal.btnText;
 
@@ -59,6 +60,22 @@ PublicationModule.controller('ModalInstanceController', [
                 toastr.error("Error Deleting Publication");
             }).finally(function () {
                 $rootScope.isBusy = false;
+            });
+        }
+
+        $ctrl.trackChanges = function () {
+            $ctrl.change = true;
+        }
+
+        $ctrl.checkExisting = function (name) {
+            if (!name || !$ctrl.change)
+                return;
+            PublicationFactory.checkExisting(name).then(function (publication) {
+                $ctrl.exists = false;
+                if (publication)
+                    $ctrl.exists = true;
+                return $ctrl.exists;
+
             });
         }
 

@@ -17,6 +17,8 @@
 
         me.semesters = modal.semesters;
 
+        me.change = false;
+
         $rootScope.isBusy = false;
 
         me.ok = function () {
@@ -65,6 +67,21 @@
             });
         }
 
+        me.trackChanges = function () {
+            me.change = true;
+        }
+
+        me.checkExisting = function (name) {
+            if (!name || !me.change)
+                return;
+            CourseFactory.checkExisting(name).then(function (course) {
+                me.exists = false;
+                if (course)
+                    me.exists = true;
+                return me.exists;
+
+            });
+        }
 
     }
 ]);

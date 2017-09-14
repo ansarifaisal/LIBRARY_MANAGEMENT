@@ -7,5 +7,6 @@ namespace LibraryBackEnd.Core.Services.Interface
     {
         Subject GetByName(string name);
         IEnumerable<Subject> GetByCourse(string courseName, int semester);
+        Subject checkExisting(string name, string courseName, int semester);
     }
 }

@@ -74,6 +74,16 @@ namespace LibraryBackEnd.Controllers
             return true;
         }
 
+        [Route("checkExistingName")]
+        [HttpGet]
+        public IHttpActionResult CheckExistingName(string name)
+        {
+            if (name == null)
+                throw new ArgumentNullException();
+            var publication = _publicationService.GetByName(name);
+            return Ok(publication);
+        }
+
         [Route("get/{Id}")]
         [HttpGet]
         public IHttpActionResult Get(int Id)

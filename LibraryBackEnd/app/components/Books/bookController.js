@@ -36,6 +36,8 @@
 
         me.exists = false;
 
+        me.change = false;
+
         me.bookForm = {
             book: undefined,
             courses: undefined,
@@ -89,6 +91,7 @@
         }
 
         me.getSemesters = function (courses, courseName) {
+
             return me.bookForm.semesters = BookFactory.getSemesters(courses, courseName);
         }
 
@@ -152,10 +155,10 @@
                 me.bookForm.book = book;
                 me.bookForm.book.dateOfPublication = BookFactory.parseDate(me.bookForm.book.dateOfPublication);
                 me.getPublishers();
-                me.getCourses();
                 $timeout(function () {
-                    me.getSemesters(me.bookForm.courses, me.bookForm.book.course);
+                    me.getCourses();
                     me.getSubjects(me.bookForm.book.course, me.bookForm.book.semester);
+                    me.getSemesters(me.bookForm.courses, me.bookForm.book.course);
                 }, 100);
                 me.bookForm.book.billDate = BookFactory.parseDate(me.bookForm.book.billDate);
                 me.calculateDiscount(me.bookForm.book.actualPrice, me.bookForm.book.discount);
@@ -232,9 +235,6 @@
                 $rootScope.isBusy = false;
                 toastr.error("Error loading data");
             });
-
-
-
         }
 
         me.getIssuedData = function (accessionNumber) {
@@ -243,16 +243,21 @@
             });
         }
 
+        me.trackChanges = function () {
+            me.change = true;
+        }
+
         me.getByAccessionNumber = function (accessionNumber) {
+            if (!accessionNumber || !me.change)
+                return;
             me.exists = false;
             var id = $routeParams.id;
             BookFactory.getBookByAccessionNumber(accessionNumber).then(function (book) {
-
                 if (book === null)
-                    return me.exists = false;
+                    me.exists = false;
                 if (book.accessionNumber === accessionNumber)
-                    return me.exists = false;
-                return me.exists = true;
+                    me.exists = true;
+                return me.exists;
             }, function (errorResponse) {
                 toastr.error("Error Getting Response");
             });

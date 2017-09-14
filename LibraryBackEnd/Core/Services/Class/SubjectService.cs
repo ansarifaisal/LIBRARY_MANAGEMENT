@@ -19,6 +19,11 @@ namespace LibraryBackEnd.Core.Services.Class
             _unitOfWork = unitOfWork;
         }
 
+        public Subject checkExisting(string name, string courseName, int semester)
+        {
+            return _subjectRepository.checkExisting(name, courseName, semester);
+        }
+
         public IEnumerable<Subject> GetByCourse(string courseName, int semester)
         {
             if (courseName == null)

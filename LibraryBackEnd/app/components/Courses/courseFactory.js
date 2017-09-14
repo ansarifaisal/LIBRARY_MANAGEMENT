@@ -12,7 +12,8 @@ CourseModule.factory("CourseFactory", [
             editCourse: editCourse,
             deleteCourse: deleteCourse,
             addOrEdit: addOrEdit,
-            getSemesters: getSemesters
+            getSemesters: getSemesters,
+            checkExisting: checkExisting
         }
 
         return courseFactory;
@@ -91,6 +92,17 @@ CourseModule.factory("CourseFactory", [
                 semesters.push(i);
             }
             return semesters;
+        }
+
+        function checkExisting(name) {
+            var deferred = $q.defer();
+            $http.get("/api/course/checkExisting?name=" + name)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
         }
 
     }

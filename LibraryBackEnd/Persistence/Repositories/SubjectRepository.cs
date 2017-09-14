@@ -17,6 +17,13 @@ namespace LibraryBackEnd.Persistence.Repositories
             _context = context;
         }
 
+        public Subject checkExisting(string name, string courseName, int semester)
+        {
+            return _context.Subjects
+                .Where(s => s.Name == name && s.CourseName == courseName && s.Semester == semester)
+                .SingleOrDefault();
+        }
+
         public IEnumerable<Subject> GetByCourse(string courseName, int semester)
         {
             if (courseName == null)

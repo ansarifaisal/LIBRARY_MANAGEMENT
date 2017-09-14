@@ -22,6 +22,9 @@ namespace LibraryBackEnd.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is invalid");
+            var flag = check(subject.Name, subject.CourseName, subject.Semester);
+            if (flag == true)
+                return BadRequest("Error adding subject");
             _subjectService.Create(subject);
             return Ok("Added Successfully!");
         }
@@ -40,6 +43,9 @@ namespace LibraryBackEnd.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is Invalid");
+            var flag = check(subject.Name, subject.CourseName, subject.Semester);
+            if (flag == true)
+                return BadRequest("Error Editing subject");
             _subjectService.Update(subject);
             return Ok("Updated Successfully!");
         }
@@ -87,6 +93,29 @@ namespace LibraryBackEnd.Controllers
             if (courses == null)
                 return BadRequest();
             return Ok(courses);
+        }
+
+        [HttpGet]
+        [Route("checkExisting")]
+        public IHttpActionResult checkExisting(string name, string courseName, int semester)
+        {
+            if (courseName == null || name == null || semester == 0)
+                throw new ArgumentNullException();
+            var tempName = name.Replace("  ", "++");
+            var subject = _subjectService.checkExisting(tempName, courseName, semester);
+
+            return Ok(subject);
+        }
+
+        public bool check(string name, string courseName, int semester)
+        {
+            if (name == "" || courseName == "" || semester == 0)
+                return false;
+            var tempName = name.Replace("  ", "++");
+            var subject = _subjectService.checkExisting(tempName, courseName, semester);
+            if (subject == null)
+                return false;
+            return true;
         }
 
     }

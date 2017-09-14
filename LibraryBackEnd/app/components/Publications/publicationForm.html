@@ -4,25 +4,34 @@
 </div>
 
 <div class="modal-body">
+
     <form name="create" ng-submit="modalInstanceCtrl.submitPublicationForm()" novalidate>
         <div class="form-group" ng-class="{'has-error has-feedback': create.name.$invalid && create.name.$touched
-         || create.name.$invalid && create.$submitted,
+         || create.name.$invalid && create.$submitted || modalInstanceCtrl.exists,
          'has-success has-feedback': create.name.$valid || create.name.$valid
-         && create.$submitted}">
+         && create.$submitted || !modalInstanceCtrl.exists && create.name.$touched}">
             <label for="name">Publication Name</label>
-            <input type="text" name="name" class="form-control" placeholder="Enter Publication Name"  ng-model="modalInstanceCtrl.publication.name" required />
+            <input type="text"
+                   name="name"
+                   class="form-control"
+                   placeholder="Enter Publication Name"
+                   ng-model="modalInstanceCtrl.publication.name"
+                   ng-blur="modalInstanceCtrl.checkExisting(modalInstanceCtrl.publication.name)"
+                   ng-change="modalInstanceCtrl.trackChanges()"
+                   required />
 
             <span class="glyphicon form-control-feedback"
-                  ng-class="{'glyphicon-ok': create.name.$valid || create.name.$valid && create.$submitted,
+                  ng-class="{'glyphicon-ok': create.name.$valid || create.name.$valid && create.$submitted || !modalInstanceCtrl.exists && create.name.$touched,
                           'glyphicon-remove': create.name.$invalid && create.name.$touched
-                           || create.name.$invalid && create.$submitted}">
+                           || create.name.$invalid && create.$submitted || modalInstanceCtrl.exists}">
             </span>
 
-            <div ng-show="create.name.$invalid && create.name.$touched || create.$submitted">
-                <span ng-show="create.name.$error.required" class="text-danger small">Please, provide name.</span>
+            <div ng-show="create.name.$invalid && create.name.$touched || create.$submitted || modalInstanceCtrl.exists">
+                <div ng-show="create.name.$error.required" class="text-danger small">Please, provide name.</div>
+                <div ng-show="modalInstanceCtrl.exists" class="text-danger small">Publication already exists.</div>
             </div>
         </div>
-        <input type="submit" value="{{modalInstanceCtrl.btnText}}" class="btn btn-primary" ng-click="modalInstanceCtrl.ok()" />
+        <input type="submit" ng-disabled="create.$invalid || modalInstanceCtrl.exists || !modalInstanceCtrl.change" value="{{modalInstanceCtrl.btnText}}" class="btn btn-primary" ng-click="modalInstanceCtrl.ok()" />
         <button type="button" class="btn btn-default" ng-click="modalInstanceCtrl.cancel()">Close</button>
 
     </form>

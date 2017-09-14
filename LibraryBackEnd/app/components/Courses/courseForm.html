@@ -8,20 +8,29 @@
     <form name="createEdit" ng-submit="courseModalCtrl.submitForm()" role="form" novalidate>
 
         <div class="form-group" ng-class="{'has-error has-feedback': createEdit.name.$invalid && createEdit.name.$touched
-         || createEdit.name.$invalid && createEdit.$submitted,
+         || createEdit.name.$invalid && createEdit.$submitted || courseModalCtrl.exists,
          'has-success has-feedback': createEdit.name.$valid || createEdit.name.$valid
-         && createEdit.$submitted}">
+         && createEdit.$submitted || !courseModalCtrl.exists && createEdit.name.$touched}">
             <label for="name">Name</label>
-            <input type="text" name="name" class="form-control" ng-model="courseModalCtrl.course.name" placeholder="Enter Name" required />
+            <input type="text"
+                   name="name"
+                   class="form-control"
+                   ng-model="courseModalCtrl.course.name"
+                   ng-blur="courseModalCtrl.checkExisting(courseModalCtrl.course.name)"
+                   ng-change="courseModalCtrl.trackChanges()"
+                   placeholder="Enter Name"
+                   required />
 
             <span class="glyphicon form-control-feedback"
-                  ng-class="{'glyphicon-ok': createEdit.name.$valid || createEdit.name.$valid && createEdit.$submitted,
+                  ng-class="{'glyphicon-ok': createEdit.name.$valid || createEdit.name.$valid && createEdit.$submitted || !courseModalCtrl.exists && createEdit.name.$touched,
                           'glyphicon-remove': createEdit.name.$invalid && createEdit.name.$touched
-                           || createEdit.name.$invalid && createEdit.$submitted}">
+                           || createEdit.name.$invalid && createEdit.$submitted || courseModalCtrl.exists }">
             </span>
 
-            <div ng-show="createEdit.name.$invalid && createEdit.name.$touched || createEdit.$submitted">
-                <span ng-show="createEdit.name.$error.required" class="text-danger small">Please, provide name.</span>
+            <div ng-show="createEdit.name.$invalid && createEdit.name.$touched || createEdit.$submitted || courseModalCtrl.exists">
+                <div ng-show="createEdit.name.$error.required" class="text-danger small">Please, provide name.</div>
+                <div ng-show="courseModalCtrl.exists" class="text-danger small">Course already exists.</div>
+
             </div>
 
         </div>
@@ -31,8 +40,12 @@
          'has-success': createEdit.semester.$valid || createEdit.semester.$valid
          && createEdit.$submitted}">
             <label for="semester">Semesters</label>
-            <select class="form-control" name="semester" ng-model="courseModalCtrl.course.noOfSemesters"
-                    ng-options="semester for semester in courseModalCtrl.semesters" required>
+            <select class="form-control"
+                    name="semester"
+                    ng-model="courseModalCtrl.course.noOfSemesters"
+                    ng-options="semester for semester in courseModalCtrl.semesters"
+                    ng-change="courseModalCtrl.trackChanges()"
+                    required>
 
                 <option value="" selected="selected">Select Semester</option>
 
@@ -42,7 +55,7 @@
             </div>
         </div>
 
-        <input type="submit" class="btn btn-primary" value="{{courseModalCtrl.btnText}}" ng-click="courseModalCtrl.ok()" />
+        <input type="submit" ng-disabled="createEdit.$invalid || courseModalCtrl.exists || !courseModalCtrl.change" class="btn btn-primary" value="{{courseModalCtrl.btnText}}" ng-click="courseModalCtrl.ok()" />
         <button type="button" class="btn btn-default" ng-click="courseModalCtrl.cancel()">Close</button>
     </form>
 

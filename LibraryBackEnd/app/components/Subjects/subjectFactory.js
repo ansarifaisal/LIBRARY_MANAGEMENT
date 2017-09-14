@@ -14,7 +14,8 @@ SubjectModule.factory("SubjectFactory", [
             deleteSubject: deleteSubject,
             getByCourse: getByCourse,
             addOrEdit: addOrEdit,
-            getSemesters: getSemesters
+            getSemesters: getSemesters,
+            checkExisting: checkExisting
         }
         return subjectFactory;
 
@@ -105,5 +106,15 @@ SubjectModule.factory("SubjectFactory", [
             return semesters;
         }
 
+        function checkExisting(name, courseName, semester) {
+            var deferred = $q.defer();
+            $http.get("/api/subject/checkExisting?name=" + name + "&courseName=" + courseName + "&semester=" + semester)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
     }
 ]);

@@ -18,7 +18,7 @@ namespace LibraryBackEnd.Controllers
 
         [Route("add")]
         [HttpPost]
-        public IHttpActionResult add(Course course)
+        public IHttpActionResult Add(Course course)
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is invalid");
@@ -62,6 +62,16 @@ namespace LibraryBackEnd.Controllers
             if (course == null)
                 return false;
             return true;
+        }
+
+        [HttpGet]
+        [Route("checkExisting")]
+        public IHttpActionResult CheckExistingByName(string name)
+        {
+            if (name == null)
+                throw new ArgumentNullException();
+            var course = _courseService.GetByName(name);
+            return Ok(course);
         }
 
         [HttpGet]

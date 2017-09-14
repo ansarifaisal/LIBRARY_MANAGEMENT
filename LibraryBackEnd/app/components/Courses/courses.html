@@ -13,15 +13,13 @@
             <tr>
                 <th class="text-center">Course Name</th>
                 <th class="text-center">No Of Semesters</th>
-                <th class="text-center">No Of Students</th>
                 <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="course in courseCtrl.courses">
-                <td>{{ course.name }}</td>
+                <td><a href="" ng-href="#!/admin/studentsByCourse/{{course.name}}">{{ course.name }}</a></td>
                 <td>{{ course.noOfSemesters }}</td>
-                <td>{{ course.noOfStudents }}</td>
                 <td class="text-center">
                     <a href="" ng-click="courseCtrl.getCourse(course.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
                     <a href="" ng-click="courseCtrl.deleteCourseModal(course.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>

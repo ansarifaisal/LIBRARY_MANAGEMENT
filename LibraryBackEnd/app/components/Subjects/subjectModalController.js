@@ -21,6 +21,8 @@
 
         me.semesters = [];
 
+        me.change = false;
+
         $rootScope.isBusy = false;
 
         me.ok = function () {
@@ -87,9 +89,28 @@
             });
         }
 
+        me.trackChanges = function () {
+            me.change = true;
+        }
+
+        me.checkExisting = function (name, courseName, semester) {
+
+            if (!name || !courseName || !semester || !me.change)
+                return;
+
+            SubjectFactory.checkExisting(name, courseName, semester).then(function (course) {
+                me.exists = false;
+                if (course)
+                    me.exists = true;
+                return me.exists;
+            });
+        }
+
         $uibModalInstance.opened.then(function () {
             me.getSemesters();
         });
+
+
 
     }
 ]);

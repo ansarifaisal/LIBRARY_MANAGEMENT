@@ -23,6 +23,7 @@
                                name="accessionNumber"
                                placeholder="Enter Accession Number"
                                ng-blur="bookCtrl.getByAccessionNumber(bookCtrl.bookForm.book.accessionNumber)"
+                               ng-change="bookCtrl.trackChanges()"
                                ng-model="bookCtrl.bookForm.book.accessionNumber"
                                required />
 
@@ -502,7 +503,7 @@
                     </div>
                     <!-- Status Field Ends Here -->
 
-                    <input type="submit" value="{{bookCtrl.bookForm.btnText}}" class="btn btn-success form-control" />
+                    <input type="submit" ng-disabled="createEdit.$invalid || bookCtrl.exists" value="{{bookCtrl.bookForm.btnText}}" class="btn btn-success col-md-12" />
 
                 </form>
             </div>

@@ -25,6 +25,7 @@
                                placeholder="Enter Accession Number"
                                ng-blur="bookCtrl.getByAccessionNumber(bookCtrl.bookForm.book.accessionNumber)"
                                ng-model="bookCtrl.bookForm.book.accessionNumber"
+                               ng-change="bookCtrl.trackChanges()"
                                required />
 
                         <span class="glyphicon form-control-feedback"
@@ -53,6 +54,7 @@
                                ng-model="bookCtrl.bookForm.book.title"
                                uib-typeahead="title for title in bookCtrl.titles | filter:$viewValue | limitTo:8"
                                autocomplete="off"
+                               ng-change="bookCtrl.trackChanges()"
                                required />
 
                         <span class="glyphicon form-control-feedback"
@@ -78,6 +80,7 @@
                                name="pages"
                                placeholder="Enter Pages"
                                ng-model="bookCtrl.bookForm.book.pages"
+                               ng-change="bookCtrl.trackChanges()"
                                required />
 
                         <span class="glyphicon form-control-feedback"
@@ -103,6 +106,7 @@
                                name="author"
                                placeholder="Enter Author Name(s)"
                                ng-model="bookCtrl.bookForm.book.author"
+                               ng-change="bookCtrl.trackChanges()"
                                required />
 
                         <span class="glyphicon form-control-feedback"
@@ -127,7 +131,7 @@
                         <select class="form-control" name="publisher"
                                 ng-model="bookCtrl.bookForm.book.publisher"
                                 ng-options="publisher.name as publisher.name for publisher in  bookCtrl.bookForm.publishers"
-                                ng-change="bookCtrl.getCourses()"
+                                ng-change="bookCtrl.getCourses() || bookCtrl.trackChanges()"
                                 required>
                             <option value="" disabled>Select Publisher</option>
                         </select>
@@ -149,6 +153,7 @@
                                name="placeOfPublication"
                                placeholder="Enter Place of Publication"
                                ng-model="bookCtrl.bookForm.book.placeOfPublication"
+                               ng-change="bookCtrl.trackChanges()"
                                required />
 
                         <span class="glyphicon form-control-feedback"
@@ -178,6 +183,7 @@
                                    datepicker-options="bookCtrl.publicationDateOptions"
                                    close-text="Close"
                                    is-open="bookCtrl.dateOfPublicationPopup.opened"
+                                   ng-change="bookCtrl.trackChanges()"
                                    required />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="bookCtrl.dateOfPublicationDatePicker()"><i class="fa fa-calendar"></i></button>
@@ -199,7 +205,7 @@
                         <select class="form-control" name="course"
                                 ng-model="bookCtrl.bookForm.book.course"
                                 ng-options="course.name as course.name for course in  bookCtrl.bookForm.courses"
-                                ng-change="bookCtrl.getSemesters(bookCtrl.bookForm.courses, bookCtrl.bookForm.book.course)"
+                                ng-change="bookCtrl.getSemesters(bookCtrl.bookForm.courses, bookCtrl.bookForm.book.course) || bookCtrl.trackChanges()"
                                 ng-disabled="!bookCtrl.bookForm.book.publisher"
                                 required>
                             <option value="" disabled>Select Course</option>
@@ -220,7 +226,7 @@
                         <select class="form-control" name="semester"
                                 ng-model="bookCtrl.bookForm.book.semester"
                                 ng-options="semester as semester for semester in  bookCtrl.bookForm.semesters"
-                                ng-change="bookCtrl.getSubjects(bookCtrl.bookForm.book.course, bookCtrl.bookForm.book.semester)"
+                                ng-change="bookCtrl.getSubjects(bookCtrl.bookForm.book.course, bookCtrl.bookForm.book.semester) || bookCtrl.trackChanges()"
                                 ng-disabled="!bookCtrl.bookForm.book.course"
                                 required>
                             <option value="" disabled>Select Semester</option>
@@ -241,7 +247,7 @@
                         <select class="form-control" name="subject"
                                 ng-model="bookCtrl.bookForm.book.subject"
                                 ng-options="subject.name as subject.name for subject in  bookCtrl.bookForm.subjects"
-                                ng-change="bookCtrl.getTypeOfBook()"
+                                ng-change="bookCtrl.getTypeOfBook() || bookCtrl.trackChanges()"
                                 ng-disabled="!bookCtrl.bookForm.book.semester"
                                 required>
                             <option value="" disabled>Select Subject</option>
@@ -262,7 +268,7 @@
                         <select class="form-control" name="typeOfBook"
                                 ng-model="bookCtrl.bookForm.book.typeOfBook"
                                 ng-options="typeOfbook as typeOfbook for typeOfbook in  bookCtrl.bookForm.typesOfBook"
-                                ng-change="bookCtrl.gotBy()"
+                                ng-change="bookCtrl.gotBy() || bookCtrl.trackChanges()"
                                 ng-disabled="!bookCtrl.bookForm.book.subject"
                                 required>
                             <option value="" disabled>Select Type</option>
@@ -283,7 +289,7 @@
                         <select class="form-control" name="gotBy"
                                 ng-model="bookCtrl.bookForm.book.get"
                                 ng-options="gotBy as gotBy for gotBy in  bookCtrl.bookForm.gotBy"
-                                ng-change="bookCtrl.isBaught(bookCtrl.bookForm.book.get)"
+                                ng-change="bookCtrl.isBaught(bookCtrl.bookForm.book.get) || bookCtrl.trackChanges()"
                                 ng-disabled="!bookCtrl.bookForm.book.typeOfBook"
                                 required>
                             <option value="" disabled>Select Option</option>
@@ -308,6 +314,7 @@
                                    name="actualPrice"
                                    placeholder="Enter Actual Price"
                                    ng-model="bookCtrl.bookForm.book.actualPrice"
+                                   ng-change="bookCtrl.trackChanges()"
                                    required />
 
                             <span class="glyphicon form-control-feedback"
@@ -333,6 +340,7 @@
                                    placeholder="Enter Discount"
                                    ng-blur="bookCtrl.calculateDiscount(bookCtrl.bookForm.book.actualPrice, bookCtrl.bookForm.book.discount)"
                                    ng-model="bookCtrl.bookForm.book.discount"
+                                   ng-change="bookCtrl.trackChanges()"
                                    required />
 
                             <span class="glyphicon form-control-feedback"
@@ -368,6 +376,7 @@
                                    name="billNo"
                                    placeholder="Enter Bill Number"
                                    ng-model="bookCtrl.bookForm.book.billNo"
+                                   ng-change="bookCtrl.trackChanges()"
                                    required />
 
                             <span class="glyphicon form-control-feedback"
@@ -397,6 +406,7 @@
                                        datepicker-options="bookCtrl.dateOptions"
                                        close-text="Close"
                                        is-open="bookCtrl.billDatePopup.opened"
+                                       ng-change="bookCtrl.trackChanges()"
                                        required />
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="bookCtrl.billDatePicker()"><i class="fa fa-calendar"></i></button>
@@ -420,6 +430,7 @@
                                 ng-model="bookCtrl.bookForm.book.status"
                                 ng-options="status as status for status in  bookCtrl.bookForm.status"
                                 ng-disabled="!bookCtrl.bookForm.book.get"
+                                ng-change="bookCtrl.trackChanges()"
                                 required>
                             <option value="" disabled>Select Status</option>
                         </select>
@@ -431,7 +442,7 @@
                     </div>
                     <!-- Status Field Ends Here -->
 
-                    <input type="submit" value="{{bookCtrl.bookForm.btnText}}" class="btn btn-success form-control" />
+                    <input type="submit" ng-disabled="createEdit.$invalid || !bookCtrl.change || bookCtrl.exists " value="{{bookCtrl.bookForm.btnText}}" class="btn btn-success col-md-12" />
 
                 </form>
             </div>
