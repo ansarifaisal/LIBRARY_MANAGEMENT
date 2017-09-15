@@ -25,6 +25,8 @@
 
         me.newsPaper = modal.newsPaper;
 
+        me.change = false;
+
         me.monthPickers = function () {
             me.monthPicker.opened = true;
         };
@@ -120,6 +122,21 @@
             });
         }
 
+        me.trackChanges = function () {
+            me.change = true;
+        }
+
+        me.checkExistingPublisher = function (name) {
+            if (!name || !me.change)
+                return;
+            NewspaperFactory.checkExistingPublisher(name).then(function (newsPaper) {
+                me.exists = false;
+                if (newsPaper)
+                    me.exists = true;
+                return me.exists;
+            });
+        }
+
         me.deletePublisher = function () {
             $rootScope.isBusy = true;
             NewspaperFactory.deletePublisher(me.publisher).then(function () {
@@ -162,6 +179,17 @@
                 toastr.error(addOrEdit.errorMessage);
             }).finally(function () {
                 $rootScope.isBusy = false;
+            });
+        }
+
+        me.checkExistingPeriodicNewsPaper = function (name) {
+            if (!name || !me.change)
+                return;
+            NewspaperFactory.checkExistingPeriodicNewsPaper(name).then(function (periodicNewspaper) {
+                me.exists = false;
+                if (periodicNewspaper)
+                    me.exists = true;
+                return me.exists;
             });
         }
 
@@ -220,6 +248,17 @@
                 toastr.error(addOrEdit.errorMessage);
             }).finally(function () {
                 $rootScope.isBusy = false;
+            });
+        }
+
+        me.checkExistingNewsPaperMonth = function (date) {
+            if (!date || !me.change)
+                return;
+            NewspaperFactory.checkExistingNewsPaperMonth(date).then(function (newsPaperMonth) {
+                me.exists = false;
+                if (newsPaperMonth)
+                    me.exists = true;
+                return me.exists;
             });
         }
 

@@ -261,6 +261,21 @@
             MagazineFactory.getIssuedMagazines().then(function (issuedMagazines) {
                 me.issuedMagazines = issuedMagazines;
                 $rootScope.isBusy = false;
+                if (me.issuedMagazines.length === 0)
+                    return;
+                var fine = 0;
+                for (var i = 0; i < me.issuedMagazines.length; i++) {
+                    var flag = IssueBookFactory.isPastDate(me.issuedMagazines[i].returnDate);
+
+                    if (flag)
+                        fine = IssueBookFactory.calculateFine(me.issuedMagazines[i].issuedDate, me.issuedMagazines[i].returnDate);
+                    if (fine === me.issuedMagazines[i].fine)
+                        return;
+                    me.issuedMagazines[i].fine = fine;
+                    MagazineFactory.updateFine(me.issuedMagazines[i]);
+                }
+
+
             }, function (errorResponse) {
                 $rootScope.isBusy = false;
                 toastr.error("Error Fetching Issued Magazine");

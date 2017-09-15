@@ -21,5 +21,10 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _repository.GetByMonth(title, month);
         }
+
+        public Newspaper GetDate(DateTime date, DateTime month, string publisher)
+        {
+            return _repository.GetDate(date, month, publisher);
+        }
     }
 }

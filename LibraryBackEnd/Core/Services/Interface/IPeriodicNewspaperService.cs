@@ -4,6 +4,6 @@ namespace LibraryBackEnd.Core.Services.Interface
 {
     public interface IPeriodicNewspaperService : IEntityService<PeriodicNewspaper>
     {
-
+        PeriodicNewspaper GetByName(string name);
     }
 }

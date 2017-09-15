@@ -7,5 +7,7 @@ namespace LibraryBackEnd.Core.IRepositories
     public interface INewspaperRepository : IGenericRepository<Newspaper>
     {
         IEnumerable<Newspaper> GetByMonth(string title, DateTime month);
+
+        Newspaper GetDate(DateTime date, DateTime month, string publisher);
     }
 }

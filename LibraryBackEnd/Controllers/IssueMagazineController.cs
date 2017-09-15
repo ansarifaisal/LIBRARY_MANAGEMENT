@@ -133,5 +133,16 @@ namespace LibraryBackEnd.Controllers
             return Ok(issueMagazines);
         }
 
+        [HttpPut]
+        [Route("fine")]
+        public IHttpActionResult UpdateFine(IssueMagazine issueMagazine)
+        {
+            _issueMagazineService.Update(issueMagazine);
+            var student = _studentService.GetByRollNo(issueMagazine.RollNo);
+            student.Fine = student.Fine + issueMagazine.Fine;
+            _studentService.Update(student);
+            return Ok("Fine Updated");
+        }
+
     }
 }

@@ -84,5 +84,13 @@ namespace LibraryBackEnd.Controllers
                 return Ok(student);
             return Ok(student);
         }
+
+        [HttpGet]
+        [Route("rollNos")]
+        public IHttpActionResult GetByRollNos()
+        {
+            var rollNos = _studentService.GetRollNos();
+            return Ok(rollNos);
+        }
     }
 }

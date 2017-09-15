@@ -7,9 +7,9 @@
     <form name="createEdit" ng-submit="newsPaperModalCtrl.submitNewspaperMonthForm()" novalidate>
 
         <div class="form-group" ng-class="{'has-error has-feedback': createEdit.month.$invalid && createEdit.month.$touched
-                     || createEdit.month.$invalid && createEdit.$submitted,
+                     || createEdit.month.$invalid && createEdit.$submitted || newsPaperModalCtrl.exists && createEdit.month.$touched,
                      'has-success has-feedback': createEdit.month.$valid && createEdit.month.$touched || createEdit.month.$valid
-                     && createEdit.$submitted}">
+                     && createEdit.$submitted || !newsPaperModalCtrl.exists && createEdit.month.$touched}">
             <label for="month">Month</label>
             <div class="input-group">
                 <input type="text"
@@ -17,6 +17,8 @@
                        placeholder="Enter Month"
                        class="form-control"
                        ng-model="newsPaperModalCtrl.newsPaperMonth.month"
+                       ng-blur="newsPaperModalCtrl.checkExistingNewsPaperMonth(newsPaperModalCtrl.newsPaperMonth.month)"
+                       ng-change="newsPaperModalCtrl.trackChanges()"
                        uib-datepicker-popup="MMM, yyyy"
                        datepicker-options="newsPaperModalCtrl.monthPickerOptions"
                        close-text="Close"
@@ -26,8 +28,10 @@
                     <button type="button" class="btn btn-default" ng-click="newsPaperModalCtrl.monthPickers()"><i class="fa fa-calendar"></i></button>
                 </span>
             </div>
-            <div ng-show="createEdit.month.$invalid && createEdit.month.$touched || createEdit.$submitted">
-                <span ng-show="createEdit.month.$error.required" class="text-danger small">Please, provide month.</span>
+            <div ng-show="createEdit.month.$invalid && createEdit.month.$touched || createEdit.$submitted || newsPaperModalCtrl.exists">
+                <div ng-show="createEdit.month.$error.required" class="text-danger small">Please, provide month.</div>
+                <div ng-show="newsPaperModalCtrl.exists" class="text-danger small">This month is already exists.</div>
+
             </div>
         </div>
         <div class="form-group">
@@ -42,6 +46,7 @@
                        name="billNumber"
                        class="form-control"
                        placeholder="Enter Bill Number"
+                       ng-change="newsPaperModalCtrl.trackChanges()"
                        ng-model="newsPaperModalCtrl.newsPaperMonth.billNumber"
                        ng-pattern="/^[0-9]/" />
 
@@ -68,6 +73,7 @@
                        placeholder="Enter From"
                        class="form-control"
                        ng-model="newsPaperModalCtrl.newsPaperMonth.from"
+                       ng-change="newsPaperModalCtrl.trackChanges()"
                        uib-datepicker-popup="MMM, yyyy"
                        datepicker-options="newsPaperModalCtrl.monthPickerOptions"
                        close-text="Close"
@@ -88,6 +94,7 @@
                        placeholder="Enter To"
                        class="form-control"
                        ng-model="newsPaperModalCtrl.newsPaperMonth.to"
+                       ng-change="newsPaperModalCtrl.trackChanges()"
                        uib-datepicker-popup="MMM, yyyy"
                        datepicker-options="newsPaperModalCtrl.monthPickerOptions"
                        close-text="Close"
@@ -99,7 +106,7 @@
 
         </div>
 
-        <input type="submit" ng-disabled="createEdit.$invalid" value="{{newsPaperModalCtrl.btnText}}" class="btn btn-primary" ng-click="newsPaperModalCtrl.ok()" />
+        <input type="submit" ng-disabled="createEdit.$invalid || newsPaperModalCtrl.exists || !newsPaperModalCtrl.change" value="{{newsPaperModalCtrl.btnText}}" class="btn btn-primary" ng-click="newsPaperModalCtrl.ok()" />
         <button type="button" class="btn btn-default" ng-click="newsPaperModalCtrl.cancel()">Close</button>
 
     </form>

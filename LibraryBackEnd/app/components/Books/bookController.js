@@ -10,11 +10,9 @@
     "$timeout",
     "$rootScope",
     "toastr",
-    "DTOptionsBuilder",
-    "DTColumnDefBuilder",
     "$window",
     function (BookFactory, AppService, CourseFactory, ReturnBookFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
-        toastr, DTOptionsBuilder, DTColumnDefBuilder, $window) {
+        toastr, $window) {
 
 
         var me = this;
@@ -91,7 +89,6 @@
         }
 
         me.getSemesters = function (courses, courseName) {
-
             return me.bookForm.semesters = BookFactory.getSemesters(courses, courseName);
         }
 
@@ -157,9 +154,13 @@
                 me.getPublishers();
                 $timeout(function () {
                     me.getCourses();
-                    me.getSubjects(me.bookForm.book.course, me.bookForm.book.semester);
-                    me.getSemesters(me.bookForm.courses, me.bookForm.book.course);
                 }, 100);
+
+                $timeout(function () {
+                    me.getSemesters(me.bookForm.courses, me.bookForm.book.course);
+                    me.getSubjects(me.bookForm.book.course, me.bookForm.book.semester);
+                }, 200);
+
                 me.bookForm.book.billDate = BookFactory.parseDate(me.bookForm.book.billDate);
                 me.calculateDiscount(me.bookForm.book.actualPrice, me.bookForm.book.discount);
                 me.getTypeOfBook();

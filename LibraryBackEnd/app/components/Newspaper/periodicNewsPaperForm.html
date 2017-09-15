@@ -7,20 +7,29 @@
         <form name="createEdit" ng-submit="newsPaperModalCtrl.submitPeriodicDetailsForm()" novalidate>
 
             <div class="form-group" ng-class="{'has-error has-feedback': createEdit.title.$invalid && createEdit.title.$touched
-         || createEdit.title.$invalid && createEdit.$submitted,
+         || createEdit.title.$invalid && createEdit.$submitted || newsPaperModalCtrl.exists && createEdit.title.$touched,
          'has-success has-feedback': createEdit.title.$valid || createEdit.title.$valid
-         && createEdit.$submitted}">
+         && createEdit.$submitted || !newsPaperModalCtrl.exists && createEdit.title.$touched}">
                 <label for="title">Title</label>
-                <input type="text" name="title" class="form-control" placeholder="Enter Title" ng-model="newsPaperModalCtrl.periodicNewspaper.title" required />
+                <input type="text"
+                       name="title"
+                       class="form-control"
+                       placeholder="Enter Title"
+                       ng-model="newsPaperModalCtrl.periodicNewspaper.title"
+                       ng-blur="newsPaperModalCtrl.checkExistingPeriodicNewsPaper(newsPaperModalCtrl.periodicNewspaper.title)"
+                       ng-change="newsPaperModalCtrl.trackChanges()"
+                       required />
 
                 <span class="glyphicon form-control-feedback"
-                      ng-class="{'glyphicon-ok': createEdit.title.$valid || createEdit.title.$valid && createEdit.$submitted,
+                      ng-class="{'glyphicon-ok': createEdit.title.$valid || createEdit.title.$valid && createEdit.$submitted || !newsPaperModalCtrl.exists && createEdit.title.$touched,
                           'glyphicon-remove': createEdit.title.$invalid && createEdit.title.$touched
-                           || createEdit.title.$invalid && createEdit.$submitted}">
+                           || createEdit.title.$invalid && createEdit.$submitted || newsPaperModalCtrl.exists && createEdit.title.$touched}">
                 </span>
 
-                <div ng-show="createEdit.title.$invalid && createEdit.title.$touched || createEdit.$submitted">
-                    <span ng-show="createEdit.title.$error.required" class="text-danger small">Please, provide title.</span>
+                <div ng-show="createEdit.title.$invalid && createEdit.title.$touched || createEdit.$submitted || newsPaperModalCtrl.exists">
+                    <div ng-show="createEdit.title.$error.required" class="text-danger small">Please, provide title.</div>
+                    <div ng-show="newsPaperModalCtrl.exists" class="text-danger small">Details already exists.</div>
+
                 </div>
             </div>
 
@@ -32,6 +41,7 @@
                 <select class="form-control" name="publisher"
                         ng-model="newsPaperModalCtrl.periodicNewspaper.publisher"
                         ng-options="publisher.title as publisher.title for publisher in  newsPaperModalCtrl.publishers"
+                        ng-change="newsPaperModalCtrl.trackChanges()"
                         required>
                     <option value="" disabled>Select Publisher</option>
                 </select>
@@ -43,10 +53,15 @@
 
             <div class="form-group">
                 <label for="remark">Remake</label>
-                <input type="text" name="remark" class="form-control" placeholder="Enter Remark" ng-model="newsPaperModalCtrl.periodicNewspaper.remark" />
+                <input type="text"
+                       name="remark"
+                       class="form-control"
+                       placeholder="Enter Remark"
+                       ng-model="newsPaperModalCtrl.periodicNewspaper.remark"
+                       ng-change="newsPaperModalCtrl.trackChanges()" />
             </div>
 
-            <input type="submit" ng-disabled="createEdit.$invalid" value="{{newsPaperModalCtrl.btnText}}" class="btn btn-primary" ng-click="newsPaperModalCtrl.ok()" />
+            <input type="submit" ng-disabled="createEdit.$invalid || newsPaperModalCtrl.exists || !newsPaperModalCtrl.change" value="{{newsPaperModalCtrl.btnText}}" class="btn btn-primary" ng-click="newsPaperModalCtrl.ok()" />
             <button type="button" class="btn btn-default" ng-click="newsPaperModalCtrl.cancel()">Close</button>
 
         </form>

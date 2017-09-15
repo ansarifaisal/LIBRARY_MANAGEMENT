@@ -64,7 +64,7 @@
                        ng-model="newsPaperModalCtrl.newsPaper.remark" />
             </div>
 
-            <input type="submit" value="{{newsPaperModalCtrl.btnText}}" ng-disabled="createEdit.$invalid" class="btn btn-primary" ng-click="newsPaperModalCtrl.ok()" />
+            <input type="submit" ng-disabled="createEdit.$invalid" value="{{newsPaperModalCtrl.btnText}}" ng-disabled="createEdit.$invalid" class="btn btn-primary" ng-click="newsPaperModalCtrl.ok()" />
             <button type="button" class="btn btn-default" ng-click="newsPaperModalCtrl.cancel()">Close</button>
 
         </form>

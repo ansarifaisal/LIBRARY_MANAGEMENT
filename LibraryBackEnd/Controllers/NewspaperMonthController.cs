@@ -71,5 +71,20 @@ namespace LibraryBackEnd.Controllers
 
             return Ok(periodicNewspaper);
         }
+
+        [Route("getByMonth")]
+        [HttpGet]
+        public IHttpActionResult GetByMonth(DateTime date)
+        {
+            if (date == null)
+                throw new ArgumentNullException();
+
+            var newspaperMonth = _newsPaperMonthService.GetByMonth(date);
+
+            return Ok(newspaperMonth);
+        }
+
+
+
     }
 }

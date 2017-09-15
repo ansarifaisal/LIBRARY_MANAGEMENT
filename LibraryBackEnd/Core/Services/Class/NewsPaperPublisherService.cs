@@ -13,5 +13,10 @@ namespace LibraryBackEnd.Core.Services.Class
             _repository = repository;
             _unitOfWork = unitOfWork;
         }
+
+        public NewspaperPublisher GetByName(string name)
+        {
+            return _repository.GetByName(name);
+        }
     }
 }

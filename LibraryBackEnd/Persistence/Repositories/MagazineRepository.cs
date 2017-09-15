@@ -23,11 +23,21 @@ namespace LibraryBackEnd.Persistence.Repositories
                 .SingleOrDefault();
         }
 
+        public IEnumerable<string> GetMagazineNumbers()
+        {
+            return _context.Magazines
+                .Where(m => m.Status == "Available")
+                .Select(m => m.Number)
+                .ToList();
+        }
+
         public IEnumerable<Magazine> GetMagazines(string title)
         {
             return _context.Magazines
                 .Where(m => m.PeriodicTitle == title)
                 .ToList();
         }
+
+
     }
 }

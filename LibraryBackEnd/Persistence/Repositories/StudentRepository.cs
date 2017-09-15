@@ -35,7 +35,10 @@ namespace LibraryBackEnd.Persistence.Repositories
 
         public IEnumerable<string> GetRollNos()
         {
-            return _context.Users.Select(u => u.RollNo).ToList();
+            return _context.Users
+                .Where(u => u.Status == "APPROVED" && u.IssueCount < 2)
+                .Select(u => u.RollNo)
+                .ToList();
         }
 
         public IEnumerable<ApplicationUser> GetSearchResults(SearchStudentBindingModel searchStudentBindingModel)

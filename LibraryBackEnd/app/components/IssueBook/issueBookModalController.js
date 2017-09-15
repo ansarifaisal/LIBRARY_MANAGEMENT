@@ -1,14 +1,13 @@
 ﻿IssueBookModule.controller("IssueBookModalController", [
     "$uibModalInstance",
     "IssueBookFactory",
-    "AuthorFactory",
     "$route",
     "toastr",
     "$rootScope",
     "modal",
     "$filter",
     "$scope",
-    function ($uibModalInstance, IssueBookFactory, AuthorFactory, $route, toastr, $rootScope, modal, $filter, $scope) {
+    function ($uibModalInstance, IssueBookFactory, $route, toastr, $rootScope, modal, $filter, $scope) {
 
         var me = this;
 

@@ -1,14 +1,13 @@
 ﻿LostOrReplaceModule.controller("LostOrReplaceModalController", [
     "$uibModalInstance",
     "LostOrReplaceFactory",
-    "AuthorFactory",
     "$route",
     "toastr",
     "$rootScope",
     "modal",
     "$filter",
     "$scope",
-    function ($uibModalInstance, LostOrReplaceFactory, AuthorFactory, $route, toastr, $rootScope, modal, $filter, $scope) {
+    function ($uibModalInstance, LostOrReplaceFactory, $route, toastr, $rootScope, modal, $filter, $scope) {
         var me = this;
 
         me.book = modal.book;

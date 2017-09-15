@@ -18,7 +18,9 @@
                        ng-model="magazineModalCtrl.issueMagazine.number"
                        ng-pattern="/^[0-9]/"
                        ng-maxlength="6"
+                       uib-typeahead="number for number in magazineModalCtrl.numbers | filter:$viewValue | limitTo:8"
                        placeholder="Enter Magazine Number"
+                       autocomplete="off"
                        required />
                 <span class="glyphicon form-control-feedback"
                       ng-class="{'glyphicon-ok': createEdit.number.$valid || createEdit.number.$valid && createEdit.$submitted || magazineModalCtrl.magazineExists == true,
@@ -71,9 +73,9 @@
             </div>
 
             <div class="form-group" ng-class="{'has-error has-feedback': createEdit.rollNo.$invalid && createEdit.rollNo.$touched
-         || createEdit.rollNo.$invalid && createEdit.$submitted || magazineModalCtrl.userExists == false,
-         'has-success has-feedback': createEdit.rollNo.$valid || createEdit.rollNo.$valid
-         && createEdit.$submitted || magazineModalCtrl.userExists == true}">
+                 || createEdit.rollNo.$invalid && createEdit.$submitted || magazineModalCtrl.userExists == false,
+                 'has-success has-feedback': createEdit.rollNo.$valid || createEdit.rollNo.$valid
+                 && createEdit.$submitted || magazineModalCtrl.userExists == true}">
                 <label for="rollNo">Roll Number</label>
                 <input type="text"
                        class="form-control"
@@ -83,6 +85,8 @@
                        ng-pattern="/^[0-9]/"
                        ng-maxlength="6"
                        placeholder="Enter Roll Number"
+                       uib-typeahead="rollNo for rollNo in magazineModalCtrl.rollNos | filter:$viewValue | limitTo:8"
+                       autocomplete="off"
                        required />
                 <span class="glyphicon form-control-feedback"
                       ng-class="{'glyphicon-ok': createEdit.rollNo.$valid || createEdit.rollNo.$valid && createEdit.$submitted || magazineModalCtrl.userExists == true,

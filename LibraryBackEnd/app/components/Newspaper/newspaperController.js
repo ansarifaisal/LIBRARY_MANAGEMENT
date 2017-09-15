@@ -194,12 +194,24 @@
             me.dtOptions = AppService.dataTableWithFunction("Add Month", me.showNewspaperMonthForm);
 
             NewspaperFactory.getNewspaperMonths(title).then(function (newsPaperMonths) {
-                for (var i = 0; i < newsPaperMonths.length; i++) {
-                    newsPaperMonths[i].from = NewspaperFactory.formatDate(newsPaperMonths[i].from);
-                    newsPaperMonths[i].to = NewspaperFactory.formatDate(newsPaperMonths[i].to);
-                }
                 me.newsPaperMonths = newsPaperMonths;
-                $rootScope.isBusy = false;
+                if (me.newsPaperMonths.length === 0)
+                    return;
+                var totalAmount = 0;
+                for (var i = 0; i < newsPaperMonths.length; i++) {
+                    me.newsPaperMonths[i].from = NewspaperFactory.formatDate(newsPaperMonths[i].from);
+                    me.newsPaperMonths[i].to = NewspaperFactory.formatDate(newsPaperMonths[i].to);
+                    if (me.newsPaperMonths[i].title == title)
+                        totalAmount = totalAmount + me.newsPaperMonths[i].amount;
+                }
+                NewspaperFactory.checkExistingPeriodicNewsPaper(title).then(function (periodicNewsPaper) {
+                    me.periodicNewspaper = periodicNewsPaper;
+                    if (me.periodicNewspaper.amount === totalAmount)
+                        return;
+                    me.periodicNewspaper.amount = totalAmount;
+                    NewspaperFactory.editPeriodicNewsPaper(me.periodicNewspaper);
+                });
+                $rootScope.isBusy = false; 2
             }, function (errorResponse) {
                 console.log(errorResponse);
                 $rootScope.isBusy = false;
@@ -251,13 +263,29 @@
         me.getNewspapers = function () {
             me.title = $routeParams.title;
             me.month = $routeParams.month;
-
             $rootScope.isBusy = true;
 
             me.dtOptions = AppService.dataTableWithFunction("Add Newspaper", me.showNewspaperForm);
 
             NewspaperFactory.getNewspapers(me.title, me.month).then(function (newsPapers) {
                 me.newsPapers = newsPapers;
+                var totalAmount = 0;
+                var month;
+                if (me.newsPapers.length === 0)
+                    return;
+                for (var i = 0; i < me.newsPapers.length; i++) {
+                    month = me.newsPapers[i].month;
+                    if (month == me.month)
+                        totalAmount = parseInt(totalAmount) + parseInt(me.newsPapers[i].price);
+                }
+                me.month = NewspaperFactory.parseDate(me.month);
+                NewspaperFactory.checkExistingNewsPaperMonth(me.month).then(function (newsMonth) {
+                    me.newsMonth = newsMonth;
+                    if (totalAmount === me.newsMonth.amount)
+                        return;
+                    me.newsMonth.amount = totalAmount;
+                    NewspaperFactory.editNewspaperMonth(me.newsMonth);
+                });
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
                 console.log(errorResponse);

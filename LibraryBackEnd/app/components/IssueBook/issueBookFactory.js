@@ -28,6 +28,7 @@ IssueBookModule.factory("IssueBookFactory", [
             sendNotification: sendNotification,
             calculateFine: calculateFine,
             updateFine: updateFine,
+            isPastDate: isPastDate,
             returnBook: returnBook,
             lostBook: lostBook,
             getByRollNumber: getByRollNumber
@@ -162,7 +163,7 @@ IssueBookModule.factory("IssueBookFactory", [
         function calculateFine(date, returnDate) {
             var tempDate = parseDate(date);
             var tempReturnDate = parseDate(returnDate);
-            var numberOfDays = Math.round(convertToDate(tempDate) - convertToDate(tempReturnDate)) / (1000 * 60 * 60 * 24);
+            var numberOfDays = Math.round(convertToDate(tempReturnDate) - convertToDate(tempDate)) / (1000 * 60 * 60 * 24);
             if (numberOfDays > 0)
                 var fine = numberOfDays * 10;
             return fine;
@@ -176,6 +177,15 @@ IssueBookModule.factory("IssueBookFactory", [
                 deferred.reject(errorResponse);
             });
             return deferred.promise;
+        }
+
+        function isPastDate(returnDate) {
+            var date = new Date();
+            returnDate = convertToDate(returnDate);
+            var isPast = false;
+            if (returnDate < date)
+                isPast = true;
+            return isPast;
         }
 
         function returnBook(issuedBook) {

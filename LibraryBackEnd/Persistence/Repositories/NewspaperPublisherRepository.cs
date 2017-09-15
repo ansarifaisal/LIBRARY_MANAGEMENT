@@ -1,6 +1,7 @@
 ﻿using LibraryBackEnd.Configuration;
 using LibraryBackEnd.Core.IRepositories;
 using LibraryBackEnd.Core.Models;
+using System.Linq;
 
 namespace LibraryBackEnd.Persistence.Repositories
 {
@@ -11,6 +12,13 @@ namespace LibraryBackEnd.Persistence.Repositories
             : base(context)
         {
             _context = context;
+        }
+
+        public NewspaperPublisher GetByName(string name)
+        {
+            return _context.NewsPaperPublishers
+                .Where(n => n.Title == name)
+                .SingleOrDefault();
         }
     }
 }

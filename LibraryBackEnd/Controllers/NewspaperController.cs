@@ -71,5 +71,16 @@ namespace LibraryBackEnd.Controllers
 
             return Ok(newsPaper);
         }
+
+        [Route("getDate")]
+        [HttpGet]
+        public IHttpActionResult GetDate(DateTime date, DateTime month, string publisher)
+        {
+            if (date == null || month == null || publisher == "")
+                throw new ArgumentNullException();
+            var newsPaper = _newsPaperService.GetDate(date, month, publisher);
+
+            return Ok(newsPaper);
+        }
     }
 }

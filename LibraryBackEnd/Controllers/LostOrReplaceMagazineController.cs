@@ -37,7 +37,7 @@ namespace LibraryBackEnd.Controllers
             var student = _studentService.GetByRollNo(lostOrReplaceMagazine.RollNo);
             if (student == null)
                 return BadRequest("User Not Found");
-            student.Status = "Default";
+            student.Status = "DEFAULT";
             student.IssueCount = student.IssueCount - 1;
             _studentService.Update(student);
 
@@ -93,7 +93,7 @@ namespace LibraryBackEnd.Controllers
             var student = _studentService.GetByRollNo(lostOrReplaceMagazine.RollNo);
             if (student == null)
                 return BadRequest("User Not Found");
-            student.Status = "Default";
+            student.Status = "DEFAULT";
             _studentService.Update(student);
 
             _lostOrReplaceMagazineService.Update(lostOrReplaceMagazine);
@@ -112,18 +112,6 @@ namespace LibraryBackEnd.Controllers
             _lostOrReplaceMagazineService.Delete(lostOrReplaceMagazine);
             return Ok();
         }
-
-        //[Route("checkExisting")]
-        //[HttpGet]
-        //public bool CheckExisting(string name)
-        //{
-        //    if (name == null)
-        //        return false;
-        //    var publication = _lostOrReplaceMagazineService.GetByName(name);
-        //    if (publication == null)
-        //        return false;
-        //    return true;
-        //}
 
         [Route("get/{Id}")]
         [HttpGet]

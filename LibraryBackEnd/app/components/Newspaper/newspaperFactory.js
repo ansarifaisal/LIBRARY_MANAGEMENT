@@ -11,18 +11,21 @@ NewspaperModule.factory("NewspaperFactory", [
             addPublisher: addPublisher,
             editPublisher: editPublisher,
             deletePublisher: deletePublisher,
+            checkExistingPublisher: checkExistingPublisher,
             addOrEditPublisher: addOrEditPublisher,
             getPeriodicNewsPapers: getPeriodicNewsPapers,
             getPeriodicNewsPaper: getPeriodicNewsPaper,
             addPeriodicNewsPaper: addPeriodicNewsPaper,
             editPeriodicNewsPaper: editPeriodicNewsPaper,
             deletePeriodicNewsPaper: deletePeriodicNewsPaper,
+            checkExistingPeriodicNewsPaper: checkExistingPeriodicNewsPaper,
             addOrEditPeriodicNewsPaper: addOrEditPeriodicNewsPaper,
             getNewspaperMonths: getNewspaperMonths,
             getNewspaperMonth: getNewspaperMonth,
             addNewspaperMonth: addNewspaperMonth,
             editNewspaperMonth: editNewspaperMonth,
             deleteNewspaperMonth: deleteNewspaperMonth,
+            checkExistingNewsPaperMonth: checkExistingNewsPaperMonth,
             addOrEditNewspaperMonth: addOrEditNewspaperMonth,
             dateParse: dateParse,
             parseDate: parseDate,
@@ -32,6 +35,7 @@ NewspaperModule.factory("NewspaperFactory", [
             addNewspaper: addNewspaper,
             editNewspaper: editNewspaper,
             deleteNewspaper: deleteNewspaper,
+            checkExistingNewsPaper: checkExistingNewsPaper,
             addOrEditNewspaper: addOrEditNewspaper,
         }
         return newsPaperFactory;
@@ -84,6 +88,17 @@ NewspaperModule.factory("NewspaperFactory", [
         function deletePublisher(publisher) {
             var deferred = $q.defer();
             $http.post("/api/newspaper/publisher/delete", publisher)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function checkExistingPublisher(name) {
+            var deferred = $q.defer();
+            $http.get("/api/newspaper/publisher/getByName?name=" + name)
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (errorResponse) {
@@ -161,6 +176,17 @@ NewspaperModule.factory("NewspaperFactory", [
             return deferred.promise;
         }
 
+        function checkExistingPeriodicNewsPaper(name) {
+            var deferred = $q.defer();
+            $http.get("/api/newspaper/periodic/getByName?name=" + name)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
         function addOrEditPeriodicNewsPaper(periodicDetail) {
             var toDo = {};
             if (periodicDetail.id === undefined) {
@@ -199,7 +225,6 @@ NewspaperModule.factory("NewspaperFactory", [
 
         function addNewspaperMonth(newsPaperMonth) {
             var deferred = $q.defer();
-            console.log(newsPaperMonth);
             $http.post("/api/newspaper/month/add", newsPaperMonth)
                 .then(function (response) {
                     deferred.resolve(response.data);
@@ -224,6 +249,18 @@ NewspaperModule.factory("NewspaperFactory", [
         function deleteNewspaperMonth(newsPaperMonth) {
             var deferred = $q.defer();
             $http.post("/api/newspaper/month/delete", newsPaperMonth)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function checkExistingNewsPaperMonth(date) {
+            var tempDate = dateParse(date);
+            var deferred = $q.defer();
+            $http.get("/api/newspaper/month/getByMonth?date=" + tempDate)
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (errorResponse) {
@@ -310,6 +347,19 @@ NewspaperModule.factory("NewspaperFactory", [
         function deleteNewspaper(newsPaper) {
             var deferred = $q.defer();
             $http.post("/api/newspaper/paper/delete", newsPaper)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function checkExistingNewsPaper(date, month, publisher) {
+            var tempDate = dateParse(date);
+            var tempMonth = dateParse(month);
+            var deferred = $q.defer();
+            $http.get("/api/newspaper/paper/getDate?date=" + tempDate + "&month=" + tempMonth + "&publisher=" + publisher)
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (errorResponse) {

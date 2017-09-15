@@ -110,7 +110,7 @@ namespace LibraryBackEnd.Controllers
         {
             _issueBookService.Update(issueBook);
             var student = _studentService.GetByRollNo(issueBook.RollNo);
-            student.Fine = issueBook.Fine;
+            student.Fine = student.Fine + issueBook.Fine;
             _studentService.Update(student);
             return Ok("Fine Updated");
         }
@@ -137,6 +137,7 @@ namespace LibraryBackEnd.Controllers
             var student = _studentService.GetByRollNo(_issuedBook.RollNo);
             if (student == null)
                 return BadRequest();
+            student.IssueCount = student.IssueCount - 1;
             student.Fine = student.Fine - _issuedBook.Fine;
             _studentService.Update(student);
             var book = _bookService.GetByAccessionNumber(_issuedBook.AccessionNumber);
@@ -173,6 +174,7 @@ namespace LibraryBackEnd.Controllers
             var borrower = _studentService.GetByRollNo(issueBook.RollNo);
             if (borrower == null)
                 return BadRequest();
+            borrower.IssueCount = borrower.IssueCount - 1;
             borrower.Status = "DEFAULT";
             _studentService.Update(borrower);
             return Ok("");

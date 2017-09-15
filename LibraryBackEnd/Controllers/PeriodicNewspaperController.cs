@@ -72,5 +72,17 @@ namespace LibraryBackEnd.Controllers
             return Ok(periodicNewspaper);
         }
 
+        [Route("getByName")]
+        [HttpGet]
+        public IHttpActionResult GetByName(string name)
+        {
+            if (name == "")
+                throw new ArgumentNullException();
+
+            var periodicNewspaper = _periodicNewpaperService.GetByName(name);
+
+            return Ok(periodicNewspaper);
+        }
+
     }
 }

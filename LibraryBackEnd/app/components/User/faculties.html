@@ -30,7 +30,7 @@
                 <td>{{ faculty.emailConfirmed }}</td>
                 <td>{{ faculty.role }}</td>
                 <td>{{ faculty.status }}</td>
-                <td class="text-center">
+                <td class="text-center" ng-hide="faculty.status == 'DEFAULT'">
                     <a href="" ng-click="userCtrl.getFaculty(faculty.userName)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
                     <a href="" ng-click="userCtrl.deleteUser(faculty.userName)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
                 </td>

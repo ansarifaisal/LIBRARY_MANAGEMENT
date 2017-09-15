@@ -83,5 +83,13 @@ namespace LibraryBackEnd.Controllers
             return Ok(magazine);
         }
 
+        [Route("numbers")]
+        [HttpGet]
+        public IHttpActionResult GetMagazineNumbers()
+        {
+            var numbers = _magazineService.GetMagazineNumbers();
+            return Ok(numbers);
+        }
+
     }
 }

@@ -21,6 +21,11 @@ namespace LibraryBackEnd.Core.Services.Class
             return _repository.GetByNumber(number);
         }
 
+        public IEnumerable<string> GetMagazineNumbers()
+        {
+            return _repository.GetMagazineNumbers();
+        }
+
         public IEnumerable<Magazine> GetMagazines(string title)
         {
             return _repository.GetMagazines(title);

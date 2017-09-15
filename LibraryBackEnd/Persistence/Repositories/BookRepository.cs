@@ -24,7 +24,11 @@ namespace LibraryBackEnd.Persistence.Repositories
 
         public IEnumerable<string> GetAccessionNumbers()
         {
-            return _context.Books.Select(b => b.AccessionNumber).Distinct().ToList();
+            return _context.Books
+                .Where(b => b.Status == "Available")
+                .Select(b => b.AccessionNumber)
+                .Distinct()
+                .ToList();
         }
 
         public Book GetByAccessionNumber(string accessionNumber)

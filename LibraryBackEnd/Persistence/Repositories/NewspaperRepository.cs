@@ -25,5 +25,18 @@ namespace LibraryBackEnd.Persistence.Repositories
                 && n.Date.Year == month.Year)
                 .ToList();
         }
+
+        public Newspaper GetDate(DateTime date, DateTime month, string publisher)
+        {
+            return _context.Newspapers
+                .Where(n =>
+                    n.Date.Date == date.Date
+                    && n.Date.Month == date.Month
+                    && n.Date.Year == date.Year
+                    && n.Month.Month == month.Month
+                    && n.Month.Year == month.Year
+                    && n.Publisher == publisher)
+                .SingleOrDefault();
+        }
     }
 }

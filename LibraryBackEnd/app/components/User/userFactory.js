@@ -22,6 +22,7 @@ UserModule.factory("UserFactory", [
             getRoles: getRoles,
             getStudentByRollNo: getStudentByRollNo,
             changePassword: changePassword,
+            getRollNos: getRollNos
         }
 
         return userFactory;
@@ -152,6 +153,17 @@ UserModule.factory("UserFactory", [
         function changePassword(password) {
             var deferred = $q.defer();
             $http.post("/api/Account/ChangePassword", password)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function getRollNos() {
+            var deferred = $q.defer();
+            $http.get("/api/student/rollNos")
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (errorResponse) {

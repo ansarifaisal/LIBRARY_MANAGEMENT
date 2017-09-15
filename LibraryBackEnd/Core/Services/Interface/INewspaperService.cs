@@ -7,5 +7,7 @@ namespace LibraryBackEnd.Core.Services.Interface
     public interface INewspaperService : IEntityService<Newspaper>
     {
         IEnumerable<Newspaper> GetByMonth(string title, DateTime month);
+
+        Newspaper GetDate(DateTime date, DateTime month, string publisher);
     }
 }

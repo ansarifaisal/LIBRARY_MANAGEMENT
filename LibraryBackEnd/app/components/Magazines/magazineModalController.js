@@ -421,6 +421,12 @@
                     me.getMagazineByNumber(me.issueMagazine.number);
                 if (me.issueMagazine.rollNo)
                     me.getByRollNumber(me.issueMagazine.rollNo);
+                MagazineFactory.getMagazineNumbers().then(function (numbers) {
+                    me.numbers = numbers;
+                });
+                UserFactory.getRollNos().then(function (rollNos) {
+                    me.rollNos = rollNos;
+                });
             }
         }
 

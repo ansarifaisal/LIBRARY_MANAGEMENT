@@ -1,7 +1,6 @@
 ﻿IssueBookModule.controller("IssueBookController", [
     "IssueBookFactory",
     "AppService",
-    "AuthenticationFactory",
     "BookFactory",
     "UserFactory",
     "$scope",
@@ -12,10 +11,8 @@
     "$rootScope",
     "toastr",
     "$window",
-    "DTOptionsBuilder",
-    "DTColumnDefBuilder",
-    function (IssueBookFactory, AppService, AuthenticationFactory, BookFactory, UserFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
-        toastr, $window, DTOptionsBuilder, DTColumnDefBuilder) {
+    function (IssueBookFactory, AppService, BookFactory, UserFactory, $scope, $location, $route, $routeParams, $timeout, $rootScope,
+        toastr, $window) {
 
         $timeout(function () {
             settings();
@@ -55,6 +52,12 @@
         me.getData = function () {
             me.issueBook.issuedDate = IssueBookFactory.getIssueDate();
             me.issueBook.returnDate = IssueBookFactory.getReturnDate();
+            BookFactory.getAccessionNumbers().then(function (accessionNumbers) {
+                me.accessionNumbers = accessionNumbers;
+            });
+            UserFactory.getRollNos().then(function (rollNos) {
+                me.rollNos = rollNos;
+            });
         }
 
         me.showIssueForm = function () {
@@ -75,7 +78,8 @@
         }
 
         me.getByAccessionNumber = function (accessionNumber) {
-
+            if (!accessionNumber)
+                return;
             BookFactory.getBookByAccessionNumber(accessionNumber).then(function (response) {
                 angular.copy(response, me.book);
                 if (me.book.accessionNumber === accessionNumber) {
@@ -88,6 +92,8 @@
         }
 
         me.getByRollNumber = function (rollNumber, accessionNumber) {
+            if (!rollNumber)
+                return;
             UserFactory.getStudentByRollNo(rollNumber).then(function (response) {
                 me.isError = false;
                 angular.copy(response, me.student);
@@ -155,6 +161,18 @@
             me.dtOptions = AppService.dataTableWithFunction("Issue Book", me.showIssueForm);
             IssueBookFactory.getIssuedBooks().then(function (issuedBooks) {
                 me.issuedBooks = issuedBooks;
+                if (me.issuedBooks.length === 0)
+                    return;
+                var fine = 0;
+                for (var i = 0; i < me.issuedBooks.length; i++) {
+                    var flag = IssueBookFactory.isPastDate(me.issuedBooks[i].returnDate);
+                    if (flag)
+                        fine = IssueBookFactory.calculateFine(me.issuedBooks[i].issuedDate, me.issuedBooks[i].returnDate);
+                    if (fine === me.issuedBooks[i].fine)
+                        return;
+                    me.issuedBooks[i].fine = fine;
+                    IssueBookFactory.updateFine(me.issuedBooks[i]);
+                }
             }).finally(function () {
                 $rootScope.isBusy = false;
             });
@@ -178,6 +196,7 @@
                 me.bookModal.issueBook = issueBook;
                 me.bookModal.title = "Return Issue Book";
                 me.bookModal.btnText = "Return";
+                console.log(me.bookModal);
                 AppService.showModal(me.bookModal,
                "issuebook/returnIssueBook.html",
                "IssueBookModalController",

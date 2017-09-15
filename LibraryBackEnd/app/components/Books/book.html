@@ -5,7 +5,7 @@
         <li class="active">{{bookCtrl.book.title}}</li>
     </ol>
 
-   
+
 
     <div class="page-header">
         <h3>{{bookCtrl.book.title}}</h3>
@@ -22,13 +22,13 @@
     <div ng-show="bookCtrl.book.status == 'Replace'">
         <div class="alert alert-success">
             <div class="text-center">
-                <strong>This book is replaced by bookLink.</strong>
+                <strong>This book is replaced.</strong>
             </div>
         </div>
     </div>
 
-    <div ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
-        <div class="panel panel-default panel-body">
+    <div>
+        <div class="panel panel-default panel-body" ng-show="user.role == 'ADMIN' && book.status == 'Available' || user.role == 'LIBRARIAN' && book.status == 'Available'">
             <table class="table">
                 <tr>
                     <td>Actions</td>

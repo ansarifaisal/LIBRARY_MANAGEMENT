@@ -71,5 +71,15 @@ namespace LibraryBackEnd.Controllers
 
             return Ok(newspaperPublisher);
         }
+
+        [HttpGet]
+        [Route("getByName")]
+        public IHttpActionResult GetByName(string name)
+        {
+            if (name == "")
+                throw new ArgumentNullException();
+            var newspaperPublisher = _newsPaperPublisherService.GetByName(name);
+            return Ok(newspaperPublisher);
+        }
     }
 }
