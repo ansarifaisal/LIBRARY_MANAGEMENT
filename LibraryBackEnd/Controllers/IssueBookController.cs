@@ -39,10 +39,12 @@ namespace LibraryBackEnd.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is invalid");
-            _issueBookService.Create(issueBookBindingModel.IssueBook);
+            var issueBook = issueBookBindingModel.IssueBook;
+            _issueBookService.Create(issueBook);
             issueBookBindingModel.Book.Status = "Issued";
             _bookService.Update(issueBookBindingModel.Book);
             issueBookBindingModel.User.IssueCount = issueBookBindingModel.User.IssueCount + 1;
+            _sendEmailService.sendIssueBookConfirmation(issueBookBindingModel.User.Email, issueBook);
             _studentService.Update(issueBookBindingModel.User);
             return Ok("Added Successfully!");
         }
@@ -71,12 +73,6 @@ namespace LibraryBackEnd.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest("Model is Invalid");
-            var student = _studentService.GetByRollNo(issueBook.RollNo);
-            student.IssueCount = student.IssueCount - 1;
-            _studentService.Update(student);
-            var book = _bookService.GetByAccessionNumber(issueBook.AccessionNumber);
-            book.Status = "Available";
-            _bookService.Update(book);
             _issueBookService.Delete(issueBook);
             return Ok("Deleted Successfully!");
         }
@@ -117,65 +113,40 @@ namespace LibraryBackEnd.Controllers
 
         [HttpPut]
         [Route("return")]
-        public IHttpActionResult ReturnBook(IssueBook issueBook)
+        public IHttpActionResult ReturnBook(ReturnBook returnBook)
         {
-            var _issuedBook = issueBook;
-            _issueBookService.Delete(issueBook);
-            var returnBook = new ReturnBook
-            {
-                AccessionNumber = _issuedBook.AccessionNumber,
-                BookTitle = _issuedBook.BookTitle,
-                Course = _issuedBook.Course,
-                Email = _issuedBook.Email,
-                IssuedDate = _issuedBook.IssuedDate,
-                ReturnDate = _issuedBook.ReturnDate,
-                FullName = _issuedBook.FullName,
-                Fine = _issuedBook.Fine,
-                RollNo = _issuedBook.RollNo
-            };
             _returnBookService.Create(returnBook);
-            var student = _studentService.GetByRollNo(_issuedBook.RollNo);
+            var student = _studentService.GetByRollNo(returnBook.RollNo);
             if (student == null)
                 return BadRequest();
             student.IssueCount = student.IssueCount - 1;
-            student.Fine = student.Fine - _issuedBook.Fine;
+            student.Fine = student.Fine - returnBook.Fine;
             _studentService.Update(student);
-            var book = _bookService.GetByAccessionNumber(_issuedBook.AccessionNumber);
+            var book = _bookService.GetByAccessionNumber(returnBook.AccessionNumber);
             if (book == null)
                 return BadRequest();
             book.Status = "Available";
+            _sendEmailService.sendReturnBookConfirmation(returnBook.Email, returnBook);
             _bookService.Update(book);
             return Ok("Book Returned Successfully!");
         }
 
         [HttpPut]
         [Route("lost")]
-        public IHttpActionResult LostBook(IssueBook issueBook)
+        public IHttpActionResult LostBook(LostOrReplace lostOrReplace)
         {
-            var _issueBook = issueBook;
-            _issueBookService.Delete(issueBook);
-            var lostOrReplace = new LostOrReplace
-            {
-                AccessionNumber = _issueBook.AccessionNumber,
-                BookTitle = _issueBook.BookTitle,
-                Course = _issueBook.Course,
-                Email = _issueBook.Email,
-                FullName = _issueBook.FullName,
-                IssuedDate = _issueBook.IssuedDate,
-                RollNo = _issueBook.RollNo,
-                ReturnDate = _issueBook.ReturnDate,
-            };
             _lostOrReplaceService.Create(lostOrReplace);
-            var book = _bookService.GetByAccessionNumber(issueBook.AccessionNumber);
+            var book = _bookService.GetByAccessionNumber(lostOrReplace.AccessionNumber);
             if (book == null)
                 return BadRequest();
             book.Status = "Lost";
             _bookService.Update(book);
-            var borrower = _studentService.GetByRollNo(issueBook.RollNo);
+            var borrower = _studentService.GetByRollNo(lostOrReplace.RollNo);
             if (borrower == null)
                 return BadRequest();
             borrower.IssueCount = borrower.IssueCount - 1;
             borrower.Status = "DEFAULT";
+            _sendEmailService.sendLostBookReminder(lostOrReplace.Email, lostOrReplace);
             _studentService.Update(borrower);
             return Ok("");
         }

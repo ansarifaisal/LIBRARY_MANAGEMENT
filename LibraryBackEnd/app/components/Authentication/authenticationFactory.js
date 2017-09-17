@@ -25,6 +25,8 @@ AuthenticationModule.factory("AuthenticationFactory", [
             logout: logout,
             saveUser: saveUser,
             saveToken: saveToken,
+            saveConfiguration: saveConfiguration,
+            loadConfiguration: loadConfiguration,
             loadUserFromCookie: loadUserFromCookie,
             loadTokenFromSession: loadTokenFromSession,
             studentRole: studentRole,
@@ -34,7 +36,11 @@ AuthenticationModule.factory("AuthenticationFactory", [
             checkExistingAccount: checkExistingAccount,
             sendActivationMail: sendActivationMail,
             forgetPassword: forgetPassword,
-            setPassword: setPassword
+            setPassword: setPassword,
+            sendReturnBookReminder: sendReturnBookReminder,
+            sendLateBookReminder: sendLateBookReminder,
+            sendReturnMagazineReminder: sendReturnMagazineReminder,
+            sendLateMagazineReminder: sendLateMagazineReminder
         }
 
         //returning the authenticationFactory object
@@ -74,6 +80,15 @@ AuthenticationModule.factory("AuthenticationFactory", [
             //role = user.role;
         }
 
+        function saveConfiguration(configuration) {
+            $cookies.putObject('configuration', configuration);
+        }
+
+        function loadConfiguration() {
+            var configuration = $cookies.getObject('configuration');
+            return configuration;
+        }
+
         //function loadUserFromCookie to load if the user is already logged in
         function loadUserFromCookie() {
             //getting User Object from cookies
@@ -81,15 +96,10 @@ AuthenticationModule.factory("AuthenticationFactory", [
             if (user) {
                 setUserIsAuthenticated(true);
                 setRole(user.role);
-                //userIsAuthenticated = true;
-                //role = user.role;
             } else {
                 //if cookies is empty set user not authenticated and role as guest
-                //userIsAuthenticated = false;
-                //role = 'GUEST';
                 setUserIsAuthenticated(false);
                 setRole('GUEST');
-
             }
             return user;
         }
@@ -251,9 +261,60 @@ AuthenticationModule.factory("AuthenticationFactory", [
         }
 
         function setPassword(password) {
-            console.log(password);
             var deferred = $q.defer();
             $http.post("/api/account/ResetPassword", password)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                },
+            function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+
+            return deferred.promise;
+        }
+
+        function sendReturnBookReminder(email, issueBook) {
+            var deferred = $q.defer();
+            $http.post("/api/email/returnBook?email=" + email, issueBook)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                },
+            function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+
+            return deferred.promise;
+        }
+
+        function sendLateBookReminder(email, issueBook) {
+            var deferred = $q.defer();
+            $http.post("/api/email/lateBook?email=" + email, issueBook)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                },
+            function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+
+            return deferred.promise;
+        }
+
+        function sendReturnMagazineReminder(email, issueMagazine) {
+            var deferred = $q.defer();
+            $http.post("/api/email/returnMagazine?email=" + email, issueMagazine)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                },
+            function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+
+            return deferred.promise;
+        }
+
+        function sendLateMagazineReminder(email, issueMagazine) {
+            var deferred = $q.defer();
+            $http.post("/api/email/lateMagazine?email=" + email, issueMagazine)
                 .then(function (response) {
                     deferred.resolve(response.data);
                 },

@@ -2,6 +2,8 @@
 AuthenticationModule.controller("AuthenticationController", [
     "AuthenticationFactory",
     "IssueBookFactory",
+    "ConfigurationFactory",
+    "MagazineFactory",
     "$scope",
     "$location",
     "$timeout",
@@ -9,7 +11,7 @@ AuthenticationModule.controller("AuthenticationController", [
     "$routeParams",
     "$route",
     "toastr",
-    function (AuthenticationFactory, IssueBookFactory, $scope, $location, $timeout, $rootScope, $routeParams, $route, toastr) {
+    function (AuthenticationFactory, IssueBookFactory, ConfigurationFactory, MagazineFactory, $scope, $location, $timeout, $rootScope, $routeParams, $route, toastr) {
 
         //here `me` is use to reffer the current value
         var me = this;
@@ -18,6 +20,19 @@ AuthenticationModule.controller("AuthenticationController", [
         me.credentials = {
             username: '',
             password: ''
+        };
+
+        me.configuration = {
+            id: undefined,
+            email: '',
+            password: '',
+            fine: '',
+            issueDays: '',
+            noOfBookIssue: '',
+            adminName: '',
+            canLogin: '',
+            canRegister: '',
+            notificationSent: ''
         };
 
         $scope.errorMessage = "";
@@ -52,6 +67,28 @@ AuthenticationModule.controller("AuthenticationController", [
             settings();
         }, 1000);
 
+        me.getConfigurations = function () {
+            ConfigurationFactory.getConfigurations().then(function (configurations) {
+                me.configurations = configurations;
+                if (me.configurations.length === 0)
+                    return;
+                for (var i = 0; i < me.configurations.length; i++) {
+                    me.configuration = {
+                        id: me.configurations[i].id,
+                        fine: me.configurations[i].fine,
+                        issueDays: me.configurations[i].issueDays,
+                        noOfBookIssue: me.configurations[i].noOfBookIssue,
+                        adminName: me.configurations[i].adminName,
+                        canLogin: me.configurations[i].canLogin,
+                        canRegister: me.configurations[i].canRegister,
+                        notificationSent: me.configurations[i].notificationSent
+                    }
+                }
+                AuthenticationFactory.saveConfiguration(me.configuration);
+                return;
+            });
+        }
+
         //Method to login.
         me.login = function () {
 
@@ -70,9 +107,11 @@ AuthenticationModule.controller("AuthenticationController", [
                     //if the credentials is wrong
                     if (me.data.error === 'invalid_grant')
                         return $scope.errorMessage = me.data.error_description;
-
                     //getting the user
                     AuthenticationFactory.getUserByUserName(me.data.userName).then(function (user) {
+
+                        if ($rootScope.configuration.canLogin === "No" && user.role !== "ADMIN")
+                            return $location.path("/user/denyLogin");
 
                         if (user) {
                             if (user.status === 'PENDING') {
@@ -87,7 +126,10 @@ AuthenticationModule.controller("AuthenticationController", [
                                 AuthenticationFactory.saveUser(user);
                                 AuthenticationFactory.setUserIsAuthenticated(true);
                                 AuthenticationFactory.setRole(user.role);
-                                if (user.modified === false && user.role === "STUDENT" || user.modified === false && user.role === "FACULTY")
+                                if (user.modified === false && user.role === "STUDENT"
+                                    || user.modified === false && user.role === "FACULTY"
+                                    || user.modified === false && user.role === "LIBRARIAN"
+                                    || user.modified === false && user.role === "ADMIN")
                                     return $location.path("/user/moreDetails");
                                 $location.path("/home");
                             }
@@ -286,6 +328,44 @@ AuthenticationModule.controller("AuthenticationController", [
             });
         }
 
+        me.getTomorrowDate = function () {
+            date = new Date();
+            date = date.setDate(date.getDate() + 1);
+            return new Date(date);
+        }
 
+        me.sendNotifications = function () {
+            IssueBookFactory.getIssuedBooks().then(function (issuedBooks) {
+                var tomorrow = me.getTomorrowDate();
+                var date = new Date();
+                for (var i = 0; i < issuedBooks.length; i++) {
+                    issuedBooks[i].returnDate = new Date(issuedBooks[i].returnDate);
+                    if (issuedBooks[i].returnDate.getDate() === tomorrow.getDate()
+                        && issuedBooks[i].returnDate.getMonth() === tomorrow.getMonth()
+                        && issuedBooks[i].returnDate.getFullYear() === tomorrow.getFullYear())
+                        AuthenticationFactory.sendReturnBookReminder(issuedBooks[i].email, issuedBooks[i]);
+                    if (issuedBooks[i].returnDate < date)
+                        AuthenticationFactory.sendLateBookReminder(issuedBooks[i].email, issuedBooks[i]);
+                }
+            }, function (errorResponse) {
+                toastr.error("Error getting issued books");
+            });
+
+            MagazineFactory.getIssuedMagazines().then(function (issuedMagazines) {
+                var tomorrow = me.getTomorrowDate();
+                var date = new Date();
+                for (var i = 0; i < issuedMagazines.length; i++) {
+                    issuedMagazines[i].returnDate = new Date(issuedMagazines[i].returnDate);
+                    if (issuedMagazines[i].returnDate.getDate() === tomorrow.getDate()
+                        && issuedMagazines[i].returnDate.getMonth() === tomorrow.getMonth()
+                        && issuedMagazines[i].returnDate.getFullYear() === tomorrow.getFullYear())
+                        AuthenticationFactory.sendReturnMagazineReminder(issuedMagazines[i].email, issuedMagazines[i]);
+                    if (issuedMagazines[i].returnDate < date)
+                        AuthenticationFactory.sendLateMagazineReminder(issuedMagazines[i].email, issuedMagazines[i]);
+                }
+            }, function (errorResponse) {
+                toastr.error("Error getting issued magazine");
+            });
+        }
     }
 ]);

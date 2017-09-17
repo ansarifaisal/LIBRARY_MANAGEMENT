@@ -106,9 +106,9 @@
                     if (me.book.course !== me.student.course) {
                         me.isError = true;
                         return toastr.error(me.student.fullName + " is not from " + me.book.course);
-                    } else if (me.student.issueCount >= 2) {
+                    } else if (me.student.issueCount >= $rootScope.configuration.noOfBookIssue) {
                         me.isError = true;
-                        return toastr.error(me.student.fullName + " already took 2 books.");
+                        return toastr.error(me.student.fullName + " already took " + $rootScope.configuration.noOfBookIssue + " books.");
                     } else if (me.student.status !== "APPROVED") {
                         me.isError = true;
                         return toastr.error(me.student.fullName + " is not approved yet.");
@@ -127,6 +127,7 @@
         }
 
         me.submitForm = function () {
+            me.issueBook.issuedBy = $rootScope.user.fullName;
             me.issueBookBindingModel.issueBook = me.issueBook;
             me.issueBookBindingModel.book = IssueBookFactory.loadBook();
             me.issueBookBindingModel.user = IssueBookFactory.loadUser();
@@ -144,6 +145,7 @@
 
         me.submitEditForm = function () {
             $rootScope.isBusy = true;
+            me.issueBook.issuedBy = $rootScope.user.fullName;
             IssueBookFactory.editIssueBook(me.issueBook).then(function () {
                 $rootScope.isBusy = false;
                 toastr.success("Issued Book Details Edited Successfully.");
@@ -163,13 +165,13 @@
                 me.issuedBooks = issuedBooks;
                 if (me.issuedBooks.length === 0)
                     return;
-                var fine = 0;
+                var fine = 0
                 for (var i = 0; i < me.issuedBooks.length; i++) {
                     var flag = IssueBookFactory.isPastDate(me.issuedBooks[i].returnDate);
                     if (flag)
                         fine = IssueBookFactory.calculateFine(me.issuedBooks[i].issuedDate, me.issuedBooks[i].returnDate);
                     if (fine === me.issuedBooks[i].fine)
-                        return;
+                        continue;
                     me.issuedBooks[i].fine = fine;
                     IssueBookFactory.updateFine(me.issuedBooks[i]);
                 }
@@ -196,7 +198,6 @@
                 me.bookModal.issueBook = issueBook;
                 me.bookModal.title = "Return Issue Book";
                 me.bookModal.btnText = "Return";
-                console.log(me.bookModal);
                 AppService.showModal(me.bookModal,
                "issuebook/returnIssueBook.html",
                "IssueBookModalController",

@@ -366,7 +366,7 @@ namespace LibraryBackEnd.Controllers
             string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
             var url = new Uri(Url.Link("ForgetPasswordRoute",
                 new { code = code, userName = user.UserName }));
-            var result = _sendEmailService.SendActivationMail(url, user.Email);
+            var result = _sendEmailService.SendForgetMail(url, user.Email);
 
             return Ok("Email Sent Successfully!");
         }

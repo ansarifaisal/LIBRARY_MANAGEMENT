@@ -13,17 +13,20 @@ namespace LibraryBackEnd.Controllers
         private MagazineService _magazineService;
         private StudentService _studentService;
         private ReturnMagazineService _returnMagazineService;
+        private SendEmailService _sendEmailService;
 
         public IssueMagazineController(
             IssueMagazineService issueMagazineService,
             MagazineService magazineService,
             StudentService studentService,
-            ReturnMagazineService returnMagazineService)
+            ReturnMagazineService returnMagazineService,
+            SendEmailService sendEmailService)
         {
             _issueMagazineService = issueMagazineService;
             _magazineService = magazineService;
             _studentService = studentService;
             _returnMagazineService = returnMagazineService;
+            _sendEmailService = sendEmailService;
         }
 
         [Route("add")]
@@ -36,23 +39,12 @@ namespace LibraryBackEnd.Controllers
             var student = _studentService.GetByRollNo(issueMagazine.RollNo);
             if (student == null)
                 return BadRequest("User Not Found");
-            if (student.Status == "Default")
-                return BadRequest("User Status is Default");
-            if (student.IssueCount >= 2)
-                return BadRequest("Already took " + student.IssueCount);
             student.IssueCount = student.IssueCount + 1;
             _studentService.Update(student);
-
             var magazine = _magazineService.GetByNumber(issueMagazine.Number);
-            if (magazine == null)
-                return BadRequest("Magazine Not Found");
-            if (magazine.Status == "Lost")
-                return BadRequest("Book is Lost");
-            if (magazine.Status == "Issued")
-                return BadRequest("Already Issued");
             magazine.Status = "Issued";
             _magazineService.Update(magazine);
-
+            _sendEmailService.sendIssueMagazineConfirmation(issueMagazine.Email, issueMagazine);
             _issueMagazineService.Create(issueMagazine);
             return Ok();
         }
@@ -104,7 +96,7 @@ namespace LibraryBackEnd.Controllers
             student.IssueCount = student.IssueCount - 1;
             student.Fine = student.Fine - returnMagazine.Fine;
             _studentService.Update(student);
-
+            _sendEmailService.sendReturnMagazineConfirmation(returnMagazine.Email, returnMagazine);
             _returnMagazineService.Create(returnMagazine);
             return Ok("Magazine Returned Successfully!");
         }

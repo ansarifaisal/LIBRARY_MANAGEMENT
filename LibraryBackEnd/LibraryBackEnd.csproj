@@ -284,6 +284,7 @@
     <Compile Include="Controllers\ReturnBookController.cs" />
     <Compile Include="Controllers\ReturnMagazineController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\SiteConfigurationController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
@@ -296,6 +297,7 @@
     <Compile Include="Core\BindingModels\SearchStudentBindingModel.cs" />
     <Compile Include="Core\IRepositories\IAuthorRepository.cs" />
     <Compile Include="Core\IRepositories\IBookRepository.cs" />
+    <Compile Include="Core\IRepositories\ISiteConfigurationRepository.cs" />
     <Compile Include="Core\IRepositories\ICourseRepository.cs" />
     <Compile Include="Core\IRepositories\IIssueBookRepository.cs" />
     <Compile Include="Core\IRepositories\IIssueMagazineRepository.cs" />
@@ -314,6 +316,7 @@
     <Compile Include="Core\IRepositories\ISubjectRepository.cs" />
     <Compile Include="Core\Models\Author.cs" />
     <Compile Include="Core\Models\Book.cs" />
+    <Compile Include="Core\Models\SiteConfiguration.cs" />
     <Compile Include="Core\Models\Course.cs" />
     <Compile Include="Core\Models\IssueBook.cs" />
     <Compile Include="Core\Models\IssueMagazine.cs" />
@@ -348,6 +351,7 @@
     <Compile Include="Core\Services\Class\RequestService.cs" />
     <Compile Include="Core\Services\Class\ReturnBookService.cs" />
     <Compile Include="Core\Services\Class\ReturnMagazineService.cs" />
+    <Compile Include="Core\Services\Class\SiteConfigurationService.cs" />
     <Compile Include="Core\Services\Class\SubjectService.cs" />
     <Compile Include="Core\Services\Interface\IAuthorService.cs" />
     <Compile Include="Core\Services\Interface\IBookService.cs" />
@@ -371,6 +375,7 @@
     <Compile Include="Core\Services\Interface\IReturnMagazineService.cs" />
     <Compile Include="Core\Services\Interface\ISendEmailService.cs" />
     <Compile Include="Core\Services\Interface\IEntityService.cs" />
+    <Compile Include="Core\Services\Interface\ISiteConfigurationService.cs" />
     <Compile Include="Core\Services\Interface\IStudentService.cs" />
     <Compile Include="Core\Services\Interface\ISubjectService.cs" />
     <Compile Include="Global.asax.cs">
@@ -551,6 +556,22 @@
     <Compile Include="Persistence\Migrations\201709111040276_modifyNewspaperMonth.Designer.cs">
       <DependentUpon>201709111040276_modifyNewspaperMonth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709152054302_modifyBookModule1.cs" />
+    <Compile Include="Persistence\Migrations\201709152054302_modifyBookModule1.Designer.cs">
+      <DependentUpon>201709152054302_modifyBookModule1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709161900474_addConfigurationModule.cs" />
+    <Compile Include="Persistence\Migrations\201709161900474_addConfigurationModule.Designer.cs">
+      <DependentUpon>201709161900474_addConfigurationModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709161937006_modifyConfigurationModule.cs" />
+    <Compile Include="Persistence\Migrations\201709161937006_modifyConfigurationModule.Designer.cs">
+      <DependentUpon>201709161937006_modifyConfigurationModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709170620254_modifyConfiguration.cs" />
+    <Compile Include="Persistence\Migrations\201709170620254_modifyConfiguration.Designer.cs">
+      <DependentUpon>201709170620254_modifyConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -582,6 +603,7 @@
     <Compile Include="Persistence\Repositories\RequestRepository.cs" />
     <Compile Include="Persistence\Repositories\ReturnBookRepository.cs" />
     <Compile Include="Persistence\Repositories\ReturnMagazineRepository.cs" />
+    <Compile Include="Persistence\Repositories\SiteConfigurationRepository.cs" />
     <Compile Include="Persistence\Repositories\StudentRepository.cs" />
     <Compile Include="Persistence\Repositories\SubjectRepository.cs" />
     <Compile Include="Persistence\UnitOfWork.cs" />
@@ -600,6 +622,7 @@
     <Content Include="app\components\Authentication\authenticationFactory.js" />
     <Content Include="app\components\Authentication\confirm.html" />
     <Content Include="app\components\Authentication\confirmation.html" />
+    <Content Include="app\components\Authentication\denyLogin.html" />
     <Content Include="app\components\Authentication\error.html" />
     <Content Include="app\components\Authentication\forget.html" />
     <Content Include="app\components\Authentication\login.html" />
@@ -620,6 +643,9 @@
     <Content Include="app\components\Books\books.html" />
     <Content Include="app\components\Books\deleteBook.html" />
     <Content Include="app\components\Books\editBookForm.html" />
+    <Content Include="app\components\Configuration\configuration.html" />
+    <Content Include="app\components\Configuration\configurationController.js" />
+    <Content Include="app\components\Configuration\configurationFactory.js" />
     <Content Include="app\components\Courses\courseController.js" />
     <Content Include="app\components\Courses\courseFactory.js" />
     <Content Include="app\components\Courses\courseForm.html" />
@@ -934,6 +960,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709111040276_modifyNewspaperMonth.resx">
       <DependentUpon>201709111040276_modifyNewspaperMonth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709152054302_modifyBookModule1.resx">
+      <DependentUpon>201709152054302_modifyBookModule1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709161900474_addConfigurationModule.resx">
+      <DependentUpon>201709161900474_addConfigurationModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709161937006_modifyConfigurationModule.resx">
+      <DependentUpon>201709161937006_modifyConfigurationModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709170620254_modifyConfiguration.resx">
+      <DependentUpon>201709170620254_modifyConfiguration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

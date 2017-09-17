@@ -22,6 +22,8 @@ namespace LibraryBackEnd.Core.Models
 
         public DateTime ActualReturnDate { get; set; }
 
+        public string Librarian { get; set; }
+
         [Required]
         public string Course { get; set; }
 

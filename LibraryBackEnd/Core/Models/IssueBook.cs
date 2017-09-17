@@ -20,6 +20,8 @@ namespace LibraryBackEnd.Core.Models
         [Required]
         public DateTime ReturnDate { get; set; }
 
+        public string IssuedBy { get; set; }
+
         [Required]
         public string Course { get; set; }
 

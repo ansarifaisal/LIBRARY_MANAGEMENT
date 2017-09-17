@@ -266,11 +266,10 @@
                 var fine = 0;
                 for (var i = 0; i < me.issuedMagazines.length; i++) {
                     var flag = IssueBookFactory.isPastDate(me.issuedMagazines[i].returnDate);
-
                     if (flag)
                         fine = IssueBookFactory.calculateFine(me.issuedMagazines[i].issuedDate, me.issuedMagazines[i].returnDate);
                     if (fine === me.issuedMagazines[i].fine)
-                        return;
+                        continue;
                     me.issuedMagazines[i].fine = fine;
                     MagazineFactory.updateFine(me.issuedMagazines[i]);
                 }

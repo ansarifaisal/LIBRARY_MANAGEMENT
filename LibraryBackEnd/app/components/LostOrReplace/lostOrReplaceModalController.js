@@ -28,6 +28,7 @@
 
         me.replaceBook = function (book) {
             $rootScope.isBusy = true;
+            book.librarian = $rootScope.user.fullName;
             LostOrReplaceFactory.replaceBook(book).then(function () {
                 $route.reload();
                 me.ok();

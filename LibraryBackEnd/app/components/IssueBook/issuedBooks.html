@@ -18,6 +18,7 @@
                     <th class="text-center">Roll No</th>
                     <th class="text-center">Borrower</th>
                     <th class="text-center">Course</th>
+                    <th class="text-center">Librarian</th>
                     <th class="text-center">Fine</th>
                     <th class="text-center">Action</th>
                 </tr>
@@ -31,6 +32,7 @@
                     <td>{{ issuedBook.rollNo }}</td>
                     <td>{{ issuedBook.fullName }}</td>
                     <td>{{ issuedBook.course }}</td>
+                    <td>{{ issuedBook.issuedBy }}</td>
                     <td>{{ issuedBook.fine }}</td>
                     <td class="text-center">
                         <!--   <a href="" title="Edit" ng-click="issueBookCtrl.showEditIssueBookForm(issuedBook.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>-->

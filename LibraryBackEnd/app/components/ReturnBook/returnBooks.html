@@ -15,10 +15,12 @@
                     <th class="text-center">Title</th>
                     <th class="text-center">Issue Date</th>
                     <th class="text-center">Return Date</th>
+                    <th class="text-center">Actual Return Date</th>
                     <th class="text-center">Roll No</th>
                     <th class="text-center">Borrower</th>
                     <th class="text-center">Course</th>
                     <th class="text-center">Fine</th>
+                    <th class="text-center">Librarian</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,10 +29,12 @@
                     <td>{{ returnBook.bookTitle }}</td>
                     <td>{{ returnBook.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
                     <td>{{ returnBook.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                    <td>{{ returnBook.actualReturnDate | date: "EEE MMM, dd yyyy"}}</td>
                     <td>{{ returnBook.rollNo }}</td>
                     <td>{{ returnBook.fullName }}</td>
                     <td>{{ returnBook.course }}</td>
                     <td>{{ returnBook.fine }}</td>
+                    <td>{{ returnBook.librarian }}</td>
                 </tr>
             </tbody>
         </table>

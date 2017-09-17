@@ -302,8 +302,8 @@
         }
 
         me.isEligible = function (user) {
-            if (user.issueCount >= 2) {
-                me.errorMsg = "User has already took " + user.issueCount + " book/magazine";
+            if (user.issueCount > $rootScope.configuration.noOfBookIssue) {
+                me.errorMsg = "User has already took " + $rootScope.configuration.noOfBookIssue + " book/magazine";
                 me.eligible = true;
             }
             else
@@ -347,15 +347,6 @@
 
         me.returnIssueMagazine = function (issueMagazine) {
 
-            MagazineFactory.deleteIssuedMagazine(issueMagazine).then(function () {
-                toastr.success("Magazine Returned Successfully!");
-            }, function (errorResponse) {
-                toastr.error("Error getting response");
-            });
-        }
-
-
-        me.returnIssueMagazine = function (issueMagazine) {
             me.returnMagazine.title = issueMagazine.title;
             me.returnMagazine.number = issueMagazine.number;
             me.returnMagazine.volume = issueMagazine.volume;
@@ -368,6 +359,7 @@
             me.returnMagazine.recievedBy = $rootScope.user.fullName;
             me.returnMagazine.fine = issueMagazine.fine;
             me.returnMagazine.actualReturnDate = new Date();
+            console.log(me.returnMagazine);
             MagazineFactory.deleteIssuedMagazine(issueMagazine).then(function () {
                 MagazineFactory.returnIssuedMagazine(me.returnMagazine).then(function () {
                     me.ok();

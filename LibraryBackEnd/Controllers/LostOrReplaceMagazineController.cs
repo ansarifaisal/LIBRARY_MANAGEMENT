@@ -12,15 +12,17 @@ namespace LibraryBackEnd.Controllers
         private LostOrReplaceMagazineService _lostOrReplaceMagazineService;
         private StudentService _studentService;
         private MagazineService _magazineService;
-
+        private SendEmailService _sendEmailService;
         public LostOrReplaceMagazineController(
             LostOrReplaceMagazineService lostOrReplaceMagazineService,
             StudentService studentService,
-            MagazineService magazineService)
+            MagazineService magazineService,
+            SendEmailService sendEmailService)
         {
             _lostOrReplaceMagazineService = lostOrReplaceMagazineService;
             _studentService = studentService;
             _magazineService = magazineService;
+            _sendEmailService = sendEmailService;
         }
 
         [Route("add")]
@@ -40,7 +42,7 @@ namespace LibraryBackEnd.Controllers
             student.Status = "DEFAULT";
             student.IssueCount = student.IssueCount - 1;
             _studentService.Update(student);
-
+            _sendEmailService.sendLostMagazineReminder(lostOrReplaceMagazine.Email, lostOrReplaceMagazine);
             _lostOrReplaceMagazineService.Create(lostOrReplaceMagazine);
             return Ok("Added Successfully!");
         }

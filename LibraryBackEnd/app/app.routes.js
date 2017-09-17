@@ -37,6 +37,18 @@ window.routes = {
 
     },
 
+
+    '/user/denyLogin': {
+
+        templateUrl: 'app/components/authentication/denyLogin.html',
+        controller: 'AuthenticationController',
+        controllerAs: 'authCtrl',
+        requireLogin: false,
+        data: { pageTitle: 'Error' },
+        roles: ['GUEST', 'STUDENT', 'FACULTY', 'LIBRARIAN']
+
+    },
+
     '/confirmation': {
 
         templateUrl: 'app/components/authentication/confirmation.html',
@@ -111,7 +123,7 @@ window.routes = {
         controller: 'UserController',
         controllerAs: 'userCtrl',
         requireLogin: true,
-        roles: ['STUDENT', 'FACULTY', 'LIBRARIAN']
+        roles: ['STUDENT', 'FACULTY', 'LIBRARIAN', 'ADMIN']
     },
 
     '/user/settings': {
@@ -484,6 +496,17 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN', 'LIBRARIAN']
     },
+
+    /*
+     * Loading Configuration Module
+     */
+    '/admin/configuration': {
+        templateUrl: 'app/components/configuration/configuration.html',
+        controller: 'ConfigurationController',
+        controllerAs: 'configurationCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
 }
 
 //Load all the routes
@@ -539,13 +562,11 @@ myApp.config(['$routeProvider',
 //when the app run check whether is authenticated to view this page
 //run method is basically use to initialization
 
-myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cookies, $timeout, IssueBookFactory, AppService) {
+myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cookies, $timeout, IssueBookFactory, AppService, MagazineFactory) {
     //on method is use to listen on event of a given type
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
         //check if the page refereshed has the same url thene execute the below block
-
-
 
         if (next === current) {
             //if user trying to access page which requires login and is not logged in
@@ -559,6 +580,7 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
             //check whether the user is authenticated
             $rootScope.authenticated = AuthenticationFactory.getUserIsAuthenticated();
 
+            $rootScope.configuration = AuthenticationFactory.loadConfiguration();
             return;
         }
 
@@ -578,7 +600,7 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
             }
         }
     });
-
+    $rootScope.configuration = AuthenticationFactory.loadConfiguration();
     //$cookies.getObject('user');
     //$cookies.getObject('authenticationData');
 
@@ -611,36 +633,46 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
         }, 1000);
     }
 
-    function calculateFine() {
+    function sendNotifications() {
         IssueBookFactory.getIssuedBooks().then(function (issuedBooks) {
-            var me = this;
-            me.issuedBooks = issuedBooks;
-            console.log(me.issuedBooks);
+            var tomorrow = me.getTomorrowDate();
             var date = new Date();
-            var tom = new Date();
-            var tomorrow = tom.setDate(tom.getDate() + 1);
-            var returnDate = "";
-            var email = "";
-            for (var i = 0; i < me.issuedBooks.length; i++) {
-                returnDate = me.issuedBooks[i].returnDate;
-                email = me.issuedBooks[i].email;
-                IssueBookFactory.checkToSendNotification(tomorrow, returnDate, email);
-                var fine = IssueBookFactory.calculateFine(date, returnDate);
-                if (fine > 0) {
-                    me.issuedBooks[i].fine = fine;
-                    IssueBookFactory.updateFine(me.issuedBooks[i]);
-                }
+            for (var i = 0; i < issuedBooks.length; i++) {
+                issuedBooks[i].returnDate = new Date(issuedBooks[i].returnDate);
+                if (issuedBooks[i].returnDate.getDate() === tomorrow.getDate()
+                    && issuedBooks[i].returnDate.getMonth() === tomorrow.getMonth()
+                    && issuedBooks[i].returnDate.getFullYear() === tomorrow.getFullYear())
+                    AuthenticationFactory.sendReturnBookReminder(issuedBooks[i].email, issuedBooks[i]);
+                if (issuedBooks[i].returnDate < date)
+                    AuthenticationFactory.sendLateBookReminder(issuedBooks[i].email, issuedBooks[i]);
             }
+        }, function (errorResponse) {
+            toastr.error("Error getting issued books");
+        });
+
+        MagazineFactory.getIssuedMagazines().then(function (issuedMagazines) {
+            var tomorrow = me.getTomorrowDate();
+            var date = new Date();
+            for (var i = 0; i < issuedMagazines.length; i++) {
+                issuedMagazines[i].returnDate = new Date(issuedMagazines[i].returnDate);
+                if (issuedMagazines[i].returnDate.getDate() === tomorrow.getDate()
+                    && issuedMagazines[i].returnDate.getMonth() === tomorrow.getMonth()
+                    && issuedMagazines[i].returnDate.getFullYear() === tomorrow.getFullYear())
+                    AuthenticationFactory.sendReturnMagazineReminder(issuedMagazines[i].email, issuedMagazines[i]);
+                if (issuedMagazines[i].returnDate < date)
+                    AuthenticationFactory.sendLateMagazineReminder(issuedMagazines[i].email, issuedMagazines[i]);
+            }
+        }, function (errorResponse) {
+            toastr.error("Error getting issued magazine");
         });
     }
 
     var now = new Date();
-    var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 16, 30, 0, 0) - now;
-    console.log(millisTill10);
-    if (millisTill10 < 0) {
+    var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 0, 0, 0) - now;
+    if (millisTill10 < 0)
         millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
-    }
+
     setTimeout(function () {
-        calculateFine();
+        sendNotifications();
     }, millisTill10);
 });

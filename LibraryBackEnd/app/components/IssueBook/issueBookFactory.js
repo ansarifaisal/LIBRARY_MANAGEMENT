@@ -6,7 +6,8 @@ IssueBookModule.factory("IssueBookFactory", [
     "$filter",
     "$cookies",
     "BookFactory",
-    function ($http, $q, $filter, $cookies, BookFactory) {
+    "$rootScope",
+    function ($http, $q, $filter, $cookies, BookFactory, $rootScope) {
         var issueBookFactory = {
             getIssueDate: getIssueDate,
             getReturnDate: getReturnDate,
@@ -42,7 +43,7 @@ IssueBookModule.factory("IssueBookFactory", [
 
         function getReturnDate() {
             var date = new Date();
-            var returnDate = date.setDate(date.getDate() + 7);
+            var returnDate = date.setDate(date.getDate() + parseInt($rootScope.configuration.issueDays));
             return formatDate(returnDate);
         }
 
@@ -88,7 +89,7 @@ IssueBookModule.factory("IssueBookFactory", [
             $http.post("/api/issueBook/add", issueBookBindingModel).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
-                console.log(errorResponse);
+
                 deferred.reject(errorResponse);
             });
             return deferred.promise;
@@ -99,7 +100,7 @@ IssueBookModule.factory("IssueBookFactory", [
             $http.post("/api/issueBook/edit", issueBook).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
-                console.log(errorResponse);
+
                 deferred.reject(errorResponse);
             });
             return deferred.promise;
@@ -110,7 +111,6 @@ IssueBookModule.factory("IssueBookFactory", [
             $http.get("/api/issueBook/all").then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
-                console.log(errorResponse);
                 deferred.reject(errorResponse);
             });
             return deferred.promise;
@@ -121,7 +121,6 @@ IssueBookModule.factory("IssueBookFactory", [
             $http.post("/api/issueBook/delete", issueBook).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
-                console.log(errorResponse);
                 deferred.reject(errorResponse);
             });
             return deferred.promise;
@@ -132,7 +131,6 @@ IssueBookModule.factory("IssueBookFactory", [
             $http.get("/api/issueBook/get/" + id).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
-                console.log(errorResponse);
                 deferred.reject(errorResponse);
             });
             return deferred.promise;
@@ -165,7 +163,7 @@ IssueBookModule.factory("IssueBookFactory", [
             var tempReturnDate = parseDate(returnDate);
             var numberOfDays = Math.round(convertToDate(tempReturnDate) - convertToDate(tempDate)) / (1000 * 60 * 60 * 24);
             if (numberOfDays > 0)
-                var fine = numberOfDays * 10;
+                var fine = numberOfDays * parseInt($rootScope.configuration.fine);
             return fine;
         }
 

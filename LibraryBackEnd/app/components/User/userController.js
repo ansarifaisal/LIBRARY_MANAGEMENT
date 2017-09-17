@@ -38,7 +38,7 @@
         me.getData = function () {
             me.user = UserFactory.getUserByUserName($rootScope.user.userName);
             me.courses = UserFactory.getCourses();
-            me.years = UserFactory.getYears(-2, 20);
+            me.years = UserFactory.getYears(-2, 1);
         }
 
         me.checkByRollNumber = function (rollNo) {

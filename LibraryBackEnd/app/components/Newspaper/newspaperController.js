@@ -201,7 +201,7 @@
                 for (var i = 0; i < newsPaperMonths.length; i++) {
                     me.newsPaperMonths[i].from = NewspaperFactory.formatDate(newsPaperMonths[i].from);
                     me.newsPaperMonths[i].to = NewspaperFactory.formatDate(newsPaperMonths[i].to);
-                    if (me.newsPaperMonths[i].title == title)
+                    if (me.newsPaperMonths[i].title === title)
                         totalAmount = totalAmount + me.newsPaperMonths[i].amount;
                 }
                 NewspaperFactory.checkExistingPeriodicNewsPaper(title).then(function (periodicNewsPaper) {
@@ -263,6 +263,7 @@
         me.getNewspapers = function () {
             me.title = $routeParams.title;
             me.month = $routeParams.month;
+            me.publisher = $routeParams.publisher;
             $rootScope.isBusy = true;
 
             me.dtOptions = AppService.dataTableWithFunction("Add Newspaper", me.showNewspaperForm);
@@ -275,7 +276,7 @@
                     return;
                 for (var i = 0; i < me.newsPapers.length; i++) {
                     month = me.newsPapers[i].month;
-                    if (month == me.month)
+                    if (month === me.month)
                         totalAmount = parseInt(totalAmount) + parseInt(me.newsPapers[i].price);
                 }
                 me.month = NewspaperFactory.parseDate(me.month);

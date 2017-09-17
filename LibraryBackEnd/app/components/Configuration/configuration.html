@@ -1,0 +1,200 @@
+﻿<div ng-init="configurationCtrl.getConfigurations()">
+
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li class="active">Site Configuration</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Site Configuration</h3>
+    </div>
+
+    <div class="col-md-offset-3 col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">Configuration</h3>
+            </div>
+
+            <!-- Panel Body Starts Here -->
+
+            <div class="panel-body">
+                <form name="createEdit" ng-submit="configurationCtrl.submitForm()" novalidate>
+
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.email.$invalid && createEdit.email.$touched
+                                 || createEdit.email.$invalid && createEdit.$submitted,
+                                 'has-success has-feedback': createEdit.email.$valid || createEdit.email.$valid
+                                 && createEdit.$submitted}">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control"
+                               name="email"
+                               placeholder="Enter Email"
+                               ng-model="configurationCtrl.configuration.email"
+                               autocomplete="off"
+                               required />
+
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': createEdit.email.$valid || createEdit.email.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.email.$invalid && createEdit.email.$touched
+                           || createEdit.email.$invalid && createEdit.$submitted}">
+                        </span>
+
+                        <div ng-show="createEdit.email.$invalid && createEdit.email.$touched || createEdit.$submitted">
+                            <div ng-show="createEdit.email.$error.required" class="text-danger small">Please, provide email.</div>
+                            <div ng-show="createEdit.email.$error.email" class="text-danger small">Please, provide valid email.</div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.password.$invalid && createEdit.password.$touched
+                                 || createEdit.password.$invalid && createEdit.$submitted,
+                                 'has-success has-feedback': createEdit.password.$valid || createEdit.password.$valid
+                                 && createEdit.$submitted}">
+
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control"
+                               name="password"
+                               placeholder="Enter Password"
+                               ng-model="configurationCtrl.configuration.password"
+                               autocomplete="off"
+                               required />
+
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': createEdit.password.$valid || createEdit.password.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.password.$invalid && createEdit.password.$touched
+                           || createEdit.password.$invalid && createEdit.$submitted}">
+                        </span>
+
+                        <div ng-show="createEdit.password.$invalid && createEdit.password.$touched || createEdit.$submitted">
+                            <div ng-show="createEdit.password.$error.required" class="text-danger small">Please, provide password.</div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.fine.$invalid && createEdit.fine.$touched
+                                 || createEdit.fine.$invalid && createEdit.$submitted,
+                                 'has-success has-feedback': createEdit.fine.$valid || createEdit.fine.$valid
+                                 && createEdit.$submitted}">
+                        <label for="fine">Fine</label>
+                        <input type="text" class="form-control"
+                               name="fine"
+                               placeholder="Enter Fine"
+                               ng-model="configurationCtrl.configuration.fine"
+                               ng-minlength="1"
+                               ng-maxlength="3"
+                               ng-pattern="/^[0-9]/"
+                               autocomplete="off"
+                               required />
+
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': createEdit.fine.$valid || createEdit.fine.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.fine.$invalid && createEdit.fine.$touched
+                           || createEdit.fine.$invalid && createEdit.$submitted}">
+                        </span>
+
+                        <div ng-show="createEdit.fine.$invalid && createEdit.fine.$touched || createEdit.$submitted">
+                            <div ng-show="createEdit.fine.$error.required" class="text-danger small">Please, provide fine.</div>
+                            <div ng-show="createEdit.fine.$error.minlength" class="text-danger small">This field must contain atleast 1 digit.</div>
+                            <div ng-show="createEdit.fine.$error.maxlength" class="text-danger small">This field can contain 3 digits only.</div>
+                            <div ng-show="createEdit.fine.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.issueDays.$invalid && createEdit.issueDays.$touched
+                                 || createEdit.issueDays.$invalid && createEdit.$submitted,
+                                 'has-success has-feedback': createEdit.issueDays.$valid || createEdit.issueDays.$valid
+                                 && createEdit.$submitted}">
+                        <label for="issueDays">Issue Days</label>
+                        <input type="text" class="form-control"
+                               name="issueDays"
+                               placeholder="Enter Issue Days"
+                               ng-model="configurationCtrl.configuration.issueDays"
+                               ng-minlength="1"
+                               ng-maxlength="3"
+                               ng-pattern="/^[0-9]/"
+                               autocomplete="off"
+                               required />
+
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': createEdit.issueDays.$valid || createEdit.issueDays.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.issueDays.$invalid && createEdit.issueDays.$touched
+                           || createEdit.issueDays.$invalid && createEdit.$submitted}">
+                        </span>
+
+                        <div ng-show="createEdit.issueDays.$invalid && createEdit.issueDays.$touched || createEdit.$submitted">
+                            <div ng-show="createEdit.issueDays.$error.required" class="text-danger small">Please, provide issue days.</div>
+                            <div ng-show="createEdit.issueDays.$error.minlength" class="text-danger small">This field must contain atleast 1 digit.</div>
+                            <div ng-show="createEdit.issueDays.$error.maxlength" class="text-danger small">This field can contain 3 digits only.</div>
+                            <div ng-show="createEdit.issueDays.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.noOfBookIssue.$invalid && createEdit.noOfBookIssue.$touched
+                                 || createEdit.noOfBookIssue.$invalid && createEdit.$submitted,
+                                 'has-success has-feedback': createEdit.noOfBookIssue.$valid || createEdit.noOfBookIssue.$valid
+                                 && createEdit.$submitted}">
+                        <label for="noOfBookIssue">No Of Book Issue</label>
+                        <input type="text" class="form-control"
+                               name="noOfBookIssue"
+                               placeholder="Enter No of Book Issue"
+                               ng-model="configurationCtrl.configuration.noOfBookIssue"
+                               ng-minlength="1"
+                               ng-maxlength="3"
+                               ng-pattern="/^[0-9]/"
+                               autocomplete="off"
+                               required />
+
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': createEdit.noOfBookIssue.$valid || createEdit.noOfBookIssue.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.noOfBookIssue.$invalid && createEdit.noOfBookIssue.$touched
+                           || createEdit.noOfBookIssue.$invalid && createEdit.$submitted}">
+                        </span>
+
+                        <div ng-show="createEdit.noOfBookIssue.$invalid && createEdit.noOfBookIssue.$touched || createEdit.$submitted">
+                            <div ng-show="createEdit.noOfBookIssue.$error.required" class="text-danger small">Please, provide number of issue books.</div>
+                            <div ng-show="createEdit.noOfBookIssue.$error.minlength" class="text-danger small">This field must contain atleast 1 digit.</div>
+                            <div ng-show="createEdit.noOfBookIssue.$error.maxlength" class="text-danger small">This field can contain 3 digits only.</div>
+                            <div ng-show="createEdit.noOfBookIssue.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.canLogin.$invalid && createEdit.canLogin.$touched
+                                 || createEdit.canLogin.$invalid && createEdit.$submitted,
+                                 'has-success has-feedback': createEdit.canLogin.$valid || createEdit.canLogin.$valid
+                                 && createEdit.$submitted}">
+                        <label for="canLogin">Can Login</label>
+                        <select class="form-control" name="canLogin"
+                                ng-model="configurationCtrl.configuration.canLogin"
+                                ng-options="option as option for option in  configurationCtrl.options"
+                                required>
+                            <option value="" disabled>Select Option</option>
+                        </select>
+                        <div ng-show="createEdit.canLogin.$invalid && createEdit.canLogin.$touched || createEdit.$submitted">
+                            <div ng-show="createEdit.canLogin.$error.required" class="text-danger small">Please, select an option.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.canRegister.$invalid && createEdit.canRegister.$touched
+                                 || createEdit.canRegister.$invalid && createEdit.$submitted,
+                                 'has-success has-feedback': createEdit.canRegister.$valid || createEdit.canRegister.$valid
+                                 && createEdit.$submitted}">
+                        <label for="canRegister">Can Register</label>
+                        <select class="form-control" name="canRegister"
+                                ng-model="configurationCtrl.configuration.canRegister"
+                                ng-options="option as option for option in  configurationCtrl.options"
+                                required>
+                            <option value="" disabled>Select Option</option>
+                        </select>
+                        <div ng-show="createEdit.canRegister.$invalid && createEdit.canRegister.$touched || createEdit.$submitted">
+                            <div ng-show="createEdit.canRegister.$error.required" class="text-danger small">Please, select an option.</div>
+                        </div>
+
+                    </div>
+                    <input type="submit" ng-disabled="createEdit.$invalid" value="Save" class="btn btn-success col-md-12" />
+                </form>
+            </div>
+            <!-- Panel Body Ends Here -->
+        </div>
+
+    </div>
+</div>

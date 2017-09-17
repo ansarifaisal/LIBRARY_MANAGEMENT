@@ -1,5 +1,12 @@
 ﻿<!-- ADMIN Section Starts Here -->
-<div ng-show="user.role == 'ADMIN'">
+<div ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
+
+    <div>
+        <div class="alert alert-info">
+            <h5 class="text-center"><a href="" class="alert-link" ng-click="authCtrl.sendNotifications()">Click Here</a> to Send Notifications To the Students.</h5>
+        </div>
+    </div>
+
     <!-- Member Panel Starts Here -->
     <div class="panel panel-primary">
         <div class="panel-heading">
