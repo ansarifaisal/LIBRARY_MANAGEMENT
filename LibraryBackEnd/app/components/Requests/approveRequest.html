@@ -1,0 +1,16 @@
+﻿
+<div class="modal-header">
+    <h4 class="modal-title">{{requestModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    Want to Approve The Request of <strong>{{requestModalCtrl.request.name}}</strong> for
+    <strong>{{requestModalCtrl.request.title}}</strong> of <strong>{{requestModalCtrl.request.author}}</strong> ?
+    <div class="small text-danger">Note: Before Approving the Request, Make Sure You Can Complete the Request.</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="requestModalCtrl.cancel()">Close</button>
+    <button class="btn btn-primary" ng-click="requestModalCtrl.updateRequestStatus('APPROVED')">{{requestModalCtrl.btnText}}</button>
+</div>
+

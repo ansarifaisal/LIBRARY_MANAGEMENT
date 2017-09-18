@@ -53,7 +53,9 @@ MagazineModule.factory("MagazineFactory", [
             getIssuedMagazineByRollNumber: getIssuedMagazineByRollNumber,
             getReturnedMagazineByRollNo: getReturnedMagazineByRollNo,
             getMagazineNumbers: getMagazineNumbers,
-            updateFine: updateFine
+            updateFine: updateFine,
+            getTypes: getTypes,
+            getPeriodicityOptions: getPeriodicityOptions
         }
         return magazineFactory;
 
@@ -494,7 +496,7 @@ MagazineModule.factory("MagazineFactory", [
         }
 
         function getStatus() {
-            return status = ["Available", "Donated"]
+            return status = ["Available", "Donated", "Sample", "Withdrawl"]
         }
 
         function getIssuedMagazineByRollNumber(rollNo) {
@@ -538,6 +540,16 @@ MagazineModule.factory("MagazineFactory", [
                 deferred.reject(errorResponse);
             });
             return deferred.promise;
+        }
+
+        function getTypes() {
+            var types = ["Magazine", "Periodicity"];
+            return types;
+        }
+
+        function getPeriodicityOptions() {
+            var periodicityOptions = ["Days", "Weeks", "Months", "Years"];
+            return periodicityOptions;
         }
     }
 ]);

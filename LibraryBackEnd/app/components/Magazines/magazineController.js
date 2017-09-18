@@ -31,6 +31,12 @@
         me.periodicDetail = {
             title: '',
             subscription: '',
+            subscriptionAmount: '',
+            subscriptionDate: '',
+            subscriptionDuration: '',
+            chequeDate: '',
+            bundleSentDate: '',
+            bundleDeliveryDate: '',
             from: '',
             to: '',
             volume: '',
@@ -56,8 +62,7 @@
             volume: '',
             number: '',
             dateOfRecieved: '',
-            recievedBy: '',
-            remark: ''
+            recievedBy: ''
         };
 
         me.magazineModal = {
@@ -155,6 +160,12 @@
 
             MagazineFactory.getPeriodicDetails().then(function (periodicDetails) {
                 me.periodicDetails = periodicDetails;
+                for (var i = 0; i < me.periodicDetails.length; i++) {
+                    me.periodicDetails[i].billDate = new Date(me.periodicDetails[i].billDate);
+                    me.periodicDetails[i].chequeDate = new Date(me.periodicDetails[i].chequeDate);
+                    me.periodicDetails[i].bundleSentDate = new Date(me.periodicDetails[i].bundleSentDate);
+                    me.periodicDetails[i].bundleDeliveryDate = new Date(me.periodicDetails[i].bundleDeliveryDate);
+                }
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
                 $rootScope.isBusy = false;

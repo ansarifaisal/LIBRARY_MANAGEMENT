@@ -20,5 +20,9 @@ namespace LibraryBackEnd.Core.Services.Interface
         bool sendReturnMagazineReminder(string email, IssueMagazine issueMagazine);
         bool sendLostMagazineReminder(string email, LostOrReplaceMagazine lostOrReplace);
         bool sendReturnMagazineConfirmation(string email, ReturnMagazine returnMagazine);
+
+        bool sendApproveRequestConfirmation(Request request);
+        bool sendRejectRequestConfirmation(Request request);
+        bool sendCompleteRequestConfirmation(Request request);
     }
 }

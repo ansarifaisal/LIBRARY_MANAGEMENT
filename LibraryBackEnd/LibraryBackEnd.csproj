@@ -572,6 +572,26 @@
     <Compile Include="Persistence\Migrations\201709170620254_modifyConfiguration.Designer.cs">
       <DependentUpon>201709170620254_modifyConfiguration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709181531538_modifyLostOrReplaceAndReturnBook.cs" />
+    <Compile Include="Persistence\Migrations\201709181531538_modifyLostOrReplaceAndReturnBook.Designer.cs">
+      <DependentUpon>201709181531538_modifyLostOrReplaceAndReturnBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709181637491_modifyMagazinePeriodicDetails.cs" />
+    <Compile Include="Persistence\Migrations\201709181637491_modifyMagazinePeriodicDetails.Designer.cs">
+      <DependentUpon>201709181637491_modifyMagazinePeriodicDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709182151424_modifyRequestModule.cs" />
+    <Compile Include="Persistence\Migrations\201709182151424_modifyRequestModule.Designer.cs">
+      <DependentUpon>201709182151424_modifyRequestModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709182207097_addEmailRequestModule.cs" />
+    <Compile Include="Persistence\Migrations\201709182207097_addEmailRequestModule.Designer.cs">
+      <DependentUpon>201709182207097_addEmailRequestModule.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709182217525_modifyRequestModule1.cs" />
+    <Compile Include="Persistence\Migrations\201709182217525_modifyRequestModule1.Designer.cs">
+      <DependentUpon>201709182217525_modifyRequestModule1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -708,6 +728,9 @@
     <Content Include="app\components\Publications\publicationController.js" />
     <Content Include="app\components\Publications\publicationFactory.js" />
     <Content Include="app\components\Publications\publicationForm.html" />
+    <Content Include="app\components\Requests\approveRequest.html" />
+    <Content Include="app\components\Requests\completeRequest.html" />
+    <Content Include="app\components\Requests\rejectRequest.html" />
     <Content Include="app\components\Requests\requestController.js" />
     <Content Include="app\components\Requests\requestFactory.js" />
     <Content Include="app\components\Requests\requestForm.html" />
@@ -972,6 +995,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709170620254_modifyConfiguration.resx">
       <DependentUpon>201709170620254_modifyConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709181531538_modifyLostOrReplaceAndReturnBook.resx">
+      <DependentUpon>201709181531538_modifyLostOrReplaceAndReturnBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709181637491_modifyMagazinePeriodicDetails.resx">
+      <DependentUpon>201709181637491_modifyMagazinePeriodicDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709182151424_modifyRequestModule.resx">
+      <DependentUpon>201709182151424_modifyRequestModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709182207097_addEmailRequestModule.resx">
+      <DependentUpon>201709182207097_addEmailRequestModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709182217525_modifyRequestModule1.resx">
+      <DependentUpon>201709182217525_modifyRequestModule1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

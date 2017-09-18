@@ -120,7 +120,7 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             var config = GetCredentials();
 
-            var message = "<h2>Hello " + issueBook.FullName + ",</h2> <b>" + issueBook.BookTitle
+            var message = "<h4>Hello " + issueBook.FullName + ",</h4> <b>" + issueBook.BookTitle
                 + "</b> Has Been Issued, You Have To Submit It On <b>" + issueBook.ReturnDate.ToShortDateString()
             + "</b>.<br/> If You Fail To Do So You Will Be Charged <b>" + config.Fine + "/-</b> Per Day Basis.<br/>"
             + "<p align='right'>Regards & Thanks,<br><b>" + config.AdminName + "</b></p>";
@@ -136,8 +136,8 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             var config = GetCredentials();
 
-            var message = "<h2>Hello " + issueBook.FullName
-                + ",</h2> You Are Receiving This Mail Since You Have Failed To Submit " + issueBook.BookTitle
+            var message = "<h4>Hello " + issueBook.FullName
+                + ",</h4> You Are Receiving This Mail Since You Have Failed To Submit " + issueBook.BookTitle
                 + " On " + issueBook.ReturnDate
                 + ", Submit The Book With " + issueBook.Fine + "/- fine.<br/>"
                 + "<p align='right'>Regards & Thanks,<br><b>" + config.AdminName + "</b></p>";
@@ -153,8 +153,8 @@ namespace LibraryBackEnd.Core.Services.Class
         public bool sendReturnBookReminder(string email, IssueBook issueBook)
         {
             var config = GetCredentials();
-            var message = "<h2>Hello " + issueBook.FullName
-              + ",</h2> You Are Receiving This Mail You Have To Submit <b>" + issueBook.BookTitle
+            var message = "<h4>Hello " + issueBook.FullName
+              + ",</h4> You Are Receiving This Mail You Have To Submit <b>" + issueBook.BookTitle
               + "</b> Tomorrow. i.e on " + issueBook.ReturnDate
               + ", If You Fail To Do So You Will Be Charged <b>" + config.Fine + "/-</b> per day.<br/>"
               + "<p align='right'>Regards & Thanks,<br><b>" + config.AdminName + "</b></p>";
@@ -169,8 +169,8 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             var config = GetCredentials();
 
-            var message = "<h2>Hello " + lostOrReplace.FullName
-              + ",</h2> You Have Lost <b>" + lostOrReplace.BookTitle
+            var message = "<h4>Hello " + lostOrReplace.FullName
+              + ",</h4> You Have Lost <b>" + lostOrReplace.BookTitle
               + "</b> book, Now Your Status Is <b>Default</b>. <br>"
               + "Please Contact To <b>" + config.AdminName + "</b> In Library."
             + "<p align='right'>Regards & Thanks,<br><b>" + config.AdminName + "</b></p>";
@@ -185,8 +185,8 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             var config = GetCredentials();
 
-            var message = "<h2>Hello " + returnBook.FullName
-              + ",</h2> You Have Submitted <b>" + returnBook.BookTitle
+            var message = "<h4>Hello " + returnBook.FullName
+              + ",</h4> You Have Submitted <b>" + returnBook.BookTitle
               + "</b> Book."
             + "<p align='right'>Regards & Thanks,<br><b>" + config.AdminName + "</b></p>";
             var subject = "Book Return Reminder.";
@@ -200,7 +200,7 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             var config = GetCredentials();
 
-            var message = "<h2>Hello " + issueMagazine.FullName + ",</h2> <b>Volume "
+            var message = "<h4>Hello " + issueMagazine.FullName + ",</h4> <b>Volume "
                         + issueMagazine.Volume + " Of " + issueMagazine.Title
                         + "</b> Has Been Issued, You Have To Submit It On <b>" + issueMagazine.ReturnDate.ToShortDateString()
                         + "</b>.<br/> If You Fail To Do So You Will Be Charged <b>" + config.Fine + "/-</b> Per Day Basis.<br/>"
@@ -217,8 +217,8 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             var config = GetCredentials();
 
-            var message = "<h2>Hello " + issueMagazine.FullName
-                + ",</h2> You Are Receiving This Mail Since You Have Failed To Submit <b>Volume "
+            var message = "<h4>Hello " + issueMagazine.FullName
+                + ",</h4> You Are Receiving This Mail Since You Have Failed To Submit <b>Volume "
                 + issueMagazine.Volume + " Of " + issueMagazine.Title + " On " + issueMagazine.ReturnDate.ToShortDateString()
                 + ", Submit The Magazine With " + issueMagazine.Fine + "/- fine.<br/>"
                 + "<p align='right'>Regards & Thanks,<br><b>" + config.AdminName + "</b></p>";
@@ -234,8 +234,8 @@ namespace LibraryBackEnd.Core.Services.Class
         public bool sendReturnMagazineReminder(string email, IssueMagazine issueMagazine)
         {
             var config = GetCredentials();
-            var message = "<h2>Hello " + issueMagazine.FullName
-              + ",</h2> You Are Receiving This Mail Since You Have To Submit <b> Volume "
+            var message = "<h4>Hello " + issueMagazine.FullName
+              + ",</h4> You Are Receiving This Mail Since You Have To Submit <b> Volume "
               + issueMagazine.Volume + " Of " + issueMagazine.Title
               + "</b> Tomorrow. i.e on " + issueMagazine.ReturnDate.ToShortDateString()
               + ", If You Fail To Do So You Will Be Charged <b>" + config.Fine + "/-</b> per day.<br/>"
@@ -251,8 +251,8 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             var config = GetCredentials();
 
-            var message = "<h2>Hello " + lostOrReplace.FullName
-              + ",</h2> You Have Lost <b>Volume " + lostOrReplace.Volume + " Of " + lostOrReplace.Title
+            var message = "<h4>Hello " + lostOrReplace.FullName
+              + ",</h4> You Have Lost <b>Volume " + lostOrReplace.Volume + " Of " + lostOrReplace.Title
               + "</b> Magazine, Now Your Status Is <b>Default</b>. <br>"
               + "Please Contact To <b>" + config.AdminName + "</b> In Library."
             + "<p align='right'>Regards & Thanks,<br><b>" + config.AdminName + "</b></p>";
@@ -267,13 +267,59 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             var config = GetCredentials();
 
-            var message = "<h2>Hello " + returnMagazine.FullName
-              + ",</h2> You Have Submitted <b>Volume " + returnMagazine.Volume + " Of " + returnMagazine.title
+            var message = "<h4>Hello " + returnMagazine.FullName
+              + ",</h4> You Have Submitted <b>Volume " + returnMagazine.Volume + " Of " + returnMagazine.title
               + "</b> Magazine."
             + "<p align='right'>Regards & Thanks,<br><b>" + config.AdminName + "</b></p>";
             var subject = "Magazine Return Confirmation.";
 
             SendEmail(email, subject, message);
+
+            return true;
+        }
+
+        public bool sendApproveRequestConfirmation(Request request)
+        {
+            var config = GetCredentials();
+
+            var message = "<h4>Hello " + request.Name
+              + ",</h4> Your Request </strong> for <strong>" + request.Title + "</strong> of <strong>"
+              + request.Author + "</strong> is Approved, You Will be Notified Once Your Request is Completed."
+              + "<p align='right'>Regards & Thanks,<br><b>" + config.AdminName + "</b></p>";
+            var subject = "Request Approval Confirmation.";
+
+            SendEmail(request.Email, subject, message);
+
+            return true;
+        }
+
+        public bool sendRejectRequestConfirmation(Request request)
+        {
+            var config = GetCredentials();
+
+            var message = "<h4>Hello " + request.Name
+             + ",</h4> Your Request </strong> for <strong>" + request.Title + "</strong> of <strong>"
+             + request.Author + "</strong> is Rejected For the Following Reason. <br/>"
+             + "Reason: " + request.Remark
+            + "<p align='right'>Regards & Thanks,<br><b>" + config.AdminName + "</b></p>";
+            var subject = "Request Reject Confirmation.";
+
+            SendEmail(request.Email, subject, message);
+
+            return true;
+        }
+
+        public bool sendCompleteRequestConfirmation(Request request)
+        {
+            var config = GetCredentials();
+
+            var message = "<h4>Hello " + request.Name
+              + ",</h4> Your Request </strong> for <strong>" + request.Title + "</strong> of <strong>"
+              + request.Author + "</strong> is Completed, Now You Can Contact Librarian For Further Process."
+              + "<p align='right'>Regards & Thanks,<br><b>" + config.AdminName + "</b></p>";
+            var subject = "Request Completed Confirmation.";
+
+            SendEmail(request.Email, subject, message);
 
             return true;
         }

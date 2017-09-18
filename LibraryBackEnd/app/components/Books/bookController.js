@@ -255,10 +255,9 @@
             var id = $routeParams.id;
             BookFactory.getBookByAccessionNumber(accessionNumber).then(function (book) {
                 if (book === null)
-                    me.exists = false;
+                    return me.exists = false;
                 if (book.accessionNumber === accessionNumber)
-                    me.exists = true;
-                return me.exists;
+                    return me.exists = true;
             }, function (errorResponse) {
                 toastr.error("Error Getting Response");
             });

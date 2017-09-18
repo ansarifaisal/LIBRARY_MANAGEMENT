@@ -10,10 +10,12 @@ namespace LibraryBackEnd.Controllers
     public class RequestController : ApiController
     {
         private IRequestService _requestService;
+        private ISendEmailService _sendEmailService;
 
-        public RequestController(IRequestService requestService)
+        public RequestController(IRequestService requestService, ISendEmailService sendEmailService)
         {
             _requestService = requestService;
+            _sendEmailService = sendEmailService;
         }
 
         [Route("add")]
@@ -79,5 +81,23 @@ namespace LibraryBackEnd.Controllers
 
             return Ok(requests);
         }
+
+        [Route("updateStatus")]
+        [HttpPost]
+        public IHttpActionResult UpdateStatus(Request request)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Model is Invalid");
+            if (request.Status == "APPROVED")
+                _sendEmailService.sendApproveRequestConfirmation(request);
+            if (request.Status == "REJECTED")
+                _sendEmailService.sendRejectRequestConfirmation(request);
+            if (request.Status == "COMPLETED")
+                _sendEmailService.sendCompleteRequestConfirmation(request);
+
+            _requestService.Update(request);
+            return Ok("Updated Successfully!");
+        }
+
     }
 }

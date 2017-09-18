@@ -37,6 +37,8 @@ namespace LibraryBackEnd.Core.Models
         [Required]
         public string Status { get; set; }
 
+        public string Remark { get; set; }
+
         public LostOrReplace()
         {
             Status = "Lost";

@@ -39,6 +39,8 @@ namespace LibraryBackEnd.Core.Models
         [Required]
         public int Fine { get; set; }
 
+        public string Remark { get; set; }
+
         public ReturnBook()
         {
             ActualReturnDate = DateTime.Now;

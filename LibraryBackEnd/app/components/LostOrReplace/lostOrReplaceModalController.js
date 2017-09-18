@@ -51,5 +51,10 @@
                 toastr.error("Error while changing status book.");
             });
         }
+
+        me.showForm = false;
+        me.showFineForm = function () {
+            return me.showForm = true;
+        }
     }
 ]);

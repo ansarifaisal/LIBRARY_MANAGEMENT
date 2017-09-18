@@ -60,9 +60,9 @@
         </div>
 
         <div class="form-group" ng-class="{'has-error has-feedback': createEdit.number.$invalid && createEdit.number.$touched
-         || createEdit.number.$invalid && createEdit.$submitted,
+         || createEdit.number.$invalid && createEdit.$submitted || magazineModalCtrl.exists && createEdit.number.$touched,
          'has-success has-feedback': createEdit.number.$valid || createEdit.number.$valid
-         && createEdit.$submitted}">
+         && createEdit.$submitted || !magazineModalCtrl.exists && createEdit.number.$touched}">
             <label for="number">Magazine Number</label>
             <input type="text"
                    name="number"
@@ -71,18 +71,20 @@
                    ng-pattern="/^[0-9]/"
                    ng-maxlength="6"
                    ng-model="magazineModalCtrl.magazine.number"
+                   ng-blur="magazineModalCtrl.checkExistingMagazine(magazineModalCtrl.magazine.number)"
                    required />
 
             <span class="glyphicon form-control-feedback"
-                  ng-class="{'glyphicon-ok': createEdit.number.$valid || createEdit.number.$valid && createEdit.$submitted,
+                  ng-class="{'glyphicon-ok': createEdit.number.$valid || createEdit.number.$valid && createEdit.$submitted || !magazineModalCtrl.exists && createEdit.number.$touched,
                           'glyphicon-remove': createEdit.number.$invalid && createEdit.number.$touched
-                           || createEdit.number.$invalid && createEdit.$submitted}">
+                           || createEdit.number.$invalid && createEdit.$submitted || magazineModalCtrl.exists && createEdit.number.$touched}">
             </span>
 
-            <div ng-show="createEdit.number.$invalid && createEdit.number.$touched || createEdit.$submitted">
+            <div ng-show="createEdit.number.$invalid && createEdit.number.$touched || createEdit.$submitted || magazineModalCtrl.exists">
                 <div ng-show="createEdit.number.$error.required" class="text-danger small">Please, provide magazine number.</div>
                 <div ng-show="createEdit.number.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
                 <div ng-show="createEdit.number.$error.maxlength" class="text-danger small">This field can contain 6 characters only.</div>
+                <div ng-show="magazineModalCtrl.exists" class="text-danger small">Magazine already exists.</div>
             </div>
 
         </div>
@@ -112,31 +114,11 @@
             </div>
         </div>
 
-        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.remark.$invalid && createEdit.remark.$touched
-         || createEdit.remark.$invalid && createEdit.$submitted,
-         'has-success has-feedback': createEdit.remark.$valid || createEdit.remark.$valid
-         && createEdit.$submitted}">
-            <label for="remark">Remark</label>
-            <input type="text"
-                   name="remark"
-                   class="form-control"
-                   placeholder="Enter Remark"
-                   ng-model="magazineModalCtrl.magazine.remark"
-                   required />
-
-            <span class="glyphicon form-control-feedback"
-                  ng-class="{'glyphicon-ok': createEdit.remark.$valid || createEdit.remark.$valid && createEdit.$submitted,
-                          'glyphicon-remove': createEdit.remark.$invalid && createEdit.remark.$touched
-                           || createEdit.remark.$invalid && createEdit.$submitted}">
-            </span>
-
-            <div ng-show="createEdit.remark.$invalid && createEdit.remark.$touched || createEdit.$submitted">
-                <div ng-show="createEdit.remark.$error.required" class="text-danger small">Please, provide remark.</div>
-            </div>
-        </div>
-
-
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.status.$invalid && createEdit.status.$touched
+                         || createEdit.status.$invalid && createEdit.$submitted,
+                         'has-success has-feedback': createEdit.status.$valid || createEdit.status.$valid
+                         && createEdit.$submitted}">
+            <label for="status">Status</label>
             <select class="form-control" name="status"
                     ng-model="magazineModalCtrl.magazine.status"
                     ng-options="status as status for status in  magazineModalCtrl.status"

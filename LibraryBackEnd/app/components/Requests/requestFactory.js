@@ -12,7 +12,9 @@ RequestModule.factory("RequestFactory", [
             editRequest: editRequest,
             deleteRequest: deleteRequest,
             getByRollNo: getByRollNo,
-            addOrEdit: addOrEdit
+            addOrEdit: addOrEdit,
+            getTypes: getTypes,
+            updateStatus: updateStatus
         }
         return requestFactory;
 
@@ -97,5 +99,21 @@ RequestModule.factory("RequestFactory", [
             return toDo;
         }
 
+        function getTypes() {
+            var types = ["General", "Reference", "Digest", "Novel", "Drama"];
+            console.log(types);
+            return types;
+        }
+        
+        function updateStatus(request) {
+            var deferred = $q.defer();
+            $http.post("/api/request/updateStatus", request)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
     }
 ]);

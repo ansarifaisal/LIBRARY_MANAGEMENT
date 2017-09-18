@@ -19,7 +19,6 @@
                 <th class="text-center">Number</th>
                 <th class="text-center">Received Date</th>
                 <th class="text-center">Received By</th>
-                <th class="text-center">Remark</th>
                 <th class="text-center">Status</th>
                 <th class="text-center">Action</th>
             </tr>
@@ -33,18 +32,19 @@
                 <td>{{ magazine.number}}</td>
                 <td>{{ magazine.dateOfRecieved | date: 'EEE MMM, dd yyyy'}}</td>
                 <td>{{ magazine.recievedBy}}</td>
-                <td>{{ magazine.remark}}</td>
                 <td>{{ magazine.status}}</td>
                 <td class="text-center">
                     <a href=""
                        ng-click="magazineCtrl.getMagazine(magazine.id)"
-                       ng-show="magazine.status == 'Available'"
+                       ng-show="magazine.status == 'Available' 
+                       || user.role == 'ADMIN' && magazine.status != 'Issued'"
                        class="text-warning">
                         <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
                     </a>&nbsp;&nbsp;
                     <a href=""
                        ng-click="magazineCtrl.deleteMagazineModal(magazine.id)"
-                       ng-show="magazine.status == 'Available' || magazine.status == 'Replaced' "
+                       ng-show="magazine.status == 'Available' || magazine.status == 'Replaced' 
+                       || user.role == 'ADMIN' && magazine.status != 'Issued'"
                        class="text-danger">
                         <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
                     </a>

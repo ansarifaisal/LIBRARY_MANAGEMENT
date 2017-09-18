@@ -20,6 +20,7 @@
                 <th class="text-center">Course</th>
                 <th class="text-center">Librarian</th>
                 <th class="text-center">Status</th>
+                <th class="text-center">Remark</th>
                 <th class="text-center">Action</th>
             </tr>
         </thead>
@@ -34,6 +35,7 @@
                 <td>{{ book.course }}</td>
                 <td>{{ book.librarian }}</td>
                 <td>{{ book.status }}</td>
+                <td>{{ book.remark }}</td>
                 <td class="text-center">
                     <a href="" title="Replace" ng-show="book.status != 'Replace'" ng-click="lostOrReplaceBookCtrl.replaceBook(book.id)" class="text-success"><i class="fa fa-check fa-2x" aria-hidden="true"></i></a>
                     <a href="" title="Undo Replace" ng-show="book.status != 'Lost'" ng-click="lostOrReplaceBookCtrl.undoReplace(book.id)" class="text-danger"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>

@@ -170,6 +170,8 @@
                     var flag = IssueBookFactory.isPastDate(me.issuedBooks[i].returnDate);
                     if (flag)
                         fine = IssueBookFactory.calculateFine(me.issuedBooks[i].issuedDate, me.issuedBooks[i].returnDate);
+                    else
+                        continue;
                     if (fine === me.issuedBooks[i].fine)
                         continue;
                     me.issuedBooks[i].fine = fine;

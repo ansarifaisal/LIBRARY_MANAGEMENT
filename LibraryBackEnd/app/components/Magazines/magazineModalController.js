@@ -2,6 +2,7 @@
     "$uibModalInstance",
     "MagazineFactory",
     "UserFactory",
+    "CourseFactory",
     "$route",
     "toastr",
     "$rootScope",
@@ -9,7 +10,8 @@
     "$filter",
     "$scope",
     "$routeParams",
-    function ($uibModalInstance, MagazineFactory, UserFactory, $route, toastr, $rootScope, modal, $filter, $scope, $routeParams) {
+    "$timeout",
+    function ($uibModalInstance, MagazineFactory, UserFactory, CourseFactory, $route, toastr, $rootScope, modal, $filter, $scope, $routeParams, $timeout) {
 
         var me = this;
 
@@ -54,6 +56,8 @@
             fine: ''
         }
 
+        me.duration = "";
+
         $rootScope.isBusy = false;
 
         me.ok = function () {
@@ -81,6 +85,14 @@
             opened: false
         };
 
+        me.subscriptionDatePickers = function () {
+            me.subscriptionDatePicker.opened = true;
+        };
+
+        me.subscriptionDatePicker = {
+            opened: false
+        };
+
         me.orderDatePickers = function () {
             me.orderDatePicker.opened = true;
         };
@@ -98,6 +110,33 @@
             opened: false
         };
 
+        me.chequeDatePickers = function () {
+            me.chequeDatePicker.opened = true;
+        };
+
+        me.chequeDatePicker = {
+            opened: false
+        };
+
+
+        me.bundleSentDatePickers = function () {
+            me.bundleSentDatePicker.opened = true;
+        };
+
+        me.bundleSentDatePicker = {
+            opened: false
+        };
+
+
+        me.bundleDeliveryDatePickers = function () {
+            me.bundleDeliveryDatePicker.opened = true;
+        };
+
+        me.bundleDeliveryDatePicker = {
+            opened: false
+        };
+
+
         me.monthPickerOptions = {
             formatYear: 'yy',
             maxDate: new Date(),
@@ -106,9 +145,24 @@
             startingDay: 1
         };
 
+        me.futureMonthPickerOptions = {
+            formatYear: 'yy',
+            minDate: new Date(),
+            minMode: "month",
+            datepickerMode: "month",
+            startingDay: 1
+        };
+
         me.datePickerOptions = {
             formatYear: 'yy',
             maxDate: new Date(),
+            startingDay: 1,
+            showWeeks: false
+        };
+
+        me.futureDatePickerOptions = {
+            formatYear: 'yy',
+            minDate: new Date(),
             startingDay: 1,
             showWeeks: false
         };
@@ -158,12 +212,12 @@
 
             if (me.periodicDetail.chequeNo === "")
                 me.periodicDetail.chequeNo = "NA";
-
+            me.periodicDetail.subscriptionDuration = me.duration + " " + me.periodicityOption;
             me.periodicDetail.from = MagazineFactory.dateParse(me.periodicDetail.from);
             me.periodicDetail.to = MagazineFactory.dateParse(me.periodicDetail.to);
             me.periodicDetail.orderDate = MagazineFactory.dateParse(me.periodicDetail.orderDate);
             me.periodicDetail.billDate = MagazineFactory.dateParse(me.periodicDetail.billDate);
-
+            console.log(me.periodicDetail);
             var addOrEdit = MagazineFactory.addOrEditPeriodicDetail(me.periodicDetail);
 
             $action = addOrEdit.action;
@@ -191,6 +245,13 @@
             });
         }
 
+        me.getCourses = function () {
+            CourseFactory.getCourses().then(function (courses) {
+                me.courses = courses;
+            });
+        }
+
+
         me.getPaidBy = function () {
             me.paidBy = MagazineFactory.getPaidBy();
         }
@@ -198,11 +259,27 @@
         me.getPeriodicity = function () {
             me.periodicity = MagazineFactory.getPeriodicity();
         }
+
+        me.getTypes = function () {
+            me.types = MagazineFactory.getTypes();
+        }
+
         me.isPaidByCheque = function (paidBy) {
             me.cheque = false;
             if (paidBy === "Cheque")
                 me.cheque = true;
             return me.cheque;
+        }
+
+        me.isBundled = function (bundleDate) {
+            me.bundle = false;
+            if (bundleDate)
+                me.bundle = true;
+            return me.bundle;
+        }
+
+        me.getPeriodicityOptions = function () {
+            me.periodicityOptions = MagazineFactory.getPeriodicityOptions();
         }
 
         me.deletePeriodicDetail = function () {
@@ -233,6 +310,8 @@
             me.magazine.recievedBy = $rootScope.user.fullName;
             me.magazine.month = MagazineFactory.dateParse(me.magazine.month);
             me.magazine.dateOfRecieved = MagazineFactory.dateParse(me.magazine.dateOfRecieved);
+            if (me.magazine.remark === "")
+                me.magazine.remark = "NA";
             if (me.magazine.id === undefined || me.magazine.id === "")
                 me.magazine.status = "Available";
             var addOrEdit = MagazineFactory.addOrEditMagazine(me.magazine);
@@ -301,6 +380,18 @@
             });
         }
 
+
+        me.checkExistingMagazine = function (number) {
+            if (!number)
+                return;
+            me.exists = false;
+            MagazineFactory.getMagazineByNumber(number).then(function (magazine) {
+                if (magazine)
+                    me.exists = true;
+                return me.exists;
+            });
+        }
+
         me.isEligible = function (user) {
             if (user.issueCount > $rootScope.configuration.noOfBookIssue) {
                 me.errorMsg = "User has already took " + $rootScope.configuration.noOfBookIssue + " book/magazine";
@@ -359,7 +450,6 @@
             me.returnMagazine.recievedBy = $rootScope.user.fullName;
             me.returnMagazine.fine = issueMagazine.fine;
             me.returnMagazine.actualReturnDate = new Date();
-            console.log(me.returnMagazine);
             MagazineFactory.deleteIssuedMagazine(issueMagazine).then(function () {
                 MagazineFactory.returnIssuedMagazine(me.returnMagazine).then(function () {
                     me.ok();
@@ -450,18 +540,26 @@
             return me.status = MagazineFactory.getStatus();
         }
 
+        me.loadPeriodicDetailData = function () {
+            me.getPublishers();
+            me.getPaidBy();
+            me.getPeriodicity();
+            me.getCourses();
+            me.getTypes();
+            me.getPeriodicityOptions();
+            me.periodicDetail.from = MagazineFactory.parseDate(me.periodicDetail.from);
+            me.periodicDetail.to = MagazineFactory.parseDate(me.periodicDetail.to);
+            me.periodicDetail.subscriptionDate = MagazineFactory.parseDate(me.periodicDetail.subscriptionDate);
+            me.periodicDetail.orderDate = MagazineFactory.parseDate(me.periodicDetail.orderDate);
+            me.periodicDetail.billDate = MagazineFactory.parseDate(me.periodicDetail.billDate);
+            me.periodicDetail.chequeDate = MagazineFactory.parseDate(me.periodicDetail.chequeDate);
+            me.periodicDetail.bundleSentDate = MagazineFactory.parseDate(me.periodicDetail.bundleSentDate);
+            me.periodicDetail.bundleDeliveryDate = MagazineFactory.parseDate(me.periodicDetail.bundleDeliveryDate);
+            if (me.periodicDetail.paidBy !== undefined)
+                me.isPaidByCheque(me.periodicDetail.paidBy);
+        }
+
         $uibModalInstance.opened.then(function () {
-            if (me.periodicDetail) {
-                me.getPublishers();
-                me.getPaidBy();
-                me.getPeriodicity();
-                me.periodicDetail.from = MagazineFactory.parseDate(me.periodicDetail.from);
-                me.periodicDetail.to = MagazineFactory.parseDate(me.periodicDetail.to);
-                me.periodicDetail.orderDate = MagazineFactory.parseDate(me.periodicDetail.orderDate);
-                me.periodicDetail.billDate = MagazineFactory.parseDate(me.periodicDetail.billDate);
-                if (me.periodicDetail.paidBy !== undefined)
-                    me.isPaidByCheque(me.periodicDetail.paidBy);
-            }
             if (me.magazine)
                 me.getStatus();
         });

@@ -600,13 +600,13 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
             }
         }
     });
-    $rootScope.configuration = AuthenticationFactory.loadConfiguration();
-    //$cookies.getObject('user');
-    //$cookies.getObject('authenticationData');
 
-    //$(window).on('beforeunload', function () {
-    //    AppService.unLoad();
-    //});
+    $rootScope.configuration = AuthenticationFactory.loadConfiguration();
+
+    //$window.onbeforeunload = function () {
+    //    console.log("Called");
+    //    $rootScope.logOut();
+    //};
 
     $rootScope.logOut = function () {
         AppService.unLoad();
@@ -633,7 +633,7 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
         }, 1000);
     }
 
-    function sendNotifications() {
+    $rootScope.sendNotifications = function () {
         IssueBookFactory.getIssuedBooks().then(function (issuedBooks) {
             var tomorrow = me.getTomorrowDate();
             var date = new Date();
@@ -673,6 +673,6 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
         millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
 
     setTimeout(function () {
-        sendNotifications();
+        $rootScope.sendNotifications();
     }, millisTill10);
 });

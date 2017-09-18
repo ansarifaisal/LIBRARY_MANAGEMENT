@@ -1,12 +1,11 @@
 ﻿<!-- ADMIN Section Starts Here -->
 <div ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
 
-    <div>
+    <!--<div>
         <div class="alert alert-info">
             <h5 class="text-center"><a href="" class="alert-link" ng-click="authCtrl.sendNotifications()">Click Here</a> to Send Notifications To the Students.</h5>
         </div>
-    </div>
-
+    </div>-->
     <!-- Member Panel Starts Here -->
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -305,6 +304,30 @@
             </div>
         </div>
         <!-- Statistics panel ends here -->
+        <!-- Order Book panel starts here -->
+        <div class="panel panel-primary col-md-2 margin-4x">
+            <div class="panel-body">
+                <a href="" ng-href="#!/user/requests">
+                    <div class="text-center">
+                        <i class="fa fa-cart-plus fa-7x text-center" aria-hidden="true"></i>
+                    </div>
+                    <div class="text-center">Requested Books</div>
+                </a>
+            </div>
+        </div>
+        <!-- Order Book panel ends here -->
+        <!-- configuration panel starts here -->
+        <div class="panel panel-primary col-md-2 margin-4x" ng-show="user.role == 'ADMIN'">
+            <div class="panel-body">
+                <a href="" ng-href="#!/admin/configuration">
+                    <div class="text-center">
+                        <i class="fa fa-cogs fa-7x text-center" aria-hidden="true"></i>
+                    </div>
+                    <div class="text-center">Configuration</div>
+                </a>
+            </div>
+        </div>
+        <!-- configuration panel ends here -->
     </div>
     <!-- Panel body ends here -->
 </div>
@@ -314,7 +337,7 @@
 <div ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
     <div ng-init="authCtrl.checkReturn()">
         <div class="alert alert-danger" ng-show="authCtrl.submitTom">
-            <marquee behavior="alternate" scrollamount="5">You need to submit book(s) tomorrow, Click Here for more info.</marquee>
+            <p align="center">You need to submit book(s) tomorrow, Click Here for more info.</p>
         </div>
     </div>
 

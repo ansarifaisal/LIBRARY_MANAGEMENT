@@ -141,17 +141,17 @@ BookModule.factory("BookFactory", [
         }
 
         function getTypeOfBook() {
-            var type = ["General", "Reference", "Digest", "Novel"];
+            var type = ["General", "Reference", "Digest", "Novel", "Drama"];
             return type;
         }
 
         function getStatus() {
-            var status = ["Available", "Not Available", "Withdrawl", "Lost", "Issued"];
+            var status = ["Available", "Withdrawl", "Lost", "Issued"];
             return status;
         }
 
         function gotBy() {
-            var got = ["Baught", "Donated"];
+            var got = ["Baught", "Donated", "Sample"];
             return got;
         }
 

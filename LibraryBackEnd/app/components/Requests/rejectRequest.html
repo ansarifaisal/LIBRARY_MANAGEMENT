@@ -1,0 +1,25 @@
+﻿
+<div class="modal-header">
+    <h4 class="modal-title">{{requestModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    Want to Reject The Request of <strong>{{requestModalCtrl.request.name}}</strong> for
+    <strong>{{requestModalCtrl.request.title}}</strong> of <strong>{{requestModalCtrl.request.author}}</strong> ?<br />
+
+    <div class="form-group">
+        <label for="remark">Please Specify The Reason Why?</label>
+        <input type="text"
+               name="remark"
+               ng-model="requestModalCtrl.request.remark"
+               class="form-control"
+               placeholder="Enter Reason for Rejection" />
+    </div>
+
+</div>
+
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="requestModalCtrl.cancel()">Close</button>
+    <button class="btn btn-primary" ng-click="requestModalCtrl.updateRequestStatus('REJECTED')">{{requestModalCtrl.btnText}}</button>
+</div>

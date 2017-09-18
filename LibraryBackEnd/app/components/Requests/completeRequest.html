@@ -1,0 +1,15 @@
+﻿
+<div class="modal-header">
+    <h4 class="modal-title">{{requestModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    Want to Complete The Request of <strong>{{requestModalCtrl.request.name}}</strong> for
+    <strong>{{requestModalCtrl.request.title}}</strong> of <strong>{{requestModalCtrl.request.author}}</strong> ?
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="requestModalCtrl.cancel()">Close</button>
+    <button class="btn btn-primary" ng-click="requestModalCtrl.updateRequestStatus('COMPLETED')">{{requestModalCtrl.btnText}}</button>
+</div>
+

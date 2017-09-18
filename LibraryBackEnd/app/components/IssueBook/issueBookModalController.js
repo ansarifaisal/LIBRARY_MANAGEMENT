@@ -17,6 +17,21 @@
 
         me.btnText = modal.btnText;
 
+        me.returnBook = {
+            bookTitle: '',
+            accessionNumber: '',
+            issuedDate: '',
+            returnDate: '',
+            librarian: '',
+            course: '',
+            fullName: '',
+            rollNo: '',
+            email: '',
+            fine: undefined,
+            remark: ''
+        }
+        me.remark = '';
+
         $rootScope.isBusy = false;
 
         me.ok = function () {
@@ -56,6 +71,7 @@
                 fullName: issueBook.fullName,
                 fine: issueBook.fine,
                 rollNo: issueBook.rollNo,
+                remark: "NA"
             }
             IssueBookFactory.deleteIssueBook(issueBook).then(function () {
                 me.ok();
@@ -72,7 +88,7 @@
         }
 
         me.returnIssueBook = function (issueBook) {
-            $rootScope.isBusy = true;
+            //$rootScope.isBusy = true;
             me.returnBook = {
                 bookTitle: issueBook.bookTitle,
                 accessionNumber: issueBook.accessionNumber,
@@ -82,7 +98,9 @@
                 course: issueBook.course,
                 fullName: issueBook.fullName,
                 rollNo: issueBook.rollNo,
-                email: issueBook.email
+                email: issueBook.email,
+                fine: issueBook.fine,
+                remark: me.remark
             }
             IssueBookFactory.deleteIssueBook(issueBook).then(function () {
                 IssueBookFactory.returnBook(me.returnBook).then(function () {
@@ -97,6 +115,10 @@
                 });
             });
 
+        }
+        me.showForm = false;
+        me.showFineForm = function () {
+            return me.showForm = true;
         }
 
     }

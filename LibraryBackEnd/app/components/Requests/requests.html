@@ -1,14 +1,47 @@
-﻿<div ng-init="requestCtrl.getByRollNo()">
+﻿
+<ol class="breadcrumb">
+    <li><a href="" ng-href="#!/home">Home</a></li>
+    <li class="active">Requests</li>
+</ol>
 
-    <ol class="breadcrumb">
-        <li><a href="" ng-href="#!/home">Home</a></li>
-        <li class="active">Requests</li>
-    </ol>
+<div class="page-header">
+    <h3>Requests</h3>
+</div>
+<div ng-init="requestCtrl.getByRollNo()" ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
+    <table datatable="ng" dt-options="requestCtrl.dtOptions" dt-column-defs="requestCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Title</th>
+                <th class="text-center">Author</th>
+                <th class="text-center">Publication</th>
+                <th class="text-center">Course</th>
+                <th class="text-center">Type</th>
+                <th class="text-center">Date</th>
+                <th class="text-center">Remark</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="request in requestCtrl.requests">
+                <td>{{ request.title}}</td>
+                <td>{{ request.author}}</td>
+                <td>{{ request.publication}}</td>
+                <td>{{ request.bookCourse}}</td>
+                <td>{{ request.type}}</td>
+                <td>{{ request.date | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ request.remark}}</td>
+                <td>{{ request.status}}</td>
+                <td class="text-center" ng-hide="request.status == 'APPROVED'">
+                    <a href="" ng-click="requestCtrl.getRequest(request.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
+                    <a href="" ng-click="requestCtrl.deleteRequestModal(request.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
-    <div class="page-header">
-        <h3>Requests</h3>
-    </div>
-
+<div ng-init="requestCtrl.getRequests()" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
     <table datatable="ng" dt-options="requestCtrl.dtOptions" dt-column-defs="requestCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>
@@ -17,11 +50,13 @@
                 <th class="text-center">Publication</th>
                 <th class="text-center">Course</th>
                 <th class="text-center">Semester</th>
+                <th class="text-center">Type</th>
                 <th class="text-center">R. No</th>
                 <th class="text-center">Name</th>
                 <th class="text-center">Date</th>
+                <th class="text-center">Remark</th>
                 <th class="text-center">Status</th>
-                <th class="text-center" ng-hide="request.status == 'APPROVED'">Action</th>
+                <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -31,16 +66,31 @@
                 <td>{{ request.publication}}</td>
                 <td>{{ request.bookCourse}}</td>
                 <td>{{ request.semester}}</td>
+                <td>{{ request.type}}</td>
                 <td>{{ request.rollNo}}</td>
                 <td>{{ request.name}}</td>
                 <td>{{ request.date | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ request.remark}}</td>
                 <td>{{ request.status}}</td>
-                <td class="text-center" ng-hide="request.status == 'APPROVED'">
-                    <a href="" ng-click="requestCtrl.getRequest(request.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
-                    <a href="" ng-click="requestCtrl.deleteRequestModal(request.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                <td class="text-center">
+                    <a href=""
+                       ng-click="requestCtrl.approveRequest(request.id)"
+                       ng-show="request.status == 'PENDING'"
+                       class="text-success">
+                        <i class="fa fa-check fa-2x" aria-hidden="true"></i>
+                    </a>
+
+                    <a href=""
+                       ng-click="requestCtrl.completeRequest(request.id)"
+                       ng-show="request.status == 'APPROVED'"
+                       class="text-success">
+                        <i class="fa fa-hourglass-half fa-2x" aria-hidden="true"></i>
+                    </a>
+
+                    <a href="" ng-hide="request.status == 'COMPLETED' || request.status == 'REJECTED'" ng-click="requestCtrl.rejectRequest(request.id)" class="text-danger"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
                 </td>
             </tr>
         </tbody>
     </table>
-
 </div>
+

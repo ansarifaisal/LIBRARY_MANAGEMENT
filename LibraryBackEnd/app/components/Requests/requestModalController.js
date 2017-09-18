@@ -26,10 +26,15 @@
         me.submitForm = function () {
             if (me.request.title === "")
                 return;
+
             var user = $rootScope.user;
             me.request.rollNo = user.rollNo;
             me.request.name = user.fullName;
             me.request.studentCourse = user.course;
+            me.request.email = user.email;
+
+            if (!me.request.remark)
+                me.request.remark = "Not Provided!";
 
             var addOrEdit = RequestFactory.addOrEdit(me.request);
 
@@ -57,9 +62,22 @@
             return me.subjects = BookFactory.getSubjects(courseName, semester);
         }
 
+        me.getTypes = function () {
+            return me.types = RequestFactory.getTypes();
+        }
 
-        $uibModalInstance.opened.then(function () {
+        me.updateRequestStatus = function (status) {
+            me.request.status = status;
+            RequestFactory.updateStatus(me.request).then(function () {
+                me.ok();
+                $route.reload();
+                toastr.success("Request " + status + " Successfully!");
+            });
+        }
+
+        me.getData = function () {
             me.courses = BookFactory.getCourses();
+            me.getTypes();
             $timeout(function () {
                 if (me.request.bookCourse === undefined)
                     return;
@@ -68,6 +86,11 @@
                     return;
                 me.getSubjects(me.request.bookCourse, me.request.semester);
             }, 100);
+        }
+
+        $uibModalInstance.opened.then(function () {
+
+
         })
     }
 ]);

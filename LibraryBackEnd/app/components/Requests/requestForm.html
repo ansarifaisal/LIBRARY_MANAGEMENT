@@ -1,131 +1,152 @@
-﻿
-<div class="modal-header">
-    <h4 class="modal-title">{{requestModalCtrl.title}}</h4>
-</div>
+﻿<div ng-init="requestModalCtrl.getData()">
+    <div class="modal-header">
+        <h4 class="modal-title">{{requestModalCtrl.title}}</h4>
+    </div>
 
-<div class="modal-body">
-    <form name="createEdit" ng-submit="requestModalCtrl.submitForm()" role="form" novalidate>
+    <div class="modal-body">
+        <form name="createEdit" ng-submit="requestModalCtrl.submitForm()" role="form" novalidate>
 
-        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.title.$invalid && createEdit.title.$touched
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.title.$invalid && createEdit.title.$touched
          || createEdit.title.$invalid && createEdit.$submitted,
          'has-success has-feedback': createEdit.title.$valid || createEdit.title.$valid
          && createEdit.$submitted}">
-            <label for="title">Book Title</label>
-            <input type="text"
-                   placeholder="Enter Title"
-                   name="title"
-                   ng-model="requestModalCtrl.request.title"
-                   class="form-control"
-                   required />
+                <label for="title">Book Title</label>
+                <input type="text"
+                       placeholder="Enter Title"
+                       name="title"
+                       ng-model="requestModalCtrl.request.title"
+                       class="form-control"
+                       required />
 
-            <span class="glyphicon form-control-feedback"
-                  ng-class="{'glyphicon-ok': createEdit.title.$valid || createEdit.title.$valid && createEdit.$submitted,
+                <span class="glyphicon form-control-feedback"
+                      ng-class="{'glyphicon-ok': createEdit.title.$valid || createEdit.title.$valid && createEdit.$submitted,
                           'glyphicon-remove': createEdit.title.$invalid && createEdit.title.$touched
                            || createEdit.title.$invalid && createEdit.$submitted}">
-            </span>
+                </span>
 
-            <div ng-show="createEdit.title.$invalid && createEdit.title.$touched || createEdit.$submitted">
-                <span ng-show="createEdit.title.$error.required" class="text-danger small">Please, provide title.</span>
+                <div ng-show="createEdit.title.$invalid && createEdit.title.$touched || createEdit.$submitted">
+                    <span ng-show="createEdit.title.$error.required" class="text-danger small">Please, provide title.</span>
+                </div>
+
             </div>
-
-        </div>
-        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.author.$invalid && createEdit.author.$touched
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.author.$invalid && createEdit.author.$touched
          || createEdit.author.$invalid && createEdit.$submitted,
          'has-success has-feedback': createEdit.author.$valid || createEdit.author.$valid
          && createEdit.$submitted}">
-            <label for="author">Author</label>
-            <input type="text"
-                   placeholder="Enter Author"
-                   name="author"
-                   ng-model="requestModalCtrl.request.author"
-                   class="form-control"
-                   required />
-            <span class="glyphicon form-control-feedback"
-                  ng-class="{'glyphicon-ok': createEdit.author.$valid || createEdit.author.$valid && createEdit.$submitted,
+                <label for="author">Author</label>
+                <input type="text"
+                       placeholder="Enter Author"
+                       name="author"
+                       ng-model="requestModalCtrl.request.author"
+                       class="form-control"
+                       required />
+                <span class="glyphicon form-control-feedback"
+                      ng-class="{'glyphicon-ok': createEdit.author.$valid || createEdit.author.$valid && createEdit.$submitted,
                           'glyphicon-remove': createEdit.author.$invalid && createEdit.author.$touched
                            || createEdit.author.$invalid && createEdit.$submitted}">
-            </span>
+                </span>
 
-            <div ng-show="createEdit.author.$invalid && createEdit.author.$touched || createEdit.$submitted">
-                <span ng-show="createEdit.author.$error.required" class="text-danger small">Please, provide author.</span>
+                <div ng-show="createEdit.author.$invalid && createEdit.author.$touched || createEdit.$submitted">
+                    <span ng-show="createEdit.author.$error.required" class="text-danger small">Please, provide author.</span>
+                </div>
             </div>
-        </div>
-        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.publication.$invalid && createEdit.publication.$touched
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.publication.$invalid && createEdit.publication.$touched
          || createEdit.publication.$invalid && createEdit.$submitted,
          'has-success has-feedback': createEdit.publication.$valid || createEdit.publication.$valid
          && createEdit.$submitted}">
-            <label for="publication">Publication</label>
-            <input type="text"
-                   placeholder="Enter Publication"
-                   name="publication"
-                   ng-model="requestModalCtrl.request.publication"
-                   class="form-control"
-                   required />
-            <span class="glyphicon form-control-feedback"
-                  ng-class="{'glyphicon-ok': createEdit.publication.$valid || createEdit.publication.$valid && createEdit.$submitted,
+                <label for="publication">Publication</label>
+                <input type="text"
+                       placeholder="Enter Publication"
+                       name="publication"
+                       ng-model="requestModalCtrl.request.publication"
+                       class="form-control"
+                       required />
+                <span class="glyphicon form-control-feedback"
+                      ng-class="{'glyphicon-ok': createEdit.publication.$valid || createEdit.publication.$valid && createEdit.$submitted,
                           'glyphicon-remove': createEdit.publication.$invalid && createEdit.publication.$touched
                            || createEdit.publication.$invalid && createEdit.$submitted}">
-            </span>
+                </span>
 
-            <div ng-show="createEdit.publication.$invalid && createEdit.publication.$touched || createEdit.$submitted">
-                <span ng-show="createEdit.publication.$error.required" class="text-danger small">Please, provide publication.</span>
+                <div ng-show="createEdit.publication.$invalid && createEdit.publication.$touched || createEdit.$submitted">
+                    <span ng-show="createEdit.publication.$error.required" class="text-danger small">Please, provide publication.</span>
+                </div>
             </div>
-        </div>
-        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.bookCourse.$invalid && createEdit.bookCourse.$touched
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.bookCourse.$invalid && createEdit.bookCourse.$touched
          || createEdit.bookCourse.$invalid && createEdit.$submitted,
          'has-success has-feedback': createEdit.bookCourse.$valid || createEdit.bookCourse.$valid
          && createEdit.$submitted}">
-            <label for="bookCourse">Course</label>
-            <select class="form-control" name="bookCourse"
-                    ng-model="requestModalCtrl.request.bookCourse"
-                    ng-options="course.name as course.name for course in  requestModalCtrl.courses"
-                    ng-change="requestModalCtrl.getSemesters(requestModalCtrl.courses, requestModalCtrl.request.bookCourse)"
-                    required>
-                <option value="" disabled>Select Course</option>
-            </select>
+                <label for="bookCourse">Course</label>
+                <select class="form-control" name="bookCourse"
+                        ng-model="requestModalCtrl.request.bookCourse"
+                        ng-options="course.name as course.name for course in  requestModalCtrl.courses"
+                        ng-change="requestModalCtrl.getTypes()"
+                        required>
+                    <option value="" disabled>Select Course</option>
+                </select>
 
-            <div ng-show="createEdit.bookCourse.$invalid && createEdit.bookCourse.$touched || createEdit.$submitted">
-                <span ng-show="createEdit.bookCourse.$error.required" class="text-danger small">Please, select course.</span>
+                <div ng-show="createEdit.bookCourse.$invalid && createEdit.bookCourse.$touched || createEdit.$submitted">
+                    <span ng-show="createEdit.bookCourse.$error.required" class="text-danger small">Please, select course.</span>
+                </div>
             </div>
-        </div>
-        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.semester.$invalid && createEdit.semester.$touched
+
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.type.$invalid && createEdit.type.$touched
+         || createEdit.type.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.type.$valid || createEdit.type.$valid
+         && createEdit.$submitted}">
+                <label for="type">Type</label>
+                <select class="form-control" name="type"
+                        ng-model="requestModalCtrl.request.type"
+                        ng-options="type as type for type in  requestModalCtrl.types"
+                        ng-change="requestModalCtrl.getSemesters(requestModalCtrl.courses, requestModalCtrl.request.bookCourse)"
+                        ng-disabled="!requestModalCtrl.request.bookCourse"
+                        required>
+                    <option value="" disabled>Select Type</option>
+                </select>
+
+                <div ng-show="createEdit.type.$invalid && createEdit.type.$touched || createEdit.$submitted">
+                    <span ng-show="createEdit.type.$error.required" class="text-danger small">Please, select course.</span>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.semester.$invalid && createEdit.semester.$touched
          || createEdit.semester.$invalid && createEdit.$submitted,
          'has-success has-feedback': createEdit.semester.$valid || createEdit.semester.$valid
          && createEdit.$submitted}">
-            <label for="semester">Semester</label>
+                <label for="semester">Semester</label>
 
-            <select class="form-control" name="semester"
-                    ng-model="requestModalCtrl.request.semester"
-                    ng-options="semester as semester for semester in  requestModalCtrl.semesters"
-                    ng-change="requestModalCtrl.getSubjects(requestModalCtrl.request.bookCourse, requestModalCtrl.request.semester)"
-                    ng-disabled="!requestModalCtrl.request.bookCourse"
-                    required>
-                <option value="" disabled>Select Semester</option>
-            </select>
+                <select class="form-control" name="semester"
+                        ng-model="requestModalCtrl.request.semester"
+                        ng-options="semester as semester for semester in  requestModalCtrl.semesters"
+                        ng-change="requestModalCtrl.getSubjects(requestModalCtrl.request.bookCourse, requestModalCtrl.request.semester)"
+                        ng-disabled="!requestModalCtrl.request.type"
+                        required>
+                    <option value="" disabled>Select Semester</option>
+                </select>
 
-            <div ng-show="createEdit.semester.$invalid && createEdit.semester.$touched || createEdit.$submitted">
-                <span ng-show="createEdit.semester.$error.required" class="text-danger small">Please, select semester.</span>
+                <div ng-show="createEdit.semester.$invalid && createEdit.semester.$touched || createEdit.$submitted">
+                    <span ng-show="createEdit.semester.$error.required" class="text-danger small">Please, select semester.</span>
+                </div>
             </div>
-        </div>
-        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.subject.$invalid && createEdit.subject.$touched
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.subject.$invalid && createEdit.subject.$touched
          || createEdit.subject.$invalid && createEdit.$submitted,
          'has-success has-feedback': createEdit.subject.$valid || createEdit.subject.$valid
          && createEdit.$submitted}">
-            <label for="subject">Subject</label>
-            <select class="form-control" name="subject"
-                    ng-model="requestModalCtrl.request.subject"
-                    ng-options="subject.name as subject.name for subject in  requestModalCtrl.subjects"
-                    ng-disabled="!requestModalCtrl.request.semester"
-                    required>
-                <option value="" disabled>Select Subject</option>
-            </select>
-            <div ng-show="createEdit.subject.$invalid && createEdit.subject.$touched || createEdit.$submitted">
-                <span ng-show="createEdit.subject.$error.required" class="text-danger small">Please, select subject.</span>
+                <label for="subject">Subject</label>
+                <select class="form-control" name="subject"
+                        ng-model="requestModalCtrl.request.subject"
+                        ng-options="subject.name as subject.name for subject in  requestModalCtrl.subjects"
+                        ng-disabled="!requestModalCtrl.request.semester"
+                        required>
+                    <option value="" disabled>Select Subject</option>
+                </select>
+                <div ng-show="createEdit.subject.$invalid && createEdit.subject.$touched || createEdit.$submitted">
+                    <span ng-show="createEdit.subject.$error.required" class="text-danger small">Please, select subject.</span>
+                </div>
             </div>
-        </div>
 
-        <input type="submit" class="btn btn-primary" ng-disabled="createEdit.$invalid" value="{{requestModalCtrl.btnText}}" ng-click="requestModalCtrl.ok()" />
-        <button type="button" class="btn btn-default" ng-click="requestModalCtrl.cancel()">Close</button>
+            <input type="submit" ng-disabled="createEdit.$invalid" class="btn btn-primary" ng-disabled="createEdit.$invalid" value="{{requestModalCtrl.btnText}}" ng-click="requestModalCtrl.ok()" />
+            <button type="button" class="btn btn-default" ng-click="requestModalCtrl.cancel()">Close</button>
 
-    </form>
+        </form>
+    </div>
 </div>

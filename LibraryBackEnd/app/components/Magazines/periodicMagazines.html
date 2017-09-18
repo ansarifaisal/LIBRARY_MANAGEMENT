@@ -12,9 +12,14 @@
         <thead>
             <tr>
                 <th class="text-center">Title</th>
+                <th class="text-center">Course</th>
                 <th class="text-center">Periodicity</th>
                 <th class="text-center">Publisher</th>
+                <th class="text-center">Type</th>
                 <th class="text-center">Subscription</th>
+                <th class="text-center">Subscription Date</th>
+                <th class="text-center">Subscription (Per Annum)</th>
+                <th class="text-center">Subscription Duration</th>
                 <th class="text-center">From</th>
                 <th class="text-center">To</th>
                 <th class="text-center">Volume</th>
@@ -26,15 +31,23 @@
                 <th class="text-center">Amount</th>
                 <th class="text-center">Paid By</th>
                 <th class="text-center">Cheque No</th>
+                <th class="text-center">Cheque Date</th>
+                <th class="text-center">Bundle Sent Date</th>
+                <th class="text-center">Bundle Delivery Date</th>
                 <th class="text-center">Action</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="periodicDetail in magazineCtrl.periodicDetails">
                 <td><a href="" ng-href="#!/admin/magazines/{{periodicDetail.title}}">{{ periodicDetail.title}}</a></td>
+                <td>{{ periodicDetail.course}}</td>
                 <td>{{ periodicDetail.periodicity}}</td>
                 <td>{{ periodicDetail.publisher}}</td>
+                <td>{{ periodicDetail.type}}</td>
                 <td>{{ periodicDetail.subscription}}</td>
+                <td>{{ periodicDetail.subscriptionDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ periodicDetail.subscriptionAmount}}</td>
+                <td>{{ periodicDetail.subscriptionDuration}}</td>
                 <td>{{ periodicDetail.from | date: "MMM, yyyy"}}</td>
                 <td>{{ periodicDetail.to | date: "MMM, yyyy"}}</td>
                 <td>{{ periodicDetail.volume}}</td>
@@ -46,6 +59,9 @@
                 <td>{{ periodicDetail.amount}}</td>
                 <td>{{ periodicDetail.paidBy}}</td>
                 <td>{{ periodicDetail.chequeNo}}</td>
+                <td>{{ periodicDetail.chequeDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ periodicDetail.bundleSentDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ periodicDetail.bundleDeliveryDate | date: "EEE MMM, dd yyyy"}}</td>
                 <td class="text-center">
                     <a href="" ng-click="magazineCtrl.getPeriodicDetail(periodicDetail.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
                     <a href="" ng-click="magazineCtrl.deletePeriodicDetailModal(periodicDetail.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
