@@ -1,4 +1,5 @@
-﻿//Navigation routes
+﻿
+//Navigation routes
 
 window.routes = {
 
@@ -33,7 +34,7 @@ window.routes = {
         controllerAs: 'authCtrl',
         requireLogin: false,
         data: { pageTitle: 'Error' },
-        roles: ['GUEST', 'STUDENT', 'FACULTY', 'LIBRARIAN']
+        roles: ['GUEST', 'STUDENT', 'FACULTY', 'ADMIN', 'LIBRARIAN']
 
     },
 
@@ -141,7 +142,7 @@ window.routes = {
         controller: 'UserController',
         controllerAs: 'userCtrl',
         requireLogin: true,
-        roles: ['ADMIN']
+        roles: ['ADMIN', 'LIBRARIAN']
     },
 
     '/admin/faculties': {
@@ -150,7 +151,7 @@ window.routes = {
         controller: 'UserController',
         controllerAs: 'userCtrl',
         requireLogin: true,
-        roles: ['ADMIN']
+        roles: ['ADMIN', 'LIBRARIAN']
     },
 
     '/admin/librarians': {
@@ -159,7 +160,7 @@ window.routes = {
         controller: 'UserController',
         controllerAs: 'userCtrl',
         requireLogin: true,
-        roles: ['ADMIN']
+        roles: ['ADMIN', 'LIBRARIAN']
     },
 
     '/user/get/:id': {
@@ -360,6 +361,60 @@ window.routes = {
         roles: ['ADMIN']
     },
 
+    '/admin/bookTypes/:type': {
+
+        templateUrl: 'app/components/statistics/booksByTypes.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+    '/admin/magazineTitle/:title': {
+
+        templateUrl: 'app/components/statistics/magazineTitles.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+    '/admin/magazineCourse/:course': {
+
+        templateUrl: 'app/components/statistics/magazineByCourse.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+    '/admin/magazineType/:type': {
+
+        templateUrl: 'app/components/statistics/magazineByType.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+    '/admin/magazinePeriodicity/:periodic': {
+
+        templateUrl: 'app/components/statistics/magazineByPeriodicity.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+    '/admin/magazineYear/:year': {
+
+        templateUrl: 'app/components/statistics/magazineBySubscription.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
     /*
    * Loading Statistics Module
    */
@@ -370,7 +425,7 @@ window.routes = {
         controller: 'SearchController',
         controllerAs: 'searchCtrl',
         requireLogin: true,
-        roles: ['ADMIN']
+        roles: ['ADMIN', 'LIBRARIAN']
     },
 
     '/admin/searchForStudents': {
@@ -379,7 +434,7 @@ window.routes = {
         controller: 'SearchController',
         controllerAs: 'searchCtrl',
         requireLogin: true,
-        roles: ['ADMIN']
+        roles: ['ADMIN', 'LIBRARIAN']
     },
 
     /*
@@ -498,6 +553,19 @@ window.routes = {
     },
 
     /*
+    * Loading Committee Member Module
+    */
+
+    '/admin/committee': {
+        templateUrl: 'app/components/committee/committeeMembers.html',
+        controller: 'CommitteeMemberController',
+        controllerAs: 'committeeMemberCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
+
+
+    /*
      * Loading Configuration Module
      */
     '/admin/configuration': {
@@ -604,8 +672,8 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
     $rootScope.configuration = AuthenticationFactory.loadConfiguration();
 
     //$window.onbeforeunload = function () {
-    //    console.log("Called");
-    //    $rootScope.logOut();
+    //    AppService.unLoad();
+    //    $location.path('/error');
     //};
 
     $rootScope.logOut = function () {

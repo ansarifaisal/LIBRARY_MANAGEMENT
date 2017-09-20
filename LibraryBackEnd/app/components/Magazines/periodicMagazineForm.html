@@ -65,20 +65,13 @@
                 </div>
             </div>
 
-            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.course.$invalid && createEdit.course.$touched
-                     || createEdit.course.$invalid && createEdit.$submitted,
-                     'has-success has-feedback': createEdit.course.$valid || createEdit.course.$valid
-                     && createEdit.$submitted}">
-                <label for="course">Courses *</label>
+            <div class="form-group">
+                <label for="course">Courses</label>
                 <select class="form-control" name="course"
                         ng-model="magazineModalCtrl.periodicDetail.course"
-                        ng-options="course.name as course.name for course in  magazineModalCtrl.courses"
-                        required>
-                    <option value="" disabled>Select Courses</option>
+                        ng-options="course.name as course.name for course in  magazineModalCtrl.courses">
+                    <option value="">Select Courses</option>
                 </select>
-                <div ng-show="createEdit.course.$invalid && createEdit.course.$touched || createEdit.$submitted">
-                    <span ng-show="createEdit.course.$error.required" class="text-danger small">Please, select course.</span>
-                </div>
             </div>
 
 
@@ -146,28 +139,28 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <lable for="subscriptionDuration">Subscription Duration *</lable>
-                    <input type="text"
-                           name="subscriptionDuration"
-                           class="form-control "
-                           placeholder="Enter Subscription Duration"
-                           ng-model="magazineModalCtrl.duration"
-                           required />
-                </div>
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.subscriptionDuration.$invalid && createEdit.subscriptionDuration.$touched
+                     || createEdit.subscriptionDuration.$invalid && createEdit.$submitted,
+                     'has-success has-feedback': createEdit.subscriptionDuration.$valid || createEdit.subscriptionDuration.$valid
+                     && createEdit.$submitted}">
+                <lable for="subscriptionDuration">Subscription Duration *</lable>
+                <input type="text"
+                       name="subscriptionDuration"
+                       class="form-control "
+                       placeholder="Enter Subscription Duration For e.g 4 Months"
+                       ng-model="magazineModalCtrl.periodicDetail.subscriptionDuration"
+                       required />
+                <span class="glyphicon form-control-feedback"
+                      ng-class="{'glyphicon-ok': createEdit.subscriptionDuration.$valid || createEdit.subscriptionDuration.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.subscriptionDuration.$invalid && createEdit.subscriptionDuration.$touched
+                           || createEdit.subscriptionDuration.$invalid && createEdit.$submitted}">
+                </span>
 
-                <div class="form-group col-md-6">
-                    <label></label>
-                    <select class="form-control" name="periodicityOption"
-                            ng-model="magazineModalCtrl.periodicityOption"
-                            ng-options="periodicityOption as periodicityOption for periodicityOption in  magazineModalCtrl.periodicityOptions"
-                            required>
-                        <option value="" disabled>Select Option</option>
-                    </select>
+                <div ng-show="createEdit.subscriptionDuration.$invalid && createEdit.subscriptionDuration.$touched || createEdit.$submitted">
+                    <span ng-show="createEdit.subscriptionDuration.$error.required" class="text-danger small">Please, provide subscription amount (per annum).</span>
                 </div>
-
             </div>
+
 
 
             <div class="form-group" ng-class="{'has-error has-feedback': createEdit.subscriptionAmount.$invalid && createEdit.subscriptionAmount.$touched

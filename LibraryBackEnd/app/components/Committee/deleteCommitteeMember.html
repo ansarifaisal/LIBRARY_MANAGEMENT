@@ -1,0 +1,12 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{committeeMemberModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    Want To Delete <strong>{{committeeMemberModalCtrl.committeeMember.name}}</strong> Member?
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="committeeMemberModalCtrl.cancel()">Close</button>
+    <button class="btn btn-danger" ng-click="committeeMemberModalCtrl.deleteCommitteeMember()">{{committeeMemberModalCtrl.btnText}}</button>
+</div>

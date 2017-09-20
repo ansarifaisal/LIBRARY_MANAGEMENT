@@ -42,7 +42,6 @@
         }
 
         me.deleteStudent = function () {
-
             $rootScope.isBusy = true;
             UserFactory.deleteStudent(me.user).then(function () {
                 me.ok();
@@ -56,5 +55,19 @@
             });
         }
 
+        me.updateStatus = function (status) {
+            $rootScope.isBusy = true;
+            me.user.status = status;
+            UserFactory.updateStatus(me.user).then(function () {
+                me.ok();
+                $route.reload();
+                toastr.success("User " + status + " Successfully!");
+            }, function (errorResponse) {
+                me.cancel();
+                toastr.error("Error " + status + " User");
+            }).finally(function () {
+                $rootScope.isBusy = false;
+            });
+        }
     }
 ]);

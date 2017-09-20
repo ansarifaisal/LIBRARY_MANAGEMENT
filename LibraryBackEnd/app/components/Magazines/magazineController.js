@@ -156,12 +156,16 @@
 
         me.getPeriodicDetails = function () {
             $rootScope.isBusy = true;
-            me.dtOptions = AppService.dataTableWithFunction("Add Periodic Details", me.showPeriodicDetailForm);
-
+            var user = $rootScope.user;
+            if (user.role === 'ADMIN')
+                me.dtOptions = AppService.dataTableWithFunction("Add Periodic Details", me.showPeriodicDetailForm);
+            else
+                me.dtOptions = AppService.dataTableWithOutFunction();
             MagazineFactory.getPeriodicDetails().then(function (periodicDetails) {
                 me.periodicDetails = periodicDetails;
                 for (var i = 0; i < me.periodicDetails.length; i++) {
                     me.periodicDetails[i].billDate = new Date(me.periodicDetails[i].billDate);
+                    me.periodicDetails[i].orderDate = new Date(me.periodicDetails[i].orderDate);
                     me.periodicDetails[i].chequeDate = new Date(me.periodicDetails[i].chequeDate);
                     me.periodicDetails[i].bundleSentDate = new Date(me.periodicDetails[i].bundleSentDate);
                     me.periodicDetails[i].bundleDeliveryDate = new Date(me.periodicDetails[i].bundleDeliveryDate);
@@ -210,8 +214,11 @@
         me.getMagazines = function () {
             me.title = $routeParams.title;
             $rootScope.isBusy = true;
-            me.dtOptions = AppService.dataTableWithFunction("Add Magazine", me.showMagazineForm);
-
+            var user = $rootScope.user;
+            if (user.role === 'ADMIN')
+                me.dtOptions = AppService.dataTableWithFunction("Add Magazine", me.showMagazineForm);
+            else
+                me.dtOptions = AppService.dataTableWithOutFunction();
             MagazineFactory.getMagazines(me.title).then(function (magazines) {
                 me.magazines = magazines;
                 $rootScope.isBusy = false;

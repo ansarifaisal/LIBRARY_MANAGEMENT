@@ -6,6 +6,8 @@ namespace LibraryBackEnd.Core.Models
     {
         public int Id { get; set; }
 
+        public DateTime Date { get; set; }
+
         public string Title { get; set; }
 
         public string Periodicity { get; set; }
@@ -34,7 +36,7 @@ namespace LibraryBackEnd.Core.Models
 
         public string OrderNo { get; set; }
 
-        public DateTime OrderDate { get; set; }
+        public string OrderDate { get; set; }
 
         public string BillNo { get; set; }
 
@@ -51,5 +53,10 @@ namespace LibraryBackEnd.Core.Models
         public string BundleSentDate { get; set; }
 
         public string BundleDeliveryDate { get; set; }
+
+        public PeriodicMagazine()
+        {
+            Date = DateTime.Now;
+        }
     }
 }

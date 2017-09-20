@@ -9,11 +9,14 @@ namespace LibraryBackEnd.Controllers
     {
         private IBookService _bookService;
         private IStudentService _studentService;
+        private IPeriodicMagazineService _periodicMagazineService;
 
-        public StatisticsController(IBookService bookService, IStudentService studentService)
+        public StatisticsController(IBookService bookService, IStudentService studentService,
+            IPeriodicMagazineService periodicMagazineService)
         {
             _bookService = bookService;
             _studentService = studentService;
+            _periodicMagazineService = periodicMagazineService;
         }
 
         [HttpGet]
@@ -116,5 +119,107 @@ namespace LibraryBackEnd.Controllers
             var books = _bookService.GetBooksByTitle(title);
             return Ok(books);
         }
+
+        [HttpGet]
+        [Route("bookTypes")]
+        public IHttpActionResult GetBookType()
+        {
+            var bookTypes = _bookService.GetBookTypes();
+            return Ok(bookTypes);
+        }
+
+        [HttpGet]
+        [Route("booksByType")]
+        public IHttpActionResult GetBooksByType(string type)
+        {
+            var books = _bookService.GetBooksByType(type);
+            return Ok(books);
+        }
+
+        [HttpGet]
+        [Route("magazineTitles")]
+        public IHttpActionResult GetMagazineTitles()
+        {
+            var magazines = _periodicMagazineService.GetMagazineTitles();
+            return Ok(magazines);
+        }
+
+        [HttpGet]
+        [Route("magazineByTitle")]
+        public IHttpActionResult GetMagazineByTitle(string title)
+        {
+            if (title.Contains("  "))
+                title = title.Replace("  ", "++");
+
+            var magazines = _periodicMagazineService.GetMagazineByTitle(title);
+            return Ok(magazines);
+        }
+
+        [HttpGet]
+        [Route("magazineCourses")]
+        public IHttpActionResult GetMagazineCourse()
+        {
+            var courses = _periodicMagazineService.GetMagazineCourse();
+            return Ok(courses);
+        }
+
+        [HttpGet]
+        [Route("magazineByCourse")]
+        public IHttpActionResult GetMagazineByCourse(string course)
+        {
+            var magazines = _periodicMagazineService.GetMagazineByCourse(course);
+            return Ok(magazines);
+        }
+
+        [HttpGet]
+        [Route("magazineTypes")]
+        public IHttpActionResult GetMagazineTypes()
+        {
+            var types = _periodicMagazineService.GetMagazineTypes();
+            return Ok(types);
+        }
+
+        [HttpGet]
+        [Route("magazineByType")]
+        public IHttpActionResult GetMagazineByTypes(string type)
+        {
+
+            var magazines = _periodicMagazineService.GetMagazineByTypes(type);
+            return Ok(magazines);
+        }
+
+        [HttpGet]
+        [Route("magazinePeriodicity")]
+        public IHttpActionResult GetMagazinePeriodicity()
+        {
+
+            var periodicity = _periodicMagazineService.GetMagazinePeriodicity();
+            return Ok(periodicity);
+        }
+
+        [HttpGet]
+        [Route("magazineByPeriodicity")]
+        public IHttpActionResult GetMagazineByPeriodicity(string periodicity)
+        {
+            var magazines = _periodicMagazineService.GetMagazineByPeriodicity(periodicity);
+            return Ok(magazines);
+        }
+
+        [HttpGet]
+        [Route("magazineSubscription")]
+        public IHttpActionResult GetMagazineSubscriptionInYear()
+        {
+            var years = _periodicMagazineService.GetMagazineSubscriptionInYear();
+            return Ok(years);
+        }
+
+        [HttpGet]
+        [Route("magazineBySubscription/{year}")]
+        public IHttpActionResult GetMagazineBySubscription(int year)
+        {
+            var magazines = _periodicMagazineService.GetMagazineBySubscription(year);
+            return Ok(magazines);
+        }
+
     }
 }

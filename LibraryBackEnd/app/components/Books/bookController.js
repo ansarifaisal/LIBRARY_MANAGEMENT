@@ -186,11 +186,16 @@
         //get all publisher
         me.getBooks = function () {
 
+            var user = $rootScope.user;
+
             if (user.role === 'STUDENT' || user.role === 'FACULTY')
                 return;
 
             $rootScope.isBusy = true;
-            me.dtOptions = AppService.dataTableWithFunction("Add Book", me.showAddBookForm);
+            if (user.role === 'ADMIN')
+                me.dtOptions = AppService.dataTableWithFunction("Add Book", me.showAddBookForm);
+            else
+                me.dtOptions = AppService.dataTableWithOutFunction();
             BookFactory.getBooks().then(function (books) {
                 me.books = books;
             }).finally(function () {
@@ -204,6 +209,14 @@
 
             me.bookForm.book.billDate = BookFactory.dateParse(me.bookForm.book.billDate);
             me.bookForm.book.dateOfPublication = BookFactory.dateParse(me.bookForm.book.dateOfPublication);
+
+            var type = me.bookForm.book.typeOfBook;
+
+            if (type === "Reference" || type === "Novel" || type === "Drama") {
+                me.bookForm.book.course = "General";
+                me.bookForm.book.semester = 0;
+                me.bookForm.book.subject = "General";
+            }
 
             var addOrEdit = BookFactory.addOrEdit(me.bookForm.book);
             $action = addOrEdit.action;
@@ -245,6 +258,7 @@
         }
 
         me.trackChanges = function () {
+            console.log("Called");
             me.change = true;
         }
 

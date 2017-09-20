@@ -16,10 +16,11 @@
                 <th class="text-center">Course</th>
                 <th class="text-center">Book Issued</th>
                 <th class="text-center">Admission Year</th>
+                <th class="text-center">Email</th>
                 <th class="text-center">Email Confirmed</th>
                 <th class="text-center">Role</th>
                 <th class="text-center">Status</th>
-                <th class="text-center">Action</th>
+                <th class="text-center" ng-show="user.role == 'ADMIN'">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -29,12 +30,20 @@
                 <td>{{ student.course }}</td>
                 <td>{{ student.issueCount }}</td>
                 <td>{{ student.yearOfAdmission }}</td>
+                <td>{{ student.email }}</td>
                 <td>{{ student.emailConfirmed }}</td>
                 <td>{{ student.role }}</td>
                 <td>{{ student.status }}</td>
-                <td class="text-center" ng-hide="student.status == 'DEFAULT'">
-                    <a href="" ng-click="userCtrl.getStudent(student.userName)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                    <a href="" ng-click="userCtrl.deleteUser(student.userName)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                <td class="text-center" ng-show="user.role == 'ADMIN'">
+                    <div ng-show="student.status != 'APPROVED'">
+                        <a href="" ng-click="userCtrl.approveUser(student.userName)" title="Approve" class="text-success"><i class="fa fa-check fa-2x" aria-hidden="true"></i></a>
+                        <a href="" ng-hide="student.status == 'REJECTED'" ng-click="userCtrl.rejectUser(student.userName)" title="Reject" class="text-danger"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+                        <a href="" ng-show="student.status == 'REJECTED'" ng-click="userCtrl.deleteUser(student.userName)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                    </div>
+                    <div ng-show="student.status == 'APPROVED'">
+                        <a href="" ng-click="userCtrl.getStudent(student.userName)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                        <a href="" ng-click="userCtrl.deleteUser(student.userName)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                    </div>
                 </td>
             </tr>
         </tbody>

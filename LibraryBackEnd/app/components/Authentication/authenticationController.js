@@ -308,21 +308,49 @@ AuthenticationModule.controller("AuthenticationController", [
         }
 
         me.checkReturn = function () {
+            if (!user)
+                return $location.path("/error");
+            me.submitTom = false;
             IssueBookFactory.getByRollNumber(user.rollNo).then(function (issuedBooks) {
                 me.issuedBooks = issuedBooks;
                 var date = new Date();
                 var tom = new Date(date.setDate(date.getDate() + 1));
-                var issuedDate = "";
+                var returnDate = "";
                 var userRollNo = $rootScope.user.rollNo;
                 var rollNo = "";
                 for (var i = 0; i < me.issuedBooks.length; i++) {
-                    issuedDate = me.issuedBooks[i].issuedDate;
+                    returnDate = new Date(me.issuedBooks[i].returnDate);
                     rollNo = me.issuedBooks[i].rollNo;
-                    if (userRollNo === rollNo && issuedDate === tom) {
+                    if (userRollNo === rollNo
+                        && returnDate.getDate() === tom.getDate()
+                        && returnDate.getMonth() === tom.getMonth()
+                        && returnDate.getYear() === tom.getYear()) {
+                        me.bookTitle = me.issuedBooks[i].bookTitle;
                         me.submitTom = true;
-                        break;
                     }
                 }
+                me.checkLateBook();
+            }, function () {
+                toastr.error("Error getting data");
+            });
+        }
+
+        me.checkLateBook = function () {
+            if (!user)
+                return $location.path("/error");
+            IssueBookFactory.getByRollNumber(user.rollNo).then(function (issuedBooks) {
+                var date = new Date();
+                date = new Date(date.setDate(date.getDate(), date.getMonth(), date.getYear()));
+                for (var i = 0; i < issuedBooks.length; i++) {
+                    issuedBooks[i].returnDate = new Date(issuedBooks[i].returnDate);
+                 
+                    if (issuedBooks[i].returnDate < date) {
+                        me.late = true;
+                        me.bookTitle = issuedBooks[i].bookTitle;
+                        me.fine = issuedBooks[i].fine;
+                    }
+                }
+
             }, function () {
                 toastr.error("Error getting data");
             });

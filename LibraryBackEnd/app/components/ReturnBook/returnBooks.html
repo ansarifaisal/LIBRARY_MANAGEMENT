@@ -28,13 +28,13 @@
                 <tr ng-repeat="returnBook in returnBookCtrl.returnBooks">
                     <td>{{ returnBook.accessionNumber }}</td>
                     <td>{{ returnBook.bookTitle }}</td>
-                    <td>{{ returnBook.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
-                    <td>{{ returnBook.returnDate | date: "EEE MMM, dd yyyy"}}</td>
-                    <td>{{ returnBook.actualReturnDate | date: "EEE MMM, dd yyyy"}}</td>
+                    <td>{{ returnBook.issuedDate | date: "MMM, dd yyyy"}}</td>
+                    <td>{{ returnBook.returnDate | date: "MMM, dd yyyy"}}</td>
+                    <td>{{ returnBook.actualReturnDate | date: "MMM, dd yyyy"}}</td>
                     <td>{{ returnBook.rollNo }}</td>
                     <td>{{ returnBook.fullName }}</td>
                     <td>{{ returnBook.course }}</td>
-                    <td>{{ returnBook.fine }}</td>
+                    <td><span class="fa fa-rupee"></span> {{ returnBook.fine }}</td>
                     <td>{{ returnBook.librarian }}</td>
                     <td>{{ returnBook.remark }}</td>
                 </tr>
@@ -53,6 +53,7 @@
                     <th class="text-center">Title</th>
                     <th class="text-center">Issue Date</th>
                     <th class="text-center">Return Date</th>
+                    <th class="text-center">Actual Return Date</th>
                     <th class="text-center">Roll No</th>
                     <th class="text-center">Borrower</th>
                     <th class="text-center">Course</th>
@@ -63,12 +64,13 @@
                 <tr ng-repeat="returnBook in returnBookCtrl.returnBooks">
                     <td>{{ returnBook.accessionNumber }}</td>
                     <td>{{ returnBook.bookTitle }}</td>
-                    <td>{{ returnBook.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
-                    <td>{{ returnBook.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                    <td>{{ returnBook.issuedDate | date: "MMM, dd yyyy"}}</td>
+                    <td>{{ returnBook.returnDate | date: "MMM, dd yyyy"}}</td>
+                    <td>{{ returnBook.actualReturnDate | date: "MMM, dd yyyy"}}</td>
                     <td>{{ returnBook.rollNo }}</td>
                     <td>{{ returnBook.fullName }}</td>
                     <td>{{ returnBook.course }}</td>
-                    <td>{{ returnBook.fine }}</td>
+                    <td><span class="fa fa-rupee"></span> {{ returnBook.fine }}</td>
                 </tr>
             </tbody>
         </table>

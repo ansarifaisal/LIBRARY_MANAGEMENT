@@ -19,5 +19,7 @@ namespace LibraryBackEnd.Core.Services.Interface
         IEnumerable<Book> GetBooksByTitle(string title);
         object GetDistinctBooksByCourse(string course);
         IEnumerable<Book> GetSearchResults(SearchBindingModel searchBindingModel);
+        object GetBookTypes();
+        IEnumerable<Book> GetBooksByType(string type);
     }
 }

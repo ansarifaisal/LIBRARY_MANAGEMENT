@@ -1,0 +1,48 @@
+﻿<div ng-init="statisticsCtrl.loadMagazineDataByCourse()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li><a href="" ng-href="#!/admin/statistics">Statistics</a></li>
+        <li class="active">Magazine by Course - {{statisticsCtrl.course}}</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Magazine by Course - {{statisticsCtrl.course}}</h3>
+    </div>
+
+    <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Date</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Periodicity</th>
+                <th class="text-center">Publisher</th>
+                <th class="text-center">Course</th>
+                <th class="text-center">Type</th>
+                <th class="text-center">Subscription</th>
+                <th class="text-center">Subscription Amount(Per Annum)</th>
+                <th class="text-center">Subscription Duration</th>
+                <th class="text-center">From</th>
+                <th class="text-center">To</th>
+                <th class="text-center">Volume</th>
+                <th class="text-center">Source</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="magazine in statisticsCtrl.magazines">
+                <td>{{ magazine.date | date: "MMM, dd yyyy"}}</td>
+                <td>{{ magazine.title }}</td>
+                <td>{{ magazine.periodicity }}</td>
+                <td>{{ magazine.publisher }}</td>
+                <td>{{ magazine.course }}</td>
+                <td>{{ magazine.type }}</td>
+                <td>{{ magazine.subscription }}</td>
+                <td>{{ magazine.subscriptionAmount }}</td>
+                <td>{{ magazine.subscriptionDuration }}</td>
+                <td>{{ magazine.from | date: "MMM, yyyy"}}</td>
+                <td>{{ magazine.to | date: "MMM, yyyy"}}</td>
+                <td>{{ magazine.volume }}</td>
+                <td>{{ magazine.source }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

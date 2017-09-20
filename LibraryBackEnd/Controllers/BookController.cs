@@ -103,6 +103,5 @@ namespace LibraryBackEnd.Controllers
             var books = _bookService.GetDistinctBooksByCourse(course);
             return Ok(books);
         }
-
     }
 }

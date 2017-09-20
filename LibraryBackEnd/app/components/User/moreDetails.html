@@ -21,6 +21,7 @@
                                ng-pattern="/^[0-9]+$/"
                                ng-maxlength="6"
                                ng-blur="userCtrl.checkByRollNumber(userCtrl.user.rollNo)"
+                               ng-change="userCtrl.trackChanges()"
                                autocomplete="off"
                                required />
 
@@ -50,8 +51,9 @@
                                name="fullName"
                                placeholder="Enter Full Name"
                                ng-model="userCtrl.user.fullName"
-                               ng-pattern="/^[a-zA-Z0-9\s]+$/"
+                               ng-pattern="/^[a-zA-Z\s]+$/"
                                ng-disabled="userCtrl.user.modified"
+                               ng-change="userCtrl.trackChanges()"
                                required />
 
                         <span class="glyphicon form-control-feedback"
@@ -76,6 +78,7 @@
                                 ng-model="userCtrl.user.course"
                                 ng-options="course.name as course.name for course in  userCtrl.courses"
                                 ng-disabled="userCtrl.user.modified"
+                                ng-change="userCtrl.trackChanges()"
                                 required>
                             <option value="" disabled>Select Course</option>
                         </select>
@@ -95,6 +98,7 @@
                                 ng-model="userCtrl.user.yearOfAdmission"
                                 ng-options="year as year for year in  userCtrl.years"
                                 ng-disabled="userCtrl.user.modified"
+                                ng-change="userCtrl.trackChanges()"
                                 required>
                             <option value="" disabled>Select Year</option>
                         </select>
@@ -107,7 +111,7 @@
 
                     <span class="small text-danger" ng-show="createEdit.$valid"><strong>Note: Verify the above details, once submit you can't change it.</strong></span>
 
-                    <input type="submit" value="Save" ng-disabled="userCtrl.user.modified || createEdit.$invalid || userCtrl.exists" class="btn col-md-12 btn-success" />
+                    <input type="submit" value="Save" ng-disabled="userCtrl.user.modified || createEdit.$invalid || userCtrl.exists || !userCtrl.change" class="btn col-md-12 btn-success" />
 
                 </form>
             </div>
@@ -119,15 +123,16 @@
                              'has-success has-feedback': createEdit.rollNo.$valid || createEdit.rollNo.$valid
                              && createEdit.$submitted || !userCtrl.exists}">
 
-                        <label for="rollNo">Roll No</label>
+                        <label for="rollNo">Library Enrollment Number</label>
                         <input type="text" class="form-control"
                                name="rollNo"
-                               placeholder="Enter Roll Number"
+                               placeholder="Enter Library Enrollment Number"
                                ng-model="userCtrl.user.rollNo"
                                ng-disabled="userCtrl.user.modified"
                                ng-pattern="/^[0-9]+$/"
                                ng-maxlength="6"
                                ng-blur="userCtrl.checkByRollNumber(userCtrl.user.rollNo)"
+                               ng-change="userCtrl.trackChanges()"
                                autocomplete="off"
                                required />
 
@@ -157,8 +162,9 @@
                                name="fullName"
                                placeholder="Enter Full Name"
                                ng-model="userCtrl.user.fullName"
-                               ng-pattern="/^[a-zA-Z0-9\s]+$/"
+                               ng-pattern="/^[a-zA-Z/\s]+$/"
                                ng-disabled="userCtrl.user.modified"
+                               ng-change="userCtrl.trackChanges()"
                                required />
 
                         <span class="glyphicon form-control-feedback"
@@ -183,6 +189,7 @@
                                 ng-model="userCtrl.user.course"
                                 ng-options="course.name as course.name for course in  userCtrl.courses"
                                 ng-disabled="userCtrl.user.modified"
+                                ng-change="userCtrl.trackChanges()"
                                 required>
                             <option value="" disabled>Select Course</option>
                         </select>
@@ -195,11 +202,82 @@
 
                     <span class="small text-danger" ng-show="createEdit.$valid"><strong>Note: Verify the above details, once submit you can't change it.</strong></span>
 
-                    <input type="submit" value="Save" ng-disabled="userCtrl.user.modified || createEdit.$invalid || userCtrl.exists" class="btn col-md-12 btn-success" />
+                    <input type="submit" value="Save" ng-disabled="userCtrl.user.modified || createEdit.$invalid || userCtrl.exists || !userCtrl.change" class="btn col-md-12 btn-success" />
 
                 </form>
             </div>
 
+
+            <div class="panel-body" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
+                <form name="createEdit" ng-submit="userCtrl.submitForm()" role="form" novalidate>
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.rollNo.$invalid && createEdit.rollNo.$touched
+                             || createEdit.rollNo.$invalid && createEdit.$submitted || userCtrl.exists,
+                             'has-success has-feedback': createEdit.rollNo.$valid || createEdit.rollNo.$valid
+                             && createEdit.$submitted || !userCtrl.exists}">
+
+                        <label for="rollNo">Library Enrollment Number</label>
+                        <input type="text" class="form-control"
+                               name="rollNo"
+                               placeholder="Enter Library Enrollment Number"
+                               ng-model="userCtrl.user.rollNo"
+                               ng-disabled="userCtrl.user.modified"
+                               ng-pattern="/^[0-9]+$/"
+                               ng-maxlength="6"
+                               ng-blur="userCtrl.checkByRollNumber(userCtrl.user.rollNo)"
+                               ng-change="userCtrl.trackChanges()"
+                               autocomplete="off"
+                               required />
+
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': createEdit.rollNo.$valid || createEdit.rollNo.$valid && createEdit.$submitted || !userCtrl.exists,
+                          'glyphicon-remove': createEdit.rollNo.$invalid && createEdit.rollNo.$touched
+                           || createEdit.rollNo.$invalid && createEdit.$submitted|| userCtrl.exists}">
+                        </span>
+
+                        <div ng-show="createEdit.rollNo.$invalid && createEdit.rollNo.$touched || createEdit.$submitted || userCtrl.exists">
+                            <div ng-show="createEdit.rollNo.$error.required" class="text-danger small">
+                                Please, provide roll number.
+                            </div>
+                            <div ng-show="createEdit.rollNo.$error.maxlength" class="text-danger small">This field can contain maximum 6 charachters.</div>
+                            <div ng-show="createEdit.rollNo.$error.pattern" class="text-danger small">Please, provide valid number.</div>
+                            <div ng-show="userCtrl.exists" class="text-danger small">Roll number is in use.</div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.fullName.$invalid && createEdit.fullName.$touched
+                             || createEdit.fullName.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.fullName.$valid || createEdit.fullName.$valid
+                             && createEdit.$submitted}">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" class="form-control"
+                               name="fullName"
+                               placeholder="Enter Full Name"
+                               ng-model="userCtrl.user.fullName"
+                               ng-pattern="/^[a-zA-Z\s]+$/"
+                               ng-disabled="userCtrl.user.modified"
+                               ng-change="userCtrl.trackChanges()"
+                               required />
+
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': createEdit.fullName.$valid || createEdit.fullName.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.fullName.$invalid && createEdit.fullName.$touched
+                           || createEdit.fullName.$invalid && createEdit.$submitted}">
+                        </span>
+
+                        <div ng-show="createEdit.fullName.$invalid && createEdit.fullName.$touched || createEdit.$submitted">
+                            <span ng-show="createEdit.fullName.$error.required" class="text-danger small">Please, provide full name.</span>
+                            <span ng-show="createEdit.fullName.$error.pattern" class="text-danger small">This field cannot contain special charachters.</span>
+                        </div>
+
+                    </div>
+
+                    <span class="small text-danger" ng-show="createEdit.$valid"><strong>Note: Verify the above details, once submit you can't change it.</strong></span>
+
+                    <input type="submit" value="Save" ng-disabled="userCtrl.user.modified || createEdit.$invalid || userCtrl.exists || !userCtrl.change" class="btn col-md-12 btn-success" />
+
+                </form>
+            </div>
         </div>
     </div>
 </div>

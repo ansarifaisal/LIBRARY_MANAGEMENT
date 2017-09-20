@@ -27,13 +27,9 @@ namespace LibraryBackEnd.Controllers
         [HttpPost]
         public IHttpActionResult AddPublication(PeriodicMagazine periodicMagazine)
         {
+            periodicMagazine.Date = DateTime.Now;
             if (!ModelState.IsValid)
                 return BadRequest("Model is Invalid");
-
-            var flag = CheckExisting(periodicMagazine.Title);
-
-            if (flag == true)
-                return BadRequest("true");
 
             _periodicMagazineService.Create(periodicMagazine);
             return Ok("Added Successfully!");
@@ -94,7 +90,6 @@ namespace LibraryBackEnd.Controllers
             var periodicMagazine = _periodicMagazineService.GetByTitle(title);
             return Ok(periodicMagazine);
         }
-
 
     }
 }

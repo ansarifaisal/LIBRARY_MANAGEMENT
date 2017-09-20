@@ -90,6 +90,27 @@
             </table>
         </div>
 
+
+        <div uib-accordion-group class="panel-default">
+            <uib-accordion-heading>
+                Types Of The Books
+            </uib-accordion-heading>
+            <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Types</th>
+                        <th class="text-center">No Of Books</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="book in statisticsCtrl.bookTypes">
+                        <td><a href="" ng-href="#!/admin/bookTypes/{{book.type}}">{{ book.type }}</a></td>
+                        <td>{{ book.count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
         <div uib-accordion-group class="panel-default">
             <uib-accordion-heading>
                 Students in a Course
@@ -113,6 +134,7 @@
                 </tbody>
             </table>
         </div>
+
         <div uib-accordion-group class="panel-default">
             <uib-accordion-heading>
                 Students Joined in a Year
@@ -132,5 +154,109 @@
                 </tbody>
             </table>
         </div>
+
+        <div uib-accordion-group class="panel-default">
+            <uib-accordion-heading>
+                Magazine Titles
+            </uib-accordion-heading>
+            <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Titles</th>
+                        <th class="text-center">No Of Magazines</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="magazineTitle in statisticsCtrl.magazineTitles">
+                        <td><a href="" ng-href="#!/admin/magazineTitle/{{magazineTitle.title}}">{{ magazineTitle.title }}</a></td>
+                        <td>{{ magazineTitle.count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div uib-accordion-group class="panel-default">
+            <uib-accordion-heading>
+                Magazine in Course
+            </uib-accordion-heading>
+            <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Course</th>
+                        <th class="text-center">No Of Magazines</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="magazineCourse in statisticsCtrl.magazineCourses">
+                        <td><a href="" ng-href="#!/admin/magazineCourse/{{magazineCourse.course}}">{{ magazineCourse.course }}</a></td>
+                        <td>{{ magazineCourse.count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div uib-accordion-group class="panel-default">
+            <uib-accordion-heading>
+                Magazine Types
+            </uib-accordion-heading>
+            <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Type</th>
+                        <th class="text-center">No Of Magazines</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="magazineType in statisticsCtrl.magazineTypes">
+                        <td><a href="" ng-href="#!/admin/magazineType/{{magazineType.type}}">{{ magazineType.type }}</a></td>
+                        <td>{{ magazineType.count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div uib-accordion-group class="panel-default">
+            <uib-accordion-heading>
+                Magazine Periodicity
+            </uib-accordion-heading>
+            <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Periodicity</th>
+                        <th class="text-center">No Of Magazines</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="periodic in statisticsCtrl.periodicity">
+                        <td><a href="" ng-href="#!/admin/magazinePeriodicity/{{periodic.periodicity}}">{{ periodic.periodicity }}</a></td>
+                        <td>{{ periodic.count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div uib-accordion-group class="panel-default">
+            <uib-accordion-heading>
+                Magazine Subscription
+            </uib-accordion-heading>
+            <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Subscription Year</th>
+                        <th class="text-center">No Of Magazines</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="subcription in statisticsCtrl.subscription">
+                        <td><a href="" ng-href="#!/admin/magazineYear/{{subcription.year}}">{{ subcription.year }}</a></td>
+                        <td>{{ subcription.count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </uib-accordion>
+
+
+
 </div>

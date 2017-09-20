@@ -23,6 +23,8 @@
 
         me.student = {};
 
+        me.change = false;
+
         me.userModal = {
             user: undefined,
             title: '',
@@ -38,11 +40,16 @@
         me.getData = function () {
             me.user = UserFactory.getUserByUserName($rootScope.user.userName);
             me.courses = UserFactory.getCourses();
-            me.years = UserFactory.getYears(-2, 1);
+            me.years = UserFactory.getYears(-2, 2);
+        }
+
+        me.trackChanges = function () {
+            me.change = true;
         }
 
         me.checkByRollNumber = function (rollNo) {
-            console.log(rollNo);
+            if (rollNo === "" || !me.change)
+                return;
             UserFactory.getStudentByRollNo(rollNo).then(function (user) {
                 me.exists = false;
                 if (user)
@@ -54,6 +61,18 @@
         }
 
         me.submitForm = function () {
+
+            var user = $rootScope.user;
+
+            if (user.role === 'ADMIN' || user.role === 'LIBRARIAN') {
+                user.yearOfAdmission = 0;
+                user.course = "General";
+            }
+
+            if (user.role === 'FACULTY') {
+                user.yearOfAdmission = 0;
+            }
+
             me.user.modified = true;
             UserFactory.editStudent(me.user).then(function () {
                 toastr.success("Details Saved Successfully!");
@@ -95,8 +114,28 @@
            "userModalCtrl");
         }
 
-        me.deleteUser = function (id) {
-            me.userModal.user = UserFactory.getUserByUserName($rootScope.user.userName);
+        me.approveUser = function (userName) {
+            me.userModal.user = UserFactory.getUserByUserName(userName);
+            me.userModal.title = "Approve User Request";
+            me.userModal.btnText = "Approve";
+            AppService.showModal(me.userModal,
+           "user/approveUser.html",
+           "UserModalController",
+           "userModalCtrl");
+        }
+
+        me.rejectUser = function (userName) {
+            me.userModal.user = UserFactory.getUserByUserName(userName);
+            me.userModal.title = "Reject User Request";
+            me.userModal.btnText = "Reject";
+            AppService.showModal(me.userModal,
+           "user/rejectUser.html",
+           "UserModalController",
+           "userModalCtrl");
+        }
+
+        me.deleteUser = function (userName) {
+            me.userModal.user = UserFactory.getUserByUserName(userName);
             me.userModal.title = "Delete Subject";
             me.userModal.btnText = "Delete";
             AppService.showModal(me.userModal,

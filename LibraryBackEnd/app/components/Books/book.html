@@ -28,7 +28,8 @@
     </div>
 
     <div>
-        <div class="panel panel-default panel-body" ng-show="user.role == 'ADMIN' && bookCtrl.book.status == 'Available' || user.role == 'LIBRARIAN' && bookCtrl.book.status == 'Available'">
+        <div class="panel panel-default panel-body"
+             ng-show="user.role == 'ADMIN' && bookCtrl.book.status != 'Issued'">
             <table class="table">
                 <tr>
                     <td>Actions</td>

@@ -82,5 +82,15 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _bookRepository.GetDistinctBooksByCourse(course);
         }
+
+        public object GetBookTypes()
+        {
+            return _bookRepository.GetBookTypes();
+        }
+
+        public IEnumerable<Book> GetBooksByType(string type)
+        {
+            return _bookRepository.GetBooksByType(type);
+        }
     }
 }

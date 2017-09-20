@@ -15,7 +15,14 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="" ng-click="sendNotifications()" title="Send Notification"><span class="fa fa-envelope fa-lg"></span></a></li>
+                <li>
+                    <a href=""
+                       ng-click="sendNotifications()"
+                       ng-show="user.role == 'ADMIN'"
+                       title="Send Notification">
+                        <span class="fa fa-envelope fa-lg"></span>
+                    </a>
+                </li>
 
 
                 <li class="dropdown" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
@@ -57,18 +64,13 @@
                 <li class="dropdown" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs fa-lg" aria-hidden="true"></i> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li>
+                        <li ng-show="user.role == 'ADMIN'">
                             <a href="" ng-href="#!/admin/publications">
                                 <i class="fa fa-pencil-square-o " aria-hidden="true"></i> Publications
                             </a>
                         </li>
                         <li>
-                            <a href="" ng-href="#!/admin/authors">
-                                <i class="fa fa-user-circle-o " aria-hidden="true"></i> Authors
-                            </a>
-                        </li>
-                        <li>
-                            <a href="" ng-href="#!/admin/courses">
+                            <a href="" ng-href="#!/admin/courses" ng-show="user.role == 'ADMIN'">
                                 <i class="fa fa-graduation-cap " aria-hidden="true"></i> Courses
                             </a>
                         </li>
@@ -78,7 +80,7 @@
                             </a>
                         </li>-->
                         <li>
-                            <a href="" ng-href="#!/admin/subjects">
+                            <a href="" ng-href="#!/admin/subjects" ng-show="user.role == 'ADMIN'">
                                 <i class="fa fa-stack-overflow " aria-hidden="true"></i> Subjects
                             </a>
                         </li>
@@ -99,8 +101,8 @@
                     <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-book fa-lg" aria-hidden="true"></i> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="" ng-href="#!/user/issuedBooks" class="small"><i class="fa fa-address-book-o " aria-hidden="true"></i> Issued Books</a></li>
-                        <li><a href="" ng-href="#!/admin/returnedBooks" class="small"><i class="fa fa-reply " aria-hidden="true"></i> Returned Books</a></li>
-                        <li><a href="" ng-href="#!/admin/lostOrReplace" class="small"><i class="fa fa-times " aria-hidden="true"></i> Lost/Replace Books</a></li>
+                        <li><a href="" ng-href="#!/user/returnedBooks" class="small"><i class="fa fa-reply " aria-hidden="true"></i> Returned Books</a></li>
+                        <li><a href="" ng-show="user.role == 'ADMIN'" ng-href="#!/admin/lostOrReplace" class="small"><i class="fa fa-times " aria-hidden="true"></i> Lost/Replace Books</a></li>
                     </ul>
                 </li>
 

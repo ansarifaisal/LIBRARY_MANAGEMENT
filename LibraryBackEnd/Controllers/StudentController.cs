@@ -92,5 +92,16 @@ namespace LibraryBackEnd.Controllers
             var rollNos = _studentService.GetRollNos();
             return Ok(rollNos);
         }
+
+        [HttpPut]
+        [Route("updateStatus")]
+        public IHttpActionResult UpdateStatus(ApplicationUser student)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid State");
+
+            _studentService.Update(student);
+            return Ok("Student Status Updated Successfully!");
+        }
     }
 }

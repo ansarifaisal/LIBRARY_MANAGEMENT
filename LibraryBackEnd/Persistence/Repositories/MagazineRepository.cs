@@ -23,6 +23,8 @@ namespace LibraryBackEnd.Persistence.Repositories
                 .SingleOrDefault();
         }
 
+
+
         public IEnumerable<string> GetMagazineNumbers()
         {
             return _context.Magazines
@@ -30,6 +32,7 @@ namespace LibraryBackEnd.Persistence.Repositories
                 .Select(m => m.Number)
                 .ToList();
         }
+
 
         public IEnumerable<Magazine> GetMagazines(string title)
         {

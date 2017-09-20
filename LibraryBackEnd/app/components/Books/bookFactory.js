@@ -30,7 +30,7 @@ BookModule.factory("BookFactory", [
             getTitles: getTitles,
             getAccessionNumbers: getAccessionNumbers,
             getBookByAccessionNumber: getBookByAccessionNumber,
-            getByCourse: getByCourse
+            getByCourse: getByCourse,
         };
 
         return bookFactory;
@@ -203,6 +203,18 @@ BookModule.factory("BookFactory", [
         function getByCourse(course) {
             var deferred = $q.defer();
             $http.get("/api/book/booksByCourse?course=" + course).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+
+
+        function getBookType(type) {
+            var deferred = $q.defer();
+            $http.get("/api/book/booksByType?type=" + type).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
                 deferred.reject(errorResponse);

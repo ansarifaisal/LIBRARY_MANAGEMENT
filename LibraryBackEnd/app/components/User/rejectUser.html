@@ -1,0 +1,12 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{userModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    Want To Reject the User Request ?
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="userModalCtrl.cancel()">Close</button>
+    <button class="btn btn-danger" ng-click="userModalCtrl.updateStatus('REJECTED')">{{userModalCtrl.btnText}}</button>
+</div>

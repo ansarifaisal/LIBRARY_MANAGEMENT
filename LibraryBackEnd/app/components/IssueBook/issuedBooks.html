@@ -27,13 +27,13 @@
                 <tr ng-repeat="issuedBook in issueBookCtrl.issuedBooks">
                     <td>{{ issuedBook.accessionNumber }}</td>
                     <td>{{ issuedBook.bookTitle }}</td>
-                    <td>{{ issuedBook.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
-                    <td>{{ issuedBook.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                    <td>{{ issuedBook.issuedDate | date: "MMM, dd yyyy"}}</td>
+                    <td>{{ issuedBook.returnDate | date: "MMM, dd yyyy"}}</td>
                     <td>{{ issuedBook.rollNo }}</td>
                     <td>{{ issuedBook.fullName }}</td>
                     <td>{{ issuedBook.course }}</td>
                     <td>{{ issuedBook.issuedBy }}</td>
-                    <td>{{ issuedBook.fine }}</td>
+                    <td><span class="fa fa-rupee"></span> {{ issuedBook.fine }}</td>
                     <td class="text-center">
                         <!--   <a href="" title="Edit" ng-click="issueBookCtrl.showEditIssueBookForm(issuedBook.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>-->
                         <a href="" title="Return" ng-click="issueBookCtrl.confirmReturnBook(issuedBook.id)" class="text-success"><i class="fa fa-reply fa-2x" aria-hidden="true"></i></a>
@@ -64,12 +64,12 @@
                 <tr ng-repeat="issuedBook in issueBookCtrl.issuedBooks">
                     <td>{{ issuedBook.accessionNumber }}</td>
                     <td>{{ issuedBook.bookTitle }}</td>
-                    <td>{{ issuedBook.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
-                    <td>{{ issuedBook.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                    <td>{{ issuedBook.issuedDate | date: "MMM, dd yyyy"}}</td>
+                    <td>{{ issuedBook.returnDate | date: "MMM, dd yyyy"}}</td>
                     <td>{{ issuedBook.rollNo }}</td>
                     <td>{{ issuedBook.fullName }}</td>
                     <td>{{ issuedBook.course }}</td>
-                    <td>{{ issuedBook.fine }}</td>
+                    <td><span class="fa fa-rupee"></span> {{ issuedBook.fine }}</td>
                 </tr>
             </tbody>
         </table>

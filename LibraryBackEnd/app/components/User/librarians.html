@@ -15,10 +15,11 @@
                 <th class="text-center">Name</th>
                 <th class="text-center">Course</th>
                 <th class="text-center">Book Issued</th>
+                <th class="text-center">Email</th>
                 <th class="text-center">Email Confirmed</th>
                 <th class="text-center">Role</th>
                 <th class="text-center">Status</th>
-                <th class="text-center">Action</th>
+                <th class="text-center" ng-show="user.role == 'ADMIN'">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -27,12 +28,20 @@
                 <td>{{ librarian.fullName}}</td>
                 <td>{{ librarian.course }}</td>
                 <td>{{ librarian.issueCount }}</td>
+                <td>{{ librarian.email }}</td>
                 <td>{{ librarian.emailConfirmed }}</td>
                 <td>{{ librarian.role }}</td>
                 <td>{{ librarian.status }}</td>
-                <td class="text-center">
-                    <a href="" ng-click="userCtrl.getLibrarian(librarian.userName)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
-                    <a href="" ng-click="userCtrl.deleteUser(librarian.userName)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                <td class="text-center" ng-show="user.role == 'ADMIN'">
+                    <div ng-show="librarian.status != 'APPROVED'">
+                        <a href="" ng-click="userCtrl.approveUser(librarian.userName)" title="Approve" class="text-success"><i class="fa fa-check fa-2x" aria-hidden="true"></i></a>
+                        <a href="" ng-hide="librarian.status == 'REJECTED'" ng-click="userCtrl.rejectUser(librarian.userName)" title="Reject" class="text-danger"><i class="fa fa-times fa-2x" aria-hidden="true"></i></a>
+                        <a href="" ng-show="librarian.status == 'REJECTED'" ng-click="userCtrl.deleteUser(librarian.userName)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                    </div>
+                    <div ng-show="librarian.status == 'APPROVED'">
+                        <a href="" ng-click="userCtrl.getLibrarian(librarian.userName)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
+                        <a href="" ng-click="userCtrl.deleteUser(librarian.userName)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                    </div>
                 </td>
             </tr>
         </tbody>

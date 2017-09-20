@@ -22,7 +22,8 @@ UserModule.factory("UserFactory", [
             getRoles: getRoles,
             getStudentByRollNo: getStudentByRollNo,
             changePassword: changePassword,
-            getRollNos: getRollNos
+            getRollNos: getRollNos,
+            updateStatus: updateStatus
         }
 
         return userFactory;
@@ -172,5 +173,15 @@ UserModule.factory("UserFactory", [
             return deferred.promise;
         }
 
+        function updateStatus(user) {
+            var deferred = $q.defer();
+            $http.put("/api/student/updateStatus", user)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
     }
 ]);

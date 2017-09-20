@@ -1,0 +1,90 @@
+﻿
+<div class="modal-header">
+    <h4 class="modal-title">{{committeeMemberModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+
+    <form name="createEdit" ng-submit="committeeMemberModalCtrl.submitForm()" role="form" novalidate>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.name.$invalid && createEdit.name.$touched
+                 || createEdit.name.$invalid && createEdit.$submitted || committeeMemberModalCtrl.exists,
+                 'has-success has-feedback': createEdit.name.$valid || createEdit.name.$valid
+                 && createEdit.$submitted || !committeeMemberModalCtrl.exists && createEdit.name.$touched}">
+            <label for="name">Name</label>
+            <input type="text"
+                   name="name"
+                   class="form-control"
+                   ng-model="committeeMemberModalCtrl.committeeMember.name"
+                   ng-blur="committeeMemberModalCtrl.checkExisting(committeeMemberModalCtrl.committeeMember.name)"
+                   ng-change="committeeMemberModalCtrl.trackChanges()"
+                   placeholder="Enter Name"
+                   required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.name.$valid || createEdit.name.$valid && createEdit.$submitted || !committeeMemberModalCtrl.exists && createEdit.name.$touched,
+                          'glyphicon-remove': createEdit.name.$invalid && createEdit.name.$touched
+                           || createEdit.name.$invalid && createEdit.$submitted || committeeMemberModalCtrl.exists }">
+            </span>
+
+            <div ng-show="createEdit.name.$invalid && createEdit.name.$touched || createEdit.$submitted || committeeMemberModalCtrl.exists">
+                <div ng-show="createEdit.name.$error.required" class="text-danger small">Please, provide name.</div>
+                <div ng-show="committeeMemberModalCtrl.exists" class="text-danger small">Committee Member already exists.</div>
+            </div>
+
+        </div>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.designation.$invalid && createEdit.designation.$touched
+                             || createEdit.designation.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.designation.$valid || createEdit.designation.$valid
+                             && createEdit.$submitted}">
+            <label for="designation">Designation</label>
+            <input type="text"
+                   name="designation"
+                   class="form-control"
+                   ng-model="committeeMemberModalCtrl.committeeMember.designation"
+                   ng-change="committeeMemberModalCtrl.trackChanges()"
+                   placeholder="Enter Designation"
+                   required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.designation.$valid || createEdit.designation.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.designation.$invalid && createEdit.designation.$touched
+                           || createEdit.designation.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.designation.$invalid && createEdit.designation.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.designation.$error.required" class="text-danger small">Please, provide designation.</span>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.committeeRole.$invalid && createEdit.committeeRole.$touched
+                                 || createEdit.committeeRole.$invalid && createEdit.$submitted,
+                                 'has-success has-feedback': createEdit.committeeRole.$valid || createEdit.committeeRole.$valid
+                                 && createEdit.$submitted}">
+            <label for="committeeRole">Committee Role</label>
+            <input type="text"
+                   name="committeeRole"
+                   class="form-control"
+                   ng-model="committeeMemberModalCtrl.committeeMember.committeeRole"
+                   ng-change="committeeMemberModalCtrl.trackChanges()"
+                   placeholder="Enter Committee Role"
+                   required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.committeeRole.$valid || createEdit.committeeRole.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.committeeRole.$invalid && createEdit.committeeRole.$touched
+                           || createEdit.committeeRole.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.committeeRole.$invalid && createEdit.committeeRole.$touched || createEdit.$submitted">
+                <span ng-show="createEdit.committeeRole.$error.required" class="text-danger small">Please, provide committeeRole.</span>
+            </div>
+
+        </div>
+
+        <input type="submit" ng-disabled="createEdit.$invalid || !committeeMemberModalCtrl.change || committeeMemberModalCtrl.exists" class="btn btn-primary" value="{{committeeMemberModalCtrl.btnText}}" ng-click="committeeMemberModalCtrl.ok()" />
+        <button type="button" class="btn btn-default" ng-click="committeeMemberModalCtrl.cancel()">Close</button>
+    </form>
+
+</div>

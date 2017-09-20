@@ -1,0 +1,35 @@
+﻿<div ng-init="committeeMemberCtrl.getCommitteeMembers()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li class="active">Committee Members</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Committee Members</h3>
+    </div>
+
+    <table datatable="ng" dt-options="committeeMemberCtrl.dtOptions" dt-column-defs="committeeMemberCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Date</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Designation</th>
+                <th class="text-center">Committee Role</th>
+                <th class="text-center" ng-show="user.role == 'ADMIN'">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="committeeMember in committeeMemberCtrl.committeeMembers">
+                <td>{{ committeeMember.date | date : 'MMM, dd yyyy'}}</td>
+                <td>{{ committeeMember.name}}</td>
+                <td>{{ committeeMember.designation }}</td>
+                <td>{{ committeeMember.committeeRole }}</td>
+                <td class="text-center" ng-show="user.role == 'ADMIN'">
+                    <a href="" ng-click="committeeMemberCtrl.getCommitteeMember(committeeMember.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>
+                    <a href="" ng-click="committeeMemberCtrl.deleteCommitteeMemberModal(committeeMember.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

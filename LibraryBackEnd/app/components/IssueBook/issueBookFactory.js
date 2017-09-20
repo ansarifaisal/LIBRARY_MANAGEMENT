@@ -44,6 +44,8 @@ IssueBookModule.factory("IssueBookFactory", [
         function getReturnDate() {
             var date = new Date();
             var returnDate = date.setDate(date.getDate() + parseInt($rootScope.configuration.issueDays));
+            returnDate = date.setHours(11);
+            returnDate = date.setMinutes(59);
             return formatDate(returnDate);
         }
 
@@ -52,7 +54,7 @@ IssueBookModule.factory("IssueBookFactory", [
         }
 
         function formatDate(date) {
-            return $filter('date')(date, "EEE MMM, dd yyyy");
+            return $filter('date')(date, "EEE MMM, dd yyyy HH:mm");
         }
 
         function getByAccessionNumber(accessionNumber) {
@@ -181,6 +183,7 @@ IssueBookModule.factory("IssueBookFactory", [
             var date = new Date();
             returnDate = convertToDate(returnDate);
             var isPast = false;
+            console.log(returnDate < date);
             if (returnDate < date)
                 isPast = true;
             return isPast;

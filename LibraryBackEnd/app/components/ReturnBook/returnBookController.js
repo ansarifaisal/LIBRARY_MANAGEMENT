@@ -42,7 +42,6 @@
             me.dtOptions = AppService.dataTableWithOutFunction();
             ReturnBookFactory.getByRollNo(user.rollNo).then(function (returnBooks) {
                 me.returnBooks = returnBooks;
-                console.log(me.returnBooks);
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
                 toastr.error("Error getting the ");

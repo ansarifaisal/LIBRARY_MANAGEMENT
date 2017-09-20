@@ -28,6 +28,18 @@
 
         me.bookTitles = [];
 
+        me.bookTypes = [];
+
+        me.magazineTiles = [];
+
+        me.magazineCourses = [];
+
+        me.magazineTypes = [];
+
+        me.periodicity = [];
+
+        me.subscription = [];
+
         me.config = function () {
             me.dtOptions = AppService.dataTableWithOutFunction();
         }
@@ -39,6 +51,12 @@
             me.loadStudentsInCourse();
             me.loadStudentsInYear();
             me.loadBooksTitles();
+            me.loadBookTypes();
+            me.loadMagazineTitleData();
+            me.loadMagazineCourseData();
+            me.loadMagazineTypeData();
+            me.loadMagazinePeriodicityData();
+            me.loadMagazineSubscriptionData();
         }
 
         me.loadBooksInCourse = function () {
@@ -93,6 +111,24 @@
                 return;
             StatisticsFactory.getBooksTitles().then(function (response) {
                 me.bookTitles = response;
+            });
+        }
+
+        me.loadBookTypes = function () {
+            me.config();
+            if (me.bookTypes.length > 0)
+                return;
+            StatisticsFactory.getBookTypes().then(function (response) {
+                me.bookTypes = response;
+            });
+        }
+
+        me.loadMagazineTitleData = function () {
+            me.config();
+            if (me.magazineTiles.length > 0)
+                return;
+            StatisticsFactory.getMagazineTitles().then(function (response) {
+                me.magazineTitles = response;
             });
         }
 
@@ -175,5 +211,120 @@
                 toastr.error("Error fetching data.");
             });
         }
+
+        me.loadBookDataByTypes = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.type = $routeParams.type;
+            StatisticsFactory.getBookByType(me.type).then(function (response) {
+                me.books = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+        }
+
+        me.loadMagazineDataByTitle = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.title = $routeParams.title;
+            StatisticsFactory.getMagazineByTitle(me.title).then(function (response) {
+                me.magazines = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+        }
+
+        me.loadMagazineCourseData = function () {
+            me.config();
+            if (me.magazineCourses.length > 0)
+                return;
+            StatisticsFactory.getMagazineCourse().then(function (response) {
+                me.magazineCourses = response;
+            });
+        }
+
+        me.loadMagazineDataByCourse = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.course = $routeParams.course;
+            StatisticsFactory.getMagazineByCourse(me.course).then(function (response) {
+                me.magazines = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+        }
+
+        me.loadMagazineTypeData = function () {
+            me.config();
+            if (me.magazineTypes.length > 0)
+                return;
+            StatisticsFactory.getMagazineTypes().then(function (response) {
+                me.magazineTypes = response;
+            });
+        }
+
+        me.loadMagazineDataByType = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.type = $routeParams.type;
+            StatisticsFactory.getMagazineByTypes(me.type).then(function (response) {
+                me.magazines = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+        }
+
+        me.loadMagazinePeriodicityData = function () {
+            me.config();
+            if (me.periodicity.length > 0)
+                return;
+            StatisticsFactory.getMagazinePeriodicity().then(function (response) {
+                me.periodicity = response;
+            });
+        }
+
+        me.loadMagazineDataByPeriodicity = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.periodic = $routeParams.periodic;
+            StatisticsFactory.getMagazineByPeriodicity(me.periodic).then(function (response) {
+                me.magazines = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+        }
+
+        me.loadMagazineSubscriptionData = function () {
+            me.config();
+            if (me.subscription.length > 0)
+                return;
+            StatisticsFactory.getMagazineSubscriptionInYear().then(function (response) {
+                me.subscription = response;
+            });
+        }
+
+        me.loadMagazineDataBySubscription = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.year = $routeParams.year;
+            StatisticsFactory.getMagazineBySubscription(me.year).then(function (response) {
+                me.magazines = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+        }
+
     }
 ]);

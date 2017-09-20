@@ -30,14 +30,14 @@
                 <td>{{ magazine.title}}</td>
                 <td>{{ magazine.number}}</td>
                 <td>{{ magazine.volume}}</td>
-                <td>{{ magazine.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
-                <td>{{ magazine.returnDate | date: "EEE MMM, dd yyyy"}}</td>
-                <td>{{ magazine.actualReturnDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ magazine.issuedDate | date: "MMM, dd yyyy"}}</td>
+                <td>{{ magazine.returnDate | date: "MMM, dd yyyy"}}</td>
+                <td>{{ magazine.actualReturnDate | date: "MMM, dd yyyy"}}</td>
                 <td>{{ magazine.rollNo}}</td>
                 <td>{{ magazine.fullName}}</td>
                 <td>{{ magazine.course}}</td>
                 <td>{{ magazine.recievedBy}}</td>
-                <td>{{ magazine.fine}}</td>
+                <td><span class="fa fa-rupee"></span> {{ magazine.fine}}</td>
             </tr>
         </tbody>
     </table>
@@ -72,11 +72,11 @@
                 <td>{{ magazine.title}}</td>
                 <td>{{ magazine.number}}</td>
                 <td>{{ magazine.volume}}</td>
-                <td>{{ magazine.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
-                <td>{{ magazine.returnDate | date: "EEE MMM, dd yyyy"}}</td>
-                <td>{{ magazine.actualReturnDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ magazine.issuedDate | date: "MMM, dd yyyy"}}</td>
+                <td>{{ magazine.returnDate | date: "MMM, dd yyyy"}}</td>
+                <td>{{ magazine.actualReturnDate | date: "MMM, dd yyyy"}}</td>
                 <td>{{ magazine.recievedBy}}</td>
-                <td>{{ magazine.fine}}</td>
+                <td><span class="fa fa-rupee"></span> {{ magazine.fine}}</td>
             </tr>
         </tbody>
     </table>

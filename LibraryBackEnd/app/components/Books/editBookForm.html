@@ -41,6 +41,32 @@
 
                     </div>
                     <!-- Accession Number Field Ends Here -->
+                    <!-- Author Name Field Starts Here -->
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.author.$invalid && createEdit.author.$touched
+                             || createEdit.author.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.author.$valid || createEdit.author.$valid
+                             && createEdit.$submitted}">
+
+                        <label for="author">Author(s)</label>
+                        <input type="text" class="form-control"
+                               name="author"
+                               placeholder="Enter Author Name(s)"
+                               ng-model="bookCtrl.bookForm.book.author"
+                               ng-change="bookCtrl.trackChanges()"
+                               required />
+
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': createEdit.author.$valid || createEdit.author.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.author.$invalid && createEdit.author.$touched
+                           || createEdit.author.$invalid && createEdit.$submitted}">
+                        </span>
+
+                        <div ng-show="createEdit.author.$invalid && createEdit.author.$touched || createEdit.$submitted">
+                            <span ng-show="createEdit.author.$error.required" class="text-danger small">Please, provide author(s) name(s).</span>
+                        </div>
+
+                    </div>
+                    <!-- Author Name Field Ends Here -->
                     <!-- Title Field Starts Here -->
                     <div class="form-group" ng-class="{'has-error has-feedback': createEdit.title.$invalid && createEdit.title.$touched
                              || createEdit.title.$invalid && createEdit.$submitted,
@@ -69,58 +95,30 @@
 
                     </div>
                     <!-- Title Field Ends Here -->
-                    <!-- Pages Field Starts Here -->
-                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.pages.$invalid && createEdit.pages.$touched
-                             || createEdit.pages.$invalid && createEdit.$submitted,
-                             'has-success has-feedback': createEdit.pages.$valid || createEdit.pages.$valid
+                    <!-- Class No Field Starts Here -->
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.classNo.$invalid && createEdit.classNo.$touched
+                             || createEdit.classNo.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.classNo.$valid || createEdit.classNo.$valid
                              && createEdit.$submitted}">
-
-                        <label for="pages">Pages</label>
+                        <label for="classNo">Class Number</label>
                         <input type="text" class="form-control"
-                               name="pages"
-                               placeholder="Enter Pages"
-                               ng-model="bookCtrl.bookForm.book.pages"
-                               ng-change="bookCtrl.trackChanges()"
+                               name="classNo"
+                               placeholder="Enter Class Number"
+                               ng-model="bookCtrl.bookForm.book.classNo"
                                required />
 
                         <span class="glyphicon form-control-feedback"
-                              ng-class="{'glyphicon-ok': createEdit.pages.$valid || createEdit.pages.$valid && createEdit.$submitted,
-                          'glyphicon-remove': createEdit.pages.$invalid && createEdit.pages.$touched
-                           || createEdit.pages.$invalid && createEdit.$submitted}">
+                              ng-class="{'glyphicon-ok': createEdit.classNo.$valid || createEdit.classNo.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.classNo.$invalid && createEdit.classNo.$touched
+                           || createEdit.classNo.$invalid && createEdit.$submitted}">
                         </span>
 
-                        <div ng-show="createEdit.pages.$invalid && createEdit.pages.$touched || createEdit.$submitted">
-                            <span ng-show="createEdit.pages.$error.required" class="text-danger small">Please, provide page number.</span>
+                        <div ng-show="createEdit.classNo.$invalid && createEdit.classNo.$touched || createEdit.$submitted">
+                            <span ng-show="createEdit.classNo.$error.required" class="text-danger small">Please, provide class number.</span>
                         </div>
 
                     </div>
-                    <!-- Pages Field Ends Here -->
-                    <!-- Author Name Field Starts Here -->
-                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.author.$invalid && createEdit.author.$touched
-                             || createEdit.author.$invalid && createEdit.$submitted,
-                             'has-success has-feedback': createEdit.author.$valid || createEdit.author.$valid
-                             && createEdit.$submitted}">
-
-                        <label for="author">Author(s)</label>
-                        <input type="text" class="form-control"
-                               name="author"
-                               placeholder="Enter Author Name(s)"
-                               ng-model="bookCtrl.bookForm.book.author"
-                               ng-change="bookCtrl.trackChanges()"
-                               required />
-
-                        <span class="glyphicon form-control-feedback"
-                              ng-class="{'glyphicon-ok': createEdit.author.$valid || createEdit.author.$valid && createEdit.$submitted,
-                          'glyphicon-remove': createEdit.author.$invalid && createEdit.author.$touched
-                           || createEdit.author.$invalid && createEdit.$submitted}">
-                        </span>
-
-                        <div ng-show="createEdit.author.$invalid && createEdit.author.$touched || createEdit.$submitted">
-                            <span ng-show="createEdit.author.$error.required" class="text-danger small">Please, provide author(s) name(s).</span>
-                        </div>
-
-                    </div>
-                    <!-- Author Name Field Ends Here -->
+                    <!-- Class No Field Ends Here -->
                     <!-- Publisher Field Starts Here -->
                     <div class="form-group" ng-class="{'has-error has-feedback': createEdit.publisher.$invalid && createEdit.publisher.$touched
                              || createEdit.publisher.$invalid && createEdit.$submitted,
@@ -196,6 +194,80 @@
 
                     </div>
                     <!-- Date of Publication Field Ends Here -->
+                    <!-- Edition Field Starts Here -->
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.edition.$invalid && createEdit.edition.$touched
+                             || createEdit.edition.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.edition.$valid || createEdit.edition.$valid
+                             && createEdit.$submitted}">
+                        <label for="edition">Edition</label>
+                        <input type="text" class="form-control"
+                               name="edition"
+                               placeholder="Enter Edition"
+                               ng-model="bookCtrl.bookForm.book.edition"
+                               required />
+
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': createEdit.edition.$valid || createEdit.edition.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.edition.$invalid && createEdit.edition.$touched
+                           || createEdit.edition.$invalid && createEdit.$submitted}">
+                        </span>
+
+                        <div ng-show="createEdit.edition.$invalid && createEdit.edition.$touched || createEdit.$submitted">
+                            <span ng-show="createEdit.edition.$error.required" class="text-danger small">Please, provide edition.</span>
+                        </div>
+
+                    </div>
+                    <!-- Edition Field Ends Here -->
+                    <!-- Source Field Starts Here -->
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.source.$invalid && createEdit.source.$touched
+                             || createEdit.source.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.source.$valid || createEdit.source.$valid
+                             && createEdit.$submitted}">
+                        <label for="source">Source</label>
+                        <input type="text" class="form-control"
+                               name="source"
+                               placeholder="Enter Source"
+                               ng-model="bookCtrl.bookForm.book.source"
+                               required />
+
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': createEdit.source.$valid || createEdit.source.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.source.$invalid && createEdit.source.$touched
+                           || createEdit.source.$invalid && createEdit.$submitted}">
+                        </span>
+
+                        <div ng-show="createEdit.source.$invalid && createEdit.source.$touched || createEdit.$submitted">
+                            <span ng-show="createEdit.source.$error.required" class="text-danger small">Please, provide source.</span>
+                        </div>
+
+                    </div>
+                    <!-- Source Field Ends Here -->
+                    <!-- Pages Field Starts Here -->
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.pages.$invalid && createEdit.pages.$touched
+                             || createEdit.pages.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.pages.$valid || createEdit.pages.$valid
+                             && createEdit.$submitted}">
+
+                        <label for="pages">Pages</label>
+                        <input type="text" class="form-control"
+                               name="pages"
+                               placeholder="Enter Pages"
+                               ng-model="bookCtrl.bookForm.book.pages"
+                               ng-change="bookCtrl.trackChanges()"
+                               required />
+
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': createEdit.pages.$valid || createEdit.pages.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.pages.$invalid && createEdit.pages.$touched
+                           || createEdit.pages.$invalid && createEdit.$submitted}">
+                        </span>
+
+                        <div ng-show="createEdit.pages.$invalid && createEdit.pages.$touched || createEdit.$submitted">
+                            <span ng-show="createEdit.pages.$error.required" class="text-danger small">Please, provide page number.</span>
+                        </div>
+
+                    </div>
+                    <!-- Pages Field Ends Here -->
                     <!-- Course Field Starts Here -->
                     <div class="form-group" ng-class="{'has-error has-feedback': createEdit.course.$invalid && createEdit.course.$touched
                              || createEdit.course.$invalid && createEdit.$submitted,
@@ -268,7 +340,7 @@
                         <select class="form-control" name="typeOfBook"
                                 ng-model="bookCtrl.bookForm.book.typeOfBook"
                                 ng-options="typeOfbook as typeOfbook for typeOfbook in  bookCtrl.bookForm.typesOfBook"
-                                ng-change="bookCtrl.gotBy() || bookCtrl.trackChanges()"
+                                ng-change="bookCtrl.gotBy(); bookCtrl.trackChanges()"
                                 ng-disabled="!bookCtrl.bookForm.book.subject"
                                 required>
                             <option value="" disabled>Select Type</option>
@@ -301,34 +373,33 @@
 
                     </div>
                     <!-- Get Field Ends Here -->
-                    <div ng-show="bookCtrl.baught == true">
-
-
-                        <!-- Actual Price Field Starts Here -->
-                        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.actualPrice.$invalid && createEdit.actualPrice.$touched
+                    <!-- Actual Price Field Starts Here -->
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.actualPrice.$invalid && createEdit.actualPrice.$touched
                              || createEdit.actualPrice.$invalid && createEdit.$submitted,
                              'has-success has-feedback': createEdit.actualPrice.$valid || createEdit.actualPrice.$valid
                              && createEdit.$submitted}">
-                            <label for="actualPrice">Actual Price</label>
-                            <input type="text" class="form-control"
-                                   name="actualPrice"
-                                   placeholder="Enter Actual Price"
-                                   ng-model="bookCtrl.bookForm.book.actualPrice"
-                                   ng-change="bookCtrl.trackChanges()"
-                                   required />
+                        <label for="actualPrice">Actual Price</label>
+                        <input type="text" class="form-control"
+                               name="actualPrice"
+                               placeholder="Enter Actual Price"
+                               ng-model="bookCtrl.bookForm.book.actualPrice"
+                               ng-change="bookCtrl.trackChanges()"
+                               required />
 
-                            <span class="glyphicon form-control-feedback"
-                                  ng-class="{'glyphicon-ok': createEdit.actualPrice.$valid || createEdit.actualPrice.$valid && createEdit.$submitted,
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': createEdit.actualPrice.$valid || createEdit.actualPrice.$valid && createEdit.$submitted,
                           'glyphicon-remove': createEdit.actualPrice.$invalid && createEdit.actualPrice.$touched
                            || createEdit.actualPrice.$invalid && createEdit.$submitted}">
-                            </span>
+                        </span>
 
-                            <div ng-show="createEdit.actualPrice.$invalid && createEdit.actualPrice.$touched || createEdit.$submitted">
-                                <span ng-show="createEdit.actualPrice.$error.required" class="text-danger small">Please, provide actual price.</span>
-                            </div>
-
+                        <div ng-show="createEdit.actualPrice.$invalid && createEdit.actualPrice.$touched || createEdit.$submitted">
+                            <span ng-show="createEdit.actualPrice.$error.required" class="text-danger small">Please, provide actual price.</span>
                         </div>
-                        <!-- Actual Price Field Ends Here -->
+
+                    </div>
+                    <!-- Actual Price Field Ends Here -->
+
+                    <div ng-show="bookCtrl.baught == true">
                         <!-- Discout Field Starts Here -->
                         <div class="form-group" ng-class="{'has-error has-feedback': createEdit.discount.$invalid && createEdit.discount.$touched
                              || createEdit.discount.$invalid && createEdit.$submitted,
@@ -340,8 +411,7 @@
                                    placeholder="Enter Discount"
                                    ng-blur="bookCtrl.calculateDiscount(bookCtrl.bookForm.book.actualPrice, bookCtrl.bookForm.book.discount)"
                                    ng-model="bookCtrl.bookForm.book.discount"
-                                   ng-change="bookCtrl.trackChanges()"
-                                   required />
+                                   ng-change="bookCtrl.trackChanges()" />
 
                             <span class="glyphicon form-control-feedback"
                                   ng-class="{'glyphicon-ok': createEdit.discount.$valid || createEdit.discount.$valid && createEdit.$submitted,
@@ -362,8 +432,7 @@
                                    name="discountPrice"
                                    placeholder="Enter Discount Price"
                                    ng-model="bookCtrl.bookForm.book.discountPrice"
-                                   disabled
-                                   required />
+                                   disabled />
                         </div>
                         <!-- Discount Price Field Ends Here -->
                         <!-- Bill No Field Starts Here -->
@@ -376,8 +445,7 @@
                                    name="billNo"
                                    placeholder="Enter Bill Number"
                                    ng-model="bookCtrl.bookForm.book.billNo"
-                                   ng-change="bookCtrl.trackChanges()"
-                                   required />
+                                   ng-change="bookCtrl.trackChanges()" />
 
                             <span class="glyphicon form-control-feedback"
                                   ng-class="{'glyphicon-ok': createEdit.billNo.$valid || createEdit.billNo.$valid && createEdit.$submitted,
@@ -406,8 +474,7 @@
                                        datepicker-options="bookCtrl.dateOptions"
                                        close-text="Close"
                                        is-open="bookCtrl.billDatePopup.opened"
-                                       ng-change="bookCtrl.trackChanges()"
-                                       required />
+                                       ng-change="bookCtrl.trackChanges()" />
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" ng-click="bookCtrl.billDatePicker()"><i class="fa fa-calendar"></i></button>
                                 </span>

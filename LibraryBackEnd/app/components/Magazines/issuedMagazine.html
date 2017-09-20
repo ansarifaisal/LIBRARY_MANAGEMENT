@@ -30,13 +30,13 @@
                 <td>{{ issuedMagazine.title}}</td>
                 <td>{{ issuedMagazine.number}}</td>
                 <td>{{ issuedMagazine.volume}}</td>
-                <td>{{ issuedMagazine.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
-                <td>{{ issuedMagazine.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ issuedMagazine.issuedDate | date: "MMM, dd yyyy"}}</td>
+                <td>{{ issuedMagazine.returnDate | date: "MMM, dd yyyy"}}</td>
                 <td>{{ issuedMagazine.rollNo}}</td>
                 <td>{{ issuedMagazine.fullName}}</td>
                 <td>{{ issuedMagazine.course}}</td>
                 <td>{{ issuedMagazine.issuedBy}}</td>
-                <td>{{ issuedMagazine.fine}}</td>
+                <td><span class="fa fa-rupee"></span> {{ issuedMagazine.fine}}</td>
                 <td class="text-center">
                     <!--<a href="" ng-click="magazineCtrl.getIssuedMagazine(issuedMagazine.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;-->
                     <a href="" title="Return" ng-click="magazineCtrl.confirmReturnMagazine(issuedMagazine.id)" class="text-success"><i class="fa fa-reply fa-2x" aria-hidden="true"></i></a>

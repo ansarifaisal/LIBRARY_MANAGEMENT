@@ -119,7 +119,8 @@ namespace LibraryBackEnd.Persistence.Repositories
                     .Where(u => u.AccessionNumber == searchBindingModel.AccessionNumber
                     || u.Title == searchBindingModel.Title
                     || u.Course == searchBindingModel.Course
-                    || u.Status == searchBindingModel.Status)
+                    || u.Status == searchBindingModel.Status
+                    || u.TypeOfBook == searchBindingModel.Type)
                     .ToList();
         }
 
@@ -129,6 +130,25 @@ namespace LibraryBackEnd.Persistence.Repositories
                   .Where(b => b.Course == course)
                   .Distinct()
                   .ToList();
+        }
+
+        public object GetBookTypes()
+        {
+            return _context.Books
+                .GroupBy(b => b.TypeOfBook)
+                .Select(g => new
+                {
+                    Type = g.Key,
+                    Count = g.Count()
+                })
+                .ToList();
+        }
+
+        public IEnumerable<Book> GetBooksByType(string type)
+        {
+            return _context.Books
+                .Where(b => b.TypeOfBook == type)
+                .ToList();
         }
     }
 }

@@ -54,6 +54,20 @@
                 </div>
             </div>
             <!-- Faculty panel Ends here -->
+            <!-- Committee Members panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/admin/committee">
+                        <div class="text-center">
+                            <i class="fa fa-user-o fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">
+                            Committee
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- Committee Members panel Ends here -->
         </div>
         <!-- Panel-Body ends here -->
     </div>
@@ -64,8 +78,9 @@
             <h3 class="panel-title">Books Panel</h3>
         </div>
         <!-- panel-body starts here -->
-        <div class="panel-body">
+        <div class="panel-body" ng-hide="user.role != 'ADMIN'">
             <!-- Publications panel starts here -->
+
             <div class="panel panel-primary col-md-2">
                 <div class="panel-body">
                     <a href="" ng-href="#!/admin/publications">
@@ -158,15 +173,58 @@
 
         </div>
         <!-- panel-body ends here -->
+
+
+        <div class="panel-body" ng-show="user.role == 'LIBRARIAN'">
+            <!-- Book panel starts here -->
+            <div class="panel panel-primary col-md-2">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/user/books">
+                        <div class="text-center">
+                            <i class="fa fa-book fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">
+                            Books
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- Book panel ends here -->
+            <!-- Issued book panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/user/issuedBooks">
+                        <div class="text-center">
+                            <i class="fa fa-address-book-o fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Issued Books</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Issued book panel ends here -->
+            <!-- Returned book panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/user/returnedBooks">
+                        <div class="text-center">
+                            <i class="fa fa-reply fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Returned Books</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Returned book panel ends here -->
+        </div>
+
     </div>
     <!-- Book panel ends here -->
     <!-- Magazine panel starts here -->
-    <div class="panel panel-primary" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
+    <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Magazines Panel</h3>
         </div>
         <!-- panel-body starts here -->
-        <div class="panel-body">
+        <div class="panel-body" ng-hide="user.role != 'ADMIN'">
             <!-- Publications panel starts here -->
             <div class="panel panel-primary col-md-2">
                 <div class="panel-body">
@@ -231,113 +289,159 @@
             <!-- Lost Or Replace Book panel ends here -->
         </div>
         <!-- Book panel ends here -->
-    </div>
-    <!-- panel-body ends here -->
-</div>
-<!-- Magazine panel ends here -->
-<!-- Newspaper panel starts here -->
-<div class="panel panel-primary" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
-    <div class="panel-heading">
-        <h3 class="panel-title">Newspaper Panel</h3>
-    </div>
-    <!-- panel-body starts here -->
-    <div class="panel-body">
-        <!-- newspaper Publications panel starts here -->
-        <div class="panel panel-primary col-md-2">
-            <div class="panel-body">
-                <a href="" ng-href="#!/admin/newspaper/publication">
-                    <div class="text-center">
-                        <i class="fa fa-pencil-square-o fa-7x text-center" aria-hidden="true"></i>
-                    </div>
-                    <div class="text-center">Newspaper Publications</div>
-                </a>
-            </div>
-        </div>
-        <!-- newspaper Publications panel ends here -->
-        <!-- periodic newspaper panel starts here -->
-        <div class="panel panel-primary col-md-2 margin-4x">
-            <div class="panel-body">
-                <a href="" ng-href="#!/admin/newspaper/periodic">
-                    <div class="text-center">
-                        <i class="fa fa-newspaper-o fa-7x text-center" aria-hidden="true"></i>
-                    </div>
-                    <div class="text-center">
-                        Periodic Newspapers
-                    </div>
-                </a>
-            </div>
-        </div>
-        <!-- periodic newspaper panel ends here -->
-    </div>
-    <!-- panel-body ends here -->
-</div>
-<!-- Newspaper panel ends here -->
-<!-- Action panel starts here -->
-<div class="panel panel-primary" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
-    <div class="panel-heading">
-        <h3 class="panel-title">Action Panel</h3>
-    </div>
-    <!-- Panel body starts here -->
-    <div class="panel-body">
+        <!-- panel-body ends here -->
+        <div class="panel-body" ng-show="user.role == 'LIBRARIAN'">
 
-        <!-- Setting panel starts here -->
-        <div class="panel panel-primary col-md-2">
-            <div class="panel-body">
-                <a href="" ng-href="#!/user/settings">
-                    <div class="text-center">
-                        <i class="fa fa-wrench fa-7x text-center" aria-hidden="true"></i>
-                    </div>
-                    <div class="text-center">Settings</div>
-                </a>
+            <!-- Book panel starts here -->
+            <div class="panel panel-primary col-md-2">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/admin/magazine/periodic">
+                        <div class="text-center">
+                            <i class="fa fa-book fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">
+                            Periodic Magazine
+                        </div>
+                    </a>
+                </div>
             </div>
-        </div>
-        <!-- Setting panel ends here -->
-        <!-- Statistics panel starts here -->
-        <div class="panel panel-primary col-md-2 margin-4x">
-            <div class="panel-body">
-                <a href="" ng-href="#!/admin/statistics">
-                    <div class="text-center">
-                        <i class="fa fa-line-chart fa-7x text-center" aria-hidden="true"></i>
-                    </div>
-                    <div class="text-center">Statistics</div>
-                </a>
+            <!-- Book panel ends here -->
+            <!-- Issued book panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/user/magazine/issued">
+                        <div class="text-center">
+                            <i class="fa fa-address-book-o fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Issued Magazines</div>
+                    </a>
+                </div>
             </div>
-        </div>
-        <!-- Statistics panel ends here -->
-        <!-- Order Book panel starts here -->
-        <div class="panel panel-primary col-md-2 margin-4x">
-            <div class="panel-body">
-                <a href="" ng-href="#!/user/requests">
-                    <div class="text-center">
-                        <i class="fa fa-cart-plus fa-7x text-center" aria-hidden="true"></i>
-                    </div>
-                    <div class="text-center">Requested Books</div>
-                </a>
+            <!-- Issued book panel ends here -->
+            <!-- Returned book panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/user/magazine/returned">
+                        <div class="text-center">
+                            <i class="fa fa-reply fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Returned Magazines</div>
+                    </a>
+                </div>
             </div>
+            <!-- Returned book panel ends here -->
+
         </div>
-        <!-- Order Book panel ends here -->
-        <!-- configuration panel starts here -->
-        <div class="panel panel-primary col-md-2 margin-4x" ng-show="user.role == 'ADMIN'">
-            <div class="panel-body">
-                <a href="" ng-href="#!/admin/configuration">
-                    <div class="text-center">
-                        <i class="fa fa-cogs fa-7x text-center" aria-hidden="true"></i>
-                    </div>
-                    <div class="text-center">Configuration</div>
-                </a>
-            </div>
-        </div>
-        <!-- configuration panel ends here -->
+
     </div>
-    <!-- Panel body ends here -->
+
+    <!-- Magazine panel ends here -->
+    <!-- Newspaper panel starts here -->
+    <div class="panel panel-primary" ng-hide="user.role != 'ADMIN'">
+        <div class="panel-heading">
+            <h3 class="panel-title">Newspaper Panel</h3>
+        </div>
+        <!-- panel-body starts here -->
+        <div class="panel-body">
+            <!-- newspaper Publications panel starts here -->
+            <div class="panel panel-primary col-md-2">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/admin/newspaper/publication">
+                        <div class="text-center">
+                            <i class="fa fa-pencil-square-o fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Newspaper Publications</div>
+                    </a>
+                </div>
+            </div>
+            <!-- newspaper Publications panel ends here -->
+            <!-- periodic newspaper panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/admin/newspaper/periodic">
+                        <div class="text-center">
+                            <i class="fa fa-newspaper-o fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">
+                            Periodic Newspapers
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- periodic newspaper panel ends here -->
+        </div>
+        <!-- panel-body ends here -->
+    </div>
+    <!-- Newspaper panel ends here -->
+    <!-- Action panel starts here -->
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Action Panel</h3>
+        </div>
+        <!-- Panel body starts here -->
+        <div class="panel-body">
+            <!-- Setting panel starts here -->
+            <div class="panel panel-primary col-md-2">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/user/settings">
+                        <div class="text-center">
+                            <i class="fa fa-wrench fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Settings</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Setting panel ends here -->
+            <!-- Statistics panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x" ng-hide="user.role != 'ADMIN'">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/admin/statistics">
+                        <div class="text-center">
+                            <i class="fa fa-line-chart fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Statistics</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Statistics panel ends here -->
+            <!-- Order Book panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x" ng-hide="user.role != 'ADMIN'">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/user/requests">
+                        <div class="text-center">
+                            <i class="fa fa-cart-plus fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Requested Books</div>
+                    </a>
+                </div>
+            </div>
+            <!-- Order Book panel ends here -->
+            <!-- configuration panel starts here -->
+            <div class="panel panel-primary col-md-2 margin-4x" ng-hide="user.role != 'ADMIN'">
+                <div class="panel-body">
+                    <a href="" ng-href="#!/admin/configuration">
+                        <div class="text-center">
+                            <i class="fa fa-cogs fa-7x text-center" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center">Configuration</div>
+                    </a>
+                </div>
+            </div>
+            <!-- configuration panel ends here -->
+        </div>
+        <!-- Panel body ends here -->
+    </div>
+    <!-- Action panel ends here -->
+    <!-- ADMIN section ends here -->
 </div>
-<!-- Action panel ends here -->
-<!-- ADMIN section ends here -->
 <!-- STUDENT section starts here -->
 <div ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
     <div ng-init="authCtrl.checkReturn()">
         <div class="alert alert-danger" ng-show="authCtrl.submitTom">
-            <p align="center">You need to submit book(s) tomorrow, Click Here for more info.</p>
+            <p align="center">You Have to Submit <strong>{{authCtrl.bookTitle}}</strong> Book Tomorrow, <a href="" ng-href="#!/user/books" class="alert-link">Click Here</a> For More Info.</p>
+        </div>
+        <div class="alert alert-danger" ng-show="authCtrl.late">
+            <p align="center">You Failed to Submit <strong>{{authCtrl.bookTitle}}</strong> Book on Time, Submit the Book With <span class="fa fa-rupee"></span> {{authCtrl.fine}}/- Fine. <a href="" ng-href="#!/user/books" class="alert-link">Click Here</a> For More Info.</p>
         </div>
     </div>
 

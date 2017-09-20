@@ -16,7 +16,19 @@ StatisticsModule.factory("StatisticsFactory", [
             getBookBaughtInYear: getBookBaughtInYear,
             getBookBaughtByYear: getBookBaughtByYear,
             getBooksTitles: getBooksTitles,
-            getBooksByTitle: getBooksByTitle
+            getBooksByTitle: getBooksByTitle,
+            getBookTypes: getBookTypes,
+            getBookByType: getBookByType,
+            getMagazineTitles: getMagazineTitles,
+            getMagazineByTitle: getMagazineByTitle,
+            getMagazineCourse: getMagazineCourse,
+            getMagazineByCourse: getMagazineByCourse,
+            getMagazineTypes: getMagazineTypes,
+            getMagazineByTypes: getMagazineByTypes,
+            getMagazinePeriodicity: getMagazinePeriodicity,
+            getMagazineByPeriodicity: getMagazineByPeriodicity,
+            getMagazineSubscriptionInYear: getMagazineSubscriptionInYear,
+            getMagazineBySubscription: getMagazineBySubscription
         };
         return statisticsFactory;
 
@@ -138,5 +150,153 @@ StatisticsModule.factory("StatisticsFactory", [
             });
             return deferred.promise;
         }
+
+        function getBookTypes() {
+            var deferred = $q.defer();
+            $http.get("/api/statistics/bookTypes").then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function getBookByType(type) {
+            var deferred = $q.defer();
+            $http.get("/api/statistics/booksByType?type=" + type).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        //function getStudentsByYear(year) {
+        //    var deferred = $q.defer();
+        //    $http.get("/api/statistics/studentsByYear/" + year).then(function (response) {
+        //        deferred.resolve(response.data);
+        //    }, function (errorResponse) {
+        //        deferred.reject(errorResponse);
+        //    });
+        //    return deferred.promise;
+        //}
+
+        function getMagazineTitles() {
+
+            var deferred = $q.defer();
+            $http.get("/api/statistics/magazineTitles").then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+
+        }
+
+        function getMagazineByTitle(title) {
+
+            var deferred = $q.defer();
+            $http.get("/api/statistics/magazineByTitle?title=" + title).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+
+        }
+
+        function getMagazineCourse() {
+            var deferred = $q.defer();
+            $http.get("/api/statistics/magazineCourses").then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+
+        }
+
+        function getMagazineByCourse(course) {
+
+            var deferred = $q.defer();
+            $http.get("/api/statistics/magazineByCourses?course=" + course).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+
+        }
+
+        function getMagazineTypes() {
+
+            var deferred = $q.defer();
+            $http.get("/api/statistics/magazineTypes").then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function getMagazineByTypes(type) {
+
+            var deferred = $q.defer();
+            $http.get("/api/statistics/magazineByType?type=" + type).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+
+
+        }
+
+        function getMagazinePeriodicity() {
+
+            var deferred = $q.defer();
+            $http.get("/api/statistics/magazinePeriodicity").then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function getMagazineByPeriodicity(periodicity) {
+
+            var deferred = $q.defer();
+            $http.get("/api/statistics/magazineByPeriodicity?periodicity=" + periodicity).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+
+        }
+
+        function getMagazineSubscriptionInYear() {
+
+            var deferred = $q.defer();
+            $http.get("/api/statistics/magazineSubscription").then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function getMagazineBySubscription(year) {
+
+            var deferred = $q.defer();
+            $http.get("/api/statistics/magazineBySubscription/" + year).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+
+        }
+
     }
 ]);

@@ -1,0 +1,13 @@
+﻿<div class="modal-header">
+    <h4 class="modal-title">{{userModalCtrl.title}}</h4>
+</div>
+
+<div class="modal-body">
+    Want To Approve the User Request ?
+    <div class="small text-danger" ng-show="!userModalCtrl.user.emailConfirmed">Note: Please ask to confirm the Email Id.</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="userModalCtrl.cancel()">Close</button>
+    <button class="btn btn-success" ng-click="userModalCtrl.updateStatus('APPROVED')">{{userModalCtrl.btnText}}</button>
+</div>

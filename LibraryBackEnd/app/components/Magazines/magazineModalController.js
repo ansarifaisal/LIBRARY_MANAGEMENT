@@ -209,15 +209,26 @@
 
             if (me.periodicDetail.title === "")
                 return;
-
             if (me.periodicDetail.chequeNo === "")
                 me.periodicDetail.chequeNo = "NA";
-            me.periodicDetail.subscriptionDuration = me.duration + " " + me.periodicityOption;
+
+            if (!me.periodicDetail.course)
+                me.periodicDetail.course = "General";
+
+            if (me.periodicDetail.orderNo === "")
+                me.periodicDetail.orderNo = "NA";
+
+            if (me.periodicDetail.billNo === "")
+                me.periodicDetail.billNo = "NA";
+
+            if (me.periodicDetail.amount === "")
+                me.periodicDetail.amount = 0;
+
             me.periodicDetail.from = MagazineFactory.dateParse(me.periodicDetail.from);
             me.periodicDetail.to = MagazineFactory.dateParse(me.periodicDetail.to);
             me.periodicDetail.orderDate = MagazineFactory.dateParse(me.periodicDetail.orderDate);
             me.periodicDetail.billDate = MagazineFactory.dateParse(me.periodicDetail.billDate);
-            console.log(me.periodicDetail);
+            me.periodicDetail.billDate = me.periodicDetail.billDate;
             var addOrEdit = MagazineFactory.addOrEditPeriodicDetail(me.periodicDetail);
 
             $action = addOrEdit.action;
@@ -228,8 +239,6 @@
                 toastr.success(addOrEdit.successMessage);
             }, function (errorResponse) {
                 $route.reload();
-                if (errorResponse.status === 400)
-                    return toastr.error("Periodic Details Already Exists");
                 toastr.error(addOrEdit.errorMessage);
             }).finally(function () {
                 $rootScope.isBusy = false;

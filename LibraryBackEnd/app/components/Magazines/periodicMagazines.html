@@ -11,6 +11,7 @@
     <table datatable="ng" dt-options="magazineCtrl.dtOptions" dt-column-defs="magazineCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>
+                <th class="text-center">Date</th>
                 <th class="text-center">Title</th>
                 <th class="text-center">Course</th>
                 <th class="text-center">Periodicity</th>
@@ -32,20 +33,21 @@
                 <th class="text-center">Paid By</th>
                 <th class="text-center">Cheque No</th>
                 <th class="text-center">Cheque Date</th>
-                <th class="text-center">Bundle Sent Date</th>
-                <th class="text-center">Bundle Delivery Date</th>
-                <th class="text-center">Action</th>
+                <th class="text-center">Binding Sent Date</th>
+                <th class="text-center">Binding Delivery Date</th>
+                <th class="text-center" ng-show="user.role == 'ADMIN'">Action</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="periodicDetail in magazineCtrl.periodicDetails">
+                <td>{{ periodicDetail.date | date: "MMM, dd yyyy"}}</td>
                 <td><a href="" ng-href="#!/admin/magazines/{{periodicDetail.title}}">{{ periodicDetail.title}}</a></td>
                 <td>{{ periodicDetail.course}}</td>
                 <td>{{ periodicDetail.periodicity}}</td>
                 <td>{{ periodicDetail.publisher}}</td>
                 <td>{{ periodicDetail.type}}</td>
                 <td>{{ periodicDetail.subscription}}</td>
-                <td>{{ periodicDetail.subscriptionDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ periodicDetail.subscriptionDate | date: "MMM, dd yyyy"}}</td>
                 <td>{{ periodicDetail.subscriptionAmount}}</td>
                 <td>{{ periodicDetail.subscriptionDuration}}</td>
                 <td>{{ periodicDetail.from | date: "MMM, yyyy"}}</td>
@@ -53,16 +55,16 @@
                 <td>{{ periodicDetail.volume}}</td>
                 <td>{{ periodicDetail.source}}</td>
                 <td>{{ periodicDetail.orderNo}}</td>
-                <td>{{ periodicDetail.orderDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ periodicDetail.orderDate | date: "MMM, dd yyyy"}}</td>
                 <td>{{ periodicDetail.billNo}}</td>
-                <td>{{ periodicDetail.billDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ periodicDetail.billDate | date: "MMM, dd yyyy"}}</td>
                 <td>{{ periodicDetail.amount}}</td>
                 <td>{{ periodicDetail.paidBy}}</td>
                 <td>{{ periodicDetail.chequeNo}}</td>
-                <td>{{ periodicDetail.chequeDate | date: "EEE MMM, dd yyyy"}}</td>
-                <td>{{ periodicDetail.bundleSentDate | date: "EEE MMM, dd yyyy"}}</td>
-                <td>{{ periodicDetail.bundleDeliveryDate | date: "EEE MMM, dd yyyy"}}</td>
-                <td class="text-center">
+                <td>{{ periodicDetail.chequeDate | date: "MMM, dd yyyy"}}</td>
+                <td>{{ periodicDetail.bundleSentDate | date: "MMM, dd yyyy"}}</td>
+                <td>{{ periodicDetail.bundleDeliveryDate | date: "MMM, dd yyyy"}}</td>
+                <td class="text-center" ng-show="user.role == 'ADMIN'">
                     <a href="" ng-click="magazineCtrl.getPeriodicDetail(periodicDetail.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
                     <a href="" ng-click="magazineCtrl.deletePeriodicDetailModal(periodicDetail.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
                 </td>

@@ -24,6 +24,7 @@ var myApp = angular.module("myApp", [
     "RequestModule",
     "MagazineModule",
     "NewspaperModule",
-    "ConfigurationModule"
+    "ConfigurationModule",
+    "CommitteeMemberModule",
 ]);
 

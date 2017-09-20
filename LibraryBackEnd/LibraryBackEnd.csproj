@@ -265,6 +265,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\BookController.cs" />
+    <Compile Include="Controllers\CommitteeMemberController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -297,6 +298,7 @@
     <Compile Include="Core\BindingModels\SearchStudentBindingModel.cs" />
     <Compile Include="Core\IRepositories\IAuthorRepository.cs" />
     <Compile Include="Core\IRepositories\IBookRepository.cs" />
+    <Compile Include="Core\IRepositories\ICommitteeMemberRepository.cs" />
     <Compile Include="Core\IRepositories\ISiteConfigurationRepository.cs" />
     <Compile Include="Core\IRepositories\ICourseRepository.cs" />
     <Compile Include="Core\IRepositories\IIssueBookRepository.cs" />
@@ -316,6 +318,7 @@
     <Compile Include="Core\IRepositories\ISubjectRepository.cs" />
     <Compile Include="Core\Models\Author.cs" />
     <Compile Include="Core\Models\Book.cs" />
+    <Compile Include="Core\Models\CommitteeMember.cs" />
     <Compile Include="Core\Models\SiteConfiguration.cs" />
     <Compile Include="Core\Models\Course.cs" />
     <Compile Include="Core\Models\IssueBook.cs" />
@@ -335,6 +338,7 @@
     <Compile Include="Core\Models\Subject.cs" />
     <Compile Include="Core\Services\Class\AuthorService.cs" />
     <Compile Include="Core\Services\Class\BookService.cs" />
+    <Compile Include="Core\Services\Class\CommitteeMemberService.cs" />
     <Compile Include="Core\Services\Class\CourseService.cs" />
     <Compile Include="Core\Services\Class\EntityService.cs" />
     <Compile Include="Core\Services\Class\IssueBookService.cs" />
@@ -355,6 +359,7 @@
     <Compile Include="Core\Services\Class\SubjectService.cs" />
     <Compile Include="Core\Services\Interface\IAuthorService.cs" />
     <Compile Include="Core\Services\Interface\IBookService.cs" />
+    <Compile Include="Core\Services\Interface\ICommitteeMemberService.cs" />
     <Compile Include="Core\Services\Interface\ICourseService.cs" />
     <Compile Include="Core\Services\Interface\IIssueBookService.cs" />
     <Compile Include="Core\Services\Interface\IIssueMagazineService.cs" />
@@ -592,6 +597,18 @@
     <Compile Include="Persistence\Migrations\201709182217525_modifyRequestModule1.Designer.cs">
       <DependentUpon>201709182217525_modifyRequestModule1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709200626479_modifyPeriodicMagazine.cs" />
+    <Compile Include="Persistence\Migrations\201709200626479_modifyPeriodicMagazine.Designer.cs">
+      <DependentUpon>201709200626479_modifyPeriodicMagazine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709200700543_modifyPeriodicMagazineOrderDate.cs" />
+    <Compile Include="Persistence\Migrations\201709200700543_modifyPeriodicMagazineOrderDate.Designer.cs">
+      <DependentUpon>201709200700543_modifyPeriodicMagazineOrderDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201709201208442_addCommitteeMemberModule.cs" />
+    <Compile Include="Persistence\Migrations\201709201208442_addCommitteeMemberModule.Designer.cs">
+      <DependentUpon>201709201208442_addCommitteeMemberModule.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -604,6 +621,7 @@
     <Compile Include="Core\Models\Publication.cs" />
     <Compile Include="Persistence\Repositories\AuthorRepository.cs" />
     <Compile Include="Persistence\Repositories\BookRepository.cs" />
+    <Compile Include="Persistence\Repositories\CommitteeMemberRepository.cs" />
     <Compile Include="Persistence\Repositories\CourseRepository.cs" />
     <Compile Include="Persistence\Repositories\GenericRepository.cs" />
     <Compile Include="Core\IRepositories\IPublicationRepository.cs" />
@@ -663,6 +681,12 @@
     <Content Include="app\components\Books\books.html" />
     <Content Include="app\components\Books\deleteBook.html" />
     <Content Include="app\components\Books\editBookForm.html" />
+    <Content Include="app\components\Committee\committeeMemberController.js" />
+    <Content Include="app\components\Committee\committeeMemberFactory.js" />
+    <Content Include="app\components\Committee\committeeMemberForm.html" />
+    <Content Include="app\components\Committee\committeeMemberModalController.js" />
+    <Content Include="app\components\Committee\committeeMembers.html" />
+    <Content Include="app\components\Committee\deleteCommitteeMember.html" />
     <Content Include="app\components\Configuration\configuration.html" />
     <Content Include="app\components\Configuration\configurationController.js" />
     <Content Include="app\components\Configuration\configurationFactory.js" />
@@ -746,6 +770,12 @@
     <Content Include="app\components\Statistics\booksByCourse.html" />
     <Content Include="app\components\Statistics\booksBySubjects.html" />
     <Content Include="app\components\Statistics\booksBought.html" />
+    <Content Include="app\components\Statistics\booksByTypes.html" />
+    <Content Include="app\components\Statistics\magazineByCourse.html" />
+    <Content Include="app\components\Statistics\magazineByPeriodicity.html" />
+    <Content Include="app\components\Statistics\magazineBySubscription.html" />
+    <Content Include="app\components\Statistics\magazineByType.html" />
+    <Content Include="app\components\Statistics\magazineTitles.html" />
     <Content Include="app\components\Statistics\statisticsController.js" />
     <Content Include="app\components\Statistics\statistics.html" />
     <Content Include="app\components\Statistics\statisticsFactory.js" />
@@ -758,6 +788,7 @@
     <Content Include="app\components\Subjects\subjectForm.html" />
     <Content Include="app\components\Subjects\subjectModalController.js" />
     <Content Include="app\components\Subjects\subjects.html" />
+    <Content Include="app\components\User\approveUser.html" />
     <Content Include="app\components\User\deleteUser.html" />
     <Content Include="app\components\User\editForm.html" />
     <Content Include="app\components\User\editStudent.html" />
@@ -765,6 +796,7 @@
     <Content Include="app\components\User\home.html" />
     <Content Include="app\components\User\librarians.html" />
     <Content Include="app\components\User\moreDetails.html" />
+    <Content Include="app\components\User\rejectUser.html" />
     <Content Include="app\components\User\settings.html" />
     <Content Include="app\components\User\students.html" />
     <Content Include="app\components\User\user.html" />
@@ -1010,6 +1042,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709182217525_modifyRequestModule1.resx">
       <DependentUpon>201709182217525_modifyRequestModule1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709200626479_modifyPeriodicMagazine.resx">
+      <DependentUpon>201709200626479_modifyPeriodicMagazine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709200700543_modifyPeriodicMagazineOrderDate.resx">
+      <DependentUpon>201709200700543_modifyPeriodicMagazineOrderDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709201208442_addCommitteeMemberModule.resx">
+      <DependentUpon>201709201208442_addCommitteeMemberModule.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

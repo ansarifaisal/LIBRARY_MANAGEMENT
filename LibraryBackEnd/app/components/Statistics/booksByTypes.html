@@ -1,0 +1,47 @@
+﻿<div ng-init="statisticsCtrl.loadBookDataByTypes()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li><a href="" ng-href="#!/admin/statistics">Statistics</a></li>
+        <li class="active">Books by Type - {{statisticsCtrl.type}}</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Books by Type - {{statisticsCtrl.type}}</h3>
+    </div>
+
+    <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Date</th>
+                <th class="text-center">Accession Number</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Pages</th>
+                <th class="text-center">Author(s)</th>
+                <th class="text-center">Publisher</th>
+                <th class="text-center" ng-hide="statisticsCtrl.type == 'Reference' || statisticsCtrl.type == 'Drama'">Course</th>
+                <th class="text-center" ng-hide="statisticsCtrl.type == 'Reference' || statisticsCtrl.type == 'Drama'">Semester</th>
+                <th class="text-center" ng-hide="statisticsCtrl.type == 'Reference' || statisticsCtrl.type == 'Drama'">Subject</th>
+                <th class="text-center">Type</th>
+                <th class="text-center">Edition</th>
+                <th class="text-center">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="book in statisticsCtrl.books">
+                <td>{{ book.date | date: "MMM, dd yyyy"}}</td>
+                <td>{{ book.accessionNumber }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.pages }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.publisher }}</td>
+                <td ng-hide="statisticsCtrl.type == 'Reference' || statisticsCtrl.type == 'Drama'">{{ book.course }}</td>
+                <td ng-hide="statisticsCtrl.type == 'Reference' || statisticsCtrl.type == 'Drama'">{{ book.semester }}</td>
+                <td ng-hide="statisticsCtrl.type == 'Reference' || statisticsCtrl.type == 'Drama'">{{ book.subject }}</td>
+                <td>{{ book.typeOfBook }}</td>
+                <td>{{ book.edition }}</td>
+                <td>{{ book.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

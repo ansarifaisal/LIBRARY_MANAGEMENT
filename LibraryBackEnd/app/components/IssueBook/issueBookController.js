@@ -221,9 +221,8 @@
 
         me.getIssuedDataByRollNumber = function () {
             var user = $rootScope.user;
-            if (user.role === 'ADMIN' || user.role === 'LIBARIAN')
+            if (user.role === 'ADMIN' || user.role === 'LIBRARIAN')
                 return;
-
             $rootScope.isBusy = true;
             me.dtOptions = AppService.dataTableWithOutFunction();
 
