@@ -128,9 +128,9 @@
                 </div>
             </div>
             <div class="form-group" ng-class="{'has-error has-feedback': createEdit.subject.$invalid && createEdit.subject.$touched
-         || createEdit.subject.$invalid && createEdit.$submitted,
-         'has-success has-feedback': createEdit.subject.$valid || createEdit.subject.$valid
-         && createEdit.$submitted}">
+                             || createEdit.subject.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.subject.$valid || createEdit.subject.$valid
+                             && createEdit.$submitted}">
                 <label for="subject">Subject</label>
                 <select class="form-control" name="subject"
                         ng-model="requestModalCtrl.request.subject"
@@ -144,7 +144,7 @@
                 </div>
             </div>
 
-            <input type="submit" ng-disabled="createEdit.$invalid" class="btn btn-primary" ng-disabled="createEdit.$invalid" value="{{requestModalCtrl.btnText}}" ng-click="requestModalCtrl.ok()" />
+            <input type="submit" ng-disabled="createEdit.$invalid" class="btn btn-primary" value="{{requestModalCtrl.btnText}}" ng-click="requestModalCtrl.ok()" />
             <button type="button" class="btn btn-default" ng-click="requestModalCtrl.cancel()">Close</button>
 
         </form>

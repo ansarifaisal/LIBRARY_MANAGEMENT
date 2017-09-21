@@ -103,10 +103,7 @@
                     me.issueBook.fullName = me.student.fullName;
                     me.issueBook.course = me.student.course;
                     me.issueBook.email = me.student.email;
-                    if (me.book.course !== me.student.course) {
-                        me.isError = true;
-                        return toastr.error(me.student.fullName + " is not from " + me.book.course);
-                    } else if (me.student.issueCount >= $rootScope.configuration.noOfBookIssue) {
+                    if (me.student.issueCount >= $rootScope.configuration.noOfBookIssue) {
                         me.isError = true;
                         return toastr.error(me.student.fullName + " already took " + $rootScope.configuration.noOfBookIssue + " books.");
                     } else if (me.student.status !== "APPROVED") {

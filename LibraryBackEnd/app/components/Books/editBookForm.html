@@ -129,7 +129,7 @@
                         <select class="form-control" name="publisher"
                                 ng-model="bookCtrl.bookForm.book.publisher"
                                 ng-options="publisher.name as publisher.name for publisher in  bookCtrl.bookForm.publishers"
-                                ng-change="bookCtrl.getCourses() || bookCtrl.trackChanges()"
+                                ng-change="bookCtrl.getCourses(); bookCtrl.trackChanges()"
                                 required>
                             <option value="" disabled>Select Publisher</option>
                         </select>
@@ -268,6 +268,35 @@
 
                     </div>
                     <!-- Pages Field Ends Here -->
+                    <!-- ISBN Number Field Starts Here -->
+                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.isbn.$invalid && createEdit.isbn.$touched
+                             || createEdit.isbn.$invalid && createEdit.$submitted,
+                             'has-success has-feedback': createEdit.isbn.$valid || createEdit.isbn.$valid
+                             && createEdit.$submitted}">
+
+                        <label for="isbn">ISBN Number</label>
+                        <input type="text" class="form-control"
+                               name="isbn"
+                               placeholder="Enter ISBN Number"
+                               ng-model="bookCtrl.bookForm.book.isbn"
+                               ng-minlength="5"
+                               ng-maxlength="16"
+                               required />
+
+                        <span class="glyphicon form-control-feedback"
+                              ng-class="{'glyphicon-ok': createEdit.isbn.$valid || createEdit.isbn.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.isbn.$invalid && createEdit.isbn.$touched
+                           || createEdit.isbn.$invalid && createEdit.$submitted}">
+                        </span>
+
+                        <div ng-show="createEdit.isbn.$invalid && createEdit.isbn.$touched || createEdit.$submitted">
+                            <div ng-show="createEdit.isbn.$error.required" class="text-danger small">Please, provide ISBN Number.</div>
+                            <div ng-show="createEdit.isbn.$error.minlength" class="text-danger small">This field must have atleast 5 charchters.</div>
+                            <div ng-show="createEdit.isbn.$error.maxlength" class="text-danger small">This field can have maximum 16 charachters.</div>
+                        </div>
+
+                    </div>
+                    <!-- ISBN Number Field Ends Here -->
                     <!-- Course Field Starts Here -->
                     <div class="form-group" ng-class="{'has-error has-feedback': createEdit.course.$invalid && createEdit.course.$touched
                              || createEdit.course.$invalid && createEdit.$submitted,
@@ -277,7 +306,7 @@
                         <select class="form-control" name="course"
                                 ng-model="bookCtrl.bookForm.book.course"
                                 ng-options="course.name as course.name for course in  bookCtrl.bookForm.courses"
-                                ng-change="bookCtrl.getSemesters(bookCtrl.bookForm.courses, bookCtrl.bookForm.book.course) || bookCtrl.trackChanges()"
+                                ng-change="bookCtrl.getSemesters(bookCtrl.bookForm.courses, bookCtrl.bookForm.book.course); bookCtrl.trackChanges()"
                                 ng-disabled="!bookCtrl.bookForm.book.publisher"
                                 required>
                             <option value="" disabled>Select Course</option>
@@ -298,7 +327,7 @@
                         <select class="form-control" name="semester"
                                 ng-model="bookCtrl.bookForm.book.semester"
                                 ng-options="semester as semester for semester in  bookCtrl.bookForm.semesters"
-                                ng-change="bookCtrl.getSubjects(bookCtrl.bookForm.book.course, bookCtrl.bookForm.book.semester) || bookCtrl.trackChanges()"
+                                ng-change="bookCtrl.getSubjects(bookCtrl.bookForm.book.course, bookCtrl.bookForm.book.semester); bookCtrl.trackChanges()"
                                 ng-disabled="!bookCtrl.bookForm.book.course"
                                 required>
                             <option value="" disabled>Select Semester</option>
@@ -319,7 +348,7 @@
                         <select class="form-control" name="subject"
                                 ng-model="bookCtrl.bookForm.book.subject"
                                 ng-options="subject.name as subject.name for subject in  bookCtrl.bookForm.subjects"
-                                ng-change="bookCtrl.getTypeOfBook() || bookCtrl.trackChanges()"
+                                ng-change="bookCtrl.getTypeOfBook(); bookCtrl.trackChanges()"
                                 ng-disabled="!bookCtrl.bookForm.book.semester"
                                 required>
                             <option value="" disabled>Select Subject</option>
@@ -361,7 +390,7 @@
                         <select class="form-control" name="gotBy"
                                 ng-model="bookCtrl.bookForm.book.get"
                                 ng-options="gotBy as gotBy for gotBy in  bookCtrl.bookForm.gotBy"
-                                ng-change="bookCtrl.isBaught(bookCtrl.bookForm.book.get) || bookCtrl.trackChanges()"
+                                ng-change="bookCtrl.isBaught(bookCtrl.bookForm.book.get); bookCtrl.trackChanges()"
                                 ng-disabled="!bookCtrl.bookForm.book.typeOfBook"
                                 required>
                             <option value="" disabled>Select Option</option>

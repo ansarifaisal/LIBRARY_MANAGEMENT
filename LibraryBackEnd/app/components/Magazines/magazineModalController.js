@@ -58,6 +58,12 @@
 
         me.duration = "";
 
+        me.change = false;
+
+        me.trackChanges = function () {
+            me.change = true;
+        }
+
         $rootScope.isBusy = false;
 
         me.ok = function () {
@@ -306,6 +312,8 @@
         }
 
         me.checkExistingPeriodicDetails = function (title) {
+            if (!title || !me.change)
+                return;
             me.exists = false;
             MagazineFactory.checkExistingPeriodicDetail(title).then(function (periodicDetail) {
                 if (periodicDetail)
@@ -391,7 +399,7 @@
 
 
         me.checkExistingMagazine = function (number) {
-            if (!number)
+            if (!number || !me.change)
                 return;
             me.exists = false;
             MagazineFactory.getMagazineByNumber(number).then(function (magazine) {

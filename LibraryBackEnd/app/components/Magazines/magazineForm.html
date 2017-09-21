@@ -21,6 +21,7 @@
                        datepicker-options="magazineModalCtrl.monthPickerOptions"
                        close-text="Close"
                        is-open="magazineModalCtrl.fromMonthPicker.opened"
+                       ng-change="magazineModalCtrl.trackChanges()"
                        required />
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.fromMonthPickers()"><i class="fa fa-calendar"></i></button>
@@ -43,6 +44,7 @@
                    ng-pattern="/^[0-9]/"
                    ng-maxlength="4"
                    ng-model="magazineModalCtrl.magazine.volume"
+                   ng-change="magazineModalCtrl.trackChanges()"
                    required />
 
             <span class="glyphicon form-control-feedback"
@@ -59,6 +61,7 @@
 
         </div>
 
+
         <div class="form-group" ng-class="{'has-error has-feedback': createEdit.number.$invalid && createEdit.number.$touched
          || createEdit.number.$invalid && createEdit.$submitted || magazineModalCtrl.exists && createEdit.number.$touched,
          'has-success has-feedback': createEdit.number.$valid || createEdit.number.$valid
@@ -72,6 +75,7 @@
                    ng-maxlength="6"
                    ng-model="magazineModalCtrl.magazine.number"
                    ng-blur="magazineModalCtrl.checkExistingMagazine(magazineModalCtrl.magazine.number)"
+                   ng-change="magazineModalCtrl.trackChanges()"
                    required />
 
             <span class="glyphicon form-control-feedback"
@@ -85,6 +89,36 @@
                 <div ng-show="createEdit.number.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
                 <div ng-show="createEdit.number.$error.maxlength" class="text-danger small">This field can contain 6 characters only.</div>
                 <div ng-show="magazineModalCtrl.exists" class="text-danger small">Magazine already exists.</div>
+            </div>
+
+        </div>
+
+
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.issn.$invalid && createEdit.issn.$touched
+         || createEdit.issn.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.issn.$valid || createEdit.issn.$valid
+         && createEdit.$submitted}">
+            <label for="issn">ISSN Number</label>
+            <input type="text"
+                   name="issn"
+                   class="form-control"
+                   placeholder="Enter ISSN Number"
+                   ng-minlength="2"
+                   ng-maxlength="16"
+                   ng-model="magazineModalCtrl.magazine.issn"
+                   ng-change="magazineModalCtrl.trackChanges()"
+                   required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.issn.$valid || createEdit.issn.$valid && createEdit.$submitted,
+                          'glyphicon-remove': createEdit.issn.$invalid && createEdit.issn.$touched
+                           || createEdit.issn.$invalid && createEdit.$submitted}">
+            </span>
+
+            <div ng-show="createEdit.issn.$invalid && createEdit.issn.$touched || createEdit.$submitted">
+                <div ng-show="createEdit.issn.$error.required" class="text-danger small">Please, provide ISSN Number.</div>
+                <div ng-show="createEdit.issn.$error.minlength" class="text-danger small">This field must have atleast 2 charachters.</div>
+                <div ng-show="createEdit.issn.$error.maxlength" class="text-danger small">This field can contain maximum 16 characters.</div>
             </div>
 
         </div>
@@ -104,6 +138,7 @@
                        datepicker-options="magazineModalCtrl.datePickerOptions"
                        close-text="Close"
                        is-open="magazineModalCtrl.orderDatePicker.opened"
+                       ng-change="magazineModalCtrl.trackChanges()"
                        required />
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.orderDatePickers()"><i class="fa fa-calendar"></i></button>
@@ -122,6 +157,7 @@
             <select class="form-control" name="status"
                     ng-model="magazineModalCtrl.magazine.status"
                     ng-options="status as status for status in  magazineModalCtrl.status"
+                    ng-change="magazineModalCtrl.trackChanges()"
                     required>
                 <option value="" disabled>Select Status</option>
             </select>
@@ -132,7 +168,7 @@
         </div>
 
 
-        <input type="submit" ng-disabled="createEdit.$invalid" value="{{magazineModalCtrl.btnText}}" class="btn btn-primary" ng-click="magazineModalCtrl.ok()" />
+        <input type="submit" ng-disabled="createEdit.$invalid || magazineModalCtrl.exists || !magazineModalCtrl.change" value="{{magazineModalCtrl.btnText}}" class="btn btn-primary" ng-click="magazineModalCtrl.ok()" />
         <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.cancel()">Close</button>
 
     </form>

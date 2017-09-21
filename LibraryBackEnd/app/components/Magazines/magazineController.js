@@ -28,6 +28,8 @@
             btnText: ''
         }
 
+        me.change = false;
+
         me.periodicDetail = {
             title: '',
             subscription: '',
@@ -60,6 +62,7 @@
             periodicTitle: '',
             month: '',
             volume: '',
+            issn: undefined,
             number: '',
             dateOfRecieved: '',
             recievedBy: ''
@@ -106,6 +109,7 @@
         me.publishers = [];
 
         me.issuedMagazines = [];
+
 
         me.getPublishers = function () {
             $rootScope.isBusy = true;

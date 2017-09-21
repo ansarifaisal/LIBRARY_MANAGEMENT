@@ -16,7 +16,8 @@
                        class="form-control"
                        placeholder="Enter Title"
                        ng-model="magazineModalCtrl.periodicDetail.title"
-                       ng-change="magazineModalCtrl.checkExistingPeriodicDetails(magazineModalCtrl.periodicDetail.title)"
+                       ng-blur="magazineModalCtrl.checkExistingPeriodicDetails(magazineModalCtrl.periodicDetail.title)"
+                       ng-change="magazineModalCtrl.trackChanges()"
                        required />
 
                 <span class="glyphicon form-control-feedback"
@@ -39,6 +40,7 @@
                 <select class="form-control" name="periodicity"
                         ng-model="magazineModalCtrl.periodicDetail.periodicity"
                         ng-options="periodicity as periodicity for periodicity in  magazineModalCtrl.periodicity"
+                        ng-change="magazineModalCtrl.trackChanges()"
                         required>
                     <option value="" disabled>Select Periodicity</option>
                 </select>
@@ -57,6 +59,7 @@
                 <select class="form-control" name="publisher"
                         ng-model="magazineModalCtrl.periodicDetail.publisher"
                         ng-options="publisher.title as publisher.title for publisher in  magazineModalCtrl.publishers"
+                        ng-change="magazineModalCtrl.trackChanges()"
                         required>
                     <option value="" disabled>Select Publisher</option>
                 </select>
@@ -69,7 +72,8 @@
                 <label for="course">Courses</label>
                 <select class="form-control" name="course"
                         ng-model="magazineModalCtrl.periodicDetail.course"
-                        ng-options="course.name as course.name for course in  magazineModalCtrl.courses">
+                        ng-options="course.name as course.name for course in  magazineModalCtrl.courses"
+                        ng-change="magazineModalCtrl.trackChanges()">
                     <option value="">Select Courses</option>
                 </select>
             </div>
@@ -83,6 +87,7 @@
                 <select class="form-control" name="type"
                         ng-model="magazineModalCtrl.periodicDetail.type"
                         ng-options="type as type for type in  magazineModalCtrl.types"
+                        ng-change="magazineModalCtrl.trackChanges()"
                         required>
                     <option value="" disabled>Select Type</option>
                 </select>
@@ -101,6 +106,7 @@
                        class="form-control"
                        placeholder="Enter Subscription"
                        ng-model="magazineModalCtrl.periodicDetail.subscription"
+                       ng-change="magazineModalCtrl.trackChanges()"
                        required />
 
                 <span class="glyphicon form-control-feedback"
@@ -129,6 +135,7 @@
                            datepicker-options="magazineModalCtrl.datePickerOptions"
                            close-text="Close"
                            is-open="magazineModalCtrl.subscriptionDatePicker.opened"
+                           ng-change="magazineModalCtrl.trackChanges()"
                            required />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.subscriptionDatePickers()"><i class="fa fa-calendar"></i></button>
@@ -149,6 +156,7 @@
                        class="form-control "
                        placeholder="Enter Subscription Duration For e.g 4 Months"
                        ng-model="magazineModalCtrl.periodicDetail.subscriptionDuration"
+                       ng-change="magazineModalCtrl.trackChanges()"
                        required />
                 <span class="glyphicon form-control-feedback"
                       ng-class="{'glyphicon-ok': createEdit.subscriptionDuration.$valid || createEdit.subscriptionDuration.$valid && createEdit.$submitted,
@@ -173,6 +181,7 @@
                        class="form-control"
                        placeholder="Enter Subscription Amount (Per Annum)"
                        ng-model="magazineModalCtrl.periodicDetail.subscriptionAmount"
+                       ng-change="magazineModalCtrl.trackChanges()"
                        required />
 
                 <span class="glyphicon form-control-feedback"
@@ -201,6 +210,7 @@
                            datepicker-options="magazineModalCtrl.monthPickerOptions"
                            close-text="Close"
                            is-open="magazineModalCtrl.fromMonthPicker.opened"
+                           ng-change="magazineModalCtrl.trackChanges()"
                            required />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.fromMonthPickers()"><i class="fa fa-calendar"></i></button>
@@ -225,6 +235,7 @@
                            datepicker-options="magazineModalCtrl.futureMonthPickerOptions"
                            close-text="Close"
                            is-open="magazineModalCtrl.toMonthPicker.opened"
+                           ng-change="magazineModalCtrl.trackChanges()"
                            required />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.toMonthPickers()"><i class="fa fa-calendar"></i></button>
@@ -248,6 +259,7 @@
                        ng-pattern="/^[0-9]/"
                        ng-maxlength="3"
                        ng-model="magazineModalCtrl.periodicDetail.volume"
+                       ng-change="magazineModalCtrl.trackChanges()"
                        required />
 
                 <span class="glyphicon form-control-feedback"
@@ -273,6 +285,7 @@
                        class="form-control"
                        placeholder="Enter Source"
                        ng-model="magazineModalCtrl.periodicDetail.source"
+                       ng-change="magazineModalCtrl.trackChanges()"
                        required />
                 <span class="glyphicon form-control-feedback"
                       ng-class="{'glyphicon-ok': createEdit.source.$valid || createEdit.source.$valid && createEdit.$submitted,
@@ -291,6 +304,7 @@
                        name="orderNo"
                        class="form-control"
                        placeholder="Enter Order Number"
+                       ng-change="magazineModalCtrl.trackChanges()"
                        ng-model="magazineModalCtrl.periodicDetail.orderNo" />
             </div>
 
@@ -305,6 +319,7 @@
                            uib-datepicker-popup="EEE MMM, dd yyyy"
                            datepicker-options="magazineModalCtrl.datePickerOptions"
                            close-text="Close"
+                           ng-change="magazineModalCtrl.trackChanges()"
                            is-open="magazineModalCtrl.orderDatePicker.opened" />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.orderDatePickers()"><i class="fa fa-calendar"></i></button>
@@ -319,6 +334,7 @@
                        name="billNo"
                        class="form-control"
                        placeholder="Enter Bill Number"
+                       ng-change="magazineModalCtrl.trackChanges()"
                        ng-model="magazineModalCtrl.periodicDetail.billNo" />
 
             </div>
@@ -336,6 +352,7 @@
                            uib-datepicker-popup="EEE MMM, dd yyyy"
                            datepicker-options="magazineModalCtrl.datePickerOptions"
                            close-text="Close"
+                           ng-change="magazineModalCtrl.trackChanges()"
                            is-open="magazineModalCtrl.billDatePicker.opened" />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.billDatePickers()"><i class="fa fa-calendar"></i></button>
@@ -355,6 +372,7 @@
                        class="form-control"
                        placeholder="Enter Bill Amount"
                        ng-model="magazineModalCtrl.periodicDetail.amount"
+                       ng-change="magazineModalCtrl.trackChanges()"
                        ng-pattern="/^[0-9]/"
                        ng-maxlength="5" />
 
@@ -380,7 +398,7 @@
                 <select class="form-control" name="paidBy"
                         ng-model="magazineModalCtrl.periodicDetail.paidBy"
                         ng-options="paidBy as paidBy for paidBy in  magazineModalCtrl.paidBy"
-                        ng-change="magazineModalCtrl.isPaidByCheque(magazineModalCtrl.periodicDetail.paidBy)"
+                        ng-change="magazineModalCtrl.isPaidByCheque(magazineModalCtrl.periodicDetail.paidBy); magazineModalCtrl.trackChanges()"
                         required>
                     <option value="" disabled>Select Paid By</option>
                 </select>
@@ -396,6 +414,7 @@
                            name="chequeNo"
                            class="form-control"
                            placeholder="Enter Cheque Number"
+                           ng-change="magazineModalCtrl.trackChanges()"
                            ng-model="magazineModalCtrl.periodicDetail.chequeNo" />
                 </div>
 
@@ -410,7 +429,8 @@
                                uib-datepicker-popup="EEE MMM, dd yyyy"
                                datepicker-options="magazineModalCtrl.futureDatePickerOptions"
                                close-text="Close"
-                               is-open="magazineModalCtrl.chequeDatePicker.opened" />
+                               is-open="magazineModalCtrl.chequeDatePicker.opened"
+                               ng-change="magazineModalCtrl.trackChanges()" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.chequeDatePickers()"><i class="fa fa-calendar"></i></button>
                         </span>
@@ -430,7 +450,8 @@
                            uib-datepicker-popup="EEE MMM, dd yyyy"
                            datepicker-options="magazineModalCtrl.futureDatePickerOptions"
                            close-text="Close"
-                           is-open="magazineModalCtrl.bundleSentDatePicker.opened" />
+                           is-open="magazineModalCtrl.bundleSentDatePicker.opened"
+                           ng-change="magazineModalCtrl.trackChanges()" />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.bundleSentDatePickers()"><i class="fa fa-calendar"></i></button>
                     </span>
@@ -448,7 +469,8 @@
                            uib-datepicker-popup="EEE MMM, dd yyyy"
                            datepicker-options="magazineModalCtrl.futureDatePickerOptions"
                            close-text="Close"
-                           is-open="magazineModalCtrl.bundleDeliveryDatePicker.opened" />
+                           is-open="magazineModalCtrl.bundleDeliveryDatePicker.opened"
+                           ng-change="magazineModalCtrl.trackChanges()" />
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.bundleDeliveryDatePickers()"><i class="fa fa-calendar"></i></button>
                     </span>

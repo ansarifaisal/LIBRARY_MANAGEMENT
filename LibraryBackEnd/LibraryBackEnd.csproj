@@ -609,6 +609,10 @@
     <Compile Include="Persistence\Migrations\201709201208442_addCommitteeMemberModule.Designer.cs">
       <DependentUpon>201709201208442_addCommitteeMemberModule.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201709211612486_addISBNAndISSN.cs" />
+    <Compile Include="Persistence\Migrations\201709211612486_addISBNAndISSN.Designer.cs">
+      <DependentUpon>201709211612486_addISBNAndISSN.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -1051,6 +1055,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709201208442_addCommitteeMemberModule.resx">
       <DependentUpon>201709201208442_addCommitteeMemberModule.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201709211612486_addISBNAndISSN.resx">
+      <DependentUpon>201709211612486_addISBNAndISSN.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

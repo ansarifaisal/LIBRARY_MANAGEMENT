@@ -13,7 +13,6 @@ RequestModule.factory("RequestFactory", [
             deleteRequest: deleteRequest,
             getByRollNo: getByRollNo,
             addOrEdit: addOrEdit,
-            getTypes: getTypes,
             updateStatus: updateStatus
         }
         return requestFactory;
@@ -99,12 +98,6 @@ RequestModule.factory("RequestFactory", [
             return toDo;
         }
 
-        function getTypes() {
-            var types = ["General", "Reference", "Digest", "Novel", "Drama"];
-            console.log(types);
-            return types;
-        }
-        
         function updateStatus(request) {
             var deferred = $q.defer();
             $http.post("/api/request/updateStatus", request)

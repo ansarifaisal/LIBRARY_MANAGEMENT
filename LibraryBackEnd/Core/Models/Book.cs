@@ -36,6 +36,9 @@ namespace LibraryBackEnd.Core.Models
         public string Course { get; set; }
 
         [Required]
+        public string Isbn { get; set; }
+
+        [Required]
         public int Semester { get; set; }
 
         [Required]

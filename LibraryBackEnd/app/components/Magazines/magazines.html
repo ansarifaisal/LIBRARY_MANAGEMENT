@@ -17,6 +17,7 @@
                 <th class="text-center">Month</th>
                 <th class="text-center">Volume</th>
                 <th class="text-center">Number</th>
+                <th class="text-center">ISSN</th>
                 <th class="text-center">Received Date</th>
                 <th class="text-center">Received By</th>
                 <th class="text-center">Status</th>
@@ -30,6 +31,7 @@
                 <td>{{ magazine.month | date: 'MMM, yyyy'}}</td>
                 <td>{{ magazine.volume}}</td>
                 <td>{{ magazine.number}}</td>
+                <td>{{ magazine.issn}}</td>
                 <td>{{ magazine.dateOfRecieved | date: 'EEE MMM, dd yyyy'}}</td>
                 <td>{{ magazine.recievedBy}}</td>
                 <td>{{ magazine.status}}</td>

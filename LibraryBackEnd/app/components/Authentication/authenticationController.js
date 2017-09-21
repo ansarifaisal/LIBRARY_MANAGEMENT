@@ -104,6 +104,8 @@ AuthenticationModule.controller("AuthenticationController", [
                     AuthenticationFactory.saveToken(me.data);
                     //storing token into global scope
                     $rootScope.token = AuthenticationFactory.loadTokenFromSession();
+                    //strong configuration into global scope
+                    $rootScope.configuration = AuthenticationFactory.loadConfiguration();
                     //if the credentials is wrong
                     if (me.data.error === 'invalid_grant')
                         return $scope.errorMessage = me.data.error_description;
@@ -343,7 +345,7 @@ AuthenticationModule.controller("AuthenticationController", [
                 date = new Date(date.setDate(date.getDate(), date.getMonth(), date.getYear()));
                 for (var i = 0; i < issuedBooks.length; i++) {
                     issuedBooks[i].returnDate = new Date(issuedBooks[i].returnDate);
-                 
+
                     if (issuedBooks[i].returnDate < date) {
                         me.late = true;
                         me.bookTitle = issuedBooks[i].bookTitle;

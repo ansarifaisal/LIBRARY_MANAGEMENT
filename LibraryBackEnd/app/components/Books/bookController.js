@@ -42,6 +42,7 @@
             semesters: undefined,
             subjects: undefined,
             publishers: undefined,
+            isbn: undefined,
             typesOfBook: undefined,
             status: status,
             title: '',
@@ -212,7 +213,12 @@
 
             var type = me.bookForm.book.typeOfBook;
 
-            if (type === "Reference" || type === "Novel" || type === "Drama") {
+            if (type === "Reference") {
+                me.bookForm.book.semester = 0;
+                me.bookForm.book.subject = "General";
+            }
+
+            if (type === "Novel" || type === "Drama") {
                 me.bookForm.book.course = "General";
                 me.bookForm.book.semester = 0;
                 me.bookForm.book.subject = "General";

@@ -36,6 +36,19 @@
             if (!me.request.remark)
                 me.request.remark = "Not Provided!";
 
+            var type = me.request.type;
+
+            if (type === "Reference") {
+                me.request.semester = 0;
+                me.request.subject = "General";
+            }
+
+            if (type === "Novel" || type === "Drama") {
+                me.request.course = "General";
+                me.request.semester = 0;
+                me.request.subject = "General";
+            }
+
             var addOrEdit = RequestFactory.addOrEdit(me.request);
 
             $action = addOrEdit.action;
@@ -63,7 +76,7 @@
         }
 
         me.getTypes = function () {
-            return me.types = RequestFactory.getTypes();
+            return me.types = BookFactory.getTypeOfBook();
         }
 
         me.updateRequestStatus = function (status) {

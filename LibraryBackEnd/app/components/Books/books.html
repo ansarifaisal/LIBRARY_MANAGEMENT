@@ -1,4 +1,5 @@
-﻿<div ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
+﻿
+<div ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
     <div ng-init="bookCtrl.getBooks()">
         <ol class="breadcrumb">
             <li><a href="" ng-href="#!/home">Home</a></li>
@@ -14,17 +15,18 @@
                     <th class="text-center">Accession Number</th>
                     <th class="text-center">Author(s)</th>
                     <th class="text-center">Title</th>
+                    <th class="text-center">Course</th>
+                    <th class="text-center">Semester</th>
+                    <th class="text-center">Subject</th>
+                    <th class="text-center">Type of Book</th>
                     <th class="text-center">Class No</th>
                     <th class="text-center">Publisher</th>
                     <th class="text-center">Place</th>
                     <th class="text-center">Date of Publication</th>
                     <th class="text-center">Edition</th>
+                    <th class="text-center">ISBN</th>
                     <th class="text-center">Source</th>
                     <th class="text-center">Pages</th>
-                    <th class="text-center">Course</th>
-                    <th class="text-center">Semester</th>
-                    <th class="text-center">Subject</th>
-                    <th class="text-center">Type of Book</th>
                     <th class="text-center">Actual Price</th>
                     <th class="text-center">Discount</th>
                     <th class="text-center">Discount Price</th>
@@ -40,17 +42,18 @@
                     <td>{{ book.accessionNumber }}</td>
                     <td>{{ book.author }}</td>
                     <td><a href="" ng-href="#!/user/book/{{book.id}}">{{ book.title }}</a></td>
+                    <td>{{ book.course }}</td>
+                    <td>{{ book.semester }}</td>
+                    <td>{{ book.subject }}</td>
+                    <td>{{ book.typeOfBook }}</td>
                     <td>{{ book.classNo }}</td>
                     <td>{{ book.publisher }}</td>
                     <td>{{ book.placeOfPublication }}</td>
                     <td>{{ book.dateOfPublication | date: "MMM, yyyy"}}</td>
                     <td>{{ book.edition }}</td>
+                    <td>{{ book.isbn }}</td>
                     <td>{{ book.source }}</td>
                     <td>{{ book.pages }}</td>
-                    <td>{{ book.course }}</td>
-                    <td>{{ book.semester }}</td>
-                    <td>{{ book.subject }}</td>
-                    <td>{{ book.typeOfBook }}</td>
                     <td><span class="fa fa-rupee"></span> {{ book.actualPrice }}</td>
                     <td>{{ book.discount }} %</td>
                     <td><span class="fa fa-rupee"></span> {{ book.discountPrice }}</td>
@@ -84,26 +87,26 @@
         <table datatable="ng" dt-options="bookCtrl.dtOptions" dt-column-defs="bookCtrl.dtColumnDefs" class="table-condensed table-hover">
             <thead>
                 <tr>
-                    <th class="text-center">Title</th>
                     <th class="text-center">Author(s)</th>
-                    <th class="text-center">Publisher</th>
+                    <th class="text-center">Title</th>
                     <th class="text-center">Course</th>
                     <th class="text-center">Semester</th>
                     <th class="text-center">Subject</th>
                     <th class="text-center">Type of Book</th>
+                    <th class="text-center">Publisher</th>
                     <th class="text-center">Edition</th>
 
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="book in bookCtrl.books">
-                    <td><a href="" ng-href="#!/user/book/{{book.id}}">{{ book.title }}</a></td>
                     <td>{{ book.author }}</td>
-                    <td>{{ book.publisher }}</td>
+                    <td><a href="" ng-href="#!/user/book/{{book.id}}">{{ book.title }}</a></td>
                     <td>{{ book.course }}</td>
                     <td>{{ book.semester }}</td>
                     <td>{{ book.subject }}</td>
                     <td>{{ book.typeOfBook }}</td>
+                    <td>{{ book.publisher }}</td>
                     <td>{{ book.edition }}</td>
                 </tr>
             </tbody>

@@ -141,7 +141,7 @@ BookModule.factory("BookFactory", [
         }
 
         function getTypeOfBook() {
-            var type = ["General", "Reference", "Digest", "Novel", "Drama"];
+            var type = ["Text", "Reference", "Digest", "Novel", "Drama"];
             return type;
         }
 
