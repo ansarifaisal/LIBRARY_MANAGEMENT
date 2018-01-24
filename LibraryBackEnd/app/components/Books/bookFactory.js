@@ -13,6 +13,7 @@ BookModule.factory("BookFactory", [
         var bookFactory = {
             addBook: addBook,
             getBooks: getBooks,
+            getUserBooks: getUserBooks,
             getBook: getBook,
             editBook: editBook,
             deleteBook: deleteBook,
@@ -31,6 +32,7 @@ BookModule.factory("BookFactory", [
             getAccessionNumbers: getAccessionNumbers,
             getBookByAccessionNumber: getBookByAccessionNumber,
             getByCourse: getByCourse,
+            getBookByTitle: getBookByTitle
         };
 
         return bookFactory;
@@ -48,6 +50,17 @@ BookModule.factory("BookFactory", [
         function getBooks() {
             var deferred = $q.defer();
             $http.get("/api/book/all")
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function getUserBooks() {
+            var deferred = $q.defer();
+            $http.get("/api/book/getBooks")
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (errorResponse) {
@@ -141,7 +154,7 @@ BookModule.factory("BookFactory", [
         }
 
         function getTypeOfBook() {
-            var type = ["Text", "Reference", "Digest", "Novel", "Drama"];
+            var type = ["Text", "Reference", "Digest", "Novel", "Project", "BC", "Drama"];
             return type;
         }
 
@@ -151,7 +164,7 @@ BookModule.factory("BookFactory", [
         }
 
         function gotBy() {
-            var got = ["Baught", "Donated", "Sample"];
+            var got = ["Purchased", "Donated", "Sample"];
             return got;
         }
 
@@ -215,6 +228,16 @@ BookModule.factory("BookFactory", [
         function getBookType(type) {
             var deferred = $q.defer();
             $http.get("/api/book/booksByType?type=" + type).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+        }
+
+        function getBookByTitle(title) {
+            var deferred = $q.defer();
+            $http.get("/api/book/getBookByTitle?title=" + title).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
                 deferred.reject(errorResponse);

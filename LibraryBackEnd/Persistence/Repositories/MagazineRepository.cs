@@ -41,6 +41,11 @@ namespace LibraryBackEnd.Persistence.Repositories
                 .ToList();
         }
 
-
+        public List<Magazine> GetMagazinesById(int periodicId)
+        {
+            return _context.Magazines
+                .Where(m => m.PeriodicId == periodicId)
+                .ToList();
+        }
     }
 }

@@ -264,6 +264,7 @@
     <Compile Include="Configuration\LibraryDbContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
+    <Compile Include="Controllers\BindingMagazineController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\CommitteeMemberController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
@@ -297,6 +298,7 @@
     <Compile Include="Core\BindingModels\SearchBindingModel.cs" />
     <Compile Include="Core\BindingModels\SearchStudentBindingModel.cs" />
     <Compile Include="Core\IRepositories\IAuthorRepository.cs" />
+    <Compile Include="Core\IRepositories\IBindingMagazineRepository.cs" />
     <Compile Include="Core\IRepositories\IBookRepository.cs" />
     <Compile Include="Core\IRepositories\ICommitteeMemberRepository.cs" />
     <Compile Include="Core\IRepositories\ISiteConfigurationRepository.cs" />
@@ -317,6 +319,7 @@
     <Compile Include="Core\IRepositories\IReturnMagazineRepository.cs" />
     <Compile Include="Core\IRepositories\ISubjectRepository.cs" />
     <Compile Include="Core\Models\Author.cs" />
+    <Compile Include="Core\Models\BindingMagazine.cs" />
     <Compile Include="Core\Models\Book.cs" />
     <Compile Include="Core\Models\CommitteeMember.cs" />
     <Compile Include="Core\Models\SiteConfiguration.cs" />
@@ -337,6 +340,7 @@
     <Compile Include="Core\Models\ReturnMagazine.cs" />
     <Compile Include="Core\Models\Subject.cs" />
     <Compile Include="Core\Services\Class\AuthorService.cs" />
+    <Compile Include="Core\Services\Class\BindingMagazineService.cs" />
     <Compile Include="Core\Services\Class\BookService.cs" />
     <Compile Include="Core\Services\Class\CommitteeMemberService.cs" />
     <Compile Include="Core\Services\Class\CourseService.cs" />
@@ -358,6 +362,7 @@
     <Compile Include="Core\Services\Class\SiteConfigurationService.cs" />
     <Compile Include="Core\Services\Class\SubjectService.cs" />
     <Compile Include="Core\Services\Interface\IAuthorService.cs" />
+    <Compile Include="Core\Services\Interface\IBindingMagazineService.cs" />
     <Compile Include="Core\Services\Interface\IBookService.cs" />
     <Compile Include="Core\Services\Interface\ICommitteeMemberService.cs" />
     <Compile Include="Core\Services\Interface\ICourseService.cs" />
@@ -613,6 +618,22 @@
     <Compile Include="Persistence\Migrations\201709211612486_addISBNAndISSN.Designer.cs">
       <DependentUpon>201709211612486_addISBNAndISSN.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201801232208061_addIsBundled.cs" />
+    <Compile Include="Persistence\Migrations\201801232208061_addIsBundled.Designer.cs">
+      <DependentUpon>201801232208061_addIsBundled.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201801241554069_alterIsBundled.cs" />
+    <Compile Include="Persistence\Migrations\201801241554069_alterIsBundled.Designer.cs">
+      <DependentUpon>201801241554069_alterIsBundled.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201801241635442_addPeriodicIdField.cs" />
+    <Compile Include="Persistence\Migrations\201801241635442_addPeriodicIdField.Designer.cs">
+      <DependentUpon>201801241635442_addPeriodicIdField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201801242028449_addBundleMagazine.cs" />
+    <Compile Include="Persistence\Migrations\201801242028449_addBundleMagazine.Designer.cs">
+      <DependentUpon>201801242028449_addBundleMagazine.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -624,6 +645,7 @@
     <Compile Include="Core\IRepositories\IStudentRepository.cs" />
     <Compile Include="Core\Models\Publication.cs" />
     <Compile Include="Persistence\Repositories\AuthorRepository.cs" />
+    <Compile Include="Persistence\Repositories\BindingMagazineRepository.cs" />
     <Compile Include="Persistence\Repositories\BookRepository.cs" />
     <Compile Include="Persistence\Repositories\CommitteeMemberRepository.cs" />
     <Compile Include="Persistence\Repositories\CourseRepository.cs" />
@@ -715,9 +737,12 @@
     <Content Include="app\components\LostOrReplace\lostOrReplaceModalController.js" />
     <Content Include="app\components\LostOrReplace\replaceBook.html" />
     <Content Include="app\components\LostOrReplace\undoReplaceBook.html" />
+    <Content Include="app\components\Magazines\bindingMagazineForm.html" />
+    <Content Include="app\components\Magazines\bindingMagazines.html" />
     <Content Include="app\components\Magazines\confirmReplaceMagazine.html" />
     <Content Include="app\components\Magazines\confirmReturnMagazine.html" />
     <Content Include="app\components\Magazines\confirmUndoReplaceMagazine.html" />
+    <Content Include="app\components\Magazines\deleteBindingMagazines.html" />
     <Content Include="app\components\Magazines\deleteMagazine.html" />
     <Content Include="app\components\Magazines\deletePeriodicDetails.html" />
     <Content Include="app\components\Magazines\issueMagazineForm.html" />
@@ -1058,6 +1083,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201709211612486_addISBNAndISSN.resx">
       <DependentUpon>201709211612486_addISBNAndISSN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801232208061_addIsBundled.resx">
+      <DependentUpon>201801232208061_addIsBundled.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801241554069_alterIsBundled.resx">
+      <DependentUpon>201801241554069_alterIsBundled.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801241635442_addPeriodicIdField.resx">
+      <DependentUpon>201801241635442_addPeriodicIdField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801242028449_addBundleMagazine.resx">
+      <DependentUpon>201801242028449_addBundleMagazine.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

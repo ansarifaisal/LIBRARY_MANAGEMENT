@@ -117,6 +117,7 @@ namespace LibraryBackEnd.Persistence.Repositories
         {
             return _context.Books
                     .Where(u => u.AccessionNumber == searchBindingModel.AccessionNumber
+                    || u.AccessionNumber.Contains(searchBindingModel.AccessionNumber)
                     || u.Title == searchBindingModel.Title
                     || u.Course == searchBindingModel.Course
                     || u.Status == searchBindingModel.Status
@@ -149,6 +150,21 @@ namespace LibraryBackEnd.Persistence.Repositories
             return _context.Books
                 .Where(b => b.TypeOfBook == type)
                 .ToList();
+        }
+
+        public IEnumerable<Book> GetBooks()
+        {
+            return _context.Books
+                 .Where(b => b.TypeOfBook != "BC")
+                 .ToList();
+        }
+
+        public Book GetBookByTitle(string title)
+        {
+            return _context.Books
+                .OrderByDescending(b => b.Id)
+                .Where(b => b.Title == title)
+                .FirstOrDefault();
         }
     }
 }

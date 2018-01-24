@@ -8,6 +8,8 @@ namespace LibraryBackEnd.Core.Models
 
         public string PeriodicTitle { get; set; }
 
+        public int PeriodicId { get; set; }
+
         public DateTime Date { get; set; }
 
         public DateTime Month { get; set; }

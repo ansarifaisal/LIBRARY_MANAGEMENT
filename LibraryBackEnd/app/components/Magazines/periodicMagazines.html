@@ -1,11 +1,12 @@
 ﻿<div ng-init="magazineCtrl.getPeriodicDetails()">
     <ol class="breadcrumb">
         <li><a href="" ng-href="#!/home">Home</a></li>
-        <li class="active">Magazines</li>
+
+        <li class="active">Periodical Magazines</li>
     </ol>
 
     <div class="page-header">
-        <h3>Magazines</h3>
+        <h3>Periodical Magazines</h3>
     </div>
 
     <table datatable="ng" dt-options="magazineCtrl.dtOptions" dt-column-defs="magazineCtrl.dtColumnDefs" class="table-condensed table-hover">
@@ -31,8 +32,9 @@
                 <th class="text-center">Bill Date</th>
                 <th class="text-center">Amount</th>
                 <th class="text-center">Paid By</th>
-                <th class="text-center">Cheque No</th>
-                <th class="text-center">Cheque Date</th>
+                <th class="text-center">Cheque | DD No</th>
+                <th class="text-center">Cheque | DD Date</th>
+                <th class="text-center">Binding</th>
                 <th class="text-center">Binding Sent Date</th>
                 <th class="text-center">Binding Delivery Date</th>
                 <th class="text-center" ng-show="user.role == 'ADMIN'">Action</th>
@@ -40,14 +42,17 @@
         </thead>
         <tbody>
             <tr ng-repeat="periodicDetail in magazineCtrl.periodicDetails">
-                <td>{{ periodicDetail.date | date: "MMM, dd yyyy"}}</td>
-                <td><a href="" ng-href="#!/admin/magazines/{{periodicDetail.title}}">{{ periodicDetail.title}}</a></td>
+                <td>{{ periodicDetail.date | date: "yyyy/MM/dd"}}</td>
+                <td>
+                    <a ng-if="periodicDetail.bundled == 'Yes'" href="" ng-href="#!/admin/magazines/{{periodicDetail.title}}/{{periodicDetail.id}}?bundled=yes">{{ periodicDetail.title}}</a>
+                    <a ng-if="periodicDetail.bundled == 'No'" href="" ng-href="#!/admin/magazines/{{periodicDetail.title}}/{{periodicDetail.id}}">{{ periodicDetail.title}}</a>
+                </td>
                 <td>{{ periodicDetail.course}}</td>
                 <td>{{ periodicDetail.periodicity}}</td>
                 <td>{{ periodicDetail.publisher}}</td>
                 <td>{{ periodicDetail.type}}</td>
                 <td>{{ periodicDetail.subscription}}</td>
-                <td>{{ periodicDetail.subscriptionDate | date: "MMM, dd yyyy"}}</td>
+                <td>{{ periodicDetail.subscriptionDate | date: "yyyy/MM/dd"}}</td>
                 <td>{{ periodicDetail.subscriptionAmount}}</td>
                 <td>{{ periodicDetail.subscriptionDuration}}</td>
                 <td>{{ periodicDetail.from | date: "MMM, yyyy"}}</td>
@@ -55,15 +60,16 @@
                 <td>{{ periodicDetail.volume}}</td>
                 <td>{{ periodicDetail.source}}</td>
                 <td>{{ periodicDetail.orderNo}}</td>
-                <td>{{ periodicDetail.orderDate | date: "MMM, dd yyyy"}}</td>
+                <td>{{ periodicDetail.orderDate | date: "yyyy/MM/dd"}}</td>
                 <td>{{ periodicDetail.billNo}}</td>
-                <td>{{ periodicDetail.billDate | date: "MMM, dd yyyy"}}</td>
+                <td>{{ periodicDetail.billDate | date: "yyyy/MM/dd"}}</td>
                 <td>{{ periodicDetail.amount}}</td>
                 <td>{{ periodicDetail.paidBy}}</td>
                 <td>{{ periodicDetail.chequeNo}}</td>
-                <td>{{ periodicDetail.chequeDate | date: "MMM, dd yyyy"}}</td>
-                <td>{{ periodicDetail.bundleSentDate | date: "MMM, dd yyyy"}}</td>
-                <td>{{ periodicDetail.bundleDeliveryDate | date: "MMM, dd yyyy"}}</td>
+                <td>{{ periodicDetail.chequeDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ periodicDetail.bundled }}</td>
+                <td>{{ periodicDetail.bundleSentDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ periodicDetail.bundleDeliveryDate | date: "yyyy/MM/dd"}}</td>
                 <td class="text-center" ng-show="user.role == 'ADMIN'">
                     <a href="" ng-click="magazineCtrl.getPeriodicDetail(periodicDetail.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
                     <a href="" ng-click="magazineCtrl.deletePeriodicDetailModal(periodicDetail.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>

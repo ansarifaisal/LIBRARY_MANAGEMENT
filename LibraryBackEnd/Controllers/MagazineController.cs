@@ -1,6 +1,7 @@
 ﻿using LibraryBackEnd.Core.Models;
 using LibraryBackEnd.Core.Services.Interface;
 using System;
+using System.Collections.Generic;
 using System.Web.Http;
 
 namespace LibraryBackEnd.Controllers
@@ -89,6 +90,21 @@ namespace LibraryBackEnd.Controllers
         {
             var numbers = _magazineService.GetMagazineNumbers();
             return Ok(numbers);
+        }
+
+        [Route("updateMagazineStatus/{Id}")]
+        [HttpGet]
+        public IHttpActionResult UpdateMagazineStatus(int Id)
+        {
+
+            List<Magazine> magazines = _magazineService.GetMagazinesById(Id);
+            for (int i = 0; i < magazines.Count; i++)
+            {
+                magazines[i].Status = "Bundled";
+                _magazineService.Update(magazines[i]);
+            }
+            return Ok();
+
         }
 
     }

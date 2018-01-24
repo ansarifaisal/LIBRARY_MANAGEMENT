@@ -21,5 +21,7 @@ namespace LibraryBackEnd.Core.IRepositories
         IEnumerable<Book> GetSearchResults(SearchBindingModel searchBindingModel);
         object GetBookTypes();
         IEnumerable<Book> GetBooksByType(string type);
+        IEnumerable<Book> GetBooks();
+        Book GetBookByTitle(string title);
     }
 }

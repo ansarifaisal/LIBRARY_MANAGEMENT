@@ -34,7 +34,7 @@ window.routes = {
         controllerAs: 'authCtrl',
         requireLogin: false,
         data: { pageTitle: 'Error' },
-        roles: ['GUEST', 'STUDENT', 'FACULTY', 'ADMIN', 'LIBRARIAN']
+        roles: ['GUEST', 'STUDENT', 'FACULTY', 'ADMIN', 'LIBRARIAN', 'NON-TEACHING']
 
     },
 
@@ -46,7 +46,7 @@ window.routes = {
         controllerAs: 'authCtrl',
         requireLogin: false,
         data: { pageTitle: 'Error' },
-        roles: ['GUEST', 'STUDENT', 'FACULTY', 'LIBRARIAN']
+        roles: ['GUEST', 'STUDENT', 'FACULTY', 'LIBRARIAN', 'NON-TEACHING']
 
     },
 
@@ -115,7 +115,7 @@ window.routes = {
         controller: 'AuthenticationController',
         controllerAs: 'authCtrl',
         requireLogin: true,
-        roles: ['STUDENT', 'ADMIN', 'FACULTY', 'LIBRARIAN']
+        roles: ['STUDENT', 'ADMIN', 'FACULTY', 'LIBRARIAN', 'NON-TEACHING']
     },
 
     '/user/moreDetails': {
@@ -124,7 +124,7 @@ window.routes = {
         controller: 'UserController',
         controllerAs: 'userCtrl',
         requireLogin: true,
-        roles: ['STUDENT', 'FACULTY', 'LIBRARIAN', 'ADMIN']
+        roles: ['STUDENT', 'FACULTY', 'LIBRARIAN', 'ADMIN', 'NON-TEACHING']
     },
 
     '/user/settings': {
@@ -133,7 +133,7 @@ window.routes = {
         controller: 'UserController',
         controllerAs: 'userCtrl',
         requireLogin: true,
-        roles: ['STUDENT', 'FACULTY', 'LIBRARIAN', 'ADMIN']
+        roles: ['STUDENT', 'FACULTY', 'LIBRARIAN', 'ADMIN', 'NON-TEACHING']
     },
 
     '/admin/students': {
@@ -221,7 +221,7 @@ window.routes = {
         controller: 'BookController',
         controllerAs: 'bookCtrl',
         requireLogin: true,
-        roles: ['ADMIN', 'STUDENT', 'LIBRARIAN', 'FACULTY']
+        roles: ['ADMIN', 'STUDENT', 'LIBRARIAN', 'FACULTY', 'NON-TEACHING']
     },
 
     '/admin/book/add': {
@@ -244,7 +244,7 @@ window.routes = {
         controller: 'BookController',
         controllerAs: 'bookCtrl',
         requireLogin: true,
-        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY']
+        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY', 'NON-TEACHING']
     },
 
     /*
@@ -257,7 +257,7 @@ window.routes = {
         controller: 'IssueBookController',
         controllerAs: 'issueBookCtrl',
         requireLogin: true,
-        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY']
+        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY', 'NON-TEACHING']
     },
     '/admin/issueBook/add': {
         templateUrl: 'app/components/issueBook/issueBook.html',
@@ -284,7 +284,7 @@ window.routes = {
         controller: 'ReturnBookController',
         controllerAs: 'returnBookCtrl',
         requireLogin: true,
-        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY']
+        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY', 'NON-TEACHING']
     },
 
     /*
@@ -447,14 +447,14 @@ window.routes = {
         controller: 'RequestController',
         controllerAs: 'requestCtrl',
         requireLogin: true,
-        roles: ['ADMIN', 'LIBRARIAN', 'FACULTY', 'STUDENT']
+        roles: ['ADMIN', 'LIBRARIAN', 'FACULTY', 'STUDENT', 'NON-TEACHING']
     },
 
     /*
     * Loading Magazine Module
     */
 
-    '/admin/magazines/:title': {
+    '/admin/magazines/:title/:id': {
 
         templateUrl: 'app/components/magazines/magazines.html',
         controller: 'MagazineController',
@@ -487,7 +487,7 @@ window.routes = {
         controller: 'MagazineController',
         controllerAs: 'magazineCtrl',
         requireLogin: true,
-        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY']
+        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY', 'NON-TEACHING']
     },
 
     '/user/magazine/returned': {
@@ -496,7 +496,7 @@ window.routes = {
         controller: 'MagazineController',
         controllerAs: 'magazineCtrl',
         requireLogin: true,
-        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY']
+        roles: ['ADMIN', 'LIBRARIAN', 'STUDENT', 'FACULTY', 'NON-TEACHING']
     },
 
     '/admin/magazine/lost': {
@@ -507,6 +507,16 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN', 'LIBRARIAN']
     },
+
+    '/admin/magazine/binding': {
+
+        templateUrl: 'app/components/magazines/bindingMagazines.html',
+        controller: 'MagazineController',
+        controllerAs: 'magazineCtrl',
+        requireLogin: true,
+        roles: ['ADMIN', 'LIBRARIAN']
+    },
+
 
     /*
     * Loading Newspaper Module
@@ -700,10 +710,16 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
             $rootScope.countDown();
         }, 1000);
     }
+    
+    function getTomorrowDate() {
+        var date = new Date();
+        var tom = date.setDate(date.getDate() + 1, date.getMonth, date.getFullYear);
+        return new Date(tom);
+    }
 
     $rootScope.sendNotifications = function () {
         IssueBookFactory.getIssuedBooks().then(function (issuedBooks) {
-            var tomorrow = me.getTomorrowDate();
+            var tomorrow = getTomorrowDate();
             var date = new Date();
             for (var i = 0; i < issuedBooks.length; i++) {
                 issuedBooks[i].returnDate = new Date(issuedBooks[i].returnDate);
@@ -719,7 +735,7 @@ myApp.run(function ($rootScope, $location, AuthenticationFactory, $window, $cook
         });
 
         MagazineFactory.getIssuedMagazines().then(function (issuedMagazines) {
-            var tomorrow = me.getTomorrowDate();
+            var tomorrow = getTomorrowDate();
             var date = new Date();
             for (var i = 0; i < issuedMagazines.length; i++) {
                 issuedMagazines[i].returnDate = new Date(issuedMagazines[i].returnDate);

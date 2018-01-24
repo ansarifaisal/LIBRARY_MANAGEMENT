@@ -6,7 +6,7 @@
 <div class="page-header">
     <h3>Returned Books</h3>
 </div>
-<div ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
+<div ng-if="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
     <div ng-init="returnBookCtrl.getReturnBooks()">
         <table datatable="ng" dt-options="returnBookCtrl.dtOptions" dt-column-defs="returnBookCtrl.dtColumnDefs" class="table-condensed table-hover">
             <thead>
@@ -28,9 +28,9 @@
                 <tr ng-repeat="returnBook in returnBookCtrl.returnBooks">
                     <td>{{ returnBook.accessionNumber }}</td>
                     <td>{{ returnBook.bookTitle }}</td>
-                    <td>{{ returnBook.issuedDate | date: "MMM, dd yyyy"}}</td>
-                    <td>{{ returnBook.returnDate | date: "MMM, dd yyyy"}}</td>
-                    <td>{{ returnBook.actualReturnDate | date: "MMM, dd yyyy"}}</td>
+                    <td>{{ returnBook.issuedDate | date: "yyyy/MM/dd"}}</td>
+                    <td>{{ returnBook.returnDate | date: "yyyy/MM/dd"}}</td>
+                    <td>{{ returnBook.actualReturnDate | date: "yyyy/MM/dd"}}</td>
                     <td>{{ returnBook.rollNo }}</td>
                     <td>{{ returnBook.fullName }}</td>
                     <td>{{ returnBook.course }}</td>
@@ -43,7 +43,7 @@
     </div>
 </div>
 
-<div ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
+<div ng-if="user.role == 'STUDENT' || user.role == 'FACULTY' || user.role == 'NON-TEACHING'">
 
     <div ng-init="returnBookCtrl.getByRollNumber()">
         <table datatable="ng" dt-options="returnBookCtrl.dtOptions" dt-column-defs="returnBookCtrl.dtColumnDefs" class="table-condensed table-hover">

@@ -55,6 +55,7 @@ UserModule.factory("UserFactory", [
             $http.get("/api/student/faculties")
                 .then(function (response) {
                     deferred.resolve(response.data);
+                    console.log(response.data);
                 }, function (errorResponse) {
                     deferred.reject(errorResponse);
                 });
@@ -136,7 +137,7 @@ UserModule.factory("UserFactory", [
         }
 
         function getRoles() {
-            var role = ["STUDENT", "FACULTY", "LIBRARIAN"];
+            var role = ["STUDENT", "FACULTY", "LIBRARIAN", "NON-TEACHING"];
             return role;
         }
 

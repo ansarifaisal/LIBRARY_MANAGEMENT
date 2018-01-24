@@ -34,6 +34,14 @@ namespace LibraryBackEnd.Controllers
             return Ok(books);
         }
 
+        [Route("getBooks")]
+        [HttpGet]
+        public IHttpActionResult GetBooks()
+        {
+            var books = _bookService.GetBooks();
+            return Ok(books);
+        }
+
         [Route("edit")]
         [HttpPost]
         public IHttpActionResult Edit(Book book)
@@ -102,6 +110,14 @@ namespace LibraryBackEnd.Controllers
         {
             var books = _bookService.GetDistinctBooksByCourse(course);
             return Ok(books);
+        }
+
+        [HttpGet]
+        [Route("getBookByTitle")]
+        public IHttpActionResult GetBookByTitle(string title)
+        {
+            var book = _bookService.GetBookByTitle(title);
+            return Ok(book);
         }
     }
 }

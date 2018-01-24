@@ -1,5 +1,5 @@
 ﻿
-<div ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
+<div ng-if="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
     <div ng-init="bookCtrl.getBooks()">
         <ol class="breadcrumb">
             <li><a href="" ng-href="#!/home">Home</a></li>
@@ -38,7 +38,7 @@
             </thead>
             <tbody>
                 <tr ng-repeat="book in bookCtrl.books">
-                    <td>{{ book.date | date: "MMM, dd yyyy"}}</td>
+                    <td>{{ book.date | date: "yyyy/MM/dd"}}</td>
                     <td>{{ book.accessionNumber }}</td>
                     <td>{{ book.author }}</td>
                     <td><a href="" ng-href="#!/user/book/{{book.id}}">{{ book.title }}</a></td>
@@ -61,7 +61,7 @@
                     <td>{{ book.billDate | date: "MMM, dd yyyy"}}</td>
                     <td>{{ book.status }}</td>
                     <td class="text-center" ng-show="user.role == 'ADMIN'">
-                        <div ng-show="book.status == 'Available' || user.role == 'ADMIN' && book.status != 'Issued'">
+                        <div ng-show="book.status == 'Available' || user.role == 'ADMIN'">
                             <a href="" ng-click="bookCtrl.showEditBookForm(book.id)" class="text-warning"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></a>&nbsp;&nbsp;
                             <a href="" ng-click="bookCtrl.deleteBookModal(book.id)" class="text-danger"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
                         </div>
@@ -72,7 +72,7 @@
     </div>
 </div>
 
-<div ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
+<div ng-if="user.role == 'STUDENT' || user.role == 'FACULTY' || user.role=='NON-TEACHING'">
 
     <div ng-init="bookCtrl.getUserBooks()">
         <ol class="breadcrumb">

@@ -7,7 +7,7 @@
         <form name="createEdit" ng-submit="magazineModalCtrl.submitIssueMagazineForm()" novalidate>
 
             <div class="form-group" ng-class="{'has-error has-feedback': createEdit.number.$invalid && createEdit.number.$touched
-         || createEdit.number.$invalid && createEdit.$submitted || magazineModalCtrl.magazineExists == false,
+         || createEdit.number.$invalid && createEdit.$submitted || magazineModalCtrl.magazineExists == false || magazineModalCtrl.bundled == 'Bundled',
          'has-success has-feedback': createEdit.number.$valid || createEdit.number.$valid
          && createEdit.$submitted || magazineModalCtrl.magazineExists == true}">
                 <label for="number">Number</label>
@@ -23,16 +23,19 @@
                        autocomplete="off"
                        required />
                 <span class="glyphicon form-control-feedback"
-                      ng-class="{'glyphicon-ok': createEdit.number.$valid || createEdit.number.$valid && createEdit.$submitted || magazineModalCtrl.magazineExists == true,
+                      ng-class="{'glyphicon-ok': createEdit.number.$valid || createEdit.number.$valid && createEdit.$submitted
+                           || magazineModalCtrl.magazineExists == true,
                           'glyphicon-remove': createEdit.number.$invalid && createEdit.number.$touched
-                           || createEdit.number.$invalid && createEdit.$submitted || magazineModalCtrl.magazineExists == false}">
+                           || createEdit.number.$invalid && createEdit.$submitted
+                           || magazineModalCtrl.magazineExists == false || magazineModalCtrl.bundled == 'Bundled'}">
                 </span>
 
-                <div ng-show="createEdit.number.$invalid && createEdit.number.$touched || createEdit.$submitted || magazineModalCtrl.magazineExists == false">
+                <div ng-show="createEdit.number.$invalid && createEdit.number.$touched || createEdit.$submitted || magazineModalCtrl.magazineExists == false || magazineModalCtrl.bundled == 'Bundled'">
                     <div ng-show="createEdit.number.$error.required" class="text-danger small">Please, provide number.</div>
                     <div ng-show="createEdit.number.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
                     <div ng-show="createEdit.number.$error.maxlength" class="text-danger small">This field can contain 6 characters only.</div>
                     <div ng-show="magazineModalCtrl.magazineExists == false" class="text-danger small">Magazine doesn't exists, Please provide valid magazine number.</div>
+                    <div ng-show="magazineModalCtrl.bundled == 'Bundled'" class="text-danger small">This magazine is bundled.</div>
                 </div>
             </div>
             <div class="form-group">
@@ -132,7 +135,7 @@
             <input type="submit"
                    ng-disabled="createEdit.$invalid || magazineModalCtrl.userExists == false
                                 || magazineModalCtrl.magazineExists == false || magazineModalCtrl.eligible
-                                || magazineModalCtrl.isIssued"
+                                || magazineModalCtrl.isIssued || magazineModalCtrl.bundled == 'Bundled'"
                    value="{{magazineModalCtrl.btnText}}"
                    class="btn btn-primary"
                    ng-click="magazineModalCtrl.ok()" />

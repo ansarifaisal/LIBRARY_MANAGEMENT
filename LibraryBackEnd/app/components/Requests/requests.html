@@ -7,7 +7,7 @@
 <div class="page-header">
     <h3>Requests</h3>
 </div>
-<div ng-init="requestCtrl.getByRollNo()" ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
+<div ng-init="requestCtrl.getByRollNo()" ng-if="user.role == 'STUDENT' || user.role == 'FACULTY' || user.role == 'NON-TEACHING'">
     <table datatable="ng" dt-options="requestCtrl.dtOptions" dt-column-defs="requestCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>
@@ -43,7 +43,7 @@
     </table>
 </div>
 
-<div ng-init="requestCtrl.getRequests()" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
+<div ng-init="requestCtrl.getRequests()" ng-if="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
     <table datatable="ng" dt-options="requestCtrl.dtOptions" dt-column-defs="requestCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>

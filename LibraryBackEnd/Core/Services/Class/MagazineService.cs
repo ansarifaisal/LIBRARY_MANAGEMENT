@@ -30,5 +30,10 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _repository.GetMagazines(title);
         }
+
+        public List<Magazine> GetMagazinesById(int id)
+        {
+            return _repository.GetMagazinesById(id);
+        }
     }
 }

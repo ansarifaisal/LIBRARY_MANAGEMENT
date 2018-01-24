@@ -50,6 +50,8 @@ namespace LibraryBackEnd.Core.Models
 
         public string ChequeDate { get; set; }
 
+        public string Bundled { get; set; }
+
         public string BundleSentDate { get; set; }
 
         public string BundleDeliveryDate { get; set; }

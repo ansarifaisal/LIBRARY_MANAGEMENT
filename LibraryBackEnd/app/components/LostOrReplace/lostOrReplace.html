@@ -28,8 +28,8 @@
             <tr ng-repeat="book in lostOrReplaceBookCtrl.books">
                 <td>{{ book.accessionNumber }}</td>
                 <td>{{ book.bookTitle }}</td>
-                <td>{{ book.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
-                <td>{{ book.returnDate | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ book.issuedDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ book.returnDate | date: "yyyy/MM/dd"}}</td>
                 <td>{{ book.rollNo }}</td>
                 <td>{{ book.fullName }}</td>
                 <td>{{ book.course }}</td>

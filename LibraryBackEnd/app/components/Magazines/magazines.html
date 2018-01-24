@@ -1,7 +1,7 @@
 ﻿<div ng-init="magazineCtrl.getMagazines()">
     <ol class="breadcrumb">
         <li><a href="" ng-href="#!/home">Home</a></li>
-        <li><a href="" ng-href="#!/admin/magazine/periodic">Magazines</a></li>
+        <li><a href="" ng-href="#!/admin/magazine/periodic">Periodical Magazines</a></li>
         <li class="active">Details of {{magazineCtrl.title}}</li>
     </ol>
 
@@ -27,12 +27,12 @@
         <tbody>
             <tr ng-repeat="magazine in magazineCtrl.magazines">
                 <td>{{ magazine.periodicTitle}}</td>
-                <td>{{ magazine.date | date: 'EEE MMM, dd yyyy'}}</td>
+                <td>{{ magazine.date | date: 'yyyy/MM/dd'}}</td>
                 <td>{{ magazine.month | date: 'MMM, yyyy'}}</td>
                 <td>{{ magazine.volume}}</td>
                 <td>{{ magazine.number}}</td>
                 <td>{{ magazine.issn}}</td>
-                <td>{{ magazine.dateOfRecieved | date: 'EEE MMM, dd yyyy'}}</td>
+                <td>{{ magazine.dateOfRecieved | date: 'yyyy/MM/dd'}}</td>
                 <td>{{ magazine.recievedBy}}</td>
                 <td>{{ magazine.status}}</td>
                 <td class="text-center" ng-show="user.role == 'ADMIN'">

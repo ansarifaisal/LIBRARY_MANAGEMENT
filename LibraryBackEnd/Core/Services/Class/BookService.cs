@@ -92,5 +92,15 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _bookRepository.GetBooksByType(type);
         }
+
+        public IEnumerable<Book> GetBooks()
+        {
+            return _bookRepository.GetBooks();
+        }
+
+        public Book GetBookByTitle(string title)
+        {
+            return _bookRepository.GetBookByTitle(title);
+        }
     }
 }

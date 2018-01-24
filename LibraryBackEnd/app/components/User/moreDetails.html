@@ -116,7 +116,7 @@
                 </form>
             </div>
 
-            <div class="panel-body" ng-show="user.role == 'FACULTY'">
+            <div class="panel-body" ng-show="user.role == 'FACULTY' || user.role== 'NON-TEACHING'">
                 <form name="createEdit" ng-submit="userCtrl.submitForm()" role="form" novalidate>
                     <div class="form-group" ng-class="{'has-error has-feedback': createEdit.rollNo.$invalid && createEdit.rollNo.$touched
                              || createEdit.rollNo.$invalid && createEdit.$submitted || userCtrl.exists,
@@ -180,7 +180,7 @@
 
                     </div>
 
-                    <div class="form-group" ng-class="{'has-error has-feedback': createEdit.course.$invalid && createEdit.course.$touched
+                    <div class="form-group" ng-if="user.role!='NON-TEACHING'" ng-class="{'has-error has-feedback': createEdit.course.$invalid && createEdit.course.$touched
                              || createEdit.course.$invalid && createEdit.$submitted,
                              'has-success has-feedback': createEdit.course.$valid || createEdit.course.$valid
                              && createEdit.$submitted}">

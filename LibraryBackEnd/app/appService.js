@@ -60,6 +60,7 @@ myApp.service('AppService', [
                 .withOption('scrollX', '100%')
                 .withOption('scrollY', '100%')
                 .withOption('scrollCollapse', true)
+               //.withOption('order', [[0, 'desc']])
                 .withBootstrap()
                 .withButtons([
                      {

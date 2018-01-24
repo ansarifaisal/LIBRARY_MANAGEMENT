@@ -160,12 +160,14 @@ IssueBookModule.factory("IssueBookFactory", [
             return deferred.promise;
         }
 
-        function calculateFine(date, returnDate) {
-            var tempDate = parseDate(date);
-            var tempReturnDate = parseDate(returnDate);
-            var numberOfDays = Math.round(convertToDate(tempReturnDate) - convertToDate(tempDate)) / (1000 * 60 * 60 * 24);
+        function calculateFine(returnDate) {
+            var date = new Date();
+            var tempDate = date.setFullYear(date.getFullYear(), date.getMonth(), date.getDate());
+            var tempReturnDate = returnDate;
+            var numberOfDays = Math.round((convertToDate(tempDate) - convertToDate(tempReturnDate)) / (1000 * 60 * 60 * 24));
+            var fine = 0;
             if (numberOfDays > 0)
-                var fine = numberOfDays * parseInt($rootScope.configuration.fine);
+                fine = numberOfDays * parseInt($rootScope.configuration.fine);
             return fine;
         }
 

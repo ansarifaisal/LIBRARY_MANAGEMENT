@@ -23,6 +23,7 @@ namespace LibraryBackEnd.Configuration
         public DbSet<IssueMagazine> IssueMagazines { get; set; }
         public DbSet<ReturnMagazine> ReturnMagazines { get; set; }
         public DbSet<LostOrReplaceMagazine> lostOrReplaceMagazines { get; set; }
+        public DbSet<BindingMagazine> BindingMagazines { get; set; }
 
         public DbSet<NewspaperPublisher> NewsPaperPublishers { get; set; }
         public DbSet<PeriodicNewspaper> PeriodicNewspapers { get; set; }

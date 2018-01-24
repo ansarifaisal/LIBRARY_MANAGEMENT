@@ -82,9 +82,12 @@
                 return;
             BookFactory.getBookByAccessionNumber(accessionNumber).then(function (response) {
                 angular.copy(response, me.book);
+                me.isBackwardClass = false;
                 if (me.book.accessionNumber === accessionNumber) {
                     IssueBookFactory.saveBook(me.book);
                     me.issueBook.bookTitle = me.book.title;
+                    if (me.book.typeOfBook === "BC")
+                        me.isBackwardClass = true;
                     return;
                 }
                 return toastr.error("Please provide correct accession number");
@@ -103,6 +106,7 @@
                     me.issueBook.fullName = me.student.fullName;
                     me.issueBook.course = me.student.course;
                     me.issueBook.email = me.student.email;
+                    me.yearOfAdmission = me.student.yearOfAdmission;
                     if (me.student.issueCount >= $rootScope.configuration.noOfBookIssue) {
                         me.isError = true;
                         return toastr.error(me.student.fullName + " already took " + $rootScope.configuration.noOfBookIssue + " books.");
@@ -154,7 +158,7 @@
 
         me.getIssuedBooks = function () {
             var user = $rootScope.user;
-            if (user.role === 'STUDENT' || user.role === 'FACULTY')
+            if (user.role === 'STUDENT' || user.role === 'FACULTY' || user.role === 'NON-TEACHING')
                 return;
             $rootScope.isBusy = true;
             me.dtOptions = AppService.dataTableWithFunction("Issue Book", me.showIssueForm);
@@ -165,8 +169,9 @@
                 var fine = 0
                 for (var i = 0; i < me.issuedBooks.length; i++) {
                     var flag = IssueBookFactory.isPastDate(me.issuedBooks[i].returnDate);
+                    console.log(flag);
                     if (flag)
-                        fine = IssueBookFactory.calculateFine(me.issuedBooks[i].issuedDate, me.issuedBooks[i].returnDate);
+                        fine = IssueBookFactory.calculateFine(me.issuedBooks[i].returnDate);
                     else
                         continue;
                     if (fine === me.issuedBooks[i].fine)
@@ -218,8 +223,10 @@
 
         me.getIssuedDataByRollNumber = function () {
             var user = $rootScope.user;
+
             if (user.role === 'ADMIN' || user.role === 'LIBRARIAN')
                 return;
+
             $rootScope.isBusy = true;
             me.dtOptions = AppService.dataTableWithOutFunction();
 

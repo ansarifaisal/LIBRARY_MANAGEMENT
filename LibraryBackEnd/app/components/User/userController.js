@@ -73,6 +73,11 @@
                 user.yearOfAdmission = 0;
             }
 
+            if (user.role === 'NON-TEACHING') {
+                user.yearOfAdmission = 0;
+                user.course = 'NA';
+            }
+
             me.user.modified = true;
             UserFactory.editStudent(me.user).then(function () {
                 toastr.success("Details Saved Successfully!");

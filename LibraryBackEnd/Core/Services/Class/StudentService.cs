@@ -72,5 +72,10 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _repository.GetRollNos();
         }
+
+        public IEnumerable<ApplicationUser> GetFacultiesAndNonTeaching()
+        {
+            return _repository.GetFacultiesAndNonTeaching();
+        }
     }
 }

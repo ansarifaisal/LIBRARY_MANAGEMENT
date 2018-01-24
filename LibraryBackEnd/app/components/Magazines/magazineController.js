@@ -60,6 +60,7 @@
         me.magazine = {
             id: undefined,
             periodicTitle: '',
+            periodicId:'',
             month: '',
             volume: '',
             issn: undefined,
@@ -100,6 +101,23 @@
             btnText: ''
         }
 
+        me.bindingMagazine = {
+            accessionNumber: '',
+            title: '',
+            pages: '',
+            editor: '',
+            publisher: '',
+            issn: '',
+            source: '',
+            classNo: '',
+        };
+
+        me.bindingMagazineModal = {
+            bindingMagazine: '',
+            title: '',
+            btnText: ''
+        }
+
         me.lostMagazines = []
 
         me.magazines = [];
@@ -110,6 +128,7 @@
 
         me.issuedMagazines = [];
 
+        me.bindingMagazines = [];
 
         me.getPublishers = function () {
             $rootScope.isBusy = true;
@@ -183,8 +202,8 @@
 
         me.showPeriodicDetailForm = function () {
             me.periodicDetailModal.periodicDetail = me.periodicDetail;
-            me.periodicDetailModal.title = "Add New Magazine Detail";
-            me.periodicDetailModal.btnText = "Add Magazine Detail";
+            me.periodicDetailModal.title = "Add New Periodic Detail";
+            me.periodicDetailModal.btnText = "Add Periodic Detail";
             AppService.showModal(me.periodicDetailModal,
                 "magazines/periodicMagazineForm.html",
                 "MagazineModalController",
@@ -219,7 +238,7 @@
             me.title = $routeParams.title;
             $rootScope.isBusy = true;
             var user = $rootScope.user;
-            if (user.role === 'ADMIN')
+            if (user.role === 'ADMIN' && $routeParams.bundled !== 'yes')
                 me.dtOptions = AppService.dataTableWithFunction("Add Magazine", me.showMagazineForm);
             else
                 me.dtOptions = AppService.dataTableWithOutFunction();
@@ -275,7 +294,7 @@
 
         me.getIssuedMagazines = function () {
             var user = $rootScope.user;
-            if (user.role === 'FACULTY' || user.role === 'STUDENT')
+            if (user.role === 'FACULTY' || user.role === 'STUDENT' || user.role === 'NON-TEACHING')
                 return;
             $rootScope.isBusy = true;
             me.dtOptions = AppService.dataTableWithFunction("Issue Magazine", me.showIssueMagazineForm);
@@ -289,7 +308,7 @@
                 for (var i = 0; i < me.issuedMagazines.length; i++) {
                     var flag = IssueBookFactory.isPastDate(me.issuedMagazines[i].returnDate);
                     if (flag)
-                        fine = IssueBookFactory.calculateFine(me.issuedMagazines[i].issuedDate, me.issuedMagazines[i].returnDate);
+                        fine = IssueBookFactory.calculateFine(me.issuedMagazines[i].returnDate);
                     if (fine === me.issuedMagazines[i].fine)
                         continue;
                     me.issuedMagazines[i].fine = fine;
@@ -426,7 +445,7 @@
 
         me.getReturnMagazines = function () {
             var user = $rootScope.user;
-            if (user.role === 'FACULTY' || user.role === 'STUDENT')
+            if (user.role === 'FACULTY' || user.role === 'STUDENT' || user.role === 'NON-TEACHING')
                 return;
             $rootScope.isBusy = true;
             me.dtOptions = AppService.dataTableWithOutFunction();
@@ -456,5 +475,53 @@
                 toastr.error("Error Fetching Magazines");
             });
         }
+
+        me.getBindingMagazines = function () {
+            $rootScope.isBusy = true;
+            me.dtOptions = AppService.dataTableWithFunction("Add Binding Magazine", me.showBindingMagazineForm);
+
+            MagazineFactory.getBindingMagazines().then(function (bindingMagazines) {
+                me.bindingMagazines = bindingMagazines;
+                $rootScope.isBusy = false;
+            }, function (errorResponse) {
+                $rootScope.isBusy = false;
+                toastr.error("Error Fetching Binding Magazine Details");
+            });
+        }
+
+        me.showBindingMagazineForm = function () {
+            me.bindingMagazineModal.bindingMagazine = me.bindingMagazine;
+            me.bindingMagazineModal.title = "Add New Binding Magazine Details";
+            me.bindingMagazineModal.btnText = "Add Binding Details";
+            AppService.showModal(me.bindingMagazineModal,
+                "magazines/bindingMagazineForm.html",
+                "MagazineModalController",
+                "magazineModalCtrl");
+        }
+
+        me.getBindingMagazine = function (id) {
+            MagazineFactory.getBindingMagazine(id).then(function (bindingMagazine) {
+                me.bindingMagazineModal.bindingMagazine = bindingMagazine;
+                me.bindingMagazineModal.title = "Edit Binding Magazine";
+                me.bindingMagazineModal.btnText = "Edit Binding Magazine";
+                AppService.showModal(me.bindingMagazineModal,
+                    "magazines/bindingMagazineForm.html",
+                    "MagazineModalController",
+                    "magazineModalCtrl");
+            });
+        }
+
+        me.deleteBindingMagazineModal = function (id) {
+            MagazineFactory.getBindingMagazine(id).then(function (bindingMagazine) {
+                me.bindingMagazineModal.bindingMagazine = bindingMagazine;
+                me.bindingMagazineModal.title = "Delete Binding Magazine Details";
+                me.bindingMagazineModal.btnText = "Delete";
+                AppService.showModal(me.bindingMagazineModal,
+                    "magazines/deleteBindingMagazine.html",
+                    "MagazineModalController",
+                    "magazineModalCtrl");
+            });
+        }
+
     }
 ]);

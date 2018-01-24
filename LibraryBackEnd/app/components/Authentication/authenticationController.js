@@ -131,7 +131,8 @@ AuthenticationModule.controller("AuthenticationController", [
                                 if (user.modified === false && user.role === "STUDENT"
                                     || user.modified === false && user.role === "FACULTY"
                                     || user.modified === false && user.role === "LIBRARIAN"
-                                    || user.modified === false && user.role === "ADMIN")
+                                    || user.modified === false && user.role === "ADMIN"
+                                    || user.modified === false && user.role === "NON-TEACHING")
                                     return $location.path("/user/moreDetails");
                                 $location.path("/home");
                             }

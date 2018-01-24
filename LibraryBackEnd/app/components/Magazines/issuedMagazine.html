@@ -30,8 +30,8 @@
                 <td>{{ issuedMagazine.title}}</td>
                 <td>{{ issuedMagazine.number}}</td>
                 <td>{{ issuedMagazine.volume}}</td>
-                <td>{{ issuedMagazine.issuedDate | date: "MMM, dd yyyy"}}</td>
-                <td>{{ issuedMagazine.returnDate | date: "MMM, dd yyyy"}}</td>
+                <td>{{ issuedMagazine.issuedDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ issuedMagazine.returnDate | date: "yyyy/MM/dd"}}</td>
                 <td>{{ issuedMagazine.rollNo}}</td>
                 <td>{{ issuedMagazine.fullName}}</td>
                 <td>{{ issuedMagazine.course}}</td>
@@ -48,7 +48,7 @@
 
 </div>
 
-<div ng-init="magazineCtrl.getIssuedMagazineByRollNo()" ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
+<div ng-init="magazineCtrl.getIssuedMagazineByRollNo()" ng-if="user.role == 'STUDENT' || user.role == 'FACULTY' || user.role == 'NON-TEACHING'">
     <ol class="breadcrumb">
         <li><a href="" ng-href="#!/home">Home</a></li>
         <li class="active">Issued Magazine</li>

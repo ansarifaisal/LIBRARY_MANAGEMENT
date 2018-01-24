@@ -1,0 +1,54 @@
+﻿<div ng-init="magazineCtrl.getBindingMagazines()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li class="active">Binding Magazine Details</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Binding Magazine Details</h3>
+    </div>
+
+    <table datatable="ng" dt-options="magazineCtrl.dtOptions" dt-column-defs="magazineCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Date</th>
+                <th class="text-center">Number</th>
+                <th class="text-center">Editor</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Course</th>
+                <th class="text-center">ISSN</th>
+                <th class="text-center">Publisher</th>
+                <th class="text-center">Pages</th>
+                <th class="text-center">Class No</th>
+                <th class="text-center">Source</th>
+                <th class="text-center" ng-show="user.role == 'ADMIN'">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="magazine in magazineCtrl.bindingMagazines">
+                <td>{{ magazine.date | date: "yyyy/MM/dd"}}</td>
+                <td>{{ magazine.accessionNumber }}</td>
+                <td>{{ magazine.editor }}</td>
+                <td>{{ magazine.title }}</td>
+                <td>{{ magazine.course}}</td>
+                <td>{{ magazine.issn}}</td>
+                <td>{{ magazine.publisher}}</td>
+                <td>{{ magazine.pages}}</td>
+                <td>{{ magazine.classNo}}</td>
+                <td>{{ magazine.source}}</td>
+                <td class="text-center" ng-show="user.role == 'ADMIN'">
+                    <a href=""
+                       ng-click="magazineCtrl.getBindingMagazine(magazine.id)"
+                       class="text-warning">
+                        <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
+                    </a>&nbsp;&nbsp;
+                    <a href=""
+                       ng-click="magazineCtrl.deleteBindingMagazineModal(magazine.id)"
+                       class="text-danger">
+                        <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

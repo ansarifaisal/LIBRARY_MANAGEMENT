@@ -67,7 +67,7 @@
 
         me.publicationDateOptions = {
             formatYear: 'yy',
-            maxDate: new Date(),
+            //maxDate: new Date(),
             minMode: "month",
             datepickerMode: "month",
             startingDay: 1
@@ -116,7 +116,7 @@
         me.isBaught = function (gotBy) {
             me.baught = false;
             me.getStatus();
-            if (gotBy === 'Baught')
+            if (gotBy === 'Purchased')
                 return me.baught = true;
             me.bookForm.book.billDate = new Date();
             return me.baught;
@@ -188,16 +188,19 @@
         me.getBooks = function () {
 
             var user = $rootScope.user;
-
-            if (user.role === 'STUDENT' || user.role === 'FACULTY')
-                return;
-
+            var action = null;
             $rootScope.isBusy = true;
             if (user.role === 'ADMIN')
                 me.dtOptions = AppService.dataTableWithFunction("Add Book", me.showAddBookForm);
             else
                 me.dtOptions = AppService.dataTableWithOutFunction();
-            BookFactory.getBooks().then(function (books) {
+
+            if (user.role === 'ADMIN')
+                action = BookFactory.getBooks();
+            else
+                action = BookFactory.getUserBooks();
+
+            action.then(function (books) {
                 me.books = books;
             }).finally(function () {
                 $rootScope.isBusy = false;
@@ -264,7 +267,6 @@
         }
 
         me.trackChanges = function () {
-            console.log("Called");
             me.change = true;
         }
 
@@ -278,6 +280,48 @@
                     return me.exists = false;
                 if (book.accessionNumber === accessionNumber)
                     return me.exists = true;
+            }, function (errorResponse) {
+                toastr.error("Error Getting Response");
+            });
+        }
+
+        me.getBookByTitle = function (title) {
+            console.log(title);
+            if (title === "" || title === undefined)
+                return;
+            BookFactory.getBookByTitle(title).then(function (book) {
+                if (!book)
+                    return;
+                me.getCourses();
+                $timeout(function () {
+                    me.getSemesters(me.bookForm.courses, book.course);
+                    me.getSubjects(book.course, book.semester);
+                    me.getTypeOfBook();
+                    me.gotBy()
+                    me.isBaught(book.get);
+                }, 2000);
+
+                me.bookForm.book.author = book.author;
+                me.bookForm.book.actualPrice = book.actualPrice;
+                me.bookForm.book.billDate = BookFactory.parseDate(book.billDate);
+                me.bookForm.book.billNo = book.billNo;
+                me.bookForm.book.classNo = book.classNo;
+                me.bookForm.book.course = book.course;
+                me.bookForm.book.date = book.date;
+                me.bookForm.book.dateOfPublication = BookFactory.parseDate(book.dateOfPublication);
+                me.bookForm.book.discount = book.discount;
+                me.bookForm.book.discountPrice = book.discountPrice;
+                me.bookForm.book.edition = book.edition;
+                me.bookForm.book.get = book.get;
+                me.bookForm.book.isbn = book.isbn;
+                me.bookForm.book.pages = book.pages;
+                me.bookForm.book.placeOfPublication = book.placeOfPublication;
+                me.bookForm.book.publisher = book.publisher;
+                me.bookForm.book.semester = book.semester;
+                me.bookForm.book.source = book.source;
+                me.bookForm.book.subject = book.subject;
+                me.bookForm.book.typeOfBook = book.typeOfBook;
+
             }, function (errorResponse) {
                 toastr.error("Error Getting Response");
             });

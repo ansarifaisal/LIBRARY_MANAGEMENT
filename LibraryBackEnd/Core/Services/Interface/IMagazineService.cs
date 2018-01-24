@@ -8,5 +8,6 @@ namespace LibraryBackEnd.Core.Services.Interface
         IEnumerable<Magazine> GetMagazines(string title);
         Magazine GetByNumber(string number);
         IEnumerable<string> GetMagazineNumbers();
+        List<Magazine> GetMagazinesById(int id);
     }
 }

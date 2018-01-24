@@ -51,7 +51,7 @@
                                name="returnDate"
                                placeholder="Enter Return Date"
                                ng-model="issueBookCtrl.issueBook.returnDate"
-                               disabled
+                               ng-disabled="!issueBookCtrl.isBackwardClass"
                                required />
                     </div>
 
@@ -85,6 +85,19 @@
                                name="course"
                                placeholder="Enter Course"
                                ng-model="issueBookCtrl.issueBook.course"
+                               disabled
+                               required />
+
+                    </div>
+
+                    <div class="form-group">
+
+
+                        <label for="course">Year of Admission</label>
+                        <input type="text" class="form-control"
+                               name="course"
+                               placeholder="Enter Year of Admission"
+                               ng-model="issueBookCtrl.yearOfAdmission"
                                disabled
                                required />
 

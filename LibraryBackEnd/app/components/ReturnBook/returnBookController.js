@@ -20,8 +20,10 @@
 
         me.getReturnBooks = function () {
             var user = $rootScope.user;
-            if (user.role === 'STUDENT' || user.role === 'FACULTY')
+
+            if (user.role === 'STUDENT' || user.role === 'FACULTY' || user.role === 'NON-TEACHING')
                 return;
+
             $rootScope.isBusy = true;
             me.dtOptions = AppService.dataTableWithOutFunction();
 
@@ -36,8 +38,10 @@
 
         me.getByRollNumber = function () {
             var user = $rootScope.user;
+
             if (user.role === 'ADMIN' || user.role === 'LIBRARIAN')
                 return;
+
             $rootScope.isBusy = true;
             me.dtOptions = AppService.dataTableWithOutFunction();
             ReturnBookFactory.getByRollNo(user.rollNo).then(function (returnBooks) {

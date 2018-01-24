@@ -30,9 +30,9 @@
                 <td>{{ magazine.title}}</td>
                 <td>{{ magazine.number}}</td>
                 <td>{{ magazine.volume}}</td>
-                <td>{{ magazine.issuedDate | date: "MMM, dd yyyy"}}</td>
-                <td>{{ magazine.returnDate | date: "MMM, dd yyyy"}}</td>
-                <td>{{ magazine.actualReturnDate | date: "MMM, dd yyyy"}}</td>
+                <td>{{ magazine.issuedDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ magazine.returnDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ magazine.actualReturnDate | date: "yyyy/MM/dd"}}</td>
                 <td>{{ magazine.rollNo}}</td>
                 <td>{{ magazine.fullName}}</td>
                 <td>{{ magazine.course}}</td>
@@ -44,7 +44,7 @@
 </div>
 
 
-<div ng-init="magazineCtrl.getReturnMagazineByRollNumber()" ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
+<div ng-init="magazineCtrl.getReturnMagazineByRollNumber()" ng-if="user.role == 'STUDENT' || user.role == 'FACULTY' || user.role == 'NON-TEACHING'">
     <ol class="breadcrumb">
         <li><a href="" ng-href="#!/home">Home</a></li>
         <li class="active">Returned Magazine</li>

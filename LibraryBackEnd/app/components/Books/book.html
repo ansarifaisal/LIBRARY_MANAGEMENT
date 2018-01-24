@@ -29,7 +29,7 @@
 
     <div>
         <div class="panel panel-default panel-body"
-             ng-show="user.role == 'ADMIN' && bookCtrl.book.status != 'Issued'">
+             ng-if="user.role == 'ADMIN'">
             <table class="table">
                 <tr>
                     <td>Actions</td>
@@ -40,7 +40,7 @@
                 </tr>
             </table>
         </div>
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" ng-if="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
             <div class="panel-heading">
                 <h3 class="panel-title">Book Details</h3>
             </div>
@@ -59,10 +59,7 @@
                         <td><strong>Book Title</strong></td>
                         <td>{{bookCtrl.book.title}}</td>
                     </tr>
-                    <tr>
-                        <td><strong>Pages</strong></td>
-                        <td>{{bookCtrl.book.pages}}</td>
-                    </tr>
+
                     <tr>
                         <td><strong>Author</strong></td>
                         <td>{{bookCtrl.book.author}}</td>
@@ -78,6 +75,11 @@
                     <tr>
                         <td><strong>Date Of Publication</strong></td>
                         <td>{{bookCtrl.book.dateOfPublication | date: "MMM, yyyy"}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pages</strong></td>
+                        <td>{{bookCtrl.book.pages}}</td>
+                    </tr>
                     <tr>
                         <td><strong>Course</strong></td>
                         <td>{{bookCtrl.book.course}}</td>
@@ -135,7 +137,7 @@
             </div>
         </div>
 
-        <div class="panel panel-primary">
+        <div class="panel panel-primary" ng-if="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
             <div class="panel-heading">
                 <h3 class="panel-title">Issue Details</h3>
             </div>
@@ -169,7 +171,7 @@
     </div>
 </div>
 
-<div ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
+<div ng-if="user.role == 'STUDENT' || user.role == 'FACULTY'  || user.role == 'NON-TEACHING'">
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="panel-title">Book Details</h3>

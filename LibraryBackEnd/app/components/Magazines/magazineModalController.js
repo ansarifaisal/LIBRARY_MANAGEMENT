@@ -17,6 +17,8 @@
 
         me.publisher = modal.publisher;
 
+        me.bindingMagazine = modal.bindingMagazine;
+
         me.title = modal.title;
 
         me.btnText = modal.btnText;
@@ -230,6 +232,11 @@
             if (me.periodicDetail.amount === "")
                 me.periodicDetail.amount = 0;
 
+            if (me.periodicDetail.bundled === "Yes" && me.periodicDetail.bundleSentDate !== undefined)
+                MagazineFactory.updateMagazineStatus(me.periodicDetail.id);
+            else
+                me.periodicDetail.bundled === "No";
+
             me.periodicDetail.from = MagazineFactory.dateParse(me.periodicDetail.from);
             me.periodicDetail.to = MagazineFactory.dateParse(me.periodicDetail.to);
             me.periodicDetail.orderDate = MagazineFactory.dateParse(me.periodicDetail.orderDate);
@@ -271,6 +278,10 @@
             me.paidBy = MagazineFactory.getPaidBy();
         }
 
+        me.isBundle = function () {
+            me.isBundle = MagazineFactory.getBundleOptions();
+        }
+
         me.getPeriodicity = function () {
             me.periodicity = MagazineFactory.getPeriodicity();
         }
@@ -281,9 +292,18 @@
 
         me.isPaidByCheque = function (paidBy) {
             me.cheque = false;
-            if (paidBy === "Cheque")
+            if (paidBy === "Cheque" || paidBy === "DD")
                 me.cheque = true;
             return me.cheque;
+        }
+
+
+        me.bundleOptionYes = function (option) {
+            console.log(option);
+            me.bundleOption = "No";
+            if (option === "Yes")
+                me.bundleOption = "Yes";
+            return me.bundleOption;
         }
 
         me.isBundled = function (bundleDate) {
@@ -324,6 +344,7 @@
 
         me.submitMagazineForm = function () {
             me.magazine.periodicTitle = $routeParams.title;
+            me.magazine.periodicId = $routeParams.id;
             me.magazine.recievedBy = $rootScope.user.fullName;
             me.magazine.month = MagazineFactory.dateParse(me.magazine.month);
             me.magazine.dateOfRecieved = MagazineFactory.dateParse(me.magazine.dateOfRecieved);
@@ -331,6 +352,7 @@
                 me.magazine.remark = "NA";
             if (me.magazine.id === undefined || me.magazine.id === "")
                 me.magazine.status = "Available";
+
             var addOrEdit = MagazineFactory.addOrEditMagazine(me.magazine);
 
             $action = addOrEdit.action;
@@ -432,6 +454,8 @@
                     return me.magazineExists = false;
                 else
                     me.magazineExists = true;
+                console.log(magazine.status);
+                me.bundled = magazine.status;
                 me.issueMagazine.title = magazine.periodicTitle;
                 me.issueMagazine.volume = magazine.volume;
                 me.isIssue(magazine);
@@ -561,6 +585,7 @@
             me.getPublishers();
             me.getPaidBy();
             me.getPeriodicity();
+            me.isBundle();
             me.getCourses();
             me.getTypes();
             me.getPeriodicityOptions();
@@ -574,6 +599,62 @@
             me.periodicDetail.bundleDeliveryDate = MagazineFactory.parseDate(me.periodicDetail.bundleDeliveryDate);
             if (me.periodicDetail.paidBy !== undefined)
                 me.isPaidByCheque(me.periodicDetail.paidBy);
+            if (me.periodicDetail.bundled !== undefined)
+                me.bundleOptionYes(me.periodicDetail.bundled);
+        }
+
+
+        me.submitBindingMagazineForm = function () {
+            if (me.bindingMagazine.title === "")
+                return;
+
+            var addOrEdit = MagazineFactory.addOrEditBindingMagazine(me.bindingMagazine);
+
+            $action = addOrEdit.action;
+            $rootScope.isBusy = true;
+
+            $action.then(function () {
+                $route.reload();
+                toastr.success(addOrEdit.successMessage);
+            }, function (errorResponse) {
+                $route.reload();
+                if (errorResponse.status === 400)
+                    return toastr.error("Details Already Exists");
+                toastr.error(addOrEdit.errorMessage);
+            }).finally(function () {
+                $rootScope.isBusy = false;
+            });
+        }
+
+        me.deleteBindingMagazine = function () {
+            $rootScope.isBusy = true;
+            MagazineFactory.deleteBindingMagazine(me.bindingMagazine).then(function () {
+                me.ok();
+                $route.reload();
+                toastr.success("Details Deleted Successfully!");
+            }, function (errorResponse) {
+                me.cancel();
+
+                toastr.error("Error Deleting Details.");
+            }).finally(function () {
+                $rootScope.isBusy = false;
+            });
+        }
+
+        me.loadBindingMagazineData = function () {
+            me.getCourses();
+            me.getPublishers();
+        }
+
+        me.checkExistingBindingMagazine = function (number) {
+            if (!number || !me.change)
+                return;
+            me.exists = false;
+            MagazineFactory.checkExistingBindingMagazineDetail(number).then(function (bindingMagazine) {
+                if (bindingMagazine)
+                    me.exists = true;
+            });
+            return me.exists;
         }
 
         $uibModalInstance.opened.then(function () {

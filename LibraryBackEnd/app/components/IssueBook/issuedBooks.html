@@ -6,7 +6,7 @@
 <div class="page-header">
     <h3>Issued Books</h3>
 </div>
-<div ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
+<div ng-if="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
     <div ng-init="issueBookCtrl.getIssuedBooks()">
         <table datatable="ng" dt-options="issueBookCtrl.dtOptions" dt-column-defs="issueBookCtrl.dtColumnDefs" class="table-condensed table-hover">
             <thead>
@@ -27,8 +27,8 @@
                 <tr ng-repeat="issuedBook in issueBookCtrl.issuedBooks">
                     <td>{{ issuedBook.accessionNumber }}</td>
                     <td>{{ issuedBook.bookTitle }}</td>
-                    <td>{{ issuedBook.issuedDate | date: "MMM, dd yyyy"}}</td>
-                    <td>{{ issuedBook.returnDate | date: "MMM, dd yyyy"}}</td>
+                    <td>{{ issuedBook.issuedDate | date: "yyyy/MM/dd"}}</td>
+                    <td>{{ issuedBook.returnDate | date: "yyyy/MM/dd"}}</td>
                     <td>{{ issuedBook.rollNo }}</td>
                     <td>{{ issuedBook.fullName }}</td>
                     <td>{{ issuedBook.course }}</td>
@@ -45,7 +45,7 @@
     </div>
 </div>
 
-<div ng-show="user.role == 'STUDENT' || user.role == 'FACULTY'">
+<div ng-if="user.role == 'STUDENT' || user.role == 'FACULTY' || user.role == 'NON-TEACHING'">
     <div ng-init="issueBookCtrl.getIssuedDataByRollNumber()">
         <table datatable="ng" dt-options="issueBookCtrl.dtOptions" dt-column-defs="issueBookCtrl.dtColumnDefs" class="table-condensed table-hover">
             <thead>
@@ -64,8 +64,8 @@
                 <tr ng-repeat="issuedBook in issueBookCtrl.issuedBooks">
                     <td>{{ issuedBook.accessionNumber }}</td>
                     <td>{{ issuedBook.bookTitle }}</td>
-                    <td>{{ issuedBook.issuedDate | date: "MMM, dd yyyy"}}</td>
-                    <td>{{ issuedBook.returnDate | date: "MMM, dd yyyy"}}</td>
+                    <td>{{ issuedBook.issuedDate | date: "yyyy/MM/dd"}}</td>
+                    <td>{{ issuedBook.returnDate | date: "yyyy/MM/dd"}}</td>
                     <td>{{ issuedBook.rollNo }}</td>
                     <td>{{ issuedBook.fullName }}</td>
                     <td>{{ issuedBook.course }}</td>

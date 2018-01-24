@@ -17,5 +17,6 @@ namespace LibraryBackEnd.Core.IRepositories
         IEnumerable<ApplicationUser> GetSearchResults(SearchStudentBindingModel searchStudentBindingModel);
         IEnumerable<string> GetFullName();
         IEnumerable<string> GetRollNos();
+        IEnumerable<ApplicationUser> GetFacultiesAndNonTeaching();
     }
 }

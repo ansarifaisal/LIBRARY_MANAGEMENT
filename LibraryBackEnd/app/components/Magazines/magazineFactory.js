@@ -55,7 +55,16 @@ MagazineModule.factory("MagazineFactory", [
             getMagazineNumbers: getMagazineNumbers,
             updateFine: updateFine,
             getTypes: getTypes,
-            getPeriodicityOptions: getPeriodicityOptions
+            getPeriodicityOptions: getPeriodicityOptions,
+            getBundleOptions: getBundleOptions,
+            updateMagazineStatus: updateMagazineStatus,
+            getBindingMagazines: getBindingMagazines,
+            getBindingMagazine: getBindingMagazine,
+            addBindingMagazine: addBindingMagazine,
+            editBindingMagazine: editBindingMagazine,
+            deleteBindingMagazine: deleteBindingMagazine,
+            addOrEditBindingMagazine: addOrEditBindingMagazine,
+            checkExistingBindingMagazineDetail: checkExistingBindingMagazineDetail,
         }
         return magazineFactory;
 
@@ -195,12 +204,12 @@ MagazineModule.factory("MagazineFactory", [
         }
 
         function getPaidBy() {
-            var paidBy = ["Cheque", "Cash"]
+            var paidBy = ["Cheque", "Cash", "DD"]
             return paidBy;
         }
 
         function getPeriodicity() {
-            var periodicity = ["Weekly", "Monthly", "Quaterly", "Yearly"];
+            var periodicity = ["Weekly", "Half Monthly", "Monthly", "Quaterly", "Half Yearly", "Yearly"];
             return periodicity;
         }
 
@@ -543,13 +552,109 @@ MagazineModule.factory("MagazineFactory", [
         }
 
         function getTypes() {
-            var types = ["Magazine", "Periodicity"];
+            var types = ["Magazine", "Periodical"];
             return types;
         }
 
         function getPeriodicityOptions() {
             var periodicityOptions = ["Days", "Weeks", "Months", "Years"];
             return periodicityOptions;
+        }
+
+        function getBundleOptions() {
+            var options = ["No", "Yes"];
+            return options;
+        }
+
+        function updateMagazineStatus(id) {
+            var deferred = $q.defer();
+            $http.get("/api/magazine/updateMagazineStatus/" + id)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function getBindingMagazines() {
+            var deferred = $q.defer();
+            $http.get("/api/magazine/bindingMagazine/all")
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function getBindingMagazine(id) {
+            var deferred = $q.defer();
+            $http.get("/api/magazine/bindingMagazine/get/" + id)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function addBindingMagazine(bindingMagazine) {
+            var deferred = $q.defer();
+            $http.post("/api/magazine/bindingMagazine/add", bindingMagazine)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function editBindingMagazine(bindingMagazine) {
+            var deferred = $q.defer();
+            $http.post("/api/magazine/bindingMagazine/edit", bindingMagazine)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function deleteBindingMagazine(bindingMagazine) {
+            var deferred = $q.defer();
+            $http.post("/api/magazine/bindingMagazine/delete", bindingMagazine)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
+        }
+
+        function addOrEditBindingMagazine(bindingMagazine) {
+            var toDo = {};
+            if (bindingMagazine.id === undefined) {
+                toDo.action = addBindingMagazine(bindingMagazine);
+                toDo.errorMessage = "Error Adding Binding Details";
+                toDo.successMessage = "Binding Details Added Successfully!";
+            } else {
+                toDo.action = editBindingMagazine(bindingMagazine);
+                toDo.errorMessage = "Error Editing Binding Details";
+                toDo.successMessage = "Binding Details Edited Successfully!";
+            }
+            return toDo;
+        }
+
+        function checkExistingBindingMagazineDetail(number) {
+            var deferred = $q.defer();
+            $http.get("/api/magazine/bindingMagazine/checkExistingByNumber?number=" + number)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (errorResponse) {
+                    deferred.reject(errorResponse);
+                });
+            return deferred.promise;
         }
     }
 ]);

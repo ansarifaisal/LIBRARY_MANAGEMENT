@@ -25,7 +25,7 @@
         <tbody>
             <tr ng-repeat="newsPaper in newsPaperCtrl.newsPapers">
                 <td>{{ newsPaper.title}}</td>
-                <td>{{ newsPaper.date | date : 'MMM, dd yyyy'}}</td>
+                <td>{{ newsPaper.date | date : 'yyyy/MM/dd'}}</td>
                 <td><span class="fa fa-rupee"></span> {{ newsPaper.price}}</td>
                 <td>{{ newsPaper.librarian}}</td>
                 <td>{{ newsPaper.remark}}</td>

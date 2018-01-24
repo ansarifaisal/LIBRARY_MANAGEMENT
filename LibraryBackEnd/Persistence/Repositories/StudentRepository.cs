@@ -101,5 +101,11 @@ namespace LibraryBackEnd.Persistence.Repositories
         {
             return _context.Users.Where(u => u.Role == role).ToList();
         }
+
+        public IEnumerable<ApplicationUser> GetFacultiesAndNonTeaching()
+        {
+            return _context.Users.Where(u => u.Role == "FACULTY" || u.Role == "NON-TEACHING").ToList();
+        }
+
     }
 }

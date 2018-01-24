@@ -28,7 +28,7 @@ namespace LibraryBackEnd.Controllers
         [HttpGet]
         public IHttpActionResult GetFactulties()
         {
-            var faculties = _studentService.GetUsersByRole("FACULTY");
+            var faculties = _studentService.GetFacultiesAndNonTeaching();
             return Ok(faculties);
         }
 

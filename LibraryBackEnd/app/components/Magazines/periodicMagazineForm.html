@@ -409,22 +409,22 @@
 
             <div ng-show="magazineModalCtrl.cheque == true">
                 <div class="form-group">
-                    <label for="chequeNo">Cheque Number</label>
+                    <label for="chequeNo">Cheque | DD Number</label>
                     <input type="text"
                            name="chequeNo"
                            class="form-control"
-                           placeholder="Enter Cheque Number"
+                           placeholder="Enter Cheque | DD Number"
                            ng-change="magazineModalCtrl.trackChanges()"
                            ng-model="magazineModalCtrl.periodicDetail.chequeNo" />
                 </div>
 
                 <div class="form-group">
-                    <label for="chequeDate">Cheque Date</label>
+                    <label for="chequeDate">Cheque | DD Date</label>
                     <div class="input-group">
                         <input type="text"
                                name="chequeDate"
                                class="form-control"
-                               placeholder="Enter Cheque Date"
+                               placeholder="Enter Cheque | DD Date"
                                ng-model="magazineModalCtrl.periodicDetail.chequeDate"
                                uib-datepicker-popup="EEE MMM, dd yyyy"
                                datepicker-options="magazineModalCtrl.futureDatePickerOptions"
@@ -439,45 +439,66 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="bundleSentDate">Bundle Sent Date</label>
-                <div class="input-group">
-                    <input type="text"
-                           name="bundleSentDate"
-                           class="form-control"
-                           placeholder="Enter Bundle Sent Date"
-                           ng-model="magazineModalCtrl.periodicDetail.bundleSentDate"
-                           uib-datepicker-popup="EEE MMM, dd yyyy"
-                           datepicker-options="magazineModalCtrl.futureDatePickerOptions"
-                           close-text="Close"
-                           is-open="magazineModalCtrl.bundleSentDatePicker.opened"
-                           ng-change="magazineModalCtrl.trackChanges()" />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.bundleSentDatePickers()"><i class="fa fa-calendar"></i></button>
-                    </span>
+
+            <div class="form-group" ng-class="{'has-error has-feedback': createEdit.bundled.$invalid && createEdit.bundled.$touched
+         || createEdit.bundled.$invalid && createEdit.$submitted,
+         'has-success has-feedback': createEdit.bundled.$valid || createEdit.bundled.$valid
+         && createEdit.$submitted}">
+
+                <label for="bundled">Binding *</label>
+                <select class="form-control" name="bundled"
+                        ng-model="magazineModalCtrl.periodicDetail.bundled"
+                        ng-options="isBundle as isBundle for isBundle in  magazineModalCtrl.isBundle"
+                        ng-change="magazineModalCtrl.bundleOptionYes(magazineModalCtrl.periodicDetail.bundled); magazineModalCtrl.trackChanges()"
+                        required>
+                    <option value="" disabled>Select Binding Option</option>
+                </select>
+                <div ng-show="createEdit.bundled.$invalid && createEdit.bundled.$touched || createEdit.$submitted">
+                    <div ng-show="createEdit.bundled.$error.required" class="text-danger small">Please, select an option.</div>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="bundleDeliveryDate">Bundle Delivery Date</label>
-                <div class="input-group">
-                    <input type="text"
-                           name="bundleDeliveryDate"
-                           class="form-control"
-                           placeholder="Enter Bundle Delivery Date"
-                           ng-model="magazineModalCtrl.periodicDetail.bundleDeliveryDate"
-                           uib-datepicker-popup="EEE MMM, dd yyyy"
-                           datepicker-options="magazineModalCtrl.futureDatePickerOptions"
-                           close-text="Close"
-                           is-open="magazineModalCtrl.bundleDeliveryDatePicker.opened"
-                           ng-change="magazineModalCtrl.trackChanges()" />
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.bundleDeliveryDatePickers()"><i class="fa fa-calendar"></i></button>
-                    </span>
+            <div ng-if="magazineModalCtrl.bundleOption == 'Yes'">
+                <div class="form-group">
+                    <label for="bundleSentDate">Binding Sent Date</label>
+                    <div class="input-group">
+                        <input type="text"
+                               name="bundleSentDate"
+                               class="form-control"
+                               placeholder="Enter Bundle Sent Date"
+                               ng-model="magazineModalCtrl.periodicDetail.bundleSentDate"
+                               uib-datepicker-popup="EEE MMM, dd yyyy"
+                               datepicker-options="magazineModalCtrl.futureDatePickerOptions"
+                               close-text="Close"
+                               is-open="magazineModalCtrl.bundleSentDatePicker.opened"
+                               ng-change="magazineModalCtrl.trackChanges()" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.bundleSentDatePickers()"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="bundleDeliveryDate">Binding Delivery Date</label>
+                    <div class="input-group">
+                        <input type="text"
+                               name="bundleDeliveryDate"
+                               class="form-control"
+                               placeholder="Enter Bundle Delivery Date"
+                               ng-model="magazineModalCtrl.periodicDetail.bundleDeliveryDate"
+                               uib-datepicker-popup="EEE MMM, dd yyyy"
+                               datepicker-options="magazineModalCtrl.futureDatePickerOptions"
+                               close-text="Close"
+                               is-open="magazineModalCtrl.bundleDeliveryDatePicker.opened"
+                               ng-change="magazineModalCtrl.trackChanges()" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.bundleDeliveryDatePickers()"><i class="fa fa-calendar"></i></button>
+                        </span>
+                    </div>
                 </div>
             </div>
 
-            <input type="submit" ng-disabled="createEdit.$invalid" value="{{magazineModalCtrl.btnText}}" class="btn btn-primary" ng-click="magazineModalCtrl.ok()" />
+            <input type="submit" ng-disabled="createEdit.$invalid || magazineModalCtrl.exists == true" value="{{magazineModalCtrl.btnText}}" class="btn btn-primary" ng-click="magazineModalCtrl.ok()" />
             <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.cancel()">Close</button>
 
         </form>
