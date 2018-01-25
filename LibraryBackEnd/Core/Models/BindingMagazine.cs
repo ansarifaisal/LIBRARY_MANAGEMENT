@@ -38,6 +38,10 @@ namespace LibraryBackEnd.Core.Models
         [Required]
         public string Course { get; set; }
 
+        public int BillNumber { get; set; }
+
+        public DateTime BillDate { get; set; }
+
         public BindingMagazine()
         {
             Date = DateTime.Now;

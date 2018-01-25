@@ -634,6 +634,14 @@
     <Compile Include="Persistence\Migrations\201801242028449_addBundleMagazine.Designer.cs">
       <DependentUpon>201801242028449_addBundleMagazine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201801251523162_addBillNumberAndBillDate.cs" />
+    <Compile Include="Persistence\Migrations\201801251523162_addBillNumberAndBillDate.Designer.cs">
+      <DependentUpon>201801251523162_addBillNumberAndBillDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201801251544230_addPublisherInMagazine.cs" />
+    <Compile Include="Persistence\Migrations\201801251544230_addPublisherInMagazine.Designer.cs">
+      <DependentUpon>201801251544230_addPublisherInMagazine.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -742,7 +750,7 @@
     <Content Include="app\components\Magazines\confirmReplaceMagazine.html" />
     <Content Include="app\components\Magazines\confirmReturnMagazine.html" />
     <Content Include="app\components\Magazines\confirmUndoReplaceMagazine.html" />
-    <Content Include="app\components\Magazines\deleteBindingMagazines.html" />
+    <Content Include="app\components\Magazines\deleteBindingMagazine.html" />
     <Content Include="app\components\Magazines\deleteMagazine.html" />
     <Content Include="app\components\Magazines\deletePeriodicDetails.html" />
     <Content Include="app\components\Magazines\issueMagazineForm.html" />
@@ -1095,6 +1103,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201801242028449_addBundleMagazine.resx">
       <DependentUpon>201801242028449_addBundleMagazine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801251523162_addBillNumberAndBillDate.resx">
+      <DependentUpon>201801251523162_addBillNumberAndBillDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801251544230_addPublisherInMagazine.resx">
+      <DependentUpon>201801251544230_addPublisherInMagazine.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -9,8 +9,8 @@
          || createEdit.title.$invalid && createEdit.$submitted,
          'has-success has-feedback': createEdit.title.$valid || createEdit.title.$valid
          && createEdit.$submitted}">
-            <label for="title">Title</label>
-            <input type="text" name="title" class="form-control" placeholder="Enter Title" ng-model="magazineModalCtrl.publisher.title" required />
+            <label for="title">Publisher</label>
+            <input type="text" name="title" class="form-control" placeholder="Enter Publisher" ng-model="magazineModalCtrl.publisher.title" required />
 
             <span class="glyphicon form-control-feedback"
                   ng-class="{'glyphicon-ok': createEdit.title.$valid || createEdit.title.$valid && createEdit.$submitted,

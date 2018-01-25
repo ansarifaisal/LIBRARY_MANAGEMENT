@@ -100,29 +100,52 @@
                     <thead>
                         <tr>
                             <th class="text-center">Date</th>
-                            <th class="text-center">Accession</th>
-                            <th class="text-center">Title</th>
+                            <th class="text-center">Accession Number</th>
                             <th class="text-center">Author(s)</th>
-                            <th class="text-center">Publisher</th>
+                            <th class="text-center">Title</th>
                             <th class="text-center">Course</th>
                             <th class="text-center">Semester</th>
                             <th class="text-center">Subject</th>
-                            <th class="text-center">Type</th>
+                            <th class="text-center">Type of Book</th>
+                            <th class="text-center">Class No</th>
+                            <th class="text-center">Publisher</th>
+                            <th class="text-center">Place</th>
+                            <th class="text-center">Date of Publication</th>
+                            <th class="text-center">Edition</th>
+                            <th class="text-center">ISBN</th>
+                            <th class="text-center">Source</th>
+                            <th class="text-center">Pages</th>
+                            <th class="text-center">Actual Price</th>
+                            <th class="text-center">Discount</th>
+                            <th class="text-center">Discount Price</th>
+                            <th class="text-center">Bill Number</th>
+                            <th class="text-center">Bill Date</th>
                             <th class="text-center">Status</th>
-
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="book in searchCtrl.books">
-                            <td>{{ book.date | date: "yyyy/MM/dd" }}</td>
+                            <td>{{ book.date | date: "yyyy/MM/dd"}}</td>
                             <td>{{ book.accessionNumber }}</td>
-                            <td><a href="" ng-href="#!/user/book/{{book.id}}">{{ book.title }}</a></td>
                             <td>{{ book.author }}</td>
-                            <td>{{ book.publisher }}</td>
+                            <td><a href="" ng-href="#!/user/book/{{book.id}}">{{ book.title }}</a></td>
                             <td>{{ book.course }}</td>
                             <td>{{ book.semester }}</td>
                             <td>{{ book.subject }}</td>
                             <td>{{ book.typeOfBook }}</td>
+                            <td>{{ book.classNo }}</td>
+                            <td>{{ book.publisher }}</td>
+                            <td>{{ book.placeOfPublication }}</td>
+                            <td>{{ book.dateOfPublication | date: "MMM, yyyy"}}</td>
+                            <td>{{ book.edition }}</td>
+                            <td>{{ book.isbn }}</td>
+                            <td>{{ book.source }}</td>
+                            <td>{{ book.pages }}</td>
+                            <td><span class="fa fa-rupee"></span> {{ book.actualPrice }}</td>
+                            <td>{{ book.discount }} %</td>
+                            <td><span class="fa fa-rupee"></span> {{ book.discountPrice }}</td>
+                            <td>{{ book.billNo }}</td>
+                            <td>{{ book.billDate | date: "MMM, dd yyyy"}}</td>
                             <td>{{ book.status }}</td>
                         </tr>
                     </tbody>

@@ -12,12 +12,13 @@
     <table datatable="ng" dt-options="magazineCtrl.dtOptions" dt-column-defs="magazineCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>
-                <th class="text-center">Title</th>
                 <th class="text-center">Date</th>
+                <th class="text-center">Lib. Ref.</th>
+                <th class="text-center">Title</th>
                 <th class="text-center">Month</th>
                 <th class="text-center">Volume</th>
-                <th class="text-center">Number</th>
                 <th class="text-center">ISSN</th>
+                <th class="text-center">Publisher</th>
                 <th class="text-center">Received Date</th>
                 <th class="text-center">Received By</th>
                 <th class="text-center">Status</th>
@@ -26,12 +27,13 @@
         </thead>
         <tbody>
             <tr ng-repeat="magazine in magazineCtrl.magazines">
-                <td>{{ magazine.periodicTitle}}</td>
                 <td>{{ magazine.date | date: 'yyyy/MM/dd'}}</td>
+                <td>{{ magazine.number}}</td>
+                <td>{{ magazine.periodicTitle}}</td>
                 <td>{{ magazine.month | date: 'MMM, yyyy'}}</td>
                 <td>{{ magazine.volume}}</td>
-                <td>{{ magazine.number}}</td>
                 <td>{{ magazine.issn}}</td>
+                <td>{{ magazine.publisher}}</td>
                 <td>{{ magazine.dateOfRecieved | date: 'yyyy/MM/dd'}}</td>
                 <td>{{ magazine.recievedBy}}</td>
                 <td>{{ magazine.status}}</td>

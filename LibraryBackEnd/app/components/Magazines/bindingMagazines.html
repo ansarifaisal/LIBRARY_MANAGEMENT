@@ -12,7 +12,7 @@
         <thead>
             <tr>
                 <th class="text-center">Date</th>
-                <th class="text-center">Number</th>
+                <th class="text-center">Accession Number</th>
                 <th class="text-center">Editor</th>
                 <th class="text-center">Title</th>
                 <th class="text-center">Course</th>
@@ -21,6 +21,8 @@
                 <th class="text-center">Pages</th>
                 <th class="text-center">Class No</th>
                 <th class="text-center">Source</th>
+                <th class="text-center">Bill No.</th>
+                <th class="text-center">Bill Date</th>
                 <th class="text-center" ng-show="user.role == 'ADMIN'">Action</th>
             </tr>
         </thead>
@@ -36,6 +38,8 @@
                 <td>{{ magazine.pages}}</td>
                 <td>{{ magazine.classNo}}</td>
                 <td>{{ magazine.source}}</td>
+                <td>{{ magazine.billNumber}}</td>
+                <td>{{ magazine.billDate | date: "yyyy/MM/dd"}}</td>
                 <td class="text-center" ng-show="user.role == 'ADMIN'">
                     <a href=""
                        ng-click="magazineCtrl.getBindingMagazine(magazine.id)"

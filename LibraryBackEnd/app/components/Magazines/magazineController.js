@@ -60,7 +60,8 @@
         me.magazine = {
             id: undefined,
             periodicTitle: '',
-            periodicId:'',
+            periodicId: '',
+            publisher:'',
             month: '',
             volume: '',
             issn: undefined,
@@ -106,10 +107,11 @@
             title: '',
             pages: '',
             editor: '',
-            publisher: '',
             issn: '',
             source: '',
             classNo: '',
+            billNumber: '',
+            billDate: ''
         };
 
         me.bindingMagazineModal = {
@@ -181,7 +183,7 @@
             $rootScope.isBusy = true;
             var user = $rootScope.user;
             if (user.role === 'ADMIN')
-                me.dtOptions = AppService.dataTableWithFunction("Add Periodic Details", me.showPeriodicDetailForm);
+                me.dtOptions = AppService.dataTableWithFunction("Add Periodical Details", me.showPeriodicDetailForm);
             else
                 me.dtOptions = AppService.dataTableWithOutFunction();
             MagazineFactory.getPeriodicDetails().then(function (periodicDetails) {

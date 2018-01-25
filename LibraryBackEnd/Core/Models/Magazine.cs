@@ -10,6 +10,8 @@ namespace LibraryBackEnd.Core.Models
 
         public int PeriodicId { get; set; }
 
+        public string Publisher { get; set; }
+
         public DateTime Date { get; set; }
 
         public DateTime Month { get; set; }

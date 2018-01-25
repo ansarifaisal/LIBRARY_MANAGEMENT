@@ -44,8 +44,8 @@
             <tr ng-repeat="periodicDetail in magazineCtrl.periodicDetails">
                 <td>{{ periodicDetail.date | date: "yyyy/MM/dd"}}</td>
                 <td>
-                    <a ng-if="periodicDetail.bundled == 'Yes'" href="" ng-href="#!/admin/magazines/{{periodicDetail.title}}/{{periodicDetail.id}}?bundled=yes">{{ periodicDetail.title}}</a>
-                    <a ng-if="periodicDetail.bundled == 'No'" href="" ng-href="#!/admin/magazines/{{periodicDetail.title}}/{{periodicDetail.id}}">{{ periodicDetail.title}}</a>
+                    <a ng-if="periodicDetail.bundled == 'Yes'" href="" ng-href="#!/admin/magazines/{{periodicDetail.title}}/{{periodicDetail.id}}?publisher={{periodicDetail.publisher}}&bundled=yes">{{ periodicDetail.title}}</a>
+                    <a ng-if="periodicDetail.bundled == 'No'" href="" ng-href="#!/admin/magazines/{{periodicDetail.title}}/{{periodicDetail.id}}?publisher={{periodicDetail.publisher}}">{{ periodicDetail.title}}</a>
                 </td>
                 <td>{{ periodicDetail.course}}</td>
                 <td>{{ periodicDetail.periodicity}}</td>

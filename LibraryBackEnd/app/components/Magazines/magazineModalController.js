@@ -346,6 +346,7 @@
             me.magazine.periodicTitle = $routeParams.title;
             me.magazine.periodicId = $routeParams.id;
             me.magazine.recievedBy = $rootScope.user.fullName;
+            me.magazine.publisher = $routeParams.publisher;
             me.magazine.month = MagazineFactory.dateParse(me.magazine.month);
             me.magazine.dateOfRecieved = MagazineFactory.dateParse(me.magazine.dateOfRecieved);
             if (me.magazine.remark === "")

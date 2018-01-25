@@ -10,13 +10,12 @@
          || createEdit.accessionNumber.$invalid && createEdit.$submitted || magazineModalCtrl.exists && createEdit.accessionNumber.$touched,
          'has-success has-feedback': createEdit.accessionNumber.$valid || createEdit.accessionNumber.$valid
          && createEdit.$submitted || !magazineModalCtrl.exists && createEdit.accessionNumber.$touched}">
-                <label for="accessionNumber">Magazine Number</label>
+                <label for="accessionNumber">Accession Number</label>
                 <input type="text"
                        name="accessionNumber"
                        class="form-control"
-                       placeholder="Enter Magazine Number"
-                       ng-pattern="/^[0-9]/"
-                       ng-maxlength="6"
+                       placeholder="Enter Magazine Accession Number"
+                       ng-maxlength="20"
                        ng-model="magazineModalCtrl.bindingMagazine.accessionNumber"
                        ng-blur="magazineModalCtrl.checkExistingBindingMagazine(magazineModalCtrl.bindingMagazine.accessionNumber)"
                        ng-change="magazineModalCtrl.trackChanges()"
@@ -30,8 +29,7 @@
 
                 <div ng-show="createEdit.accessionNumber.$invalid && createEdit.accessionNumber.$touched || createEdit.$submitted || magazineModalCtrl.exists">
                     <div ng-show="createEdit.accessionNumber.$error.required" class="text-danger small">Please, provide magazine number.</div>
-                    <div ng-show="createEdit.accessionNumber.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
-                    <div ng-show="createEdit.accessionNumber.$error.maxlength" class="text-danger small">This field can contain 6 characters only.</div>
+                    <div ng-show="createEdit.accessionNumber.$error.maxlength" class="text-danger small">This field can contain 20 characters only.</div>
                     <div ng-show="magazineModalCtrl.exists" class="text-danger small">Magazine already exists.</div>
                 </div>
 
@@ -204,6 +202,39 @@
 
                 <div ng-show="createEdit.source.$invalid && createEdit.source.$touched || createEdit.$submitted">
                     <span ng-show="createEdit.source.$error.required" class="text-danger small">Please, provide source.</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <label for="billNumber">Bill Number</label>
+                <input type="text"
+                       name="billNumber"
+                       class="form-control"
+                       placeholder="Enter Bill Number"
+                       ng-change="magazineModalCtrl.trackChanges()"
+                       ng-model="magazineModalCtrl.bindingMagazine.billNumber" />
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="billDate">Bill Date</label>
+
+                <div class="input-group">
+                    <input type="text"
+                           name="billDate"
+                           class="form-control"
+                           placeholder="Enter Bill Date"
+                           ng-model="magazineModalCtrl.bindingMagazine.billDate"
+                           uib-datepicker-popup="EEE MMM, dd yyyy"
+                           datepicker-options="magazineModalCtrl.datePickerOptions"
+                           close-text="Close"
+                           ng-change="magazineModalCtrl.trackChanges()"
+                           is-open="magazineModalCtrl.billDatePicker.opened" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="magazineModalCtrl.billDatePickers()"><i class="fa fa-calendar"></i></button>
+                    </span>
                 </div>
 
             </div>

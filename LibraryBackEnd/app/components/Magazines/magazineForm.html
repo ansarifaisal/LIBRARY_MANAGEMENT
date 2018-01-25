@@ -66,13 +66,12 @@
          || createEdit.number.$invalid && createEdit.$submitted || magazineModalCtrl.exists && createEdit.number.$touched,
          'has-success has-feedback': createEdit.number.$valid || createEdit.number.$valid
          && createEdit.$submitted || !magazineModalCtrl.exists && createEdit.number.$touched}">
-            <label for="number">Magazine Number</label>
+            <label for="number">Lib. Ref.</label>
             <input type="text"
                    name="number"
                    class="form-control"
-                   placeholder="Enter Magazine Number"
-                   ng-pattern="/^[0-9]/"
-                   ng-maxlength="6"
+                   placeholder="Enter Lib. Ref. Number"
+                   ng-maxlength="20"
                    ng-model="magazineModalCtrl.magazine.number"
                    ng-blur="magazineModalCtrl.checkExistingMagazine(magazineModalCtrl.magazine.number)"
                    ng-change="magazineModalCtrl.trackChanges()"
@@ -86,8 +85,7 @@
 
             <div ng-show="createEdit.number.$invalid && createEdit.number.$touched || createEdit.$submitted || magazineModalCtrl.exists">
                 <div ng-show="createEdit.number.$error.required" class="text-danger small">Please, provide magazine number.</div>
-                <div ng-show="createEdit.number.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
-                <div ng-show="createEdit.number.$error.maxlength" class="text-danger small">This field can contain 6 characters only.</div>
+                <div ng-show="createEdit.number.$error.maxlength" class="text-danger small">This field can contain 20 characters only.</div>
                 <div ng-show="magazineModalCtrl.exists" class="text-danger small">Magazine already exists.</div>
             </div>
 
