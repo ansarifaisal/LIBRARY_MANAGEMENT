@@ -29,5 +29,31 @@ namespace LibraryBackEnd.Persistence.Repositories
                 .Where(r => r.AccessionNumber == accessionNumber)
                 .ToList();
         }
+
+
+
+        public object returnedBookInYear()
+        {
+            return _context.ReturnBooks
+                     .GroupBy(r => r.ReturnDate.Year)
+                     .Select(g => new
+                     {
+                         ReturnedYear = g.Key,
+                         Count = g.Count()
+                     })
+                     .OrderBy(r => r.ReturnedYear)
+                     .ToList();
+        }
+
+
+
+        public IEnumerable<ReturnBook> GetBookInYear(int year)
+        {
+            return _context.ReturnBooks
+                .Where(r => r.ActualReturnDate.Year == year)
+                .OrderBy(r => r.ActualReturnDate)
+                .ToList();
+        }
+
     }
 }

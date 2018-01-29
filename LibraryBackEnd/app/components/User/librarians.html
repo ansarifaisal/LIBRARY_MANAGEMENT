@@ -17,6 +17,7 @@
                 <th class="text-center">Book Issued</th>
                 <th class="text-center">Email</th>
                 <th class="text-center">Email Confirmed</th>
+                <th class="text-center">Fine</th>
                 <th class="text-center">Role</th>
                 <th class="text-center">Status</th>
                 <th class="text-center" ng-show="user.role == 'ADMIN'">Action</th>
@@ -30,6 +31,7 @@
                 <td>{{ librarian.issueCount }}</td>
                 <td>{{ librarian.email }}</td>
                 <td>{{ librarian.emailConfirmed }}</td>
+                <td><span class="fa fa-rupee"></span> {{ librarian.fine }}</td>
                 <td>{{ librarian.role }}</td>
                 <td>{{ librarian.status }}</td>
                 <td class="text-center" ng-show="user.role == 'ADMIN'">

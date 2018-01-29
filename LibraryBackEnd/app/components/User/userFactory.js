@@ -55,7 +55,6 @@ UserModule.factory("UserFactory", [
             $http.get("/api/student/faculties")
                 .then(function (response) {
                     deferred.resolve(response.data);
-                    console.log(response.data);
                 }, function (errorResponse) {
                     deferred.reject(errorResponse);
                 });

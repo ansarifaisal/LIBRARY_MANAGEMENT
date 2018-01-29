@@ -106,7 +106,7 @@
                             <th class="text-center">Course</th>
                             <th class="text-center">Semester</th>
                             <th class="text-center">Subject</th>
-                            <th class="text-center">Type of Book</th>
+                            
                             <th class="text-center">Class No</th>
                             <th class="text-center">Publisher</th>
                             <th class="text-center">Place</th>
@@ -120,6 +120,7 @@
                             <th class="text-center">Discount Price</th>
                             <th class="text-center">Bill Number</th>
                             <th class="text-center">Bill Date</th>
+                            <th class="text-center">Type of Book</th>
                             <th class="text-center">Status</th>
                         </tr>
                     </thead>
@@ -132,7 +133,6 @@
                             <td>{{ book.course }}</td>
                             <td>{{ book.semester }}</td>
                             <td>{{ book.subject }}</td>
-                            <td>{{ book.typeOfBook }}</td>
                             <td>{{ book.classNo }}</td>
                             <td>{{ book.publisher }}</td>
                             <td>{{ book.placeOfPublication }}</td>
@@ -146,6 +146,7 @@
                             <td><span class="fa fa-rupee"></span> {{ book.discountPrice }}</td>
                             <td>{{ book.billNo }}</td>
                             <td>{{ book.billDate | date: "MMM, dd yyyy"}}</td>
+                            <td>{{ book.typeOfBook }}</td>
                             <td>{{ book.status }}</td>
                         </tr>
                     </tbody>

@@ -28,7 +28,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="book in statisticsCtrl.books">
-                <td>{{ book.date | date: "EEE MMM, dd yyyy"}}</td>
+                <td>{{ book.date | date: "yyyy/MM/dd"}}</td>
                 <td>{{ book.accessionNumber }}</td>
                 <td>{{ book.title }}</td>
                 <td>{{ book.pages }}</td>

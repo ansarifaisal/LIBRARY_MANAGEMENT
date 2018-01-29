@@ -1,0 +1,45 @@
+﻿<div ng-init="statisticsCtrl.loadReturnedBooksByYear()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li><a href="" ng-href="#!/admin/statistics">Statistics</a></li>
+        <li class="active">Issued Books by Year - {{statisticsCtrl.year}}</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Issued Books by Year - {{statisticsCtrl.year}}</h3>
+    </div>
+
+    <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Issue Date</th>
+                <th class="text-center">Return Date</th>
+                <th class="text-center">Actual Return Date</th>
+                <th class="text-center">Accession Number</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Roll No</th>
+                <th class="text-center">Borrower</th>
+                <th class="text-center">Course</th>
+                <th class="text-center">Fine</th>
+                <th class="text-center">Librarian</th>
+                <th class="text-center">Remark</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="returnBook in statisticsCtrl.returnedBooks.books">
+                <td>{{ returnBook.issuedDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ returnBook.returnDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ returnBook.actualReturnDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ returnBook.accessionNumber }}</td>
+                <td>{{ returnBook.bookTitle }}</td>
+                <td>{{ returnBook.rollNo }}</td>
+                <td>{{ returnBook.fullName }}</td>
+                <td>{{ returnBook.course }}</td>
+                <td><span class="fa fa-rupee"></span> {{ returnBook.fine }}</td>
+                <td>{{ returnBook.librarian }}</td>
+                <td>{{ returnBook.remark }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

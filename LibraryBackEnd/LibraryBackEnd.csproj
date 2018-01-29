@@ -642,6 +642,18 @@
     <Compile Include="Persistence\Migrations\201801251544230_addPublisherInMagazine.Designer.cs">
       <DependentUpon>201801251544230_addPublisherInMagazine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201801260558009_addRemarkInReturnMagazine.cs" />
+    <Compile Include="Persistence\Migrations\201801260558009_addRemarkInReturnMagazine.Designer.cs">
+      <DependentUpon>201801260558009_addRemarkInReturnMagazine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201801260616282_addLostOrReplaceMagazine1.cs" />
+    <Compile Include="Persistence\Migrations\201801260616282_addLostOrReplaceMagazine1.Designer.cs">
+      <DependentUpon>201801260616282_addLostOrReplaceMagazine1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Persistence\Migrations\201801270525247_addLibRef.cs" />
+    <Compile Include="Persistence\Migrations\201801270525247_addLibRef.Designer.cs">
+      <DependentUpon>201801270525247_addLibRef.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Core\ViewModels\EmailViewModel.cs" />
     <Compile Include="Core\Models\IdentityModels.cs" />
@@ -808,6 +820,8 @@
     <Content Include="app\components\Statistics\booksBySubjects.html" />
     <Content Include="app\components\Statistics\booksBought.html" />
     <Content Include="app\components\Statistics\booksByTypes.html" />
+    <Content Include="app\components\Statistics\magazineIssueInYear.html" />
+    <Content Include="app\components\Statistics\booksIssuedInYear.html" />
     <Content Include="app\components\Statistics\magazineByCourse.html" />
     <Content Include="app\components\Statistics\magazineByPeriodicity.html" />
     <Content Include="app\components\Statistics\magazineBySubscription.html" />
@@ -1109,6 +1123,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201801251544230_addPublisherInMagazine.resx">
       <DependentUpon>201801251544230_addPublisherInMagazine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801260558009_addRemarkInReturnMagazine.resx">
+      <DependentUpon>201801260558009_addRemarkInReturnMagazine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801260616282_addLostOrReplaceMagazine1.resx">
+      <DependentUpon>201801260616282_addLostOrReplaceMagazine1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201801270525247_addLibRef.resx">
+      <DependentUpon>201801270525247_addLibRef.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

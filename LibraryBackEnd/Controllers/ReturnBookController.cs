@@ -44,5 +44,23 @@ namespace LibraryBackEnd.Controllers
             var returnBook = _returnBookService.GetByRollNo(rollNo);
             return Ok(returnBook);
         }
+
+        [HttpGet]
+        [Route("returnedBookInYears")]
+        public IHttpActionResult returnedBookInYear()
+        {
+            var returnBook = _returnBookService.returnedBookInYear();
+            return Ok(returnBook);
+        }
+
+
+        [HttpGet]
+        [Route("returnedBookInYear/{year}")]
+        public IHttpActionResult GetBookInYear(int year)
+        {
+            var returnBook = _returnBookService.GetBookInYear(year);
+            return Ok(returnBook);
+        }
+
     }
 }

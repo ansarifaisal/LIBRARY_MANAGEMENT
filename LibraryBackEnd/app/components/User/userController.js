@@ -41,6 +41,7 @@
             me.user = UserFactory.getUserByUserName($rootScope.user.userName);
             me.courses = UserFactory.getCourses();
             me.years = UserFactory.getYears(-2, 2);
+            console.log(me.years);
         }
 
         me.trackChanges = function () {
@@ -64,18 +65,20 @@
 
             var user = $rootScope.user;
 
+            var date = new Date();
+
             if (user.role === 'ADMIN' || user.role === 'LIBRARIAN') {
-                user.yearOfAdmission = 0;
+                user.yearOfAdmission = date.getFullYear();
                 user.course = "General";
             }
 
             if (user.role === 'FACULTY') {
-                user.yearOfAdmission = 0;
+                user.yearOfAdmission = date.getFullYear();
             }
 
             if (user.role === 'NON-TEACHING') {
-                user.yearOfAdmission = 0;
-                user.course = 'NA';
+                user.yearOfAdmission = date.getFullYear();
+                user.course = 'General';
             }
 
             me.user.modified = true;

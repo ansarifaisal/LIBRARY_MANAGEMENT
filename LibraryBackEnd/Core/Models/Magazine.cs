@@ -20,6 +20,8 @@ namespace LibraryBackEnd.Core.Models
 
         public string Number { get; set; }
 
+        public string LibRef { get; set; }
+
         public string Issn { get; set; }
 
         public DateTime DateOfRecieved { get; set; }

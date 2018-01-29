@@ -16,8 +16,7 @@
                        name="number"
                        ng-blur="magazineModalCtrl.getMagazineByNumber()"
                        ng-model="magazineModalCtrl.issueMagazine.number"
-                       ng-pattern="/^[0-9]/"
-                       ng-maxlength="6"
+                       ng-maxlength="20"
                        uib-typeahead="number for number in magazineModalCtrl.numbers | filter:$viewValue | limitTo:8"
                        placeholder="Enter Magazine Number"
                        autocomplete="off"
@@ -31,9 +30,7 @@
                 </span>
 
                 <div ng-show="createEdit.number.$invalid && createEdit.number.$touched || createEdit.$submitted || magazineModalCtrl.magazineExists == false || magazineModalCtrl.bundled == 'Bundled'">
-                    <div ng-show="createEdit.number.$error.required" class="text-danger small">Please, provide number.</div>
-                    <div ng-show="createEdit.number.$error.pattern" class="text-danger small">This field can contain numbers only.</div>
-                    <div ng-show="createEdit.number.$error.maxlength" class="text-danger small">This field can contain 6 characters only.</div>
+                     <div ng-show="createEdit.number.$error.maxlength" class="text-danger small">This field can contain 20 characters only.</div>
                     <div ng-show="magazineModalCtrl.magazineExists == false" class="text-danger small">Magazine doesn't exists, Please provide valid magazine number.</div>
                     <div ng-show="magazineModalCtrl.bundled == 'Bundled'" class="text-danger small">This magazine is bundled.</div>
                 </div>

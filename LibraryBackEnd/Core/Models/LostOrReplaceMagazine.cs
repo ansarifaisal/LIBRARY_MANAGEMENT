@@ -27,6 +27,8 @@ namespace LibraryBackEnd.Core.Models
 
         public string Email { get; set; }
 
+        public string Remark { get; set; }
+
         public string Status { get; set; }
 
     }

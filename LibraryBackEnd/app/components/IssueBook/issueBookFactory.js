@@ -185,7 +185,6 @@ IssueBookModule.factory("IssueBookFactory", [
             var date = new Date();
             returnDate = convertToDate(returnDate);
             var isPast = false;
-            console.log(returnDate < date);
             if (returnDate < date)
                 isPast = true;
             return isPast;

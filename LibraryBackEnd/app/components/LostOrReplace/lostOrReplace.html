@@ -11,10 +11,10 @@
     <table datatable="ng" dt-options="lostOrReplaceBookCtrl.dtOptions" dt-column-defs="lostOrReplaceBookCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>
-                <th class="text-center">Accession Number</th>
-                <th class="text-center">Title</th>
                 <th class="text-center">Issue Date</th>
                 <th class="text-center">Return Date</th>
+                <th class="text-center">Accession Number</th>
+                <th class="text-center">Title</th>
                 <th class="text-center">Roll No</th>
                 <th class="text-center">Borrower</th>
                 <th class="text-center">Course</th>
@@ -26,10 +26,10 @@
         </thead>
         <tbody>
             <tr ng-repeat="book in lostOrReplaceBookCtrl.books">
-                <td>{{ book.accessionNumber }}</td>
-                <td>{{ book.bookTitle }}</td>
                 <td>{{ book.issuedDate | date: "yyyy/MM/dd"}}</td>
                 <td>{{ book.returnDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ book.accessionNumber }}</td>
+                <td>{{ book.bookTitle }}</td>
                 <td>{{ book.rollNo }}</td>
                 <td>{{ book.fullName }}</td>
                 <td>{{ book.course }}</td>

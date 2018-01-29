@@ -79,7 +79,7 @@
 
         me.monthPickerOptions = {
             formatYear: 'yy',
-            maxDate: new Date(),
+            //maxDate: new Date(),
             minMode: "month",
             datepickerMode: "month",
             startingDay: 1
@@ -87,7 +87,7 @@
 
         me.datePickerOptions = {
             formatYear: 'yy',
-            maxDate: new Date(),
+            //maxDate: new Date(),
             startingDay: 1,
             showWeeks: false
         };

@@ -66,6 +66,7 @@
             volume: '',
             issn: undefined,
             number: '',
+            libRef:'',
             dateOfRecieved: '',
             recievedBy: ''
         };
@@ -131,6 +132,8 @@
         me.issuedMagazines = [];
 
         me.bindingMagazines = [];
+
+        me.remark = '';
 
         me.getPublishers = function () {
             $rootScope.isBusy = true;
@@ -215,7 +218,7 @@
         me.getPeriodicDetail = function (id) {
             MagazineFactory.getPeriodicDetail(id).then(function (periodicDetail) {
                 me.periodicDetailModal.periodicDetail = periodicDetail;
-                me.periodicDetailModal.title = "Edit Magazine Detail";
+                me.periodicDetailModal.title = "Edit Periodical Detail";
                 me.periodicDetailModal.btnText = "Save Changes";
                 AppService.showModal(me.periodicDetailModal,
                     "magazines/periodicMagazineForm.html",
@@ -241,7 +244,7 @@
             $rootScope.isBusy = true;
             var user = $rootScope.user;
             if (user.role === 'ADMIN' && $routeParams.bundled !== 'yes')
-                me.dtOptions = AppService.dataTableWithFunction("Add Magazine", me.showMagazineForm);
+                me.dtOptions = AppService.dataTableWithFunction("Add Periodical", me.showMagazineForm);
             else
                 me.dtOptions = AppService.dataTableWithOutFunction();
             MagazineFactory.getMagazines(me.title).then(function (magazines) {
@@ -256,8 +259,8 @@
 
         me.showMagazineForm = function () {
             me.magazineModal.magazine = me.magazine;
-            me.magazineModal.title = "Add New Magazine";
-            me.magazineModal.btnText = "Add Magazine";
+            me.magazineModal.title = "Add New Periodical";
+            me.magazineModal.btnText = "Add ";
             AppService.showModal(me.magazineModal,
                 "magazines/magazineForm.html",
                 "MagazineModalController",
@@ -269,7 +272,7 @@
                 me.magazineModal.magazine = magazine;
                 me.magazineModal.magazine.month = MagazineFactory.parseDate(me.magazineModal.magazine.month);
                 me.magazineModal.magazine.dateOfRecieved = MagazineFactory.parseDate(me.magazineModal.magazine.dateOfRecieved);
-                me.magazineModal.title = "Edit Magazine";
+                me.magazineModal.title = "Edit P";
                 me.magazineModal.btnText = "Save Changes";
                 AppService.showModal(me.magazineModal,
                     "magazines/magazineForm.html",
@@ -340,7 +343,7 @@
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
                 $rootScope.isBusy = false;
-                toastr.error("Error Fetching Issued Magazine");
+                toastr.error("Error Fetching Issued Periodical");
             });
         }
 
@@ -348,8 +351,8 @@
             me.issueMagazine.issuedDate = IssueBookFactory.getIssueDate();
             me.issueMagazine.returnDate = IssueBookFactory.getReturnDate();
             me.issueMagazineModal.issueMagazine = me.issueMagazine;
-            me.issueMagazineModal.title = "Issue Magazine";
-            me.issueMagazineModal.btnText = "Issue Magazine";
+            me.issueMagazineModal.title = "Issue Periodical";
+            me.issueMagazineModal.btnText = "Issue Periodical";
             AppService.showModal(me.issueMagazineModal,
                 "magazines/issueMagazineForm.html",
                 "MagazineModalController",
@@ -376,7 +379,7 @@
         me.confirmReturnMagazine = function (id) {
             MagazineFactory.getIssuedMagazine(id).then(function (issueMagazine) {
                 me.issueMagazineModal.issueMagazine = issueMagazine;
-                me.issueMagazineModal.title = "Return Issue Magazine";
+                me.issueMagazineModal.title = "Return Issue Periodical";
                 me.issueMagazineModal.btnText = "Return";
                 AppService.showModal(me.issueMagazineModal,
                     "magazines/confirmReturnMagazine.html",
@@ -391,7 +394,7 @@
         me.confirmReplaceOrLostMagazine = function (id) {
             MagazineFactory.getIssuedMagazine(id).then(function (issueMagazine) {
                 me.issueMagazineModal.issueMagazine = issueMagazine;
-                me.issueMagazineModal.title = "Lost Issue Magazine";
+                me.issueMagazineModal.title = "Lost Issue Periodical";
                 me.issueMagazineModal.btnText = "Lost";
                 AppService.showModal(me.issueMagazineModal,
                     "magazines/confirmLostOrReplaceMagazine.html",
@@ -413,35 +416,35 @@
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
                 $rootScope.isBusy = false;
-                toastr.error("Error Fetching Magazines");
+                toastr.error("Error Fetching Peridocials");
             });
         }
 
         me.confirmReplaceMagazine = function (id) {
             MagazineFactory.getLostMagazine(id).then(function (lostOrReplace) {
                 me.lostMagazineModal.lostOrReplace = lostOrReplace;
-                me.lostMagazineModal.title = "Replace Magazine";
+                me.lostMagazineModal.title = "Replace Periodical";
                 me.lostMagazineModal.btnText = "Replace";
                 AppService.showModal(me.lostMagazineModal,
                     "magazines/confirmReplaceMagazine.html",
                     "MagazineModalController",
                     "magazineModalCtrl");
             }, function (errorResponse) {
-                toastr.error("Error Fetching Magazines");
+                toastr.error("Error Fetching Periodicals");
             });
         }
 
         me.confirmUndoReplaceMagazine = function (id) {
             MagazineFactory.getLostMagazine(id).then(function (lostOrReplace) {
                 me.lostMagazineModal.lostOrReplace = lostOrReplace;
-                me.lostMagazineModal.title = "Undo Replace Magazine";
+                me.lostMagazineModal.title = "Undo Replace Periodical";
                 me.lostMagazineModal.btnText = "Undo Replace";
                 AppService.showModal(me.lostMagazineModal,
                     "magazines/confirmUndoReplaceMagazine.html",
                     "MagazineModalController",
                     "magazineModalCtrl");
             }, function (errorResponse) {
-                toastr.error("Error Fetching Magazine");
+                toastr.error("Error Fetching Periodical");
             });
         }
 
@@ -457,7 +460,7 @@
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
                 $rootScope.isBusy = false;
-                toastr.error("Error Fetching Magazines");
+                toastr.error("Error Fetching Periodicals");
             });
 
         }
@@ -474,26 +477,26 @@
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
                 $rootScope.isBusy = false;
-                toastr.error("Error Fetching Magazines");
+                toastr.error("Error Fetching Periodicals");
             });
         }
 
         me.getBindingMagazines = function () {
             $rootScope.isBusy = true;
-            me.dtOptions = AppService.dataTableWithFunction("Add Binding Magazine", me.showBindingMagazineForm);
+            me.dtOptions = AppService.dataTableWithFunction("Add Binding Periodical", me.showBindingMagazineForm);
 
             MagazineFactory.getBindingMagazines().then(function (bindingMagazines) {
                 me.bindingMagazines = bindingMagazines;
                 $rootScope.isBusy = false;
             }, function (errorResponse) {
                 $rootScope.isBusy = false;
-                toastr.error("Error Fetching Binding Magazine Details");
+                toastr.error("Error Fetching Binding Periodical Details");
             });
         }
 
         me.showBindingMagazineForm = function () {
             me.bindingMagazineModal.bindingMagazine = me.bindingMagazine;
-            me.bindingMagazineModal.title = "Add New Binding Magazine Details";
+            me.bindingMagazineModal.title = "Add New Binding Periodical Details";
             me.bindingMagazineModal.btnText = "Add Binding Details";
             AppService.showModal(me.bindingMagazineModal,
                 "magazines/bindingMagazineForm.html",
@@ -504,8 +507,8 @@
         me.getBindingMagazine = function (id) {
             MagazineFactory.getBindingMagazine(id).then(function (bindingMagazine) {
                 me.bindingMagazineModal.bindingMagazine = bindingMagazine;
-                me.bindingMagazineModal.title = "Edit Binding Magazine";
-                me.bindingMagazineModal.btnText = "Edit Binding Magazine";
+                me.bindingMagazineModal.title = "Edit Binding Periodical";
+                me.bindingMagazineModal.btnText = "Edit Binding Periodical";
                 AppService.showModal(me.bindingMagazineModal,
                     "magazines/bindingMagazineForm.html",
                     "MagazineModalController",
@@ -516,7 +519,7 @@
         me.deleteBindingMagazineModal = function (id) {
             MagazineFactory.getBindingMagazine(id).then(function (bindingMagazine) {
                 me.bindingMagazineModal.bindingMagazine = bindingMagazine;
-                me.bindingMagazineModal.title = "Delete Binding Magazine Details";
+                me.bindingMagazineModal.title = "Delete Binding Periodical Details";
                 me.bindingMagazineModal.btnText = "Delete";
                 AppService.showModal(me.bindingMagazineModal,
                     "magazines/deleteBindingMagazine.html",

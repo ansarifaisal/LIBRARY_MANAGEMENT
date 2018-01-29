@@ -18,6 +18,7 @@
                 <th class="text-center">Admission Year</th>
                 <th class="text-center">Email</th>
                 <th class="text-center">Email Confirmed</th>
+                <th class="text-center">Fine</th>
                 <th class="text-center">Role</th>
                 <th class="text-center">Status</th>
                 <th class="text-center" ng-show="user.role == 'ADMIN'">Action</th>
@@ -32,6 +33,7 @@
                 <td>{{ student.yearOfAdmission }}</td>
                 <td>{{ student.email }}</td>
                 <td>{{ student.emailConfirmed }}</td>
+                <td><span class="fa fa-rupee"></span> {{ student.fine }}</td>
                 <td>{{ student.role }}</td>
                 <td>{{ student.status }}</td>
                 <td class="text-center" ng-show="user.role == 'ADMIN'">

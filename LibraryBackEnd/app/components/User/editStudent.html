@@ -41,7 +41,6 @@
                    placeholder="Enter Full Name"
                    ng-model="userModalCtrl.user.fullName"
                    ng-pattern="/^[a-zA-Z0-9\s]+$/"
-                   ng-disabled="userModalCtrl.user.modified"
                    required />
 
             <span class="glyphicon form-control-feedback"
@@ -83,7 +82,6 @@
             <select class="form-control" name="yearOfAdmission"
                     ng-model="userModalCtrl.user.yearOfAdmission"
                     ng-options="year as year for year in  userModalCtrl.years"
-                    ng-disabled="userModalCtrl.user.modified"
                     required>
                 <option value="" disabled>Select Year</option>
             </select>

@@ -276,7 +276,7 @@
                                placeholder="Enter ISBN Number"
                                ng-model="bookCtrl.bookForm.book.isbn"
                                ng-minlength="5"
-                               ng-maxlength="25"
+                               ng-maxlength="16"
                                required />
 
                         <span class="glyphicon form-control-feedback"
@@ -288,7 +288,7 @@
                         <div ng-show="createEdit.isbn.$invalid && createEdit.isbn.$touched || createEdit.$submitted">
                             <div ng-show="createEdit.isbn.$error.required" class="text-danger small">Please, provide ISBN Number.</div>
                             <div ng-show="createEdit.isbn.$error.minlength" class="text-danger small">This field must have atleast 5 charchters.</div>
-                            <div ng-show="createEdit.isbn.$error.maxlength" class="text-danger small">This field can have maximum 25 charachters.</div>
+                            <div ng-show="createEdit.isbn.$error.maxlength" class="text-danger small">This field can have maximum 16 charachters.</div>
                         </div>
 
                     </div>

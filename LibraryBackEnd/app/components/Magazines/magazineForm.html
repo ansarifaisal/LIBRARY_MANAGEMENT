@@ -62,18 +62,46 @@
         </div>
 
 
+        <div class="form-group" ng-class="{'has-error has-feedback': createEdit.libRef.$invalid && createEdit.libRef.$touched
+         || createEdit.libRef.$invalid && createEdit.$submitted || magazineModalCtrl.exists && createEdit.libRef.$touched,
+         'has-success has-feedback': createEdit.libRef.$valid || createEdit.libRef.$valid
+         && createEdit.$submitted || !magazineModalCtrl.exists && createEdit.libRef.$touched}">
+            <label for="libRef">Lib. Ref.</label>
+            <input type="text"
+                   name="libRef"
+                   class="form-control"
+                   placeholder="Enter Lib. Ref. Number"
+                   ng-maxlength="20"
+                   ng-model="magazineModalCtrl.magazine.libRef"
+                   ng-blur="magazineModalCtrl.checkExistingMagazine(magazineModalCtrl.magazine.libRef)"
+                   ng-change="magazineModalCtrl.trackChanges()"
+                   required />
+
+            <span class="glyphicon form-control-feedback"
+                  ng-class="{'glyphicon-ok': createEdit.libRef.$valid || createEdit.libRef.$valid && createEdit.$submitted || !magazineModalCtrl.exists && createEdit.libRef.$touched,
+                          'glyphicon-remove': createEdit.libRef.$invalid && createEdit.libRef.$touched
+                           || createEdit.libRef.$invalid && createEdit.$submitted || magazineModalCtrl.exists && createEdit.libRef.$touched}">
+            </span>
+
+            <div ng-show="createEdit.libRef.$invalid && createEdit.libRef.$touched || createEdit.$submitted || magazineModalCtrl.exists">
+                <div ng-show="createEdit.libRef.$error.required" class="text-danger small">Please, provide magazine Library Reference.</div>
+                <div ng-show="createEdit.libRef.$error.maxlength" class="text-danger small">This field can contain 20 characters only.</div>
+                <div ng-show="magazineModalCtrl.exists" class="text-danger small">Magazine already exists.</div>
+            </div>
+
+        </div>
+
         <div class="form-group" ng-class="{'has-error has-feedback': createEdit.number.$invalid && createEdit.number.$touched
          || createEdit.number.$invalid && createEdit.$submitted || magazineModalCtrl.exists && createEdit.number.$touched,
          'has-success has-feedback': createEdit.number.$valid || createEdit.number.$valid
          && createEdit.$submitted || !magazineModalCtrl.exists && createEdit.number.$touched}">
-            <label for="number">Lib. Ref.</label>
+            <label for="number">Number</label>
             <input type="text"
                    name="number"
                    class="form-control"
-                   placeholder="Enter Lib. Ref. Number"
+                   placeholder="Enter Number"
                    ng-maxlength="20"
                    ng-model="magazineModalCtrl.magazine.number"
-                   ng-blur="magazineModalCtrl.checkExistingMagazine(magazineModalCtrl.magazine.number)"
                    ng-change="magazineModalCtrl.trackChanges()"
                    required />
 

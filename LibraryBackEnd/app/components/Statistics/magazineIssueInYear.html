@@ -1,0 +1,45 @@
+﻿<div ng-init="statisticsCtrl.loadReturnedMagazinesByYear()">
+    <ol class="breadcrumb">
+        <li><a href="" ng-href="#!/home">Home</a></li>
+        <li><a href="" ng-href="#!/admin/statistics">Statistics</a></li>
+        <li class="active">Issued Books by Year - {{statisticsCtrl.year}}</li>
+    </ol>
+
+    <div class="page-header">
+        <h3>Issued Books by Year - {{statisticsCtrl.year}}</h3>
+    </div>
+
+    <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">Issue Date</th>
+                <th class="text-center">Return Date</th>
+                <th class="text-center">Actual Return Date</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Number</th>
+                <th class="text-center">Volume</th>
+                <th class="text-center">Roll Number</th>
+                <th class="text-center">Full Name</th>
+                <th class="text-center">Course</th>
+                <th class="text-center">Received By</th>
+                <th class="text-center">Fine</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="magazine in statisticsCtrl.returnedMagazines.magazines">
+                <td>{{ magazine.issuedDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ magazine.returnDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ magazine.actualReturnDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ magazine.title}}</td>
+                <td>{{ magazine.number}}</td>
+                <td>{{ magazine.volume}}</td>
+                <td>{{ magazine.rollNo}}</td>
+                <td>{{ magazine.fullName}}</td>
+                <td>{{ magazine.course}}</td>
+                <td>{{ magazine.recievedBy}}</td>
+                <td><span class="fa fa-rupee"></span> {{ magazine.fine}}</td
+            </tr>
+        </tbody>
+    </table>
+
+</div>

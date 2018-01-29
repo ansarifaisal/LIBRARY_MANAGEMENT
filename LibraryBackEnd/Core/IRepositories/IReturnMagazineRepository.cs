@@ -6,5 +6,8 @@ namespace LibraryBackEnd.Core.IRepositories
     public interface IReturnMagazineRepository : IGenericRepository<ReturnMagazine>
     {
         IEnumerable<ReturnMagazine> GetMagazineByRollNumber(string rollNo);
+
+        object returnedMagazineInYear();
+        IEnumerable<ReturnMagazine> GetMagazineInYear(int year);
     }
 }

@@ -31,5 +31,22 @@ namespace LibraryBackEnd.Controllers
             return Ok(returnMagazines);
         }
 
+        [HttpGet]
+        [Route("returnedMagazineInYears")]
+        public IHttpActionResult returnedMagazineInYear()
+        {
+            var returnMagazine = _returnMagazineService.returnedMagazineInYear();
+            return Ok(returnMagazine);
+        }
+
+
+        [HttpGet]
+        [Route("returnedMagazineInYear/{year}")]
+        public IHttpActionResult GetMagazineInYear(int year)
+        {
+            var returnMagazine = _returnMagazineService.GetMagazineInYear(year);
+            return Ok(returnMagazine);
+        }
+
     }
 }

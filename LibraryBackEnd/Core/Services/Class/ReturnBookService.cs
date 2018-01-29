@@ -14,6 +14,11 @@ namespace LibraryBackEnd.Core.Services.Class
             _repository = repository;
         }
 
+        public IEnumerable<ReturnBook> GetBookInYear(int year)
+        {
+            return _repository.GetBookInYear(year);
+        }
+
         public IEnumerable<ReturnBook> GetByRollNo(string rollNo)
         {
             return _repository.GetByRollNo(rollNo);
@@ -22,6 +27,12 @@ namespace LibraryBackEnd.Core.Services.Class
         public IEnumerable<ReturnBook> GetReturnBook(string accessionNumber)
         {
             return _repository.GetReturnBook(accessionNumber);
+        }
+
+
+        public object returnedBookInYear()
+        {
+            return _repository.returnedBookInYear();
         }
     }
 }

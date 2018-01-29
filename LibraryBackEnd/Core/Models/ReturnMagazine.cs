@@ -30,5 +30,7 @@ namespace LibraryBackEnd.Core.Models
 
         public int Fine { get; set; }
 
+        public string Remark { get; set; }
+
     }
 }

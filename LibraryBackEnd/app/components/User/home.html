@@ -452,10 +452,10 @@
 <div ng-show="user.role == 'STUDENT' || user.role == 'FACULTY' || user.role=='NON-TEACHING'">
     <div ng-init="authCtrl.checkReturn()">
         <div class="alert alert-danger" ng-show="authCtrl.submitTom">
-            <p align="center">You Have to Submit <strong>{{authCtrl.bookTitle}}</strong> Book Tomorrow, <a href="" ng-href="#!/user/books" class="alert-link">Click Here</a> For More Info.</p>
+            <p align="center">You Have to Submit <strong>{{authCtrl.bookTitle}}</strong> Book Tomorrow, <a href="" ng-href="#!/user/issuedBooks" class="alert-link">Click Here</a> For More Info.</p>
         </div>
         <div class="alert alert-danger" ng-show="authCtrl.late">
-            <p align="center">You Failed to Submit <strong>{{authCtrl.bookTitle}}</strong> Book on Time, Submit the Book With <span class="fa fa-rupee"></span> {{authCtrl.fine}}/- Fine. <a href="" ng-href="#!/user/books" class="alert-link">Click Here</a> For More Info.</p>
+            <p align="center">You Failed to Submit <strong>{{authCtrl.bookTitle}}</strong> Book on Time, Submit the Book With <span class="fa fa-rupee"></span> {{authCtrl.fine}}/- Fine. <a href="" ng-href="#!/user/issuedBooks" class="alert-link">Click Here</a> For More Info.</p>
         </div>
     </div>
 

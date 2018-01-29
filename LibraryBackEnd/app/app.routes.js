@@ -320,6 +320,7 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN']
     },
+
     '/admin/booksBySubject/:subject': {
 
         templateUrl: 'app/components/statistics/booksBySubjects.html',
@@ -328,6 +329,7 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN']
     },
+
     '/admin/booksBought/:year': {
 
         templateUrl: 'app/components/statistics/booksBought.html',
@@ -336,6 +338,7 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN']
     },
+
     '/admin/bookTitles/:title': {
 
         templateUrl: 'app/components/statistics/booksTitles.html',
@@ -344,6 +347,7 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN']
     },
+
     '/admin/studentsJoined/:year': {
 
         templateUrl: 'app/components/statistics/studentsJoined.html',
@@ -352,6 +356,7 @@ window.routes = {
         requireLogin: true,
         roles: ['ADMIN']
     },
+
     '/admin/studentsByCourse/:courseName': {
 
         templateUrl: 'app/components/statistics/studentsByCourse.html',
@@ -415,7 +420,27 @@ window.routes = {
         roles: ['ADMIN']
     },
 
-    /*
+    '/admin/bookIssued/year/:year': {
+
+        templateUrl: 'app/components/statistics/booksIssuedInYear.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+
+    '/admin/magazineIssued/year/:year': {
+
+        templateUrl: 'app/components/statistics/magazineIssueInYear.html',
+        controller: 'StatisticsController',
+        controllerAs: 'statisticsCtrl',
+        requireLogin: true,
+        roles: ['ADMIN']
+    },
+
+
+  /*
    * Loading Statistics Module
    */
 

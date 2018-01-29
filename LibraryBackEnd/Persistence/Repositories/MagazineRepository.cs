@@ -19,7 +19,7 @@ namespace LibraryBackEnd.Persistence.Repositories
         public Magazine GetByNumber(string number)
         {
             return _context.Magazines
-                .Where(m => m.Number == number)
+                .Where(m => m.LibRef == number)
                 .SingleOrDefault();
         }
 
@@ -29,7 +29,7 @@ namespace LibraryBackEnd.Persistence.Repositories
         {
             return _context.Magazines
                 .Where(m => m.Status == "Available")
-                .Select(m => m.Number)
+                .Select(m => m.LibRef)
                 .ToList();
         }
 

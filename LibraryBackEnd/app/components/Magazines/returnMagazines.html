@@ -1,4 +1,4 @@
-﻿<div ng-init="magazineCtrl.getReturnMagazines()" ng-show="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
+﻿<div ng-init="magazineCtrl.getReturnMagazines()" ng-if="user.role == 'ADMIN' || user.role == 'LIBRARIAN'">
     <ol class="breadcrumb">
         <li><a href="" ng-href="#!/home">Home</a></li>
         <li><a href="" ng-href="#!/admin/magazine/periodic">Magazines</a></li>
@@ -12,32 +12,34 @@
     <table datatable="ng" dt-options="magazineCtrl.dtOptions" dt-column-defs="magazineCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>
-                <th class="text-center">Title</th>
-                <th class="text-center">Number</th>
-                <th class="text-center">Volume</th>
                 <th class="text-center">Issue Date</th>
                 <th class="text-center">Return Date</th>
                 <th class="text-center">Actual Return Date</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Number</th>
+                <th class="text-center">Volume</th>
                 <th class="text-center">Roll Number</th>
                 <th class="text-center">Full Name</th>
                 <th class="text-center">Course</th>
                 <th class="text-center">Received By</th>
                 <th class="text-center">Fine</th>
+                <th class="text-center">Remark</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="magazine in magazineCtrl.magazines">
-                <td>{{ magazine.title}}</td>
-                <td>{{ magazine.number}}</td>
-                <td>{{ magazine.volume}}</td>
                 <td>{{ magazine.issuedDate | date: "yyyy/MM/dd"}}</td>
                 <td>{{ magazine.returnDate | date: "yyyy/MM/dd"}}</td>
                 <td>{{ magazine.actualReturnDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ magazine.title}}</td>
+                <td>{{ magazine.number}}</td>
+                <td>{{ magazine.volume}}</td>
                 <td>{{ magazine.rollNo}}</td>
                 <td>{{ magazine.fullName}}</td>
                 <td>{{ magazine.course}}</td>
                 <td>{{ magazine.recievedBy}}</td>
                 <td><span class="fa fa-rupee"></span> {{ magazine.fine}}</td>
+                <td>{{ magazine.remark}}</td>
             </tr>
         </tbody>
     </table>
@@ -57,24 +59,24 @@
     <table datatable="ng" dt-options="magazineCtrl.dtOptions" dt-column-defs="magazineCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>
-                <th class="text-center">Title</th>
-                <th class="text-center">Number</th>
-                <th class="text-center">Volume</th>
                 <th class="text-center">Issue Date</th>
                 <th class="text-center">Return Date</th>
                 <th class="text-center">Actual Return Date</th>
+                <th class="text-center">Title</th>
+                <th class="text-center">Number</th>
+                <th class="text-center">Volume</th>
                 <th class="text-center">Received By</th>
                 <th class="text-center">Fine</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="magazine in magazineCtrl.magazines">
+                <td>{{ magazine.issuedDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ magazine.returnDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ magazine.actualReturnDate | date: "yyyy/MM/dd"}}</td>
                 <td>{{ magazine.title}}</td>
                 <td>{{ magazine.number}}</td>
                 <td>{{ magazine.volume}}</td>
-                <td>{{ magazine.issuedDate | date: "MMM, dd yyyy"}}</td>
-                <td>{{ magazine.returnDate | date: "MMM, dd yyyy"}}</td>
-                <td>{{ magazine.actualReturnDate | date: "MMM, dd yyyy"}}</td>
                 <td>{{ magazine.recievedBy}}</td>
                 <td><span class="fa fa-rupee"></span> {{ magazine.fine}}</td>
             </tr>

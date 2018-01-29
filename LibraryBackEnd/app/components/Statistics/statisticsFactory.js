@@ -28,7 +28,11 @@ StatisticsModule.factory("StatisticsFactory", [
             getMagazinePeriodicity: getMagazinePeriodicity,
             getMagazineByPeriodicity: getMagazineByPeriodicity,
             getMagazineSubscriptionInYear: getMagazineSubscriptionInYear,
-            getMagazineBySubscription: getMagazineBySubscription
+            getMagazineBySubscription: getMagazineBySubscription,
+            getReturnedBooksInYear: getReturnedBooksInYear,
+            getReturnedBooksByYear: getReturnedBooksByYear,
+            getReturnedMagazinesInYear: getReturnedMagazinesInYear,
+            getReturnedMagazinesByYear: getReturnedMagazinesByYear
         };
         return statisticsFactory;
 
@@ -219,7 +223,7 @@ StatisticsModule.factory("StatisticsFactory", [
         function getMagazineByCourse(course) {
 
             var deferred = $q.defer();
-            $http.get("/api/statistics/magazineByCourses?course=" + course).then(function (response) {
+            $http.get("/api/statistics/magazineByCourse?course=" + course).then(function (response) {
                 deferred.resolve(response.data);
             }, function (errorResponse) {
                 deferred.reject(errorResponse);
@@ -298,5 +302,50 @@ StatisticsModule.factory("StatisticsFactory", [
 
         }
 
+        function getReturnedBooksInYear() {
+
+            var deferred = $q.defer();
+            $http.get("/api/returnBook/returnedBookInYears").then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+
+        }
+        function getReturnedBooksByYear(year) {
+
+            var deferred = $q.defer();
+            $http.get("/api/returnBook/returnedBookInYear/" + year).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+
+        }
+
+        function getReturnedMagazinesInYear() {
+
+            var deferred = $q.defer();
+            $http.get("/api/magazine/return/returnedMagazineInYears").then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+
+        }
+        function getReturnedMagazinesByYear(year) {
+
+            var deferred = $q.defer();
+            $http.get("/api/magazine/return/returnedMagazineInYear/" + year).then(function (response) {
+                deferred.resolve(response.data);
+            }, function (errorResponse) {
+                deferred.reject(errorResponse);
+            });
+            return deferred.promise;
+
+        }
     }
 ]);

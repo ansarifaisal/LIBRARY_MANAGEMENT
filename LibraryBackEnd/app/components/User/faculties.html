@@ -17,6 +17,7 @@
                 <th class="text-center">Book Issued</th>
                 <th class="text-center">Email</th>
                 <th class="text-center">Email Confirmed</th>
+                <th class="text-center">Fine</th>
                 <th class="text-center">Role</th>
                 <th class="text-center">Status</th>
                 <th class="text-center" ng-show="user.role == 'ADMIN'">Action</th>
@@ -25,11 +26,12 @@
         <tbody>
             <tr ng-repeat="faculty in userCtrl.faculties">
                 <td>{{ faculty.rollNo }}</td>
-                <td>{{ faculty.fullName}}</td>
+                <td><a href="" ng-href="#!/user/get/{{faculty.rollNo}}">{{ faculty.fullName}}</a></td>
                 <td>{{ faculty.course }}</td>
                 <td>{{ faculty.issueCount }}</td>
                 <td>{{ faculty.email }}</td>
                 <td>{{ faculty.emailConfirmed }}</td>
+                <td><span class="fa fa-rupee"></span> {{ student.fine }}</td>
                 <td>{{ faculty.role }}</td>
                 <td>{{ faculty.status }}</td>
                 <td class="text-center" ng-show="user.role == 'ADMIN'">

@@ -11,11 +11,11 @@
         <table datatable="ng" dt-options="returnBookCtrl.dtOptions" dt-column-defs="returnBookCtrl.dtColumnDefs" class="table-condensed table-hover">
             <thead>
                 <tr>
-                    <th class="text-center">Accession Number</th>
-                    <th class="text-center">Title</th>
                     <th class="text-center">Issue Date</th>
                     <th class="text-center">Return Date</th>
                     <th class="text-center">Actual Return Date</th>
+                    <th class="text-center">Accession Number</th>
+                    <th class="text-center">Title</th>
                     <th class="text-center">Roll No</th>
                     <th class="text-center">Borrower</th>
                     <th class="text-center">Course</th>
@@ -26,11 +26,11 @@
             </thead>
             <tbody>
                 <tr ng-repeat="returnBook in returnBookCtrl.returnBooks">
-                    <td>{{ returnBook.accessionNumber }}</td>
-                    <td>{{ returnBook.bookTitle }}</td>
                     <td>{{ returnBook.issuedDate | date: "yyyy/MM/dd"}}</td>
                     <td>{{ returnBook.returnDate | date: "yyyy/MM/dd"}}</td>
                     <td>{{ returnBook.actualReturnDate | date: "yyyy/MM/dd"}}</td>
+                    <td>{{ returnBook.accessionNumber }}</td>
+                    <td>{{ returnBook.bookTitle }}</td>
                     <td>{{ returnBook.rollNo }}</td>
                     <td>{{ returnBook.fullName }}</td>
                     <td>{{ returnBook.course }}</td>
@@ -49,11 +49,11 @@
         <table datatable="ng" dt-options="returnBookCtrl.dtOptions" dt-column-defs="returnBookCtrl.dtColumnDefs" class="table-condensed table-hover">
             <thead>
                 <tr>
-                    <th class="text-center">Accession Number</th>
-                    <th class="text-center">Title</th>
                     <th class="text-center">Issue Date</th>
                     <th class="text-center">Return Date</th>
                     <th class="text-center">Actual Return Date</th>
+                    <th class="text-center">Accession Number</th>
+                    <th class="text-center">Title</th>
                     <th class="text-center">Roll No</th>
                     <th class="text-center">Borrower</th>
                     <th class="text-center">Course</th>
@@ -62,11 +62,11 @@
             </thead>
             <tbody>
                 <tr ng-repeat="returnBook in returnBookCtrl.returnBooks">
+                    <td>{{ returnBook.issuedDate | date: "yyyy/MM/dd"}}</td>
+                    <td>{{ returnBook.returnDate | date: "yyyy/MM/dd"}}</td>
+                    <td>{{ returnBook.actualReturnDate | date: "yyyy/MM/dd"}}</td>
                     <td>{{ returnBook.accessionNumber }}</td>
                     <td>{{ returnBook.bookTitle }}</td>
-                    <td>{{ returnBook.issuedDate | date: "MMM, dd yyyy"}}</td>
-                    <td>{{ returnBook.returnDate | date: "MMM, dd yyyy"}}</td>
-                    <td>{{ returnBook.actualReturnDate | date: "MMM, dd yyyy"}}</td>
                     <td>{{ returnBook.rollNo }}</td>
                     <td>{{ returnBook.fullName }}</td>
                     <td>{{ returnBook.course }}</td>

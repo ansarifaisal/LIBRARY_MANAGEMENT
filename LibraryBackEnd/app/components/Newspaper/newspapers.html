@@ -14,8 +14,8 @@
     <table datatable="ng" dt-options="newsPaperCtrl.dtOptions" dt-column-defs="newsPaperCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>
-                <th class="text-center">Title</th>
                 <th class="text-center">Date</th>
+                <th class="text-center">Title</th>
                 <th class="text-center">Price</th>
                 <th class="text-center">Librarian</th>
                 <th class="text-center">Remark</th>
@@ -24,8 +24,8 @@
         </thead>
         <tbody>
             <tr ng-repeat="newsPaper in newsPaperCtrl.newsPapers">
-                <td>{{ newsPaper.title}}</td>
                 <td>{{ newsPaper.date | date : 'yyyy/MM/dd'}}</td>
+                <td>{{ newsPaper.title}}</td>
                 <td><span class="fa fa-rupee"></span> {{ newsPaper.price}}</td>
                 <td>{{ newsPaper.librarian}}</td>
                 <td>{{ newsPaper.remark}}</td>

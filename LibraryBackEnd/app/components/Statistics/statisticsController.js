@@ -40,6 +40,16 @@
 
         me.subscription = [];
 
+        me.returnedBooks = {
+            year: [],
+            books: []
+        };
+
+        me.returnedMagazines = {
+            year: [],
+            magazines: []
+        };
+
         me.config = function () {
             me.dtOptions = AppService.dataTableWithOutFunction();
         }
@@ -57,6 +67,8 @@
             me.loadMagazineTypeData();
             me.loadMagazinePeriodicityData();
             me.loadMagazineSubscriptionData();
+            me.loadReturnedBooksInYear();
+            me.loadReturnedMagazinesInYear();
         }
 
         me.loadBooksInCourse = function () {
@@ -324,6 +336,59 @@
                 $rootScope.isBusy = false;
                 toastr.error("Error fetching data.");
             });
+        }
+
+        me.loadReturnedBooksInYear = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            StatisticsFactory.getReturnedBooksInYear().then(function (response) {
+                me.returnedBooks.year = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+        }
+
+        me.loadReturnedBooksByYear = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.year = $routeParams.year;
+            StatisticsFactory.getReturnedBooksByYear(me.year).then(function (response) {
+                me.returnedBooks.books = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+
+        }
+
+
+        me.loadReturnedMagazinesInYear = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            StatisticsFactory.getReturnedMagazinesInYear().then(function (response) {
+                me.returnedMagazines.year = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+        }
+
+        me.loadReturnedMagazinesByYear = function () {
+            me.config();
+            $rootScope.isBusy = true;
+            me.year = $routeParams.year;
+            StatisticsFactory.getReturnedMagazinesByYear(me.year).then(function (response) {
+                me.returnedMagazines.magazines = response;
+                $rootScope.isBusy = false;
+            }, function () {
+                $rootScope.isBusy = false;
+                toastr.error("Error fetching data.");
+            });
+
         }
 
     }

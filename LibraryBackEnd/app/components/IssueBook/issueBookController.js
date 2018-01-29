@@ -116,6 +116,9 @@
                     } else if (me.book.status === "Issued") {
                         me.isError = true;
                         return toastr.error(me.book.title + " is already issued.");
+                    } else if (me.student.fine > 0) {
+                        me.isError = true;
+                        return toastr.error("Ask student to pay " + me.student.fine + "rs and return the book.");
                     }
                     return;
                 } else {
@@ -169,7 +172,6 @@
                 var fine = 0
                 for (var i = 0; i < me.issuedBooks.length; i++) {
                     var flag = IssueBookFactory.isPastDate(me.issuedBooks[i].returnDate);
-                    console.log(flag);
                     if (flag)
                         fine = IssueBookFactory.calculateFine(me.issuedBooks[i].returnDate);
                     else

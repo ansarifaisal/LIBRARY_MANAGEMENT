@@ -12,11 +12,11 @@
     <table datatable="ng" dt-options="magazineCtrl.dtOptions" dt-column-defs="magazineCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>
+                <th class="text-center">Issue Date</th>
+                <th class="text-center">Return Date</th>
                 <th class="text-center">Title</th>
                 <th class="text-center">Number</th>
                 <th class="text-center">Volume</th>
-                <th class="text-center">Issue Date</th>
-                <th class="text-center">Return Date</th>
                 <th class="text-center">Roll Number</th>
                 <th class="text-center">Full Name</th>
                 <th class="text-center">Course</th>
@@ -27,11 +27,11 @@
         </thead>
         <tbody>
             <tr ng-repeat="issuedMagazine in magazineCtrl.issuedMagazines">
+                <td>{{ issuedMagazine.issuedDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ issuedMagazine.returnDate | date: "yyyy/MM/dd"}}</td>
                 <td>{{ issuedMagazine.title}}</td>
                 <td>{{ issuedMagazine.number}}</td>
                 <td>{{ issuedMagazine.volume}}</td>
-                <td>{{ issuedMagazine.issuedDate | date: "yyyy/MM/dd"}}</td>
-                <td>{{ issuedMagazine.returnDate | date: "yyyy/MM/dd"}}</td>
                 <td>{{ issuedMagazine.rollNo}}</td>
                 <td>{{ issuedMagazine.fullName}}</td>
                 <td>{{ issuedMagazine.course}}</td>
@@ -61,22 +61,22 @@
     <table datatable="ng" dt-options="magazineCtrl.dtOptions" dt-column-defs="magazineCtrl.dtColumnDefs" class="table-condensed table-hover">
         <thead>
             <tr>
+                <th class="text-center">Issue Date</th>
+                <th class="text-center">Return Date</th>
                 <th class="text-center">Title</th>
                 <th class="text-center">Number</th>
                 <th class="text-center">Volume</th>
-                <th class="text-center">Issue Date</th>
-                <th class="text-center">Return Date</th>
                 <th class="text-center">Issued By</th>
                 <th class="text-center">Fine</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="issuedMagazine in magazineCtrl.issuedMagazines">
+                <td>{{ issuedMagazine.issuedDate | date: "yyyy/MM/dd"}}</td>
+                <td>{{ issuedMagazine.returnDate | date: "yyyy/MM/dd"}}</td>
                 <td>{{ issuedMagazine.title}}</td>
                 <td>{{ issuedMagazine.number}}</td>
                 <td>{{ issuedMagazine.volume}}</td>
-                <td>{{ issuedMagazine.issuedDate | date: "EEE MMM, dd yyyy"}}</td>
-                <td>{{ issuedMagazine.returnDate | date: "EEE MMM, dd yyyy"}}</td>
                 <td>{{ issuedMagazine.issuedBy}}</td>
                 <td>{{ issuedMagazine.fine}}</td>
             </tr>

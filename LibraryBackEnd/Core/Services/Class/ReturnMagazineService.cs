@@ -20,5 +20,15 @@ namespace LibraryBackEnd.Core.Services.Class
         {
             return _repository.GetMagazineByRollNumber(rollNo);
         }
+
+        public IEnumerable<ReturnMagazine> GetMagazineInYear(int year)
+        {
+            return _repository.GetMagazineInYear(year);
+        }
+
+        public object returnedMagazineInYear()
+        {
+            return _repository.returnedMagazineInYear();
+        }
     }
 }

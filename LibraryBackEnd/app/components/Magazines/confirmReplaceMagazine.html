@@ -6,6 +6,19 @@
 
     <div class="modal-body">
         Want to Replace <strong>Volume {{magazineModalCtrl.lostOrReplace.volume}}</strong> of <strong>{{magazineModalCtrl.lostOrReplace.title}}</strong> ?
+        <br />
+        <a href="" ng-click="magazineModalCtrl.showFineForm()">Want to Put Some Remark?</a>
+        <div ng-show="magazineModalCtrl.showForm">
+            <div class="form-group">
+                <label for="remark">Remark</label>
+                <input type="text"
+                       name="remark"
+                       ng-model="magazineModalCtrl.lostOrReplace.remark"
+                       class="form-control"
+                       placeholder="Enter Remark" />
+            </div>
+        </div>
+
     </div>
 
     <div class="modal-footer">

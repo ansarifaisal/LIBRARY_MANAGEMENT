@@ -6,5 +6,9 @@ namespace LibraryBackEnd.Core.Services.Interface
     public interface IReturnMagazineService : IEntityService<ReturnMagazine>
     {
         IEnumerable<ReturnMagazine> GetMagazineByRollNumber(string rollNo);
+
+        object returnedMagazineInYear();
+
+        IEnumerable<ReturnMagazine> GetMagazineInYear(int year);
     }
 }

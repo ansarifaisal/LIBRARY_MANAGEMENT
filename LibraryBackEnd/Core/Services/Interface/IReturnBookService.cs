@@ -7,5 +7,10 @@ namespace LibraryBackEnd.Core.Services.Interface
     {
         IEnumerable<ReturnBook> GetReturnBook(string accessionNumber);
         IEnumerable<ReturnBook> GetByRollNo(string rollNo);
+
+        object returnedBookInYear();
+
+        IEnumerable<ReturnBook> GetBookInYear(int year);
+
     }
 }

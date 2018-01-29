@@ -21,5 +21,26 @@ namespace LibraryBackEnd.Persistence.Repositories
                 .Where(m => m.RollNo == rollNo)
                 .ToList();
         }
+
+        public IEnumerable<ReturnMagazine> GetMagazineInYear(int year)
+        {
+            return _context.ReturnMagazines
+               .Where(r => r.ActualReturnDate.Year == year)
+               .OrderBy(r => r.ActualReturnDate)
+               .ToList();
+        }
+
+        public object returnedMagazineInYear()
+        {
+            return _context.ReturnMagazines
+                    .GroupBy(r => r.ReturnDate.Year)
+                    .Select(g => new
+                    {
+                        ReturnedYear = g.Key,
+                        Count = g.Count()
+                    })
+                    .OrderBy(r => r.ReturnedYear)
+                    .ToList();
+        }
     }
 }

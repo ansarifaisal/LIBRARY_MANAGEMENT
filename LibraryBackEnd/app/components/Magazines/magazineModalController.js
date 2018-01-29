@@ -40,6 +40,7 @@
             fullName: '',
             course: '',
             email: '',
+            remark: '',
             status: ''
         }
 
@@ -55,7 +56,8 @@
             course: '',
             email: '',
             recievedBy: '',
-            fine: ''
+            fine: '',
+            remark: ''
         }
 
         me.duration = "";
@@ -147,7 +149,7 @@
 
         me.monthPickerOptions = {
             formatYear: 'yy',
-            maxDate: new Date(),
+            //maxDate: new Date(),
             minMode: "month",
             datepickerMode: "month",
             startingDay: 1
@@ -155,7 +157,7 @@
 
         me.futureMonthPickerOptions = {
             formatYear: 'yy',
-            minDate: new Date(),
+            //minDate: new Date(),
             minMode: "month",
             datepickerMode: "month",
             startingDay: 1
@@ -163,14 +165,14 @@
 
         me.datePickerOptions = {
             formatYear: 'yy',
-            maxDate: new Date(),
+            //maxDate: new Date(),
             startingDay: 1,
             showWeeks: false
         };
 
         me.futureDatePickerOptions = {
             formatYear: 'yy',
-            minDate: new Date(),
+            //minDate: new Date(),
             startingDay: 1,
             showWeeks: false
         };
@@ -299,7 +301,6 @@
 
 
         me.bundleOptionYes = function (option) {
-            console.log(option);
             me.bundleOption = "No";
             if (option === "Yes")
                 me.bundleOption = "Yes";
@@ -443,6 +444,10 @@
                 me.errorMsg = "User status is default.";
                 me.eligible = true;
             }
+            if (user.fine > 0) {
+                me.errorMsg = "Ask student to pay "+user.fine+"rs and return the book/magazine.";
+                me.eligible = true;
+            }
 
             return me.eligible;
         }
@@ -492,6 +497,7 @@
             me.returnMagazine.recievedBy = $rootScope.user.fullName;
             me.returnMagazine.fine = issueMagazine.fine;
             me.returnMagazine.actualReturnDate = new Date();
+            me.returnMagazine.remark = me.remark;
             MagazineFactory.deleteIssuedMagazine(issueMagazine).then(function () {
                 MagazineFactory.returnIssuedMagazine(me.returnMagazine).then(function () {
                     me.ok();
@@ -557,6 +563,8 @@
         me.replaceMagazine = function (lostOrReplace) {
             lostOrReplace.status = "Replaced";
             lostOrReplace.recievedBy = $rootScope.user.fullName;
+            if (lostOrReplace.remark === undefined || lostOrReplace.remark === "")
+                lostOrReplace.remark = "NA";
             MagazineFactory.editLostMagazine(lostOrReplace).then(function () {
                 me.ok();
                 $route.reload();
@@ -569,6 +577,8 @@
         me.undoReplaceMagazine = function (lostOrReplace) {
             lostOrReplace.status = "Lost";
             lostOrReplace.recievedBy = $rootScope.user.fullName;
+            if (lostOrReplace.remark === undefined || lostOrReplace.remark === "")
+                lostOrReplace.remark = "NA";
             MagazineFactory.undoReplaceMagazine(lostOrReplace).then(function () {
                 me.ok();
                 $route.reload();
@@ -656,6 +666,11 @@
                     me.exists = true;
             });
             return me.exists;
+        }
+
+        me.showForm = false;
+        me.showFineForm = function () {
+            return me.showForm = true;
         }
 
         $uibModalInstance.opened.then(function () {

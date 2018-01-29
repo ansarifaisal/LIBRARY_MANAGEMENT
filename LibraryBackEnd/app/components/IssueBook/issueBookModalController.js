@@ -102,6 +102,7 @@
                 fine: issueBook.fine,
                 remark: me.remark
             }
+            
             IssueBookFactory.deleteIssueBook(issueBook).then(function () {
                 IssueBookFactory.returnBook(me.returnBook).then(function () {
                     me.ok();

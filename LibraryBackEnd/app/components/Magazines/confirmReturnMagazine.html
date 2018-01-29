@@ -4,7 +4,28 @@
 
 <div class="modal-body">
     Want To Return <strong>Volume {{magazineModalCtrl.issueMagazine.volume}} of {{magazineModalCtrl.issueMagazine.title}}</strong> ?
-    <div class="small text-danger">Note: Collect fine first.</div>
+    <br />
+    <a href="" ng-click="magazineModalCtrl.showFineForm()">Apply Fine?</a>
+    <div ng-show="magazineModalCtrl.showForm">
+        <!--<div class="form-group">
+            <label for="fine">Fine</label>
+            <input type="text"
+                   name="fine"
+                   ng-model="magazineModalCtrl.issueMagazine.fine"
+                   class="form-control"
+                   placeholder="Enter Fine" />
+        </div>-->
+        <div class="form-group">
+            <label for="remark">Remark</label>
+            <input type="text"
+                   name="remark"
+                   ng-model="magazineModalCtrl.remark"
+                   class="form-control"
+                   placeholder="Enter Remark" />
+        </div>
+    </div>
+
+    <div ng-if="magazineModalCtrl.issueMagazine.fine" class="small text-danger">Note: Collect fine first.</div>
 </div>
 
 <div class="modal-footer">

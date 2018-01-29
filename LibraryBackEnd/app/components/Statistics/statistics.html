@@ -157,13 +157,13 @@
 
         <div uib-accordion-group class="panel-default">
             <uib-accordion-heading>
-                Magazine Titles
+                Periodical Titles
             </uib-accordion-heading>
             <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
                 <thead>
                     <tr>
                         <th class="text-center">Titles</th>
-                        <th class="text-center">No Of Magazines</th>
+                        <th class="text-center">No Of Periodicals</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -177,13 +177,13 @@
 
         <div uib-accordion-group class="panel-default">
             <uib-accordion-heading>
-                Magazine in Course
+                Periodical in Course
             </uib-accordion-heading>
             <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
                 <thead>
                     <tr>
                         <th class="text-center">Course</th>
-                        <th class="text-center">No Of Magazines</th>
+                        <th class="text-center">No Of Periodicals</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -197,13 +197,13 @@
 
         <div uib-accordion-group class="panel-default">
             <uib-accordion-heading>
-                Magazine Types
+                Periodical Types
             </uib-accordion-heading>
             <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
                 <thead>
                     <tr>
                         <th class="text-center">Type</th>
-                        <th class="text-center">No Of Magazines</th>
+                        <th class="text-center">No Of Periodicals</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -217,13 +217,13 @@
 
         <div uib-accordion-group class="panel-default">
             <uib-accordion-heading>
-                Magazine Periodicity
+                Periodical Periodicity
             </uib-accordion-heading>
             <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
                 <thead>
                     <tr>
                         <th class="text-center">Periodicity</th>
-                        <th class="text-center">No Of Magazines</th>
+                        <th class="text-center">No Of Periodicals</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -237,19 +237,59 @@
 
         <div uib-accordion-group class="panel-default">
             <uib-accordion-heading>
-                Magazine Subscription
+                Periodical Subscription
             </uib-accordion-heading>
             <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
                 <thead>
                     <tr>
                         <th class="text-center">Subscription Year</th>
-                        <th class="text-center">No Of Magazines</th>
+                        <th class="text-center">No Of Periodicals</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="subcription in statisticsCtrl.subscription">
                         <td><a href="" ng-href="#!/admin/magazineYear/{{subcription.year}}">{{ subcription.year }}</a></td>
                         <td>{{ subcription.count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div uib-accordion-group class="panel-default">
+            <uib-accordion-heading>
+                Book Issued In Year 
+            </uib-accordion-heading>
+            <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Issued Year</th>
+                        <th class="text-center">No Of Books</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="returnedBook in statisticsCtrl.returnedBooks.year">
+                        <td><a href="" ng-href="#!/admin/bookIssued/year/{{returnedBook.returnedYear}}">{{ returnedBook.returnedYear }}</a></td>
+                        <td>{{ returnedBook.count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div uib-accordion-group class="panel-default">
+            <uib-accordion-heading>
+                Periodical Issued In Year
+            </uib-accordion-heading>
+            <table datatable="ng" dt-options="statisticsCtrl.dtOptions" dt-column-defs="statisticsCtrl.dtColumnDefs" class="table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Issued Year</th>
+                        <th class="text-center">No Of Books</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="returnedMagazine in statisticsCtrl.returnedMagazines.year">
+                        <td><a href="" ng-href="#!/admin/magazineIssued/year/{{returnedMagazine.returnedYear}}">{{ returnedMagazine.returnedYear }}</a></td>
+                        <td>{{ returnedMagazine.count }}</td>
                     </tr>
                 </tbody>
             </table>

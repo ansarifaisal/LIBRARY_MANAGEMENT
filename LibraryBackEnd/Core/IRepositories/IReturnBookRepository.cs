@@ -7,5 +7,9 @@ namespace LibraryBackEnd.Core.IRepositories
     {
         IEnumerable<ReturnBook> GetReturnBook(string accessionNumber);
         IEnumerable<ReturnBook> GetByRollNo(string rollNo);
+
+        object returnedBookInYear();
+        IEnumerable<ReturnBook> GetBookInYear(int year);
+
     }
 }
